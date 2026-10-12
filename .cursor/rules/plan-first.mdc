@@ -1,0 +1,17 @@
+---
+description: Read plan.md first; never change the locked pin table or power design without explicit approval
+alwaysApply: true
+---
+
+# Abadi Rover: plan.md is the source of truth
+
+1. At the start of every session, read `plan.md` before doing anything else, starting with the **Current Status** line at the top.
+2. The **Locked pin table** and **Locked power design** in `plan.md` must never be reassigned, renamed or "cleaned up" without explicit approval from the owner. If code or wiring would conflict with them, STOP and ask. Never silently remap a pin.
+3. `wiring.md` must always match `plan.md`. If they disagree, `plan.md` wins; report the mismatch instead of fixing it silently.
+4. Work one stage at a time. Do not write code for a later stage until the owner confirms the current stage passed on real hardware.
+5. Update the **Current Status** line in `plan.md` when a stage passes or a test result changes (with the owner's confirmation).
+6. The owner is not comfortable with git or terminal shorthand. Write every command out in full and explain what it does, one step at a time.
+7. Keep replies short and easy to read.
+8. Out of scope unless the owner asks: Hermes / AI agent on the rover, turret, MAX98357A I2S amp, Phase 3 design.
+
+Example: if a library's example uses D10 for something other than the left screen CS, change the code to match `plan.md`, not the pin table to match the example.

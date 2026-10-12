@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100">
+  <style>
+    .bg { fill: #ffffff; }
+    .box { fill: #f4f6f8; stroke: #2b2b2b; stroke-width: 3; }
+    .relay { fill: #1f5fbf; stroke: #0d2f66; stroke-width: 3; }
+    .term { fill: #2e8b57; stroke: #145a32; stroke-width: 3; }
+    .screw { fill: #d9d9d9; stroke: #555; stroke-width: 2; }
+    .h { font: bold 32px sans-serif; fill: #111; }
+    .h2 { font: bold 24px sans-serif; fill: #111; }
+    .t { font: 21px sans-serif; fill: #222; }
+    .s { font: 18px sans-serif; fill: #444; }
+    .w { font: bold 22px sans-serif; fill: #ffffff; }
+    .lbl { font: bold 22px monospace; fill: #111; }
+    .wire { fill: none; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+    .yellow { stroke: #e0b000; }
+    .black { stroke: #111; }
+    .warn { font: bold 21px sans-serif; fill: #b00020; }
+  </style>
+  <rect class="bg" width="1800" height="1100"/>
+  <text x="40" y="55" class="h">RELAY BOARD WIRING (2 channels, both used)</text>
+  <text x="40" y="90" class="s">Same wiring on relay 1 and relay 2. Screw order shown is the most common - confirm with the beep test below.</text>
+
+  <!-- Relay board -->
+  <rect class="box" x="560" y="130" width="560" height="560" rx="16"/>
+  <text x="590" y="170" class="h2">2-CHANNEL RELAY BOARD (3.3V)</text>
+
+  <!-- Relay 1 -->
+  <rect class="relay" x="600" y="200" width="230" height="150" rx="8"/>
+  <text x="640" y="265" class="w">RELAY 1</text>
+  <text x="640" y="295" class="w" style="font-size:17px">JQC-3F 03VDC</text>
+  <!-- Relay 2 -->
+  <rect class="relay" x="860" y="200" width="230" height="150" rx="8"/>
+  <text x="900" y="265" class="w">RELAY 2</text>
+  <text x="900" y="295" class="w" style="font-size:17px">JQC-3F 03VDC</text>
+
+  <!-- Terminal block relay 1 (top edge) -->
+  <rect class="term" x="600" y="370" width="230" height="80" rx="6"/>
+  <circle class="screw" cx="640" cy="400" r="20"/>
+  <circle class="screw" cx="715" cy="400" r="20"/>
+  <circle class="screw" cx="790" cy="400" r="20"/>
+  <text x="617" y="442" class="w" style="font-size:19px">NO</text>
+  <text x="688" y="442" class="w" style="font-size:19px">COM</text>
+  <text x="770" y="442" class="w" style="font-size:19px">NC</text>
+  <!-- Terminal block relay 2 -->
+  <rect class="term" x="860" y="370" width="230" height="80" rx="6"/>
+  <circle class="screw" cx="900" cy="400" r="20"/>
+  <circle class="screw" cx="975" cy="400" r="20"/>
+  <circle class="screw" cx="1050" cy="400" r="20"/>
+  <text x="877" y="442" class="w" style="font-size:19px">NO</text>
+  <text x="948" y="442" class="w" style="font-size:19px">COM</text>
+  <text x="1030" y="442" class="w" style="font-size:19px">NC</text>
+
+  <!-- Header pins -->
+  <rect class="box" x="600" y="560" width="490" height="100" rx="8" style="fill:#ffffff"/>
+  <text x="620" y="590" class="s">control pins (header)</text>
+  <text x="625" y="640" class="lbl">VCC</text>
+  <text x="745" y="640" class="lbl">GND</text>
+  <text x="865" y="640" class="lbl">IN1</text>
+  <text x="985" y="640" class="lbl">IN2</text>
+
+  <!-- NC empty notes -->
+  <text x="760" y="490" class="s" style="fill:#b00020">NC empty</text>
+  <text x="1020" y="490" class="s" style="fill:#b00020">NC empty</text>
+
+  <!-- Rail C 3.3V source -->
+  <rect class="box" x="40" y="160" width="400" height="120" rx="14" style="stroke:#e0b000"/>
+  <text x="60" y="200" class="h2" style="fill:#a07c00">RAIL C 3.3V (yellow)</text>
+  <text x="60" y="232" class="s">HW-133A output, set to 3.3V</text>
+  <text x="60" y="258" class="s">(fed from quiet 5V hub port)</text>
+
+  <!-- COM wires from rail C -->
+  <path class="wire yellow" d="M440 220 H520 V520 H715 V420"/>
+  <path class="wire yellow" d="M520 520 H975 V420"/>
+  <text x="300" y="350" class="t" style="fill:#a07c00">3.3V to COM1</text>
+  <text x="300" y="378" class="t" style="fill:#a07c00">and COM2</text>
+
+  <!-- VCC from rail C -->
+  <path class="wire yellow" d="M480 220 V700 H645 V660"/>
+  <text x="300" y="730" class="t" style="fill:#a07c00">3.3V to VCC</text>
+
+  <!-- GND to star -->
+  <rect class="box" x="40" y="830" width="400" height="110" rx="14" style="stroke:#111;fill:#eeeeee"/>
+  <text x="60" y="872" class="h2">GND (shield GND screws)</text>
+  <text x="60" y="904" class="s">same ground as everything else</text>
+  <path class="wire black" d="M440 885 H540 V770 H765 V660"/>
+
+  <!-- UNO Q pins -->
+  <rect class="box" x="760" y="860" width="420" height="200" rx="14" style="stroke:#0b5cad;fill:#e8f1fb"/>
+  <text x="780" y="900" class="h2" style="fill:#0b5cad">ARDUINO UNO Q</text>
+  <rect x="790" y="930" width="110" height="44" rx="6" style="fill:#fff;stroke:#0b5cad;stroke-width:2"/>
+  <text x="815" y="961" class="lbl" style="fill:#0b5cad">A2</text>
+  <rect x="1010" y="930" width="110" height="44" rx="6" style="fill:#fff;stroke:#0b5cad;stroke-width:2"/>
+  <text x="1035" y="961" class="lbl" style="fill:#0b5cad">A3</text>
+  <path class="wire" d="M845 930 V800 H885 V660" style="stroke:#17becf"/>
+  <path class="wire" d="M1065 930 V800 H1005 V660" style="stroke:#8c564b"/>
+  <text x="900" y="760" class="s">A2 to IN1</text>
+  <text x="1010" y="760" class="s">A3 to IN2</text>
+
+  <!-- Lights -->
+  <rect class="box" x="1260" y="160" width="500" height="170" rx="14"/>
+  <text x="1280" y="200" class="h2">LIGHT 1 (LED filament)</text>
+  <text x="1280" y="235" class="t">NO1 - 10 ohm resistor - light (+)</text>
+  <text x="1280" y="268" class="t">light (-) to GND</text>
+  <text x="1280" y="301" class="s">(+) end is usually marked</text>
+
+  <rect class="box" x="1260" y="380" width="500" height="170" rx="14"/>
+  <text x="1280" y="420" class="h2">LIGHT 2 (LED filament)</text>
+  <text x="1280" y="455" class="t">NO2 - 10 ohm resistor - light (+)</text>
+  <text x="1280" y="488" class="t">light (-) to GND</text>
+  <text x="1280" y="521" class="s">(+) end is usually marked</text>
+
+  <!-- NO wires -->
+  <path class="wire" d="M640 380 V112 H1200 V245 H1260" style="stroke:#ff6f00"/>
+  <path class="wire" d="M900 380 V360 H1200 V465 H1260" style="stroke:#ff6f00"/>
+  <rect x="1170" y="225" width="60" height="40" rx="4" style="fill:#f5deb3;stroke:#8b5a2b;stroke-width:3"/>
+  <text x="1178" y="252" class="s" style="font-size:15px">10 ohm</text>
+  <rect x="1170" y="445" width="60" height="40" rx="4" style="fill:#f5deb3;stroke:#8b5a2b;stroke-width:3"/>
+  <text x="1178" y="472" class="s" style="font-size:15px">10 ohm</text>
+
+  <!-- Beep test -->
+  <rect class="box" x="1260" y="600" width="500" height="460" rx="14" style="fill:#fff8e1;stroke:#b8860b"/>
+  <text x="1280" y="640" class="h2">FIND COM / NO / NC</text>
+  <text x="1280" y="672" class="s">Multimeter on beep, board unpowered.</text>
+  <text x="1280" y="672" class="s"> </text>
+  <text x="1280" y="712" class="t">1. Test the 3 pairs of screws</text>
+  <text x="1300" y="740" class="t">on one relay.</text>
+  <text x="1280" y="780" class="t">2. The pair that BEEPS =</text>
+  <text x="1300" y="808" class="t">COM + NC.</text>
+  <text x="1280" y="848" class="t">3. The screw that never beeps</text>
+  <text x="1300" y="876" class="t">= NO (light goes here).</text>
+  <text x="1280" y="916" class="t">4. Power board, make relay click.</text>
+  <text x="1300" y="944" class="t">The screw that beeps in both</text>
+  <text x="1300" y="972" class="t">cases = COM.</text>
+  <text x="1280" y="1020" class="warn">Repeat for relay 2.</text>
+</svg>
