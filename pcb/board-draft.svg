@@ -1,0 +1,201 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1680" viewBox="0 0 2400 1680">
+  <style>
+    .bg { fill: #ffffff; }
+    .pcb { fill: #c9e8d4; stroke: #0d5c2e; stroke-width: 8; }
+    .mod { fill: #f7fbf8; stroke: #16351f; stroke-width: 3; }
+    .esp { fill: #e7f0fb; stroke: #0b5cad; stroke-width: 4; }
+    .pwr { fill: #fff8ee; stroke: #8a5a00; stroke-width: 3; }
+    .cap { fill: #fff; stroke: #333; stroke-width: 3; }
+    .later { fill: #f4f4f4; stroke: #777; stroke-width: 3; stroke-dasharray: 10 6; }
+    .h { font: bold 32px sans-serif; fill: #111; }
+    .h2 { font: bold 22px sans-serif; fill: #111; }
+    .t { font: 18px sans-serif; fill: #222; }
+    .s { font: 16px sans-serif; fill: #333; }
+    .pin { font: bold 16px monospace; fill: #0b3a22; }
+    .warn { font: bold 16px sans-serif; fill: #8a1c1c; }
+  </style>
+  <rect class="bg" width="2400" height="1680"/>
+  <text x="40" y="46" class="h">ABADI ROVER - PCB DRAFT</text>
+  <text x="620" y="46" class="s">2 layers, 1.6 mm. For review only. Not the file you upload to order.</text>
+
+  <rect class="pcb" x="30" y="70" width="2340" height="1480" rx="18"/>
+
+  <!-- power in -->
+  <rect class="pwr" x="50" y="90" width="230" height="90" rx="8"/>
+  <text x="64" y="122" class="h2">QUIET 5V IN</text>
+  <text x="64" y="148" class="s">from power bank</text>
+  <text x="64" y="168" class="s">into the buck</text>
+
+  <rect class="mod" x="300" y="90" width="280" height="110" rx="8"/>
+  <text x="314" y="118" class="h2">3.3V BUCK</text>
+  <text x="314" y="142" class="s">replaces the HW-133A</text>
+  <text x="314" y="164" class="s">dial glued at 3.3V</text>
+  <text x="314" y="186" class="s">feeds relays and screens</text>
+
+  <rect class="cap" x="600" y="100" width="70" height="90" rx="8"/>
+  <text x="612" y="140" class="pin">100uF</text>
+  <text x="618" y="164" class="s">3.3V</text>
+
+  <rect class="cap" x="680" y="115" width="50" height="60" rx="6"/>
+  <text x="690" y="150" class="s">100nF</text>
+
+  <rect class="pwr" x="760" y="90" width="230" height="90" rx="8"/>
+  <text x="774" y="122" class="h2">NOISY 5V IN</text>
+  <text x="774" y="148" class="s">after the key switch</text>
+  <text x="774" y="168" class="s">fan, servos, boost</text>
+
+  <rect class="mod" x="1010" y="90" width="250" height="110" rx="8"/>
+  <text x="1024" y="118" class="h2">HW-183B</text>
+  <text x="1024" y="142" class="s">boost to 7.0V</text>
+  <text x="1024" y="164" class="s">both motor drivers</text>
+  <text x="1024" y="186" class="s">screw input</text>
+
+  <rect class="cap" x="1280" y="100" width="70" height="90" rx="8"/>
+  <text x="1292" y="140" class="pin">100uF</text>
+  <text x="1298" y="164" class="s">7V</text>
+
+  <rect class="cap" x="1360" y="115" width="50" height="60" rx="6"/>
+  <text x="1370" y="150" class="s">100nF</text>
+
+  <rect class="mod" x="1440" y="90" width="160" height="90" rx="8"/>
+  <text x="1454" y="124" class="h2">FAN</text>
+  <text x="1454" y="150" class="s">keep-awake</text>
+  <text x="1454" y="170" class="s">on noisy 5V</text>
+
+  <rect class="pwr" x="1620" y="90" width="220" height="90" rx="8"/>
+  <text x="1634" y="122" class="h2">GND SCREW</text>
+  <text x="1634" y="148" class="s">Pi ground wire</text>
+  <text x="1634" y="168" class="s">and every module</text>
+
+  <text x="1860" y="130" class="h2">Bottom layer</text>
+  <text x="1860" y="156" class="s">one solid ground</text>
+  <text x="1860" y="178" class="s">plane. Top layer</text>
+  <text x="1860" y="200" class="s">is the parts.</text>
+
+  <!-- ESP32 -->
+  <rect class="esp" x="50" y="240" width="520" height="900" rx="12"/>
+  <text x="64" y="274" class="h2">ESP32-S3 SOCKET</text>
+  <text x="64" y="300" class="s">USB cable goes to the Pi. The 5V pin is not used.</text>
+  <text x="64" y="340" class="pin">GPIO 4   track driver IN1</text>
+  <text x="64" y="366" class="pin">GPIO 5   track driver IN2</text>
+  <text x="64" y="392" class="pin">GPIO 6   track driver IN3</text>
+  <text x="64" y="418" class="pin">GPIO 7   track driver IN4</text>
+  <text x="64" y="456" class="pin">GPIO 15  spare driver IN1</text>
+  <text x="64" y="482" class="pin">GPIO 16  spare driver IN2</text>
+  <text x="64" y="508" class="pin">GPIO 17  spare driver IN3</text>
+  <text x="64" y="534" class="pin">GPIO 18  spare driver IN4</text>
+  <text x="64" y="572" class="pin">GPIO 8   SDA  servo board + gyro</text>
+  <text x="64" y="598" class="pin">GPIO 9   SCL  servo board + gyro</text>
+  <text x="64" y="636" class="pin">GPIO 1   relay A, light 1</text>
+  <text x="64" y="662" class="pin">GPIO 2   relay A, light 2</text>
+  <text x="64" y="688" class="pin">GPIO 38  relay B, spare</text>
+  <text x="64" y="714" class="pin">GPIO 39  relay B, spare</text>
+  <text x="64" y="752" class="pin">GPIO 13  left screen CS</text>
+  <text x="64" y="778" class="pin">GPIO 14  right screen CS</text>
+  <text x="64" y="804" class="pin">GPIO 21  both screens DC</text>
+  <text x="64" y="830" class="pin">GPIO 10  both screens RST</text>
+  <text x="64" y="856" class="pin">GPIO 11  both screens SDA</text>
+  <text x="64" y="882" class="pin">GPIO 12  both screens SCL</text>
+  <text x="64" y="920" class="pin">GPIO 41  ultrasonic TRIG</text>
+  <text x="64" y="946" class="pin">GPIO 42  ultrasonic ECHO</text>
+  <text x="64" y="984" class="pin">3V3 pin  servo logic + gyro only</text>
+  <text x="64" y="1010" class="pin">GND      ground plane</text>
+  <text x="64" y="1050" class="s">Hole order follows the labels on the</text>
+  <text x="64" y="1072" class="s">ESP32 board you buy. GPIO 40 is spare.</text>
+  <text x="64" y="1104" class="warn">Buck 3.3V does not touch this 3V3 pin.</text>
+
+  <!-- drivers -->
+  <rect class="mod" x="600" y="240" width="520" height="280" rx="10"/>
+  <text x="616" y="272" class="h2">DRV8833 - TRACKS</text>
+  <text x="616" y="300" class="s">same module type as the old one</text>
+  <text x="616" y="332" class="pin">IN1 GPIO4    IN2 GPIO5</text>
+  <text x="616" y="358" class="pin">IN3 GPIO6    IN4 GPIO7</text>
+  <text x="616" y="390" class="pin">VM  7V from HW-183B</text>
+  <text x="616" y="416" class="pin">GND ground plane</text>
+  <text x="616" y="448" class="pin">OUT1+OUT2  left track</text>
+  <text x="616" y="474" class="pin">OUT3+OUT4  right track</text>
+  <text x="616" y="502" class="s">EEP jumper closed on the module. ULT unused.</text>
+
+  <rect class="mod" x="600" y="540" width="520" height="250" rx="10"/>
+  <text x="616" y="572" class="h2">DRV8833 - SPARE</text>
+  <text x="616" y="600" class="s">second socket, same module, empty until needed</text>
+  <text x="616" y="632" class="pin">IN1 GPIO15   IN2 GPIO16</text>
+  <text x="616" y="658" class="pin">IN3 GPIO17   IN4 GPIO18</text>
+  <text x="616" y="690" class="pin">VM  same 7V     GND ground plane</text>
+  <text x="616" y="722" class="pin">four motor screws, unlabeled for now</text>
+  <text x="616" y="754" class="s">EEP jumper closed on the module. ULT unused.</text>
+
+  <!-- pca and gyro -->
+  <rect class="mod" x="600" y="810" width="340" height="250" rx="10"/>
+  <text x="616" y="842" class="h2">PCA9685</text>
+  <text x="616" y="870" class="s">address 0x40, 50 Hz</text>
+  <text x="616" y="902" class="pin">SDA GPIO8   SCL GPIO9</text>
+  <text x="616" y="928" class="pin">VCC from ESP32 3V3 pin</text>
+  <text x="616" y="954" class="pin">V+  noisy 5V (servos)</text>
+  <text x="616" y="980" class="pin">GND ground plane</text>
+  <text x="616" y="1012" class="s">CH0 MG996R  CH1 MZ996</text>
+  <text x="616" y="1034" class="s">CH2 360 servo. 1000uF already on it.</text>
+
+  <rect class="mod" x="960" y="810" width="300" height="250" rx="10"/>
+  <text x="976" y="842" class="h2">GYRO GY-521</text>
+  <text x="976" y="870" class="s">MPU6050, address 0x68</text>
+  <text x="976" y="902" class="pin">SDA GPIO8   SCL GPIO9</text>
+  <text x="976" y="928" class="pin">VCC from ESP32 3V3 pin</text>
+  <text x="976" y="954" class="pin">GND ground plane</text>
+  <text x="976" y="990" class="s">INT, XDA, XCL, AD0</text>
+  <text x="976" y="1012" class="s">left unconnected.</text>
+
+  <!-- relays -->
+  <rect class="mod" x="1150" y="240" width="560" height="300" rx="10"/>
+  <text x="1166" y="272" class="h2">RELAY BOARD A - LIGHTS</text>
+  <text x="1166" y="300" class="s">same 3.3V two-channel board you have now</text>
+  <text x="1166" y="332" class="pin">VCC  buck 3.3V     GND ground</text>
+  <text x="1166" y="358" class="pin">IN1 GPIO1        IN2 GPIO2</text>
+  <text x="1166" y="390" class="pin">COM1 and COM2  buck 3.3V</text>
+  <text x="1166" y="422" class="pin">NO1 - 10 ohm - light 1 +</text>
+  <text x="1166" y="448" class="pin">NO2 - 10 ohm - light 2 +</text>
+  <text x="1166" y="480" class="s">Both light minuses go to the ground plane.</text>
+  <text x="1166" y="508" class="s">The 10- resistors are soldered on this PCB.</text>
+
+  <rect class="mod" x="1150" y="560" width="560" height="230" rx="10"/>
+  <text x="1166" y="592" class="h2">RELAY BOARD B - SPARE</text>
+  <text x="1166" y="620" class="s">second identical 3.3V two-channel board</text>
+  <text x="1166" y="652" class="pin">VCC buck 3.3V      GND ground</text>
+  <text x="1166" y="678" class="pin">IN1 GPIO38        IN2 GPIO39</text>
+  <text x="1166" y="710" class="pin">COM to 3.3V, NO pads and 10- spots fitted</text>
+  <text x="1166" y="736" class="s">No lights attached until you add them.</text>
+  <text x="1166" y="762" class="s">GPIO 40 stays a spare pin beside these.</text>
+
+  <!-- screens and sonar -->
+  <rect class="later" x="1280" y="810" width="400" height="250" rx="10"/>
+  <text x="1296" y="842" class="h2">SCREEN HEADERS</text>
+  <text x="1296" y="870" class="s">both 7-pin, wired later</text>
+  <text x="1296" y="902" class="pin">VCC buck 3.3V   GND</text>
+  <text x="1296" y="928" class="pin">CS left GPIO13</text>
+  <text x="1296" y="954" class="pin">CS right GPIO14</text>
+  <text x="1296" y="980" class="pin">DC 21  RST 10</text>
+  <text x="1296" y="1006" class="pin">SDA 11   SCL 12</text>
+  <text x="1296" y="1032" class="s">Shared pins go to both headers.</text>
+
+  <rect class="later" x="1700" y="810" width="420" height="250" rx="10"/>
+  <text x="1716" y="842" class="h2">ULTRASONIC HEADER</text>
+  <text x="1716" y="870" class="s">fitted, left empty for now</text>
+  <text x="1716" y="902" class="pin">VCC quiet 5V    GND</text>
+  <text x="1716" y="928" class="pin">TRIG GPIO41</text>
+  <text x="1716" y="954" class="pin">ECHO GPIO42</text>
+  <text x="1716" y="990" class="s">Two resistors on the board drop</text>
+  <text x="1716" y="1012" class="s">the echo pin from 5V to 3.3V</text>
+  <text x="1716" y="1034" class="s">before it reaches the ESP32.</text>
+
+  <!-- motor screws -->
+  <rect class="pwr" x="1740" y="240" width="580" height="280" rx="10"/>
+  <text x="1756" y="272" class="h2">MOTOR SCREWS</text>
+  <text x="1756" y="308" class="pin">Left track    two screws</text>
+  <text x="1756" y="340" class="pin">Right track   two screws</text>
+  <text x="1756" y="384" class="pin">Spare driver  four screws</text>
+  <text x="1756" y="428" class="s">Orange 7V stays inside the board,</text>
+  <text x="1756" y="452" class="s">from the HW-183B to both drivers.</text>
+  <text x="1756" y="488" class="s">Tracks lifted for the first motor test.</text>
+
+  <text x="50" y="1590" class="s">Off this board: Raspberry Pi 5, power bank, key switch, the motors, the servos, and the two eye screens. The Pi talks to the ESP32 over a USB cable only.</text>
+</svg>

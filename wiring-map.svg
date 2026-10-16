@@ -1,9 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1640" viewBox="0 0 2400 1640">
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1920" viewBox="0 0 2400 1920">
   <style>
     .bg { fill: #ffffff; }
     .box { fill: #f4f6f8; stroke: #2b2b2b; stroke-width: 3; }
     .later { fill: #fbfbfb; stroke: #888; stroke-width: 3; stroke-dasharray: 14 8; }
-    .uno { fill: #e8f1fb; stroke: #0b5cad; stroke-width: 4; }
+    .pi { fill: #e8f8ee; stroke: #1b7a3d; stroke-width: 4; }
+    .esp { fill: #e8f1fb; stroke: #0b5cad; stroke-width: 4; }
     .gnd { fill: #f0f0f0; stroke: #000; stroke-width: 4; }
     .tag { fill: #ffffff; stroke-width: 3; }
     .h { font: bold 26px sans-serif; fill: #111; }
@@ -11,7 +12,7 @@
     .t { font: 19px sans-serif; fill: #222; }
     .s { font: 17px sans-serif; fill: #444; }
     .pinbox { fill: #ffffff; stroke: #0b5cad; stroke-width: 2; }
-    .pin { font: bold 19px monospace; fill: #0b5cad; }
+    .pin { font: bold 17px monospace; fill: #0b5cad; }
     .cpin { font: bold 18px monospace; fill: #222; }
     .wire { fill: none; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
     .bus { fill: none; stroke-width: 12; stroke-linecap: round; }
@@ -23,297 +24,314 @@
     .usb { stroke: #7f8c8d; }
     .warn { font: bold 19px sans-serif; fill: #b00020; }
   </style>
-  <rect class="bg" width="2400" height="1640"/>
+  <rect class="bg" width="2400" height="1920"/>
 
-  <text x="40" y="50" class="h" style="font-size:34px">ABADI ROVER  -  PHASE 1 WIRING MAP</text>
-  <text x="760" y="50" class="s">Source of truth: plan.md (locked pin table). Dashed boxes = wire later (Phase 2).</text>
+  <text x="40" y="50" class="h" style="font-size:32px">ABADI ROVER  -  PI 5 + ESP32-S3 WIRING MAP</text>
+  <text x="860" y="50" class="s">Source of truth: plan.md (locked pin table). Dashed boxes = wire later (Phase 2).</text>
 
   <!-- ================= POWER SECTION ================= -->
-  <!-- Power bank -->
-  <rect class="box" x="40" y="90" width="270" height="270" rx="14"/>
-  <text x="58" y="125" class="h2">POWER BANK</text>
-  <text x="58" y="148" class="s">20000mAh, 45W</text>
-  <rect class="tag" x="60" y="160" width="230" height="46" rx="8" style="stroke:#d62728"/>
-  <text x="74" y="190" class="t">USB-A</text>
-  <rect class="tag" x="60" y="220" width="230" height="46" rx="8" style="stroke:#7f8c8d"/>
-  <text x="74" y="250" class="t">USB-C port 2 (PD)</text>
-  <rect class="tag" x="60" y="280" width="230" height="60" rx="8" style="stroke:#aaa;stroke-dasharray:6 4"/>
-  <text x="74" y="305" class="s">USB-C port 1</text>
-  <text x="74" y="328" class="s">charging only (robot off)</text>
+  <rect class="box" x="40" y="80" width="270" height="260" rx="14"/>
+  <text x="58" y="115" class="h2">POWER BANK</text>
+  <text x="58" y="138" class="s">20000mAh, 45W</text>
+  <rect class="tag" x="60" y="150" width="230" height="42" rx="8" style="stroke:#d62728"/>
+  <text x="74" y="178" class="t">USB-A</text>
+  <rect class="tag" x="60" y="206" width="230" height="42" rx="8" style="stroke:#7f8c8d"/>
+  <text x="74" y="234" class="t">USB-C port 2 (PD)</text>
+  <rect class="tag" x="60" y="262" width="230" height="58" rx="8" style="stroke:#aaa;stroke-dasharray:6 4"/>
+  <text x="74" y="286" class="s">USB-C port 1</text>
+  <text x="74" y="308" class="s">charging only (robot off)</text>
 
-  <!-- USB-A to key switch -->
-  <path class="wire red" d="M290 183 H400"/>
-  <text x="312" y="170" class="s">screw</text>
-  <text x="312" y="210" class="s">adapter</text>
+  <path class="wire red" d="M310 171 H400"/>
+  <text x="318" y="158" class="s">screw</text>
+  <text x="318" y="198" class="s">adapter</text>
 
-  <!-- Key switch -->
-  <rect class="box" x="400" y="140" width="180" height="86" rx="12"/>
-  <text x="418" y="172" class="h2">KEY SWITCH</text>
-  <text x="418" y="198" class="s">kills motors,</text>
-  <text x="418" y="218" class="s">servos and fan</text>
+  <rect class="box" x="400" y="128" width="180" height="86" rx="12"/>
+  <text x="418" y="160" class="h2">KEY SWITCH</text>
+  <text x="418" y="186" class="s">kills motors,</text>
+  <text x="418" y="206" class="s">servos and fan</text>
 
-  <!-- Noisy 5V bus -->
-  <path class="bus red" d="M580 183 H1500"/>
-  <text x="600" y="168" class="h2" style="fill:#d62728">NOISY 5V (red)</text>
+  <path class="bus red" d="M580 171 H1480"/>
+  <text x="600" y="156" class="h2" style="fill:#d62728">NOISY 5V (red)</text>
 
-  <path class="wire red" d="M690 183 V250"/>
-  <rect class="box" x="615" y="250" width="150" height="80" rx="12"/>
-  <text x="632" y="282" class="h2">FAN 5V</text>
-  <text x="632" y="308" class="s">keep-awake load</text>
+  <path class="wire red" d="M690 171 V230"/>
+  <rect class="box" x="615" y="230" width="150" height="72" rx="12"/>
+  <text x="632" y="260" class="h2">FAN 5V</text>
+  <text x="632" y="284" class="s">keep-awake load</text>
 
-  <rect class="later" x="795" y="250" width="170" height="80" rx="12"/>
-  <text x="810" y="278" class="h2">BULK CAP</text>
-  <text x="810" y="300" class="s">1000uF already on</text>
-  <text x="810" y="320" class="s">PCA9685 board</text>
+  <rect class="later" x="790" y="230" width="175" height="72" rx="12"/>
+  <text x="804" y="256" class="h2">BULK CAP</text>
+  <text x="804" y="276" class="s">1000uF already on</text>
+  <text x="804" y="294" class="s">PCA9685 board</text>
 
-  <path class="wire red" d="M1080 183 V250"/>
-  <rect class="box" x="990" y="250" width="200" height="80" rx="12"/>
-  <text x="1005" y="278" class="h2">HW-183B boost</text>
-  <text x="1005" y="300" class="s">screw input</text>
-  <text x="1005" y="320" class="s">set 7.0V under load</text>
-  <path class="wire orange" d="M1190 290 H1500"/>
-  <text x="1210" y="280" class="h2" style="fill:#ff8c00">MOTOR 7V (orange)</text>
+  <path class="wire red" d="M1080 171 V230"/>
+  <rect class="box" x="985" y="230" width="210" height="72" rx="12"/>
+  <text x="998" y="256" class="h2">HW-183B boost</text>
+  <text x="998" y="276" class="s">screw input</text>
+  <text x="998" y="294" class="s">set 7.0V under load</text>
+  <path class="wire orange" d="M1195 266 H1480"/>
+  <text x="1210" y="256" class="h2" style="fill:#ff8c00">MOTOR 7V (orange)</text>
 
-  <rect class="tag" x="1500" y="160" width="290" height="46" rx="8" style="stroke:#d62728"/>
-  <text x="1514" y="190" class="t">to PCA9685 V+ terminal</text>
-  <rect class="tag" x="1500" y="267" width="290" height="46" rx="8" style="stroke:#ff8c00"/>
-  <text x="1514" y="297" class="t">to DRV8833 VCC</text>
+  <rect class="tag" x="1480" y="148" width="300" height="42" rx="8" style="stroke:#d62728"/>
+  <text x="1494" y="176" class="t">to PCA9685 V+ terminal</text>
+  <rect class="tag" x="1480" y="245" width="300" height="42" rx="8" style="stroke:#ff8c00"/>
+  <text x="1494" y="273" class="t">to TB6612 VM only</text>
 
-  <!-- USB-C 2 to hub -->
-  <path class="wire usb" d="M290 243 H345 V470 H400" style="stroke-width:9"/>
+  <path class="wire usb" d="M310 227 H345 V430 H400" style="stroke-width:9"/>
 
-  <!-- Hub -->
-  <rect class="box" x="400" y="410" width="270" height="140" rx="14"/>
-  <text x="418" y="444" class="h2">USB-C HUB (Benfei)</text>
-  <text x="418" y="470" class="s">PD-IN from bank USB-C 2</text>
-  <text x="418" y="494" class="s">USB: camera, audio (Phase 3)</text>
-  <text x="418" y="518" class="s">USB: screw adapter = quiet 5V</text>
-  <text x="418" y="540" class="s">USB-C cable to UNO Q</text>
+  <rect class="box" x="400" y="380" width="280" height="150" rx="14"/>
+  <text x="418" y="412" class="h2">USB-C HUB (Benfei)</text>
+  <text x="418" y="438" class="s">PD-IN from bank USB-C 2</text>
+  <text x="418" y="462" class="s">USB-C cable to Pi 5 power</text>
+  <text x="418" y="486" class="s">USB: quiet 5V screw adapter</text>
+  <text x="418" y="510" class="s">USB: camera / audio later</text>
 
-  <!-- Quiet 5V bus -->
-  <path class="bus purple" d="M670 470 H1500"/>
-  <text x="700" y="455" class="h2" style="fill:#8e44ad">QUIET 5V (purple)</text>
-  <rect class="tag" x="1500" y="447" width="290" height="46" rx="8" style="stroke:#8e44ad"/>
-  <text x="1514" y="477" class="t">to HC-SR04 VCC</text>
+  <path class="bus purple" d="M680 445 H1480"/>
+  <text x="700" y="430" class="h2" style="fill:#8e44ad">QUIET 5V (purple)</text>
+  <rect class="tag" x="1480" y="422" width="300" height="42" rx="8" style="stroke:#8e44ad"/>
+  <text x="1494" y="450" class="t">to HC-SR04 VCC</text>
 
-  <path class="wire purple" d="M1000 470 V520"/>
-  <rect class="box" x="910" y="520" width="180" height="70" rx="12"/>
-  <text x="925" y="550" class="h2">HW-133A buck</text>
-  <text x="925" y="574" class="s">set 3.3V first</text>
-  <path class="wire yellow" d="M1090 555 H1500"/>
-  <text x="1110" y="545" class="h2" style="fill:#c79a00">RAIL C 3.3V (yellow)</text>
-  <rect class="tag" x="1500" y="520" width="290" height="70" rx="8" style="stroke:#e0b000"/>
-  <text x="1514" y="548" class="t">to screens VCC, relay VCC,</text>
-  <text x="1514" y="574" class="t">relay COM1 + COM2</text>
+  <path class="wire purple" d="M1000 445 V490"/>
+  <rect class="box" x="910" y="490" width="180" height="64" rx="12"/>
+  <text x="925" y="518" class="h2">HW-133A buck</text>
+  <text x="925" y="540" class="s">set 3.3V first</text>
+  <path class="wire yellow" d="M1090 522 H1480"/>
+  <text x="1110" y="512" class="h2" style="fill:#c79a00">RAIL C 3.3V (yellow)</text>
+  <rect class="tag" x="1480" y="492" width="300" height="70" rx="8" style="stroke:#e0b000"/>
+  <text x="1494" y="518" class="t">screens, relay VCC + COM,</text>
+  <text x="1494" y="544" class="t">TB6612 VCC (logic)</text>
 
-  <!-- Star ground -->
-  <rect class="gnd" x="1830" y="90" width="530" height="520" rx="14"/>
-  <text x="1850" y="128" class="h2">STAR GROUND (black)</text>
-  <text x="1850" y="152" class="s">one screw bus bar / lever connector</text>
-  <text x="1850" y="190" class="t">- USB-A adapter minus</text>
-  <text x="1850" y="218" class="t">- Quiet 5V adapter minus</text>
-  <text x="1850" y="246" class="t">- HW-183B IN- and OUT-</text>
-  <text x="1850" y="274" class="t">- HW-133A IN- and OUT-</text>
-  <text x="1850" y="302" class="t">- (bulk cap is on PCA9685 board)</text>
-  <text x="1850" y="330" class="t">- Fan minus</text>
-  <text x="1850" y="358" class="t">- DRV8833 GND</text>
-  <text x="1850" y="386" class="t">- PCA9685 GND terminal</text>
-  <text x="1850" y="414" class="t">- HC-SR04 GND</text>
-  <text x="1850" y="442" class="t">- Relay board GND</text>
-  <text x="1850" y="470" class="t">- Lights minus</text>
-  <text x="1850" y="498" class="t">- Screens GND (Phase 2)</text>
-  <text x="1850" y="526" class="t">- UNO Q GND screw (one wire)</text>
-  <text x="1850" y="580" class="warn">Every "GND" on this map goes here.</text>
+  <rect class="gnd" x="1820" y="80" width="540" height="500" rx="14"/>
+  <text x="1840" y="116" class="h2">STAR GROUND (black)</text>
+  <text x="1840" y="140" class="s">one screw bus bar / lever connector</text>
+  <text x="1840" y="176" class="t">- USB-A adapter minus</text>
+  <text x="1840" y="202" class="t">- Quiet 5V adapter minus</text>
+  <text x="1840" y="228" class="t">- HW-183B IN- and OUT-</text>
+  <text x="1840" y="254" class="t">- HW-133A IN- and OUT-</text>
+  <text x="1840" y="280" class="t">- Fan minus</text>
+  <text x="1840" y="306" class="t">- TB6612 all GND pins</text>
+  <text x="1840" y="332" class="t">- PCA9685 GND terminal</text>
+  <text x="1840" y="358" class="t">- HC-SR04 GND</text>
+  <text x="1840" y="384" class="t">- Relay board GND</text>
+  <text x="1840" y="410" class="t">- Lights minus</text>
+  <text x="1840" y="436" class="t">- Screens GND (Phase 2)</text>
+  <text x="1840" y="462" class="t">- Pi 5 header GND (one wire)</text>
+  <text x="1840" y="488" class="t">- ESP32 GND pin (extra wire)</text>
+  <text x="1840" y="548" class="warn">Every "GND" on this map goes here.</text>
 
-  <!-- Hub to UNO Q -->
-  <path class="wire usb" d="M535 550 V645 H1160 V700" style="stroke-width:9"/>
-  <text x="600" y="635" class="t">USB-C cable: the ONLY power for the UNO Q</text>
+  <!-- Hub to Pi -->
+  <path class="wire usb" d="M540 530 V620 H1160 V640" style="stroke-width:9"/>
+  <text x="560" y="610" class="t">USB-C: the ONLY power for the Pi 5</text>
 
-  <!-- ================= SIGNAL SECTION ================= -->
-  <!-- UNO Q -->
-  <rect class="uno" x="900" y="700" width="520" height="700" rx="18"/>
-  <text x="1010" y="745" class="h" style="fill:#0b5cad">ARDUINO UNO Q</text>
-  <text x="1040" y="772" class="s">screw-terminal shield</text>
+  <!-- ================= RASPBERRY PI ================= -->
+  <rect class="pi" x="900" y="640" width="520" height="130" rx="16"/>
+  <text x="1045" y="678" class="h" style="fill:#1b7a3d">RASPBERRY PI 5  8GB</text>
+  <text x="980" y="706" class="s">Brain. Gamepad on Bluetooth. No GPIO loads.</text>
+  <text x="960" y="730" class="s">USB-C = power from hub    USB-A = ESP32 COM</text>
+  <text x="1000" y="754" class="warn" style="font-size:16px">Never feed the Pi header 5V pins</text>
 
-  <!-- UNO Q left pins -->
-  <rect class="pinbox" x="902" y="795" width="110" height="36" rx="6"/><text x="915" y="820" class="pin">D3</text>
-  <rect class="pinbox" x="902" y="845" width="110" height="36" rx="6"/><text x="915" y="870" class="pin">D5</text>
-  <rect class="pinbox" x="902" y="895" width="110" height="36" rx="6"/><text x="915" y="920" class="pin">D6</text>
-  <rect class="pinbox" x="902" y="945" width="110" height="36" rx="6"/><text x="915" y="970" class="pin">D9</text>
-  <rect class="pinbox" x="902" y="1075" width="110" height="36" rx="6"/><text x="915" y="1100" class="pin">D20 SDA</text>
-  <rect class="pinbox" x="902" y="1125" width="110" height="36" rx="6"/><text x="915" y="1150" class="pin">D21 SCL</text>
-  <rect class="pinbox" x="902" y="1175" width="110" height="36" rx="6"/><text x="915" y="1200" class="pin">3.3V</text>
-  <rect class="pinbox" x="902" y="1225" width="110" height="36" rx="6"/><text x="915" y="1250" class="pin">GND</text>
+  <path class="wire usb" d="M1160 770 V800" style="stroke-width:9"/>
+  <text x="1175" y="794" class="t">USB-A to ESP32 COM port</text>
 
-  <!-- UNO Q right pins -->
-  <rect class="pinbox" x="1308" y="795" width="110" height="36" rx="6"/><text x="1322" y="820" class="pin">D4</text>
-  <rect class="pinbox" x="1308" y="845" width="110" height="36" rx="6"/><text x="1322" y="870" class="pin">D2</text>
-  <rect class="pinbox" x="1308" y="935" width="110" height="36" rx="6"/><text x="1322" y="960" class="pin">A2</text>
-  <rect class="pinbox" x="1308" y="985" width="110" height="36" rx="6"/><text x="1322" y="1010" class="pin">A3</text>
-  <rect class="pinbox" x="1308" y="1095" width="110" height="36" rx="6"/><text x="1322" y="1120" class="pin">D10</text>
-  <rect class="pinbox" x="1308" y="1145" width="110" height="36" rx="6"/><text x="1322" y="1170" class="pin">D7</text>
-  <rect class="pinbox" x="1308" y="1195" width="110" height="36" rx="6"/><text x="1322" y="1220" class="pin">D8</text>
-  <rect class="pinbox" x="1308" y="1245" width="110" height="36" rx="6"/><text x="1322" y="1270" class="pin">A0</text>
-  <rect class="pinbox" x="1308" y="1295" width="110" height="36" rx="6"/><text x="1322" y="1320" class="pin">D11</text>
-  <rect class="pinbox" x="1308" y="1345" width="110" height="36" rx="6"/><text x="1322" y="1370" class="pin">D13</text>
+  <!-- ================= ESP32 ================= -->
+  <rect class="esp" x="900" y="800" width="520" height="780" rx="18"/>
+  <text x="1005" y="838" class="h" style="fill:#0b5cad">ESP32-S3  (hands)</text>
+  <text x="970" y="864" class="s">dual USB-C  ·  use the COM port</text>
 
-  <!-- UNO Q centre notes -->
-  <text x="1040" y="1040" class="t">Reserved:</text>
-  <text x="1040" y="1066" class="t">D0, D1, D12</text>
-  <text x="1040" y="1110" class="t">Spare:</text>
-  <text x="1040" y="1136" class="t">A1, A4, A5</text>
-  <text x="1030" y="1300" class="warn" style="font-size:17px">Never feed power into</text>
-  <text x="1030" y="1322" class="warn" style="font-size:17px">5V, 3.3V or IOREF pins</text>
+  <!-- left pins -->
+  <rect class="pinbox" x="902" y="880" width="128" height="34" rx="6"/><text x="912" y="903" class="pin">GPIO 4</text>
+  <rect class="pinbox" x="902" y="922" width="128" height="34" rx="6"/><text x="912" y="945" class="pin">GPIO 5</text>
+  <rect class="pinbox" x="902" y="964" width="128" height="34" rx="6"/><text x="912" y="987" class="pin">GPIO 6</text>
+  <rect class="pinbox" x="902" y="1006" width="128" height="34" rx="6"/><text x="912" y="1029" class="pin">GPIO 7</text>
+  <rect class="pinbox" x="902" y="1048" width="128" height="34" rx="6"/><text x="912" y="1071" class="pin">GPIO 15</text>
+  <rect class="pinbox" x="902" y="1090" width="128" height="34" rx="6"/><text x="912" y="1113" class="pin">GPIO 16</text>
+  <rect class="pinbox" x="902" y="1132" width="128" height="34" rx="6"/><text x="912" y="1155" class="pin">GPIO 17</text>
+  <rect class="pinbox" x="902" y="1270" width="128" height="34" rx="6"/><text x="912" y="1293" class="pin">GPIO 8</text>
+  <rect class="pinbox" x="902" y="1312" width="128" height="34" rx="6"/><text x="912" y="1335" class="pin">GPIO 9</text>
+  <rect class="pinbox" x="902" y="1354" width="128" height="34" rx="6"/><text x="912" y="1377" class="pin">3.3V</text>
+  <rect class="pinbox" x="902" y="1396" width="128" height="34" rx="6"/><text x="912" y="1419" class="pin">GND</text>
 
-  <!-- DRV8833 -->
-  <rect class="box" x="380" y="760" width="330" height="270" rx="14"/>
-  <text x="400" y="795" class="h2">DRV8833</text>
-  <text x="400" y="822" class="cpin">IN1</text>
-  <text x="400" y="872" class="cpin">IN2</text>
-  <text x="400" y="922" class="cpin">IN3</text>
-  <text x="400" y="972" class="cpin">IN4</text>
-  <text x="470" y="822" class="s">VCC: MOTOR 7V</text>
-  <text x="470" y="872" class="s">GND: STAR</text>
-  <text x="470" y="922" class="s">EEP: J2 soldered</text>
-  <text x="470" y="972" class="s">ULT: not connected</text>
-  <text x="400" y="1015" class="s">OUT1/2 left, OUT3/4 right</text>
-  <path class="wire" d="M710 813 H902" style="stroke:#1f77b4"/>
-  <path class="wire" d="M710 863 H902" style="stroke:#2ca02c"/>
-  <path class="wire" d="M710 913 H902" style="stroke:#17becf"/>
-  <path class="wire" d="M710 963 H902" style="stroke:#8c564b"/>
-  <text x="725" y="805" class="s">IN1 - D3</text>
-  <text x="725" y="855" class="s">IN2 - D5</text>
-  <text x="725" y="905" class="s">IN3 - D6</text>
-  <text x="725" y="955" class="s">IN4 - D9</text>
+  <!-- right pins -->
+  <rect class="pinbox" x="1290" y="880" width="128" height="34" rx="6"/><text x="1300" y="903" class="pin">GPIO 41</text>
+  <rect class="pinbox" x="1290" y="922" width="128" height="34" rx="6"/><text x="1300" y="945" class="pin">GPIO 42</text>
+  <rect class="pinbox" x="1290" y="1006" width="128" height="34" rx="6"/><text x="1300" y="1029" class="pin">GPIO 1</text>
+  <rect class="pinbox" x="1290" y="1048" width="128" height="34" rx="6"/><text x="1300" y="1071" class="pin">GPIO 2</text>
+  <rect class="pinbox" x="1290" y="1180" width="128" height="34" rx="6"/><text x="1300" y="1203" class="pin">GPIO 13</text>
+  <rect class="pinbox" x="1290" y="1222" width="128" height="34" rx="6"/><text x="1300" y="1245" class="pin">GPIO 14</text>
+  <rect class="pinbox" x="1290" y="1264" width="128" height="34" rx="6"/><text x="1300" y="1287" class="pin">GPIO 21</text>
+  <rect class="pinbox" x="1290" y="1306" width="128" height="34" rx="6"/><text x="1300" y="1329" class="pin">GPIO 10</text>
+  <rect class="pinbox" x="1290" y="1348" width="128" height="34" rx="6"/><text x="1300" y="1371" class="pin">GPIO 11</text>
+  <rect class="pinbox" x="1290" y="1390" width="128" height="34" rx="6"/><text x="1300" y="1413" class="pin">GPIO 12</text>
+
+  <text x="1050" y="980" class="t">Do not use:</text>
+  <text x="1050" y="1004" class="s">GPIO 19/20 USB</text>
+  <text x="1050" y="1026" class="s">GPIO 0 / 45 / 46 boot</text>
+  <text x="1050" y="1048" class="s">GPIO 43/44 serial</text>
+  <text x="1050" y="1070" class="s">GPIO 33-37 (N16R8 flash)</text>
+  <text x="1040" y="1210" class="s">Spares: 18, 38, 39, 40</text>
+  <text x="1040" y="1234" class="warn" style="font-size:16px">Power only from Pi USB</text>
+  <text x="1040" y="1256" class="warn" style="font-size:16px">Do not feed VIN / 5V</text>
+
+  <!-- TB6612 -->
+  <rect class="box" x="340" y="860" width="370" height="360" rx="14"/>
+  <text x="358" y="892" class="h2">TB6612FNG</text>
+  <text x="358" y="918" class="cpin">PWMA</text>
+  <text x="358" y="960" class="cpin">AIN1</text>
+  <text x="358" y="1002" class="cpin">AIN2</text>
+  <text x="358" y="1044" class="cpin">PWMB</text>
+  <text x="358" y="1086" class="cpin">BIN1</text>
+  <text x="358" y="1128" class="cpin">BIN2</text>
+  <text x="358" y="1170" class="cpin">STBY</text>
+  <text x="500" y="918" class="s">VM: MOTOR 7V</text>
+  <text x="500" y="960" class="s">VCC: RAIL C 3.3V</text>
+  <text x="500" y="1002" class="s">GND: STAR (all)</text>
+  <text x="500" y="1128" class="s">AO1/AO2 left</text>
+  <text x="500" y="1150" class="s">BO1/BO2 right</text>
+
+  <path class="wire" d="M710 897 H902" style="stroke:#1f77b4"/>
+  <path class="wire" d="M710 939 H902" style="stroke:#2ca02c"/>
+  <path class="wire" d="M710 981 H902" style="stroke:#17becf"/>
+  <path class="wire" d="M710 1023 H902" style="stroke:#8c564b"/>
+  <path class="wire" d="M710 1065 H902" style="stroke:#e377c2"/>
+  <path class="wire" d="M710 1107 H902" style="stroke:#7f7f7f"/>
+  <path class="wire" d="M710 1149 H902" style="stroke:#bcbd22"/>
+  <text x="722" y="890" class="s">PWMA - GPIO 4</text>
+  <text x="722" y="932" class="s">AIN1 - GPIO 5</text>
+  <text x="722" y="974" class="s">AIN2 - GPIO 6</text>
+  <text x="722" y="1016" class="s">PWMB - GPIO 7</text>
+  <text x="722" y="1058" class="s">BIN1 - GPIO 15</text>
+  <text x="722" y="1100" class="s">BIN2 - GPIO 16</text>
+  <text x="722" y="1142" class="s">STBY - GPIO 17</text>
 
   <!-- Motors -->
-  <circle cx="190" cy="830" r="62" class="box"/>
-  <text x="145" y="825" class="h2">LEFT</text>
-  <text x="140" y="850" class="s">track motor</text>
-  <circle cx="190" cy="975" r="62" class="box"/>
-  <text x="140" y="970" class="h2">RIGHT</text>
-  <text x="140" y="995" class="s">track motor</text>
-  <path class="wire" d="M380 815 H252" style="stroke:#555"/>
-  <path class="wire" d="M380 845 H252" style="stroke:#555"/>
-  <text x="270" y="808" class="s">OUT1</text>
-  <text x="270" y="870" class="s">OUT2</text>
-  <path class="wire" d="M380 960 H252" style="stroke:#555"/>
-  <path class="wire" d="M380 990 H252" style="stroke:#555"/>
-  <text x="270" y="953" class="s">OUT3</text>
-  <text x="270" y="1015" class="s">OUT4</text>
+  <circle cx="170" cy="930" r="58" class="box"/>
+  <text x="128" y="924" class="h2">LEFT</text>
+  <text x="122" y="948" class="s">track motor</text>
+  <circle cx="170" cy="1100" r="58" class="box"/>
+  <text x="122" y="1094" class="h2">RIGHT</text>
+  <text x="122" y="1118" class="s">track motor</text>
+  <path class="wire" d="M340 910 H228" style="stroke:#555"/>
+  <path class="wire" d="M340 948 H228" style="stroke:#555"/>
+  <text x="240" y="902" class="s">AO1</text>
+  <text x="240" y="968" class="s">AO2</text>
+  <path class="wire" d="M340 1080 H228" style="stroke:#555"/>
+  <path class="wire" d="M340 1118 H228" style="stroke:#555"/>
+  <text x="240" y="1072" class="s">BO1</text>
+  <text x="240" y="1138" class="s">BO2</text>
 
   <!-- PCA9685 -->
-  <rect class="box" x="380" y="1060" width="330" height="320" rx="14"/>
-  <text x="400" y="1094" class="h2">PCA9685 (0x40)</text>
-  <text x="590" y="1100" class="cpin">SDA</text>
-  <text x="590" y="1150" class="cpin">SCL</text>
-  <text x="590" y="1200" class="cpin">VCC</text>
-  <text x="590" y="1250" class="cpin">GND</text>
-  <text x="400" y="1290" class="s">V+ terminal: NOISY 5V (1000uF on board)</text>
-  <text x="400" y="1314" class="s">GND terminal: STAR</text>
-  <text x="400" y="1338" class="s">OE: not connected</text>
-  <text x="400" y="1362" class="s">50Hz servo signal</text>
-  <path class="wire" d="M710 1093 H902" style="stroke:#e377c2"/>
-  <path class="wire" d="M710 1143 H902" style="stroke:#2f4f4f"/>
-  <path class="wire yellow" d="M710 1193 H902"/>
-  <path class="wire black" d="M710 1243 H902"/>
-  <text x="725" y="1085" class="s">SDA - D20</text>
-  <text x="725" y="1135" class="s">SCL - D21</text>
-  <text x="725" y="1185" class="s">VCC - 3.3V pin</text>
-  <text x="725" y="1235" class="s">GND - GND</text>
+  <rect class="box" x="340" y="1250" width="370" height="290" rx="14"/>
+  <text x="358" y="1282" class="h2">PCA9685 (0x40)</text>
+  <text x="560" y="1288" class="cpin">SDA</text>
+  <text x="560" y="1330" class="cpin">SCL</text>
+  <text x="560" y="1372" class="cpin">VCC</text>
+  <text x="560" y="1414" class="cpin">GND</text>
+  <text x="358" y="1460" class="s">V+ terminal: NOISY 5V</text>
+  <text x="358" y="1482" class="s">GND terminal: STAR</text>
+  <text x="358" y="1504" class="s">OE off · 50Hz · 1000uF on board</text>
+  <path class="wire" d="M710 1281 H902" style="stroke:#e377c2"/>
+  <path class="wire" d="M710 1323 H902" style="stroke:#2f4f4f"/>
+  <path class="wire yellow" d="M710 1365 H902"/>
+  <path class="wire black" d="M710 1407 H902"/>
+  <text x="722" y="1274" class="s">SDA - GPIO 8</text>
+  <text x="722" y="1316" class="s">SCL - GPIO 9</text>
+  <text x="722" y="1358" class="s">VCC - 3.3V pin</text>
+  <text x="722" y="1400" class="s">GND - GND</text>
 
   <!-- Servos -->
-  <rect class="box" x="40" y="1080" width="250" height="70" rx="12"/>
-  <text x="56" y="1110" class="h2">MG996R 180</text>
-  <text x="56" y="1136" class="s">channel CH0</text>
-  <rect class="box" x="40" y="1170" width="250" height="70" rx="12"/>
-  <text x="56" y="1200" class="h2">MZ996 90?</text>
-  <text x="56" y="1226" class="s">channel CH1</text>
-  <rect class="box" x="40" y="1260" width="250" height="70" rx="12"/>
-  <text x="56" y="1290" class="h2">360 continuous</text>
-  <text x="56" y="1316" class="s">channel CH2 (orange gear)</text>
-  <path class="wire" d="M290 1115 H380" style="stroke:#555"/>
-  <path class="wire" d="M290 1205 H380" style="stroke:#555"/>
-  <path class="wire" d="M290 1295 H380" style="stroke:#555"/>
-  <text x="40" y="1360" class="s">Servo plug: brown = GND, red = V+,</text>
-  <text x="40" y="1382" class="s">orange = signal. Match PCA9685 labels.</text>
+  <rect class="box" x="30" y="1250" width="250" height="64" rx="12"/>
+  <text x="46" y="1276" class="h2">MG996R 180</text>
+  <text x="46" y="1298" class="s">channel CH0</text>
+  <rect class="box" x="30" y="1330" width="250" height="64" rx="12"/>
+  <text x="46" y="1356" class="h2">MZ996 90?</text>
+  <text x="46" y="1378" class="s">channel CH1</text>
+  <rect class="box" x="30" y="1410" width="250" height="64" rx="12"/>
+  <text x="46" y="1436" class="h2">360 continuous</text>
+  <text x="46" y="1458" class="s">channel CH2 (orange gear)</text>
+  <path class="wire" d="M280 1282 H340" style="stroke:#555"/>
+  <path class="wire" d="M280 1362 H340" style="stroke:#555"/>
+  <path class="wire" d="M280 1442 H340" style="stroke:#555"/>
+  <text x="30" y="1504" class="s">Plug: brown GND, red V+,</text>
+  <text x="30" y="1524" class="s">orange = signal. Match labels.</text>
 
   <!-- HC-SR04 -->
-  <rect class="box" x="1620" y="770" width="330" height="140" rx="14"/>
-  <text x="1640" y="802" class="h2">HC-SR04</text>
-  <text x="1640" y="822" class="cpin">TRIG</text>
-  <text x="1640" y="872" class="cpin">ECHO</text>
-  <text x="1720" y="822" class="s">VCC: QUIET 5V</text>
-  <text x="1720" y="872" class="s">GND: STAR</text>
-  <path class="wire" d="M1418 813 H1620" style="stroke:#1f77b4"/>
-  <path class="wire" d="M1418 863 H1620" style="stroke:#2ca02c"/>
-  <text x="1435" y="805" class="s">D4 - TRIG</text>
-  <text x="1435" y="855" class="s">D2 - ECHO</text>
-  <text x="1625" y="900" class="warn" style="font-size:16px">ECHO only on D2 (5V signal)</text>
+  <rect class="later" x="1600" y="850" width="340" height="150" rx="14"/>
+  <text x="1618" y="882" class="h2" style="fill:#666">HC-SR04 (later)</text>
+  <text x="1618" y="908" class="cpin">TRIG</text>
+  <text x="1618" y="950" class="cpin">ECHO</text>
+  <text x="1700" y="908" class="s">VCC: QUIET 5V</text>
+  <text x="1700" y="950" class="s">GND: STAR</text>
+  <path class="wire" d="M1418 897 H1600" style="stroke:#bbb;stroke-dasharray:10 6"/>
+  <path class="wire" d="M1418 939 H1600" style="stroke:#bbb;stroke-dasharray:10 6"/>
+  <text x="1430" y="890" class="s">GPIO 41 - TRIG</text>
+  <text x="1430" y="970" class="s">GPIO 42 - ECHO</text>
+  <text x="1618" y="982" class="warn" style="font-size:16px">ECHO needs a voltage divider</text>
 
-  <!-- Relay board -->
-  <rect class="box" x="1620" y="925" width="330" height="140" rx="14"/>
-  <text x="1640" y="957" class="h2">RELAY BOARD 3.3V</text>
-  <text x="1640" y="982" class="cpin">IN1</text>
-  <text x="1640" y="1012" class="cpin">IN2</text>
-  <text x="1700" y="982" class="s">VCC: RAIL C 3.3V</text>
-  <text x="1700" y="1012" class="s">GND: STAR</text>
-  <text x="1640" y="1045" class="s">COM1 + COM2: RAIL C 3.3V</text>
-  <path class="wire" d="M1418 953 H1520 V976 H1620" style="stroke:#17becf"/>
-  <path class="wire" d="M1418 1003 H1520 V1006 H1620" style="stroke:#8c564b"/>
-  <text x="1435" y="945" class="s">A2 - IN1</text>
-  <text x="1435" y="1035" class="s">A3 - IN2</text>
+  <!-- Relay -->
+  <rect class="box" x="1600" y="1020" width="340" height="140" rx="14"/>
+  <text x="1618" y="1052" class="h2">RELAY BOARD 3.3V</text>
+  <text x="1618" y="1078" class="cpin">IN1</text>
+  <text x="1618" y="1110" class="cpin">IN2</text>
+  <text x="1680" y="1078" class="s">VCC: RAIL C 3.3V</text>
+  <text x="1680" y="1110" class="s">GND: STAR</text>
+  <text x="1618" y="1144" class="s">COM1 + COM2: RAIL C 3.3V</text>
+  <path class="wire" d="M1418 1023 H1600" style="stroke:#17becf"/>
+  <path class="wire" d="M1418 1065 H1600" style="stroke:#8c564b"/>
+  <text x="1430" y="1016" class="s">GPIO 1 - IN1</text>
+  <text x="1430" y="1108" class="s">GPIO 2 - IN2</text>
 
   <!-- Lights -->
-  <rect class="box" x="2000" y="925" width="360" height="140" rx="14"/>
-  <text x="2018" y="957" class="h2">LIGHTS (LED filaments)</text>
-  <text x="2018" y="985" class="s">NO1 - 10 ohm - light 1 (+)</text>
-  <text x="2018" y="1011" class="s">NO2 - 10 ohm - light 2 (+)</text>
-  <text x="2018" y="1037" class="s">light minus: STAR</text>
-  <path class="wire yellow" d="M1950 995 H2000"/>
+  <rect class="box" x="1980" y="1020" width="380" height="140" rx="14"/>
+  <text x="1998" y="1052" class="h2">LIGHTS (LED filaments)</text>
+  <text x="1998" y="1080" class="s">NO1 - 10 ohm - light 1 (+)</text>
+  <text x="1998" y="1106" class="s">NO2 - 10 ohm - light 2 (+)</text>
+  <text x="1998" y="1132" class="s">light minus: STAR</text>
+  <path class="wire yellow" d="M1940 1090 H1980"/>
 
-  <!-- Screens (later) -->
-  <rect class="later" x="1620" y="1085" width="330" height="310" rx="14"/>
-  <text x="1640" y="1117" class="h2" style="fill:#666">SCREENS (Phase 2)</text>
-  <text x="1640" y="1140" class="s">wire later</text>
-  <path class="wire" d="M1418 1113 H1620" style="stroke:#bbb;stroke-dasharray:10 6"/>
-  <path class="wire" d="M1418 1163 H1620" style="stroke:#bbb;stroke-dasharray:10 6"/>
-  <path class="wire" d="M1418 1213 H1620" style="stroke:#bbb;stroke-dasharray:10 6"/>
-  <path class="wire" d="M1418 1263 H1620" style="stroke:#bbb;stroke-dasharray:10 6"/>
-  <path class="wire" d="M1418 1313 H1620" style="stroke:#bbb;stroke-dasharray:10 6"/>
-  <path class="wire" d="M1418 1363 H1620" style="stroke:#bbb;stroke-dasharray:10 6"/>
-  <text x="1435" y="1105" class="s">D10 - CS left</text>
-  <text x="1435" y="1155" class="s">D7 - CS right</text>
-  <text x="1435" y="1205" class="s">D8 - DC both</text>
-  <text x="1435" y="1255" class="s">A0 - RST both</text>
-  <text x="1435" y="1305" class="s">D11 - SDA both</text>
-  <text x="1435" y="1355" class="s">D13 - SCL both</text>
-  <text x="1640" y="1190" class="s">VCC: RAIL C 3.3V</text>
-  <text x="1640" y="1216" class="s">GND: STAR</text>
-  <text x="1640" y="1250" class="s">CS goes to ONE screen each.</text>
-  <text x="1640" y="1276" class="s">DC, RST, SDA, SCL go to</text>
-  <text x="1640" y="1302" class="s">BOTH screens.</text>
+  <!-- Screens -->
+  <rect class="later" x="1600" y="1180" width="340" height="360" rx="14"/>
+  <text x="1618" y="1212" class="h2" style="fill:#666">SCREENS (Phase 2)</text>
+  <text x="1618" y="1234" class="s">wire later</text>
+  <path class="wire" d="M1418 1197 H1600" style="stroke:#bbb;stroke-dasharray:10 6"/>
+  <path class="wire" d="M1418 1239 H1600" style="stroke:#bbb;stroke-dasharray:10 6"/>
+  <path class="wire" d="M1418 1281 H1600" style="stroke:#bbb;stroke-dasharray:10 6"/>
+  <path class="wire" d="M1418 1323 H1600" style="stroke:#bbb;stroke-dasharray:10 6"/>
+  <path class="wire" d="M1418 1365 H1600" style="stroke:#bbb;stroke-dasharray:10 6"/>
+  <path class="wire" d="M1418 1407 H1600" style="stroke:#bbb;stroke-dasharray:10 6"/>
+  <text x="1430" y="1190" class="s">GPIO 13 - CS left</text>
+  <text x="1430" y="1232" class="s">GPIO 14 - CS right</text>
+  <text x="1430" y="1274" class="s">GPIO 21 - DC both</text>
+  <text x="1430" y="1316" class="s">GPIO 10 - RST both</text>
+  <text x="1430" y="1358" class="s">GPIO 11 - SDA both</text>
+  <text x="1430" y="1400" class="s">GPIO 12 - SCL both</text>
+  <text x="1618" y="1280" class="s">VCC: RAIL C 3.3V</text>
+  <text x="1618" y="1304" class="s">GND: STAR</text>
+  <text x="1618" y="1336" class="s">CS goes to ONE screen each.</text>
+  <text x="1618" y="1360" class="s">DC, RST, SDA, SCL go to</text>
+  <text x="1618" y="1384" class="s">BOTH screens.</text>
 
-  <rect class="later" x="2000" y="1120" width="160" height="110" rx="12"/>
-  <text x="2030" y="1170" class="h2" style="fill:#666">LEFT</text>
-  <text x="2030" y="1196" class="s">eye, CS D10</text>
-  <rect class="later" x="2190" y="1120" width="160" height="110" rx="12"/>
-  <text x="2215" y="1170" class="h2" style="fill:#666">RIGHT</text>
-  <text x="2215" y="1196" class="s">eye, CS D7</text>
-  <path class="wire" d="M1950 1175 H2000" style="stroke:#bbb;stroke-dasharray:10 6"/>
+  <rect class="later" x="1980" y="1220" width="170" height="100" rx="12"/>
+  <text x="2010" y="1264" class="h2" style="fill:#666">LEFT</text>
+  <text x="2010" y="1290" class="s">eye, CS GPIO 13</text>
+  <rect class="later" x="2170" y="1220" width="190" height="100" rx="12"/>
+  <text x="2195" y="1264" class="h2" style="fill:#666">RIGHT</text>
+  <text x="2195" y="1290" class="s">eye, CS GPIO 14</text>
+  <path class="wire" d="M1940 1270 H1980" style="stroke:#bbb;stroke-dasharray:10 6"/>
 
-  <!-- UNO GND to star -->
-  <path class="wire black" d="M1160 1400 V1440"/>
-  <text x="1180" y="1435" class="t">UNO Q GND screw to STAR (one wire)</text>
+  <!-- GND notes -->
+  <path class="wire black" d="M1160 1580 V1620"/>
+  <text x="1180" y="1614" class="t">ESP32 GND pin + Pi header GND  →  STAR (one wire each)</text>
 
   <!-- Legend -->
-  <rect class="box" x="40" y="1470" width="2320" height="140" rx="14"/>
-  <text x="60" y="1505" class="h2">WIRE COLOURS</text>
-  <path class="bus red" d="M60 1540 H140"/><text x="155" y="1547" class="t">Noisy 5V</text>
-  <path class="bus orange" d="M290 1540 H370"/><text x="385" y="1547" class="t">Motor 7V</text>
-  <path class="bus purple" d="M520 1540 H600"/><text x="615" y="1547" class="t">Quiet 5V</text>
-  <path class="bus yellow" d="M750 1540 H830"/><text x="845" y="1547" class="t">3.3V</text>
-  <path class="bus black" d="M950 1540 H1030"/><text x="1045" y="1547" class="t">GND</text>
-  <path class="wire" d="M1140 1540 H1220" style="stroke:#1f77b4"/><text x="1235" y="1547" class="t">Signals (any other colour)</text>
-  <text x="60" y="1590" class="s">Power wires 20-22 AWG, signal wires 24-26 AWG. Lift the tracks for every first motor test. Set every converter's voltage before connecting its load. Glue the HW-183B dial after setting 7.0V.</text>
+  <rect class="box" x="40" y="1660" width="2320" height="230" rx="14"/>
+  <text x="60" y="1696" class="h2">WIRE COLOURS</text>
+  <path class="bus red" d="M60 1730 H140"/><text x="155" y="1737" class="t">Noisy 5V</text>
+  <path class="bus orange" d="M290 1730 H370"/><text x="385" y="1737" class="t">Motor 7V → TB6612 VM</text>
+  <path class="bus purple" d="M640 1730 H720"/><text x="735" y="1737" class="t">Quiet 5V</text>
+  <path class="bus yellow" d="M870 1730 H950"/><text x="965" y="1737" class="t">3.3V (screens, relays, TB6612 VCC)</text>
+  <path class="bus black" d="M1380 1730 H1460"/><text x="1475" y="1737" class="t">GND</text>
+  <path class="wire" d="M1580 1730 H1660" style="stroke:#1f77b4"/><text x="1675" y="1737" class="t">Signals</text>
+  <text x="60" y="1784" class="s">Power wires 20-22 AWG, signal wires 24-26 AWG. Lift the tracks for every first motor test. Set every converter before connecting its load.</text>
+  <text x="60" y="1812" class="s">Wire TB6612 power (VM, VCC, GND) and motors first. Leave PWMA / AIN / BIN / STBY empty until Stage 3. STBY sits low by itself, so motors stay off.</text>
+  <text x="60" y="1840" class="s">Confirm Rail C is a steady 3.3V before connecting relay IN1/IN2. ESP32 pins die if those IN pins sit at 4V+.</text>
+  <text x="60" y="1868" class="s">Pi 5 wants a strong 5V supply. If it reboots or shows a lightning bolt, the hub is not passing enough power.</text>
 </svg>
