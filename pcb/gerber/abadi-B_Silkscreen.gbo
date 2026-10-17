@@ -1,0 +1,8 @@
+G04 Abadi Rover body rev A*
+%TF.GenerationSoftware,Abadi,build_gerbers,1.0*%
+%FSLAX46Y46*%
+%MOMM*%
+%LPD*%
+%TF.FileFunction,Legend,Bot*%
+%ADD10C,0.1500*%
+M02*

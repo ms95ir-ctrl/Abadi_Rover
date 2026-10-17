@@ -1,6 +1,6 @@
 # PCB draft for review
 
-This is a draft of the rover body board. It is not locked, and it is not the file that gets ordered. `plan.md` still has the older TB6612 pin table until the owner approves a change.
+The picture in `board-draft.png` is the layout sketch. The file to upload for a quote is `abadi-rover-body.zip`. See `QUOTE.md`. `plan.md` still has the older TB6612 pin table until the owner approves a change.
 
 ## Board
 
