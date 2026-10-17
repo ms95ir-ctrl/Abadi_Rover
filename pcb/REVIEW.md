@@ -1,12 +1,15 @@
 # PCB draft for review
 
-The picture in `layout.png` is the real board, to scale, 133 mm by 93 mm. `board-draft.png` is only the earlier sketch. The file to upload for a quote is `abadi-rover-body.zip`. See `QUOTE.md`. `plan.md` still has the older TB6612 pin table until the owner approves a change.
+The picture in `layout.png` is the real board, to scale, 105 mm by 84 mm. `board-draft.png` is only the earlier sketch. The file to upload for a quote is `abadi-rover-body.zip`. See `QUOTE.md`. `plan.md` still has the older TB6612 pin table until the owner approves a change.
 
 ## Board
 
-- 2 copper layers, 1.6 mm thick.
+- 4 copper layers, 1.6 mm thick.
+- Top and bottom: the signal wires. They are allowed to cross.
+- Inner layer 1: one solid ground plane. Every GND pin on the board joins that plane.
+- Inner layer 2: the power wires only (quiet 5V, noisy 5V, buck 3.3V, motor 7V, and the ESP32 3.3V).
 - Top side: the modules, screw terminals, and capacitors.
-- Bottom side: one solid ground plane. Every GND pin on the board joins that plane.
+- The Raspberry Pi is not on this board. A USB cable from the Pi powers the ESP32 and carries commands.
 - The Raspberry Pi is not on this board. A USB cable from the Pi powers the ESP32 and carries commands.
 
 ## What plugs in

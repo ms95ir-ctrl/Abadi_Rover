@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a 2-layer Gerber zip of the Abadi Rover body board for a PCB quote."""
+"""Build a 4-layer Gerber zip of the Abadi Rover body board for a PCB quote."""
 
 import math
 import os
@@ -157,11 +157,13 @@ class Board:
 
 
 def build():
-    """Compact body board. Target: smaller than the 150 x 95 mm perfboard."""
+    """4-layer body board. Signals cross; power stays on the inner layer."""
     b = Board()
 
     def tw(net):
-        if net in WIDE_NETS:
+        if net in MOTOR_NETS:
+            return 0.60
+        if net in POWER_NETS:
             return POWER_TRACE
         if str(net).startswith("LAMP") or str(net).startswith("NO"):
             return 0.50
@@ -173,194 +175,203 @@ def build():
         b.traces.append((x1, y1, x2, y2, width, net, layer))
 
     def add_via(x, y, net):
+        for v in b.vias:
+            if v["net"] == net and abs(v["x"] - x) < 0.05 and abs(v["y"] - y) < 0.05:
+                return
         b.vias.append(
             {"x": x, "y": y, "drill": VIA_DRILL, "dia": VIA_PAD, "net": net, "name": "via"}
         )
 
-    def vstub(pad, y, net):
-        add_trace(pad["x"], pad["y"], pad["x"], y, tw(net), net, "bot")
-        add_via(pad["x"], y, net)
+    def vseg(x, y1, y2, net, layer, width=None):
+        add_trace(x, y1, x, y2, tw(net) if width is None else width, net, layer)
 
-    def place_groups(groups, y, x_start, role):
-        x = x_start
-        for title, pins in groups:
-            pads = []
-            origin = x
-            for name, net in pins:
-                actual = "GND" if net is None else net
-                pad = b.add_pad(x, y, HEADER_DRILL, HEADER_PAD, actual, name, "header")
-                pad["role"] = role
-                pads.append(pad)
-                x += PIN_PITCH
-            b.headers.append({"title": title, "x": origin, "y": y, "pads": pads})
-        return x - PIN_PITCH
+    def hseg(x1, x2, y, net, layer, width=None):
+        add_trace(min(x1, x2), y, max(x1, x2), y, tw(net) if width is None else width, net, layer)
 
-    def place_pairs(y, x0, pairs):
-        x = x0
-        out = []
-        for pos, neg in pairs:
-            a = b.add_pad(x, y, 1.3, 2.6, pos[1], pos[0], "screw")
-            a["role"] = "screw"
-            c = b.add_pad(x + 5.08, y, 1.3, 2.6, neg[1], neg[0], "screw")
-            c["role"] = "screw"
-            out.append((a, c))
-            x += 8.40
-        return out
+    x0 = 14.0
 
-    # Rows, bottom to top. Numbers are the minimum gap that still clears a
-    # 0.60 mm via and a 0.80 mm power trace.
-    y_motor = 10.0
-    motor_pitch = MOTOR_PITCH
-    lamp_pitch = 0.76
-    motor_track0 = y_motor + 1.92
-    motor_tracks = [motor_track0 + i * motor_pitch for i in range(8)]
-    lamp_track0 = motor_tracks[-1] + 0.92
-    lamp_tracks = [lamp_track0 + i * lamp_pitch for i in range(4)]
+    def X(i):
+        return x0 + i * PIN_PITCH
 
-    y_power = lamp_tracks[-1] + 1.92
-    power_names = ["QUIET5", "NOISY5", "RAILC", "VM7", "ESP3V3"]
-    power_track0 = y_power + 1.92
-    power_tracks = {name: power_track0 + i * PWR_PITCH for i, name in enumerate(power_names)}
+    def place(title, pins, y, col, role):
+        pads = []
+        for i, (name, net) in enumerate(pins):
+            actual = "GND" if net is None else net
+            pad = b.add_pad(X(col + i), y, HEADER_DRILL, HEADER_PAD, actual, name, "header")
+            pad["role"] = role
+            pads.append(pad)
+        b.headers.append({"title": title, "x": X(col), "y": y, "pads": pads})
+        return pads
 
-    y_esp = power_tracks["ESP3V3"] + 1.78
-    direct_nets = [
-        "IN1A", "IN2A", "IN3A", "IN4A",
-        "IN1B", "IN2B", "IN3B", "IN4B",
-        "SDA", "SCL",
-    ]
-    m2_sig_nets = [
-        "RLY1", "RLY2", "RLY3", "RLY4",
-        "CSL", "CSR", "DC", "RST", "MOSI", "SCK",
-        "TRIG", "ECHO3",
-    ]
-    channel_nets = direct_nets + m2_sig_nets
-    ch0 = y_esp + 1.66
-    channel = {net: ch0 + i * SIG_PITCH for i, net in enumerate(channel_nets)}
+    def by_net(pads):
+        found = {}
+        for p in pads:
+            found.setdefault(p["net"], []).append(p)
+        return found
 
-    motor_nets = ["ML1", "ML2", "MR1", "MR2", "MS1", "MS2", "MS3", "MS4"]
-    alley0 = channel[channel_nets[-1]] + 1.00
-    alley = {net: alley0 + i * motor_pitch for i, net in enumerate(motor_nets)}
+    # Y positions, bottom to top. Power lanes sit in the gap beside their own
+    # row so a power via never lands on a signal via.
+    y_cap = 5.7
+    lane_bot = {"RAILC": 7.55, "VM7": 8.7, "QUIET5": 9.85, "NOISY5": 11.0}
+    y_ps = 13.2
+    y_screw = 17.6
+    y = 19.6
+    lamp_low = {}
+    for net in ("LAMP1", "LAMP2", "LAMP3", "LAMP4"):
+        lamp_low[net] = y
+        y += 0.92
+    y += 0.40
+    mot = {}
+    for net in ("ML1", "ML2", "MR1", "MR2", "MS1", "MS2", "MS3", "MS4"):
+        mot[net] = y
+        y += 1.02
+    y_drv = y + 1.40
+    lane_vm = y_drv + 1.55
+    y = lane_vm + 1.10
+    in_y = {}
+    for net in ("IN1B", "IN2B", "IN3B", "IN4B"):
+        in_y[net] = y
+        y += 0.78
+    y_esp = y + 1.40
+    lane_esp = y_esp + 1.55
+    # Bus tracks sit next to the ESP. Relay tracks sit next to the relays.
+    # Stubs on a shared column then never overlap.
+    y = lane_esp + 1.05
+    sig_lo = {}
+    for net in ("CSR", "SDA", "SCL"):
+        sig_lo[net] = y
+        y += 0.78
+    y += 0.30
+    lamp_hi = {}
+    for net in ("LAMP1", "LAMP2", "LAMP3", "LAMP4"):
+        lamp_hi[net] = y
+        y += 0.92
+    y_div = y + 1.25
+    y_res_l = y_div + 1.9
+    y_res_n = y_res_l + 3.4
+    sig_mid = {}
+    y = y_res_n + 1.7
+    for net in ("RLY1", "RLY2", "RLY3", "RLY4", "TRIG", "ECHO3"):
+        sig_mid[net] = y
+        y += 0.78
+    lane_rel = {"RAILC": y + 0.85, "QUIET5": y + 2.0}
+    y_rel = lane_rel["QUIET5"] + 1.60
+    y = y_rel + 1.50
+    sig_hi = {}
+    for net in ("CSR", "DC", "RST", "MOSI", "SCK", "SDA", "SCL"):
+        sig_hi[net] = y
+        y += 0.78
+    y_scr = y + 1.40
+    lane_top = {}
+    y = y_scr + 1.55
+    for net in ("RAILC", "ESP3V3", "NOISY5"):
+        lane_top[net] = y
+        y += 1.12
+    board_h = y + 4.4
 
-    y_m1 = alley[motor_nets[-1]] + 1.78
-    m1_power_names = ["VM7", "NOISY5", "ESP3V3"]
-    m1p0 = y_m1 + 1.80
-    m1_power = {name: m1p0 + i * PWR_PITCH for i, name in enumerate(m1_power_names)}
+    power_x = {"QUIET5": 6.2, "NOISY5": 7.4, "RAILC": 8.6, "VM7": 9.8, "ESP3V3": 11.0}
+    # Right-hand bus, past the echo divider.
+    bus_x = {}
+    x = 91.2
+    for net in ("CSR", "SDA", "SCL"):
+        bus_x[net] = x
+        x += 0.92
+    x += 1.05
+    for net in ("LAMP1", "LAMP2", "LAMP3", "LAMP4"):
+        bus_x[net] = x
+        x += 1.08
+    board_w = x + 5.6
 
-    y_m2 = m1_power["ESP3V3"] + 1.80
-    part_lo = y_m2 + 3.35
-    part_hi = part_lo + 3.35
+    esp = place("ESP32-S3", [
+        ("GND", None),
+        ("GPIO4", "IN1A"), ("GPIO5", "IN2A"), ("GPIO6", "IN3A"), ("GPIO7", "IN4A"),
+        ("GPIO15", "IN1B"), ("GPIO16", "IN2B"), ("GPIO17", "IN3B"), ("GPIO18", "IN4B"),
+        ("GPIO8", "SDA"), ("GPIO9", "SCL"),
+        ("GPIO1", "RLY1"), ("GPIO2", "RLY2"), ("GPIO38", "RLY3"), ("GPIO39", "RLY4"),
+        ("GPIO13", "CSL"), ("GPIO14", "CSR"), ("GPIO21", "DC"), ("GPIO10", "RST"),
+        ("GPIO11", "MOSI"), ("GPIO12", "SCK"),
+        ("GPIO41", "TRIG"), ("GPIO42", "ECHO3"),
+        ("GPIO40", "SPARE"),
+        ("3V3", "ESP3V3"),
+        ("GND", None),
+    ], y_esp, 0, "esp")
+    drv_a = place("DRV A  TRACKS", [
+        ("IN1", "IN1A"), ("IN2", "IN2A"), ("IN3", "IN3A"), ("IN4", "IN4A"),
+        ("VM", "VM7"),
+        ("OUT1", "ML1"), ("OUT2", "ML2"), ("OUT3", "MR1"), ("OUT4", "MR2"),
+        ("GND", None),
+    ], y_drv, 1, "drv")
+    drv_b = place("DRV B  SPARE", [
+        ("IN1", "IN1B"), ("IN2", "IN2B"), ("IN3", "IN3B"), ("IN4", "IN4B"),
+        ("VM", "VM7"),
+        ("OUT1", "MS1"), ("OUT2", "MS2"), ("OUT3", "MS3"), ("OUT4", "MS4"),
+        ("GND", None),
+    ], y_drv, 12, "drv")
+    # Cols 15-21 stay empty on this row so five screen wires can drop straight through.
+    rel_a = place("RELAY A", [
+        ("VCC", "RAILC"), ("IN1", "RLY1"), ("IN2", "RLY2"), ("COM", "RAILC"),
+        ("NO1", "NO1"), ("NO2", "NO2"), ("GND", None),
+    ], y_rel, 0, "rel")
+    rel_b = place("RELAY B", [
+        ("NO1", "NO3"), ("NO2", "NO4"), ("VCC", "RAILC"), ("GND", None),
+        ("COM", "RAILC"), ("IN1", "RLY3"), ("IN2", "RLY4"),
+    ], y_rel, 8, "rel")
+    sonar = place("SONAR", [
+        ("VCC", "QUIET5"), ("GND", None), ("TRIG", "TRIG"), ("ECHO", "ECHO5"),
+    ], y_rel, 22, "rel")
+    scr_r = place("SCREEN R", [
+        ("VCC", "RAILC"), ("GND", None), ("CS", "CSR"), ("RST", "RST"),
+        ("DC", "DC"), ("SDA", "MOSI"), ("SCL", "SCK"),
+    ], y_scr, 0, "scr")
+    pca = place("PCA9685", [
+        ("VCC", "ESP3V3"), ("SDA", "SDA"), ("SCL", "SCL"), ("V+", "NOISY5"), ("GND", None),
+    ], y_scr, 8, "scr")
+    scr_l = place("SCREEN L", [
+        ("CS", "CSL"), ("GND", None), ("DC", "DC"), ("RST", "RST"),
+        ("SDA", "MOSI"), ("SCL", "SCK"), ("VCC", "RAILC"),
+    ], y_scr, 15, "scr")
+    gyro = place("GYRO", [
+        ("VCC", "ESP3V3"), ("SDA", "SDA"), ("SCL", "SCL"), ("GND", None),
+    ], y_scr, 22, "scr")
 
-    lamp_nets = ["LAMP1", "LAMP2", "LAMP3", "LAMP4"]
-    escape_nets = m2_sig_nets + lamp_nets
-    esc0 = part_hi + 1.28
-    escape = {}
-    esc_y = esc0
-    for i, net in enumerate(escape_nets):
-        escape[net] = esc_y
-        if i + 1 < len(escape_nets):
-            nxt = escape_nets[i + 1]
-            # Lamp traces are wider, so the via beside them needs a bigger step.
-            esc_y += 0.84 if (net.startswith("LAMP") or nxt.startswith("LAMP")) else SIG_PITCH
+    def part(x, y, net, name):
+        pad = b.add_pad(x, y, 0.8, 1.6, net, name, "part")
+        pad["role"] = "part"
+        return pad
 
-    m2_power_names = ["RAILC", "QUIET5"]
-    m2p0 = escape[escape_nets[-1]] + 0.98
-    m2_power = {name: m2p0 + i * PWR_PITCH for i, name in enumerate(m2_power_names)}
-    top_copper = m2_power["QUIET5"] + 0.55
-    board_h = top_copper + 5.5
+    lamps = {}
+    for pad in rel_a + rel_b:
+        if pad["net"] not in ("NO1", "NO2", "NO3", "NO4"):
+            continue
+        lamp_net = {"NO1": "LAMP1", "NO2": "LAMP2", "NO3": "LAMP3", "NO4": "LAMP4"}[pad["net"]]
+        hot = part(pad["x"], y_res_n, pad["net"], "10R")
+        out = part(pad["x"], y_res_l, lamp_net, "10R")
+        vseg(pad["x"], pad["y"], hot["y"], pad["net"], "bot")
+        lamps[lamp_net] = out
 
-    # ---- headers ----
-    x0 = 9.0
-    place_groups(
-        [("ESP32-S3", [
-            ("GND", None),
-            ("GPIO4", "IN1A"), ("GPIO5", "IN2A"), ("GPIO6", "IN3A"), ("GPIO7", "IN4A"),
-            ("GPIO15", "IN1B"), ("GPIO16", "IN2B"), ("GPIO17", "IN3B"), ("GPIO18", "IN4B"),
-            ("GPIO8", "SDA"), ("GPIO9", "SCL"),
-            ("GPIO1", "RLY1"), ("GPIO2", "RLY2"), ("GPIO38", "RLY3"), ("GPIO39", "RLY4"),
-            ("GPIO13", "CSL"), ("GPIO14", "CSR"), ("GPIO21", "DC"), ("GPIO10", "RST"),
-            ("GPIO11", "MOSI"), ("GPIO12", "SCK"),
-            ("GPIO41", "TRIG"), ("GPIO42", "ECHO3"),
-            ("GPIO40", "SPARE"),
-            ("3V3", "ESP3V3"),
-            ("GND", None),
-        ])],
-        y_esp, x0, "esp",
-    )
-    place_groups(
-        [
-            ("DRV A  TRACKS", [
-                ("IN1", "IN1A"), ("IN2", "IN2A"), ("IN3", "IN3A"), ("IN4", "IN4A"),
-                ("VM", "VM7"),
-                ("OUT1", "ML1"), ("OUT2", "ML2"), ("OUT3", "MR1"), ("OUT4", "MR2"),
-                ("GND", None),
-            ]),
-            ("DRV B  SPARE", [
-                ("IN1", "IN1B"), ("IN2", "IN2B"), ("IN3", "IN3B"), ("IN4", "IN4B"),
-                ("VM", "VM7"),
-                ("OUT1", "MS1"), ("OUT2", "MS2"), ("OUT3", "MS3"), ("OUT4", "MS4"),
-                ("GND", None),
-            ]),
-            ("PCA9685", [
-                ("VCC", "ESP3V3"), ("SDA", "SDA"), ("SCL", "SCL"), ("V+", "NOISY5"), ("GND", None),
-            ]),
-            ("GYRO", [
-                ("VCC", "ESP3V3"), ("SDA", "SDA"), ("SCL", "SCL"), ("GND", None),
-            ]),
-        ],
-        y_m1, x0 + 1.27, "m1",
-    )
-    place_groups(
-        [
-            ("RELAY A", [
-                ("VCC", "RAILC"), ("IN1", "RLY1"), ("IN2", "RLY2"), ("COM", "RAILC"),
-                ("NO1", "NO1"), ("NO2", "NO2"), ("GND", None),
-            ]),
-            ("RELAY B", [
-                ("VCC", "RAILC"), ("IN1", "RLY3"), ("IN2", "RLY4"), ("COM", "RAILC"),
-                ("NO1", "NO3"), ("NO2", "NO4"), ("GND", None),
-            ]),
-            ("SCREEN L", [
-                ("VCC", "RAILC"), ("GND", None), ("CS", "CSL"), ("RST", "RST"),
-                ("DC", "DC"), ("SDA", "MOSI"), ("SCL", "SCK"),
-            ]),
-            ("SCREEN R", [
-                ("VCC", "RAILC"), ("GND", None), ("CS", "CSR"), ("RST", "RST"),
-                ("DC", "DC"), ("SDA", "MOSI"), ("SCL", "SCK"),
-            ]),
-            ("SONAR", [
-                ("VCC", "QUIET5"), ("GND", None), ("TRIG", "TRIG"), ("ECHO", "ECHO5"),
-            ]),
-        ],
-        y_m2, x0, "m2",
-    )
+    d0 = 81.4
+    e5 = part(d0, y_div, "ECHO5", "1K")
+    e3a = part(d0 + 2.6, y_div, "ECHO3", "1K")
+    e3b = part(d0 + 5.2, y_div, "ECHO3", "2K")
+    part(d0 + 7.8, y_div, "GND", "2K")
+    echo = next(p for p in sonar if p["name"] == "ECHO")
+    vseg(echo["x"], echo["y"], y_div, "ECHO5", "bot")
+    add_via(echo["x"], y_div, "ECHO5")
+    add_via(e5["x"], y_div, "ECHO5")
+    hseg(echo["x"], e5["x"], y_div, "ECHO5", "top")
+    hseg(e3a["x"], e3b["x"], y_div, "ECHO3", "top")
+    b.silk.append(("text", d0, y_div + 1.2, "1K  2K", 0.7))
 
-    # 10 ohm lamp resistors above the relay NO pins.
-    no_to_lamp = {"NO1": "LAMP1", "NO2": "LAMP2", "NO3": "LAMP3", "NO4": "LAMP4"}
-    for pad in list(b.pads):
-        lamp = no_to_lamp.get(pad["net"])
-        if lamp and pad.get("role") == "m2":
-            lo = b.add_pad(pad["x"], part_lo, 0.8, 1.6, pad["net"], pad["net"], "part")
-            lo["role"] = "local"
-            hi = b.add_pad(pad["x"], part_hi, 0.8, 1.6, lamp, lamp, "part")
-            hi["role"] = "escape"
-            add_trace(pad["x"], pad["y"], lo["x"], lo["y"], 0.50, pad["net"], "bot")
+    def screw_pair(x, y, left, right):
+        pa = b.add_pad(x, y, 1.3, 2.6, left[1], left[0], "screw")
+        pb = b.add_pad(x + 5.08, y, 1.3, 2.6, right[1], right[0], "screw")
+        pa["role"] = pb["role"] = "screw"
+        return pa, pb
 
-    # Echo divider to the right of the sonar ECHO pin.
-    echo_pin = next(p for p in b.pads if p.get("role") == "m2" and p["name"] == "ECHO")
-    ex = echo_pin["x"]
-    e5 = b.add_pad(ex, part_lo, 0.8, 1.6, "ECHO5", "1K", "part")
-    e5["role"] = "local"
-    e3a = b.add_pad(ex + 3.4, part_lo, 0.8, 1.6, "ECHO3", "1K", "part")
-    e3a["role"] = "join"
-    e3b = b.add_pad(ex + 3.4, part_hi, 0.8, 1.6, "ECHO3", "2K", "part")
-    e3b["role"] = "escape"
-    g2 = b.add_pad(ex + 6.8, part_hi, 0.8, 1.6, "GND", "2K", "part")
-    g2["role"] = "gnd"
-    add_trace(echo_pin["x"], echo_pin["y"], e5["x"], e5["y"], TRACE, "ECHO5", "bot")
-    add_trace(e3a["x"], e3a["y"], e3b["x"], e3b["y"], TRACE, "ECHO3", "bot")
-
-    # Screw rows. Power row is shifted half a step so its stubs miss the motor stubs.
-    place_pairs(y_motor, 12.0, [
+    # Half a column off the header grid, so motor wires do not stack on header wires.
+    sx = 17.3
+    screws = {}
+    for pair in (
         (("LEFT1", "ML1"), ("LEFT2", "ML2")),
         (("RIGHT1", "MR1"), ("RIGHT2", "MR2")),
         (("SPR1", "MS1"), ("SPR2", "MS2")),
@@ -369,8 +380,16 @@ def build():
         (("LAMP2+", "LAMP2"), ("LAMP2-", "GND")),
         (("LAMP3+", "LAMP3"), ("LAMP3-", "GND")),
         (("LAMP4+", "LAMP4"), ("LAMP4-", "GND")),
-    ])
-    place_pairs(y_power, 16.2, [
+    ):
+        a, c = screw_pair(sx, y_screw, pair[0], pair[1])
+        screws.setdefault(a["net"], []).append(a)
+        if c["net"] != "GND":
+            screws.setdefault(c["net"], []).append(c)
+        sx += 8.10
+
+    px = 44.0
+    pscrew = []
+    for pair in (
         (("QUIET+", "QUIET5"), ("QUIET-", "GND")),
         (("NOISY+", "NOISY5"), ("NOISY-", "GND")),
         (("BUCK+", "QUIET5"), ("BUCK-", "GND")),
@@ -378,156 +397,134 @@ def build():
         (("BOOST+", "NOISY5"), ("BOOST-", "GND")),
         (("7V+", "VM7"), ("7V-", "GND")),
         (("FAN+", "NOISY5"), ("FAN-", "GND")),
-    ])
-    pi = b.add_pad(16.2 + 7 * 8.40, y_power, 1.3, 2.6, "GND", "PI GND", "screw")
+    ):
+        a, c = screw_pair(px, y_ps, pair[0], pair[1])
+        pscrew.append(a)
+        px += 8.10
+    pi = b.add_pad(px, y_ps, 1.3, 2.6, "GND", "PI GND", "screw")
     pi["role"] = "screw"
 
-    # One column per rail so the two caps on that rail share a trace.
-    for name, net, drill, dia, xx, yy in (
-        ("100U", "RAILC", 0.9, 1.9, 80.0, 7.3),
-        ("100N", "RAILC", 0.8, 1.6, 80.0, 10.0),
-        ("100U", "VM7", 0.9, 1.9, 88.5, 7.3),
-        ("100N", "VM7", 0.8, 1.6, 88.5, 10.0),
+    for name, net, xx, gx in (
+        ("100U", "RAILC", 9.2, 13.0),
+        ("100N", "RAILC", 16.8, 20.6),
+        ("100U", "VM7", 24.6, 28.4),
+        ("100N", "VM7", 32.2, 36.0),
     ):
-        hot = b.add_pad(xx, yy, drill, dia, net, name, "part")
+        drill, dia = (0.9, 1.9) if name == "100U" else (0.8, 1.6)
+        hot = b.add_pad(xx, y_cap, drill, dia, net, name, "part")
         hot["role"] = "cap"
-        gnd = b.add_pad(xx + 3.3, yy, drill, dia, "GND", "GND", "part")
-        gnd["role"] = "gnd"
+        gpad = b.add_pad(gx, y_cap, drill, dia, "GND", "GND", "part")
+        gpad["role"] = "cap"
 
-    right = max(p["x"] for p in b.pads)
-    bus = right + 2.8
-    bus_x = {}
-    for net in m2_sig_nets + lamp_nets:
-        bus_x[net] = bus
-        bus += 0.88
-    bus += 0.40
-    for net in motor_nets:
-        bus_x[net] = bus
-        bus += 1.10
-    bus += 0.40
-    for net in power_names:
-        bus_x[net] = bus
-        bus += 1.20
-    board_w = bus + 6.2
+    spans = {}
 
-    routed = set()
+    def escape(pad, lane_y):
+        """Drop on the bottom to the lane, then run on the inner power layer."""
+        net = pad["net"]
+        vseg(pad["x"], pad["y"], lane_y, net, "bot", POWER_TRACE)
+        add_via(pad["x"], lane_y, net)
+        bx = power_x[net]
+        hseg(pad["x"], bx, lane_y, net, "pwr", POWER_TRACE)
+        add_via(bx, lane_y, net)
+        spans.setdefault(net, []).append(lane_y)
 
-    def route_direct(net):
-        pads = [p for p in b.pads if p["net"] == net and p.get("role") in ("esp", "m1")]
-        y = channel[net]
-        for p in pads:
-            vstub(p, y, net)
-        xs = [p["x"] for p in pads]
-        add_trace(min(xs), y, max(xs), y, TRACE, net, "top")
-        routed.add(net)
+    def local(net, group, ytrack):
+        xs = []
+        for p in group:
+            vseg(p["x"], p["y"], ytrack, net, "bot")
+            add_via(p["x"], ytrack, net)
+            xs.append(p["x"])
+        hseg(min(xs), max(xs), ytrack, net, "top")
 
-    def route_m2_signal(net):
-        esp = [p for p in b.pads if p["net"] == net and p.get("role") == "esp"]
-        mods = [p for p in b.pads if p["net"] == net and p.get("role") in ("m2", "escape")]
-        if not esp or not mods:
-            b.errors.append("missing pads for " + net)
-            return
-        y = channel[net]
-        ey = escape[net]
+    def bus_link(net, low_pads, high_pads, y_low, y_high):
         bx = bus_x[net]
-        w = TRACE
-        for p in esp:
-            vstub(p, y, net)
-        for p in mods:
-            vstub(p, ey, net)
-        add_trace(min(p["x"] for p in esp), y, bx, y, w, net, "top")
-        add_via(bx, y, net)
-        add_trace(min(p["x"] for p in mods), ey, bx, ey, w, net, "top")
-        add_via(bx, ey, net)
-        add_trace(bx, y, bx, ey, w, net, "bot")
-        routed.add(net)
+        for group, yy in ((low_pads, y_low), (high_pads, y_high)):
+            xs = [bx]
+            add_via(bx, yy, net)
+            for p in group:
+                vseg(p["x"], p["y"], yy, net, "bot")
+                add_via(p["x"], yy, net)
+                xs.append(p["x"])
+            hseg(min(xs), max(xs), yy, net, "top")
+        vseg(bx, y_low, y_high, net, "bot")
 
-    def route_motor(net):
-        src = [p for p in b.pads if p["net"] == net and p.get("role") == "m1"]
-        dst = [p for p in b.pads if p["net"] == net and p.get("role") == "screw"]
-        if len(src) != 1 or len(dst) != 1:
-            b.errors.append("motor pads " + net)
-            return
-        y = alley[net]
-        ly = motor_tracks[motor_nets.index(net)]
-        bx = bus_x[net]
-        w = POWER_TRACE
-        vstub(src[0], y, net)
-        add_trace(src[0]["x"], y, bx, y, w, net, "top")
-        add_via(bx, y, net)
-        add_trace(bx, y, bx, ly, w, net, "bot")
-        add_via(bx, ly, net)
-        add_trace(min(dst[0]["x"], bx), ly, max(dst[0]["x"], bx), ly, w, net, "top")
-        add_via(dst[0]["x"], ly, net)
-        add_trace(dst[0]["x"], ly, dst[0]["x"], dst[0]["y"], w, net, "bot")
-        routed.add(net)
+    esp_n = by_net(esp)
+    for net in ("IN1A", "IN2A", "IN3A", "IN4A"):
+        src = esp_n[net][0]
+        dst = next(p for p in drv_a if p["net"] == net)
+        vseg(src["x"], src["y"], dst["y"], net, "bot")
+    for net in ("IN1B", "IN2B", "IN3B", "IN4B"):
+        local(net, esp_n[net] + [p for p in drv_b if p["net"] == net], in_y[net])
+    for net in ("ML1", "ML2", "MR1", "MR2"):
+        local(net, [p for p in drv_a if p["net"] == net] + screws[net], mot[net])
+    for net in ("MS1", "MS2", "MS3", "MS4"):
+        local(net, [p for p in drv_b if p["net"] == net] + screws[net], mot[net])
 
-    def route_lamp(net):
-        src = [p for p in b.pads if p["net"] == net and p.get("role") == "escape"]
-        dst = [p for p in b.pads if p["net"] == net and p.get("role") == "screw"]
-        if len(src) != 1 or len(dst) != 1:
-            b.errors.append("lamp pads " + net)
-            return
-        ey = escape[net]
-        ly = lamp_tracks[lamp_nets.index(net)]
-        bx = bus_x[net]
-        w = 0.50
-        vstub(src[0], ey, net)
-        add_trace(src[0]["x"], ey, bx, ey, w, net, "top")
-        add_via(bx, ey, net)
-        add_trace(bx, ey, bx, ly, w, net, "bot")
-        add_via(bx, ly, net)
-        add_trace(min(dst[0]["x"], bx), ly, max(dst[0]["x"], bx), ly, w, net, "top")
-        add_via(dst[0]["x"], ly, net)
-        add_trace(dst[0]["x"], ly, dst[0]["x"], dst[0]["y"], w, net, "bot")
-        routed.add(net)
+    rel_n = by_net(rel_a + rel_b + sonar)
+    for net in ("RLY1", "RLY2", "RLY3", "RLY4", "TRIG"):
+        local(net, esp_n[net] + rel_n[net], sig_mid[net])
+    local("ECHO3", esp_n["ECHO3"] + [e3a, e3b], sig_mid["ECHO3"])
 
-    def route_power(net):
-        w = POWER_TRACE
-        bx = bus_x[net]
-        groups = []
-        low = [p for p in b.pads if p["net"] == net and p.get("role") in ("screw", "cap")]
-        if net == "ESP3V3":
-            low += [p for p in b.pads if p["net"] == net and p.get("role") == "esp"]
-        m1 = [p for p in b.pads if p["net"] == net and p.get("role") == "m1"]
-        m2 = [p for p in b.pads if p["net"] == net and p.get("role") == "m2"]
-        if low:
-            groups.append((low, power_tracks[net]))
-        if m1:
-            groups.append((m1, m1_power[net]))
-        if m2:
-            groups.append((m2, m2_power[net]))
-        ys = []
-        for pads, y in groups:
-            for p in pads:
-                vstub(p, y, net)
-            xs = [p["x"] for p in pads] + [bx]
-            add_trace(min(xs), y, max(xs), y, w, net, "top")
-            add_via(bx, y, net)
-            ys.append(y)
-        if len(ys) >= 2:
-            add_trace(bx, min(ys), bx, max(ys), w, net, "bot")
-        routed.add(net)
+    scr_n = by_net(scr_l + scr_r + pca + gyro)
+    # These five land on the same column on the ESP and the left screen.
+    straight = {"CSL": 15, "DC": 17, "RST": 18, "MOSI": 19, "SCK": 20}
+    for net, col in straight.items():
+        spine = X(col)
+        src = esp_n[net][0]
+        dst = next(p for p in scr_l if p["net"] == net)
+        if abs(src["x"] - spine) > 0.1 or abs(dst["x"] - spine) > 0.1:
+            b.errors.append("straight " + net)
+        vseg(spine, src["y"], dst["y"], net, "bot")
+        others = [p for p in scr_n[net] if abs(p["x"] - spine) > 0.5]
+        if not others:
+            continue
+        yy = sig_hi[net]
+        xs = [spine]
+        add_via(spine, yy, net)
+        for p in others:
+            vseg(p["x"], p["y"], yy, net, "bot")
+            add_via(p["x"], yy, net)
+            xs.append(p["x"])
+        hseg(min(xs), max(xs), yy, net, "top")
 
-    for net in direct_nets:
-        route_direct(net)
-    for net in m2_sig_nets:
-        route_m2_signal(net)
-    for net in motor_nets:
-        route_motor(net)
-    for net in lamp_nets:
-        route_lamp(net)
-    for net in power_names:
-        route_power(net)
-    for net in ("NO1", "NO2", "NO3", "NO4", "ECHO5"):
-        routed.add(net)
+    for net in ("CSR", "SDA", "SCL"):
+        bus_link(net, esp_n[net], scr_n[net], sig_lo[net], sig_hi[net])
 
+    for net, pad in lamps.items():
+        bus_link(net, screws[net], [pad], lamp_low[net], lamp_hi[net])
+
+    for p in drv_a + drv_b:
+        if p["net"] == "VM7":
+            escape(p, lane_vm)
+    for p in esp:
+        if p["net"] == "ESP3V3":
+            escape(p, lane_esp)
+    for p in rel_a + rel_b + sonar:
+        if p["net"] in lane_rel:
+            escape(p, lane_rel[p["net"]])
+    for p in scr_l + scr_r + pca + gyro:
+        if p["net"] in lane_top:
+            escape(p, lane_top[p["net"]])
+    for p in pscrew:
+        if p["net"] in lane_bot:
+            escape(p, lane_bot[p["net"]])
+    for p in b.pads:
+        if p.get("role") == "cap" and p["net"] in lane_bot:
+            escape(p, lane_bot[p["net"]])
+    for net, ys in spans.items():
+        vseg(power_x[net], min(ys), max(ys), net, "bot", POWER_TRACE)
+
+    routed = set(spans) | set(lamps) | set(straight) | {
+        "IN1A", "IN2A", "IN3A", "IN4A", "IN1B", "IN2B", "IN3B", "IN4B",
+        "ML1", "ML2", "MR1", "MR2", "MS1", "MS2", "MS3", "MS4",
+        "RLY1", "RLY2", "RLY3", "RLY4", "TRIG", "ECHO3", "ECHO5",
+        "CSR", "SDA", "SCL", "NO1", "NO2", "NO3", "NO4",
+    }
     seen = {}
     for p in b.pads:
         if p["net"] in ("GND", "MOUNT"):
             continue
-        seen.setdefault(p["net"], 0)
-        seen[p["net"]] += 1
+        seen[p["net"]] = seen.get(p["net"], 0) + 1
     for net, count in seen.items():
         if net == "SPARE":
             continue
@@ -536,49 +533,45 @@ def build():
         if count < 2:
             b.errors.append("single pad " + net)
 
-    # Mounting holes in the four corners, clear of the copper bands.
-    inset = 3.6
+    inset = 3.5
     for hx, hy in (
         (inset, inset),
         (board_w - inset, inset),
         (inset, board_h - inset),
         (board_w - inset, board_h - inset),
     ):
-        b.add_pad(hx, hy, 3.2, 3.2, "MOUNT", "M3", "mount")
+        hole = b.add_pad(hx, hy, 3.2, 3.2, "MOUNT", "M3", "mount")
+        hole["role"] = "mount"
 
-    b.silk.append(("text", 8, board_h - 3.6, "ABADI ROVER BODY", 1.15))
+    b.silk.append(("text", 18, 2.3, "ABADI ROVER", 0.9))
     b.silk.append((
-        "text", 8, board_h - 5.3,
-        "{:.0f} MM X {:.0f} MM   2 LAYERS   1.6 MM".format(board_w, board_h),
-        0.85,
+        "text", 18, board_h - 2.8,
+        "{:.0f}X{:.0f}MM  4 LAYER  PIN 1 = LEFT HOLE  BUCK 3V3 IS NOT ESP 3V3".format(board_w, board_h),
+        0.55,
     ))
     for h in b.headers:
         cx = (h["pads"][0]["x"] + h["pads"][-1]["x"]) / 2.0
-        b.silk.append(("text", cx, h["y"] - 2.05, h["title"], 0.72, "center"))
-        p1 = h["pads"][0]
-        b.silk.append(("dot", p1["x"], p1["y"] - 1.35))
-    for p in b.pads:
-        if p["kind"] == "screw":
-            b.silk.append(("text", p["x"], p["y"] - 2.15, p["name"], 0.48, "center"))
-    b.silk.append(("text", 12, 4.6, "PIN 1 IS THE LEFT HOLE.  BUCK 3V3 DOES NOT JOIN ESP 3V3.", 0.62))
-    b.silk.append(("text", ex, part_hi + 0.3, "ECHO 1K 2K", 0.55))
+        b.silk.append(("text", cx, h["y"] + 1.02, h["title"], 0.58, "center"))
+        b.silk.append(("dot", h["pads"][0]["x"], h["pads"][0]["y"] - 1.2))
 
-    if board_w >= 150 or board_h >= 95:
+    if board_w >= 120 or board_h >= 85:
         b.errors.append("SIZE {:.1f} x {:.1f}".format(board_w, board_h))
 
-    b.meta = {"motor_y": y_motor, "power_y": y_power, "esp_y": y_esp, "m1_y": y_m1, "m2_y": y_m2}
+    b.meta = {"esp_y": y_esp, "drv_y": y_drv, "rel_y": y_rel, "scr_y": y_scr}
+    print("Y ps {:.1f} screw {:.1f} drv {:.1f} esp {:.1f} rel {:.1f} scr {:.1f} h {:.1f}".format(
+        y_ps, y_screw, y_drv, y_esp, y_rel, y_scr, board_h))
     return b, board_w, board_h
+
 def drc(b):
     features = []
     for t in b.traces:
         x1, y1, x2, y2, w, net, layer = t
         features.append(("seg", layer, net, w, (x1, y1, x2, y2)))
-    for v in b.vias:
-        features.append(("pad", "top", v["net"], v["dia"], (v["x"], v["y"])))
-        features.append(("pad", "bot", v["net"], v["dia"], (v["x"], v["y"])))
-    for p in b.pads:
-        features.append(("pad", "top", p["net"], p["dia"], (p["x"], p["y"])))
-        features.append(("pad", "bot", p["net"], p["dia"], (p["x"], p["y"])))
+    for layer_name in ("top", "bot", "pwr"):
+        for v in b.vias:
+            features.append(("pad", layer_name, v["net"], v["dia"], (v["x"], v["y"])))
+        for p in b.pads:
+            features.append(("pad", layer_name, p["net"], p["dia"], (p["x"], p["y"])))
 
     by_layer = defaultdict(list)
     for f in features:
@@ -707,6 +700,8 @@ def write_layers(b, width, height):
             aperture(15, VIA_PAD),
             aperture(16, TRACE),
             aperture(17, POWER_TRACE),
+            aperture(27, 0.60),
+            aperture(28, 0.50),
             aperture(18, TRACE + 2 * CLEARANCE),
             aperture(19, POWER_TRACE + 2 * CLEARANCE),
             aperture(20, VIA_PAD + 2 * CLEARANCE),
@@ -717,7 +712,7 @@ def write_layers(b, width, height):
             aperture(25, 1.5 + 2 * CLEARANCE),
             aperture(26, 5.2),
         ]
-        if layer == "bot":
+        if layer == "gnd":
             lines.append("%LPD*%")
             lines.append(rect_region(0.5, 0.5, width - 0.5, height - 0.5))
             lines.append("%LPC*%")
@@ -734,7 +729,7 @@ def write_layers(b, width, height):
             for v in b.vias:
                 lines.append(flash("D20*", v["x"], v["y"]))
             for t in b.traces:
-                if t[6] != "bot":
+                if t[6] != "gnd":
                     continue
                 ap = "D19*" if t[4] >= POWER_TRACE - 0.01 else "D18*"
                 lines.append(draw(ap, t[0], t[1], t[2], t[3]))
@@ -743,7 +738,7 @@ def write_layers(b, width, height):
         for p in b.pads:
             if p["net"] == "MOUNT":
                 continue
-            if layer == "bot" and p["net"] == "GND":
+            if layer == "gnd" and p["net"] == "GND":
                 # Ground holes are already in the plane. Add a pad for soldering.
                 pass
             ap = {1.0: "D10*", 1.3: "D11*", 0.8: "D12*", 0.9: "D13*"}.get(round(p["drill"], 1), "D10*")
@@ -755,7 +750,14 @@ def write_layers(b, width, height):
         for t in b.traces:
             if t[6] != layer:
                 continue
-            ap = "D17*" if t[4] >= POWER_TRACE - 0.01 else "D16*"
+            if t[4] >= POWER_TRACE - 0.01:
+                ap = "D17*"
+            elif t[4] >= 0.60 - 0.01:
+                ap = "D27*"
+            elif t[4] >= 0.50 - 0.01:
+                ap = "D28*"
+            else:
+                ap = "D16*"
             lines.append(draw(ap, t[0], t[1], t[2], t[3]))
         lines.append("M02*")
         return "\n".join(lines) + "\n"
@@ -813,7 +815,9 @@ def write_layers(b, width, height):
         return "\n".join(lines) + "\n"
 
     files["abadi-F_Cu.gtl"] = copper("top", "L1,Top")
-    files["abadi-B_Cu.gbl"] = copper("bot", "L2,Bot")
+    files["abadi-In1_Cu.g1"] = copper("gnd", "L2,Inr,Plane")
+    files["abadi-In2_Cu.g2"] = copper("pwr", "L3,Inr")
+    files["abadi-B_Cu.gbl"] = copper("bot", "L4,Bot")
     files["abadi-F_Mask.gts"] = mask().replace("Soldermask,Top", "Soldermask,Top")
     bot_mask = mask().replace("Soldermask,Top", "Soldermask,Bot")
     files["abadi-B_Mask.gbs"] = bot_mask
@@ -896,7 +900,7 @@ def write_layout_png(b, width, height, path):
     left_m, top_m, bot_m = 14.0, 18.0, 12.0
     panel = 86.0
     img_w = int((left_m + width + 6 + panel) * scale)
-    img_h = int((top_m + height + bot_m) * scale) + 520
+    img_h = int((top_m + height + bot_m) * scale) + 2400
     img = Image.new("RGBA", (img_w, img_h), (248, 246, 240, 255))
     draw = ImageDraw.Draw(img)
     regular = "/usr/share/fonts/truetype/macos/Inter-Regular.ttf"
@@ -918,13 +922,13 @@ def write_layout_png(b, width, height, path):
     draw.text((18, 10), "ABADI ROVER BODY", font=title_f, fill=(20, 20, 20, 255))
     draw.text(
         (18, 48),
-        "{:.0f} mm wide  x  {:.0f} mm tall.   Smaller than the 150 x 95 mm perfboard.".format(width, height),
+        "{:.0f} mm wide  x  {:.0f} mm tall.   4 layers.   Smaller than the 150 x 95 mm perfboard.".format(width, height),
         font=sub_f,
         fill=(150, 30, 30, 255),
     )
     draw.text(
         (18, 74),
-        "Previous file was 224 x 218 mm. This picture is the real board, to scale. Pin 1 is the left hole.",
+        "Inside layers: solid ground, and the power wires. The signal wires can cross. Pin 1 is the left hole.",
         font=sub_f,
         fill=(40, 40, 40, 255),
     )
@@ -951,7 +955,12 @@ def write_layout_png(b, width, height, path):
         draw.text((X(h["pads"][0]["x"] - 1.0), Y(h["y"] + 3.5)), h["title"], font=head_f, fill=(10, 10, 10, 255))
 
     for t in b.traces:
-        color = (255, 186, 186, 255) if t[6] == "top" else (170, 205, 255, 255)
+        if t[6] == "pwr":
+            color = (210, 100, 40, 255)
+        elif t[6] == "top":
+            color = (255, 186, 186, 255)
+        else:
+            color = (170, 205, 255, 255)
         draw.line(
             [(X(t[0]), Y(t[1])), (X(t[2]), Y(t[3]))],
             fill=color,
@@ -1020,19 +1029,25 @@ def write_layout_png(b, width, height, path):
             draw.text((px, py), "{:2d}  {:7s}  {}".format(i, p["name"], p["net"]), font=list_f, fill=(20, 20, 20, 255))
             py += 15
         py += 8
-    draw.text((px, py), "POWER SCREWS", font=list_b, fill=(120, 30, 30, 255))
-    py += 18
-    screws = sorted((p for p in b.pads if p["kind"] == "screw"), key=lambda p: (-round(p["y"], 1), p["x"]))
-    last_y = None
+    screws = sorted((p for p in b.pads if p["kind"] == "screw"), key=lambda p: (-p["y"], p["x"]))
+    bands = []
     for p in screws:
-        band = round(p["y"], 1)
-        if last_y is not None and band < last_y - 2 and py < img_h - 40:
-            py += 6
-            draw.text((px, py), "MOTOR AND LAMP SCREWS", font=list_b, fill=(120, 30, 30, 255))
-            py += 18
-        last_y = band
-        draw.text((px, py), p["name"] + "   " + p["net"], font=list_f, fill=(20, 20, 20, 255))
-        py += 15
+        if not bands or abs(p["y"] - bands[-1][0]["y"]) > 2:
+            bands.append([p])
+        else:
+            bands[-1].append(p)
+    for band in bands:
+        names = " ".join(p["name"] for p in band)
+        if "LEFT" in names or "LAMP" in names:
+            title = "MOTOR AND LAMP SCREWS"
+        else:
+            title = "POWER SCREWS"
+        draw.text((px, py), title, font=list_b, fill=(120, 30, 30, 255))
+        py += 18
+        for p in band:
+            draw.text((px, py), p["name"] + "   " + p["net"], font=list_f, fill=(20, 20, 20, 255))
+            py += 15
+        py += 8
 
     img.convert("RGB").save(path, "PNG")
 
