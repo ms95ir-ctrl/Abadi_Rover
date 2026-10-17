@@ -14,4 +14,4 @@ alwaysApply: true
 7. Keep replies short and easy to read.
 8. Out of scope unless the owner asks: Hermes / AI agent on the rover, turret, MAX98357A I2S amp, Phase 3 design.
 
-Example: if a library's example uses D10 for something other than the left screen CS, change the code to match `plan.md`, not the pin table to match the example.
+Example: if a library's example uses a different GPIO for the left screen CS, change the code to match `plan.md` (GPIO 13), not the pin table to match the example.
