@@ -1,6 +1,6 @@
 # PCB draft for review
 
-The picture in `board-draft.png` is the layout sketch. The file to upload for a quote is `abadi-rover-body.zip`. See `QUOTE.md`. `plan.md` still has the older TB6612 pin table until the owner approves a change.
+The picture in `layout.png` is the real board, to scale, 133 mm by 93 mm. `board-draft.png` is only the earlier sketch. The file to upload for a quote is `abadi-rover-body.zip`. See `QUOTE.md`. `plan.md` still has the older TB6612 pin table until the owner approves a change.
 
 ## Board
 
