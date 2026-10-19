@@ -10,7 +10,7 @@ The project's single source of truth is this GitHub repository:
 https://github.com/ms95ir-ctrl/Abadi_Rover
 
 Before doing anything:
-1. Read `plan.md` in full, starting with the **Current Status** line at the top. Then read `wiring.md`.
+1. Read `plan.md` in full, starting with the **Current Status** line at the top. Then read `docs/wiring.md`.
 2. Follow the rules in `plan.md` and `.cursor/rules/plan-first.mdc`:
    - The locked pin table and locked power design must never be changed, renamed or "cleaned up". If anything conflicts, STOP and ask me.
    - One stage at a time. No code for a later stage until I confirm the current stage passed on real hardware.

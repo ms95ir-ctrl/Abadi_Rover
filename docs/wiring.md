@@ -2,7 +2,7 @@
 
 ![Phase 1 wiring map](wiring-map.png)
 
-Soldering and assembly reference. Pin assignments come from the **Locked pin table** in [plan.md](plan.md); if this file and `plan.md` ever disagree, `plan.md` wins and the mismatch must be reported.
+Soldering and assembly reference. Pin assignments come from the **Locked pin table** in [plan.md](../plan.md); if this file and `plan.md` ever disagree, `plan.md` wins and the mismatch must be reported.
 
 Items marked **(wire later)** belong to Phase 2 or later. Their pins are reserved now; leave them unconnected until that stage.
 

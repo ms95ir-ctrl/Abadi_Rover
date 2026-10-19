@@ -1,8 +1,8 @@
-**Current Status:** Phase 1 / Stage 1 (Power) — all wired; tests 1–5 passed (fan keep-awake confirmed 15 min). Remaining: servo 5V test (done in Stage 4), HW-183B 7.0V re-check under motor load (done in Stage 3). Stage 2 (gamepad): controller paired via Claude in App Lab; pending stick-value print test and reconnect test. Handover note for App Lab Claude: [HANDOVER.md](HANDOVER.md).
+**Current Status:** Phase 1 / Stage 1 (Power) — all wired; tests 1–5 passed (fan keep-awake confirmed 15 min). Remaining: servo 5V test (done in Stage 4), HW-183B 7.0V re-check under motor load (done in Stage 3). Stage 2 (gamepad): controller paired via Claude in App Lab; pending stick-value print test and reconnect test. Handover note for App Lab Claude: [HANDOVER.md](docs/HANDOVER.md).
 
 # Abadi Rover — Build Plan
 
-This file is the single source of truth for the rover. Wiring details for soldering are in [wiring.md](wiring.md).
+This file is the single source of truth for the rover. Wiring details for soldering are in [wiring.md](docs/wiring.md).
 
 ## Rules (for every session, human or AI)
 
@@ -138,7 +138,7 @@ Results so far:
 
 - **Test 4 pass:** fan on Noisy 5V, motors idle for 5 minutes, then motors respond immediately without pressing the bank button.
 - **Test 6 pass:** Noisy 5V stays at 4.5V or above at the PCA9685 V+ terminal while servos move (done during Stage 4).
-- **Stage pass:** tests 4 and 6 pass, everything soldered per [wiring.md](wiring.md), common ground checked with multimeter continuity.
+- **Stage pass:** tests 4 and 6 pass, everything soldered per [wiring.md](docs/wiring.md), common ground checked with multimeter continuity.
 
 ### Stage 2 — Gamepad test (no motors)
 

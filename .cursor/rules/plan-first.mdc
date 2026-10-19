@@ -7,7 +7,7 @@ alwaysApply: true
 
 1. At the start of every session, read `plan.md` before doing anything else, starting with the **Current Status** line at the top.
 2. The **Locked pin table** and **Locked power design** in `plan.md` must never be reassigned, renamed or "cleaned up" without explicit approval from the owner. If code or wiring would conflict with them, STOP and ask. Never silently remap a pin.
-3. `wiring.md` must always match `plan.md`. If they disagree, `plan.md` wins; report the mismatch instead of fixing it silently.
+3. `docs/wiring.md` must always match `plan.md`. If they disagree, `plan.md` wins; report the mismatch instead of fixing it silently.
 4. Work one stage at a time. Do not write code for a later stage until the owner confirms the current stage passed on real hardware.
 5. Update the **Current Status** line in `plan.md` when a stage passes or a test result changes (with the owner's confirmation).
 6. The owner is not comfortable with git or terminal shorthand. Write every command out in full and explain what it does, one step at a time.
