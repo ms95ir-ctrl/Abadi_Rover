@@ -30,12 +30,12 @@ A tracked robot rover with a "head" — pan/tilt neck, two animated eye displays
 | 20,000 mAh 45 W USB-C PD power bank, USB hub, buck/boost converters | Single-battery power system |
 | USB webcam | Camera (later phase) |
 
-## Design highlights
+## Design
 
-- **Four separate power rails** — brain (USB-C PD), quiet 5 V for sensors, 3.3 V for screens/relay, and a noisy 5 V → 7 V path for motors and servos — all tied at a single star ground. Motor and servo noise cannot reset the controller; this was verified with stall tests on the real power bank.
-- **Hardware kill switch** cuts motors, servos and fan while the controller keeps running; a gamepad button gives a software kill.
-- **Safety stop on the microcontroller:** motors stop if no command arrives for 300 ms (for example if the gamepad disconnects).
-- **Locked pin table and power design** documented once in [plan.md](plan.md), with wiring drawings generated from it; every change goes through that file.
+- **Separate power rails** — brain (USB-C PD), quiet 5 V for sensors, 3.3 V for screens/relay, and a noisy 5 V → 7 V path for motors and servos — all tied at a single star ground. Verified on the bench: motor stall tests on the real power bank do not reboot the controller.
+- **Hardware kill switch** cuts motors, servos and fan while the controller keeps running (built). A gamepad kill button is planned for the integration stage.
+- **Planned safety stop on the microcontroller:** motors stop if no command arrives for 300 ms (for example if the gamepad disconnects).
+- **Locked pin table and power design** documented once in [plan.md](plan.md); every change goes through that file.
 - **Staged bring-up:** one stage at a time, each passed on real hardware before the next is written.
 
 ## Repository
