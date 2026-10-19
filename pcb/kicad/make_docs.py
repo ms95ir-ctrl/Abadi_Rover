@@ -21,19 +21,19 @@ def pads(ref):
 
 L = ["# Pin table (generated from the board file - PROVISIONAL)\n",
      "Everything here follows the module pin orders I assumed. Check each one against your real module before ordering.\n",
-     "## ESP32-S3 DevKit: which signal each pin carries\n", "| Header | Pin | GPIO / pin | Signal |", "|---|---|---|---|"]
+     "## ESP32-S3 DevKit: which signal each pin carries (pin 1 is the antenna end of each row; row 1 = 3V3 3V3 RST ..., row 2 = GND TX RX ...)\n", "| Header | Pin | GPIO / pin | Signal |", "|---|---|---|---|"]
 for ref, names in (("J1", J1), ("J3", J3)):
     for (n, net), g in zip(pads(ref), names):
         L.append("| %s | %d | %s | %s |" % (ref, n, g, net or "-"))
 L.append("\n## Other connectors (pin 1 = square pad)\n")
-labels = {"DRVA": "DRV8833 A (2 rows: inputs row first, then power/outputs row)", "DRVB": "DRV8833 B", "PCA": "PCA9685 control socket",
-          "GYRO": "GY-521", "SCR_L": "Screen L", "SCR_R": "Screen R", "SPARE": "Spare IO", "RLY1H": "Relay 1", "RLY2H": "Relay 2",
-          "RLY3H": "Relay 3", "SON1": "Sonar 1", "SON2": "Sonar 2", "I2C": "I2C sensor", "UART": "UART", "TCH1": "Touch 1",
-          "TCH2": "Touch 2", "TL0": "BATT IN", "TL1": "TO BUCK 1 (servo 5V)", "TL2": "TO BUCK 2 (clean 5V)", "TL3": "TO BUCK 3 (3.3V)",
-          "TR_5V": "CLEAN 5V IN", "TR_33": "3.3V IN", "TM1": "MOTOR 1", "TM2": "MOTOR 2", "TM3": "MOTOR 3", "TM4": "MOTOR 4"}
+labels = {"DRVA": "DRV8833 A (2 rows: inputs row first, then power/outputs row)", "DRVB": "DRV8833 B", "PCA": "PCA9685 header at its LEFT short end (top to bottom)",
+          "GYRO": "GY-521 (left to right as printed on the module)", "SCR_L": "Screen L", "SCR_R": "Screen R", "SPARE": "Spare IO (GPIO numbers are printed on the board)",
+          "RLY1H": "Relay 1", "RLY2H": "Relay 2", "RLY3H": "Relay 3", "SON1": "Sonar 1", "SON2": "Sonar 2", "I2C": "I2C sensor", "UART": "UART",
+          "TL0": "SERVO 5V IN", "TL1": "BATT IN", "TL2": "TO BUCK 1 (servo 5V)", "TL3": "TO BUCK 2 (clean 5V)", "TL4": "TO BUCK 3 (3.3V)",
+          "TL5": "CLEAN 5V IN", "TL6": "3.3V IN", "TM1": "MOTOR 1", "TM2": "MOTOR 2", "TM3": "MOTOR 3", "TM4": "MOTOR 4"}
 for ref, name in labels.items():
     L.append("- **%s** (%s): %s" % (name, ref, ", ".join("%d=%s" % (n, net or "-") for n, net in pads(ref))))
-L.append("\nTerminals: the lower/first pin is **+**, marked on the board. Motor terminals: M1 = DRV A out 1/2, M2 = DRV A out 3/4, M3/M4 = DRV B.")
+L.append("\nTerminals (all 5.08 mm pitch): the lower/first pin is **+**, marked on the board. Motor terminals: M1 = DRV A out 1/2, M2 = DRV A out 3/4, M3/M4 = DRV B.")
 open(out + "/pin-table.md", "w").write("\n".join(L) + "\n")
 
 groups = collections.OrderedDict()

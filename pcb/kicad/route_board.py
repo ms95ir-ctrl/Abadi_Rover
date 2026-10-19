@@ -76,7 +76,7 @@ base_w = int(re.search(r"\(rule\s+\(width (\d+)\)", txt).group(1))
 clr = re.search(r"\(clearance ([\d.]+)\)", txt).group(1)
 m = re.search(r"\(class kicad_default (.*?)\n\s*\(circuit", txt, re.S)
 names = [n for n in m.group(1).split() if n not in ('""', "GND")]
-wide = {"VBAT": 2000, "M1A": 1000, "M1B": 1000, "M2A": 1000, "M2B": 1000, "M3A": 1000, "M3B": 1000,
+wide = {"VBAT": 2000, "SERVO5": 1500, "M1A": 1000, "M1B": 1000, "M2A": 1000, "M2B": 1000, "M3A": 1000, "M3B": 1000,
         "M4A": 1000, "M4B": 1000, "RAILC": 500, "CLEAN5": 500, "ESP5V": 500}
 classes = {}
 for n in names:

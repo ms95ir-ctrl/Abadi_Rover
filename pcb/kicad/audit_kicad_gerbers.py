@@ -144,6 +144,8 @@ opens = {n: r for n, r in by_net.items() if len(r) > 1}
 print("OPENS (a net split into separate copper islands): %d" % len(opens))
 for n, r in sorted(opens.items()):
     print("  ", n, "in", len(r), "islands")
+    for isl_root in sorted(r, key=lambda q: len(node_names[q])):
+        print("      island with", len(node_names[isl_root]), "holes, e.g.", node_names[isl_root][:8])
 
 print("\n--- fab-limit numbers (typical cheap 2-layer limits in brackets) ---")
 for k in isl:
