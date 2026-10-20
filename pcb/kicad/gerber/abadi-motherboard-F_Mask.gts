@@ -1,12 +1,12 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,7.0.11+dfsg-1build4*%
-%TF.CreationDate,2026-10-20T20:11:19+00:00*%
+%TF.CreationDate,2026-10-20T20:47:07+00:00*%
 %TF.ProjectId,abadi-motherboard,61626164-692d-46d6-9f74-686572626f61,rev?*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Soldermask,Top*%
 %TF.FilePolarity,Negative*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 7.0.11+dfsg-1build4) date 2026-10-20 20:11:19*
+G04 Created by KiCad (PCBNEW 7.0.11+dfsg-1build4) date 2026-10-20 20:47:07*
 %MOMM*%
 %LPD*%
 G01*

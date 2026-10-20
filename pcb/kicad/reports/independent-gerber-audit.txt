@@ -7,6 +7,8 @@ OPENS (a net split into separate copper islands): 0
 --- fab-limit numbers (typical cheap 2-layer limits in brackets) ---
 smallest copper gap on top: 0.152 mm   [fab minimum ~0.127]
 smallest copper gap on bot: 0.152 mm   [fab minimum ~0.127]
+narrow slits (<0.14 mm) inside one copper piece on top: 0 []
+narrow slits (<0.14 mm) inside one copper piece on bot: 0 []
 narrowest track: 0.250 mm   [fab minimum ~0.127]
 smallest pad ring: 0.350 mm, smallest via ring: 0.150 mm   [fab minimum ~0.13]
 smallest wall between two holes: 0.813 mm   [fab minimum ~0.25]

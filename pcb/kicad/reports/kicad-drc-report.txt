@@ -1,5 +1,5 @@
-** Drc report for /tmp/claude-0/-home-user-Abadi-Rover/2e40e7c1-9ccc-529a-8cb9-c3782861ad82/scratchpad/kb/final5.kicad_pcb **
-** Created on 2026-10-20 20:11:19 **
+** Drc report for /tmp/claude-0/-home-user-Abadi-Rover/2e40e7c1-9ccc-529a-8cb9-c3782861ad82/scratchpad/kb/final6.kicad_pcb **
+** Created on 2026-10-20 20:47:07 **
 
 ** Found 38 DRC violations **
 [lib_footprint_issues]: The current configuration does not include the library 'abadi'.

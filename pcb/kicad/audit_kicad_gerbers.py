@@ -157,6 +157,18 @@ for k in isl:
                 if dd < best[0]:
                     best = (dd, a.representative_point().coords[0])
     print("smallest copper gap on %s: %.3f mm   [fab minimum ~0.127]" % (k, best[0]))
+# narrow slits INSIDE one copper piece (e.g. a track running 0.03 mm beside a pad of the same net): closing each island by 0.07 mm
+# fills any slit narrower than 0.14 mm; what it fills is reported (corner rounding is below the 0.03 mm2 threshold)
+for k in isl:
+    slits = []
+    for g in isl[k]:
+        if g.area < 0.5:
+            continue
+        diff = g.buffer(0.07, join_style=2).buffer(-0.07, join_style=2).difference(g)
+        for piece in (list(diff.geoms) if diff.geom_type == "MultiPolygon" else [diff]):
+            if piece.area > 0.03:
+                slits.append((round(piece.area, 3), tuple(round(v, 2) for v in piece.representative_point().coords[0])))
+    print("narrow slits (<0.14 mm) inside one copper piece on %s: %d %s" % (k, len(slits), sorted(slits, reverse=True)[:6]))
 tw = min((t["w"] for t in design["tracks"]), default=0)
 print("narrowest track: %.3f mm   [fab minimum ~0.127]" % tw)
 ring = min(((p["d"] - p["h"]) / 2 for p in design["pads"] if not p["npth"]), default=0)

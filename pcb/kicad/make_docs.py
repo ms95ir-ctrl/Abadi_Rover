@@ -20,7 +20,7 @@ def pads(ref):
 
 
 L = ["# Pin table (generated from the board file - PROVISIONAL)\n",
-     "Everything here follows the module pin orders I assumed. Check each one against your real module before ordering.\n",
+     "The DRV8833 and screen pin orders are the owner's readings of the real modules; the relay, sonar, gyro and PCA9685 orders match the owner's photos and the usual orders; the I2C and UART headers have no module behind them. Compare each printed name with your real module before ordering.\n",
      "## ESP32-S3 DevKit: which signal each pin carries (pin 1 is the antenna end of each row; row 1 = 3V3 3V3 RST ..., row 2 = GND TX RX ...)\n", "| Header | Pin | GPIO / pin | Signal |", "|---|---|---|---|"]
 for ref, names in (("J1", J1), ("J3", J3)):
     for (n, net), g in zip(pads(ref), names):
@@ -33,7 +33,7 @@ labels = {"DRVA": "DRV8833 A, HW-627 module (pins 1-6 = top row left to right IN
           "TL2": "CLEAN 5V IN (output of the clean 5V buck)", "TL3": "3.3V IN (output of the 3.3V buck)", "PWR": "POWER OUT: upper row = clean 5V, clean 5V, 3.3V, 3.3V (from the bucks); lower row = GND x4", "TM1": "MOTOR 1 (2-pin, for a JST plug)", "TM2": "MOTOR 2 (2-pin)", "TM3": "MOTOR 3 (2-pin)", "TM4": "MOTOR 4 (2-pin)"}
 for ref, name in labels.items():
     L.append("- **%s** (%s): %s" % (name, ref, ", ".join("%d=%s" % (n, net or "-") for n, net in pads(ref))))
-L.append("\nLeft-edge screw terminals (5.08 mm pitch): the lower/first pin is **+**, marked on the board. Motor connectors are 2-pin spots on a 2.54 mm grid for JST plugs (motors have no polarity; swap the two wires to reverse): M1 = DRV A out 1, M2 = DRV A out 2, M3 = DRV B out 1, M4 = DRV B out 2.")
+L.append("\nLeft-edge screw terminals (5.08 mm pitch): the lower/first pin is **+**, marked on the board. Motor connectors are 2-pin spots on a 2.54 mm grid for JST plugs (motors have no polarity; swap the two wires to reverse): M1 = DRV A OUT1+OUT2 (driven by IN1A/IN2A), M2 = DRV A OUT3+OUT4 (IN3A/IN4A), M3 = DRV B OUT1+OUT2, M4 = DRV B OUT3+OUT4.")
 open(out + "/pin-table.md", "w").write("\n".join(L) + "\n")
 
 groups = collections.OrderedDict()

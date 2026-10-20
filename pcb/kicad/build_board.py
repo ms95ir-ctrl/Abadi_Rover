@@ -61,6 +61,16 @@ def silk_rect(x0, y0, x1, y1, width=0.15):
     board.Add(s)
 
 
+def silk_line(x0, y0, x1, y1, width=0.15):
+    s = pcbnew.PCB_SHAPE(board)
+    s.SetShape(pcbnew.SHAPE_T_SEGMENT)
+    s.SetStart(P(x0, y0))
+    s.SetEnd(P(x1, y1))
+    s.SetWidth(FromMM(width))
+    s.SetLayer(pcbnew.F_SilkS)
+    board.Add(s)
+
+
 def footprint(ref, value, pads, drill=1.0, dia=None, first_square=True):
     """pads: list of (x, y, netname). Pad numbers are 1..n in list order."""
     dia = dia if dia is not None else (1.7 if FINE else 1.8)
@@ -193,6 +203,7 @@ for nm, x0, ins in (("A", 34.0, ("IN1A", "IN2A", "IN3A", "IN4A")), ("B", 60.0, (
     lower = row(hx, bot_y, ["", outs[0], outs[1], outs[2], outs[3], ""])
     footprint("DRV" + nm, "DRV8833 " + nm, pads_from(upper) + pads_from(lower))
     silk_rect(x0, y0, x0 + 21.0, y0 + DRV_GAP + 3.0)
+    silk_line(x0 + 0.1, y0 + 0.25, x0 + 20.9, y0 + 0.25, 0.5)      # thick bar on the plug side: a module turned round is obvious
     silk_text(x0 + 10.5, y0 + DRV_GAP / 2 + 2.2, "DRV8833 " + nm, 1.0)
     silk_text(x0 + 10.5, y0 + DRV_GAP / 2 + 0.4, "white plug v", 1.0)
     for i, lab in enumerate(["IN1", "IN2", "VCC", "GND", "IN3", "IN4"]):
@@ -232,17 +243,17 @@ SCR_PINS = ["CS", "DC", "RST", "SDA", "SCL", "VCC", "GND"]
 SCR_L_X, SCR_R_X = 37.0, 55.0
 footprint("SCR_L", "SCREEN L", pads_from(row(SCR_L_X, TOP_Y, ["CS_L", "LCD_DC", "LCD_RST", "MOSI", "SCK", "RAILC", "GND"])))
 footprint("SCR_R", "SCREEN R", pads_from(row(SCR_R_X, TOP_Y, ["CS_R", "LCD_DC", "LCD_RST", "MOSI", "SCK", "RAILC", "GND"])))
-silk_text(SCR_L_X + 3 * PITCH, TOP_Y - 1.8, "SCREEN L", 1.0)
-silk_text(SCR_R_X + 3 * PITCH, TOP_Y - 1.8, "SCREEN R", 1.0)
+silk_text(SCR_L_X + 3 * PITCH, TOP_Y - 1.68, "SCREEN L", 1.0)
+silk_text(SCR_R_X + 3 * PITCH, TOP_Y - 1.68, "SCREEN R", 1.0)
 for x0 in (SCR_L_X, SCR_R_X):
     for i, lab in enumerate(SCR_PINS):
-        silk_text(x0 + i * PITCH, TOP_Y + 2.6, lab, 1.0, angle=90)
+        silk_text(x0 + i * PITCH, TOP_Y + 2.48, lab, 1.0, angle=90)
 spare_names = ["GND", "ESP3V3"] + ["SPARE%d" % g for g in SPARE_GPIOS]
 spare_x = 73.2
 footprint("SPARE", "SPARE IO", pads_from(row(spare_x, TOP_Y, spare_names)))
-silk_text(spare_x + 8.9, TOP_Y - 1.8, "SPARE IO", 1.0)
+silk_text(spare_x + 8.9, TOP_Y - 1.68, "SPARE IO", 1.0)
 for i, lab in enumerate(["GND", "3V3"] + [str(g) for g in SPARE_GPIOS]):
-    silk_text(spare_x + i * PITCH, TOP_Y + 2.6, lab, 1.0, angle=90)
+    silk_text(spare_x + i * PITCH, TOP_Y + 2.48, lab, 1.0, angle=90)
 
 # ------------------------------------------------------------------ cable headers on two strips
 S1, S2, X0 = 61.0, 56.6, 35.0
