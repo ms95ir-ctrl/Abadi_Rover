@@ -103,7 +103,8 @@ def pads_from(rowspec):
 
 
 # ------------------------------------------------------------------ board outline, holes
-for (a, b) in (((0, 0), (BW, 0)), ((BW, 0), (BW, BH)), ((BW, BH), (0, BH)), ((0, BH), (0, 0))):
+OI = 0.05      # outline centre line 0.05 mm inside, so the plotted extents (line width 0.1 mm) are exactly 100.0 x 100.0
+for (a, b) in (((OI, OI), (BW - OI, OI)), ((BW - OI, OI), (BW - OI, BH - OI)), ((BW - OI, BH - OI), (OI, BH - OI)), ((OI, BH - OI), (OI, OI))):
     seg = pcbnew.PCB_SHAPE(board)
     seg.SetShape(pcbnew.SHAPE_T_SEGMENT)
     seg.SetStart(P(*a))
@@ -178,19 +179,26 @@ for i, g in enumerate(J1_PINS):
 for i, g in enumerate(J3_PINS):
     silk_text(ESP_X1 + i * PITCH, upper_y - 2.7, str(g), 1.0, angle=90)
 
-# ------------------------------------------------------------------ DRV8833 x2 (PROVISIONAL pin order)
+# ------------------------------------------------------------------ DRV8833 x2 (HW-627: two rows of 6 holes)
+# Pin names as read from the user's module. IN row (top here), left to right: IN1 IN2 VCC GND IN3 IN4  (VCC = motor supply, the board's VBAT)
+# other row (bottom, with the white plug), left to right: EEP OUT1 OUT2 OUT3 OUT4 ULT  (EEP and ULT are not used).
+# DRV_GAP = distance between the two rows; the alignment (EEP across from IN1) and the gap still have to be confirmed on the real module.
+DRV_GAP = float(os.environ.get("DRV_GAP", "16.0"))
 for nm, x0, ins in (("A", 34.0, ("IN1A", "IN2A", "IN3A", "IN4A")), ("B", 60.0, ("IN1B", "IN2B", "IN3B", "IN4B"))):
     y0 = 29.5
     outs = ("M1A", "M1B", "M2A", "M2B") if nm == "A" else ("M3A", "M3B", "M4A", "M4B")
-    upper = row(x0 + 4.0, y0 + 16.5, list(ins) + ["GND"])
-    lower = row(x0 + 4.0, y0 + 1.5, ["VBAT"] + list(outs))
+    hx = x0 + 4.15                          # first hole of both rows (rows are 12.7 mm long, centred in the 21 mm outline)
+    top_y, bot_y = y0 + 1.5 + DRV_GAP, y0 + 1.5
+    upper = row(hx, top_y, [ins[0], ins[1], "VBAT", "GND", ins[2], ins[3]])
+    lower = row(hx, bot_y, ["", outs[0], outs[1], outs[2], outs[3], ""])
     footprint("DRV" + nm, "DRV8833 " + nm, pads_from(upper) + pads_from(lower))
-    silk_rect(x0, y0, x0 + 21.0, y0 + 18.0)
-    silk_text(x0 + 10.5, y0 + 9.0, "DRV8833 " + nm, 1.0)
-    for i, lab in enumerate(["IN1", "IN2", "IN3", "IN4", "GND"]):
-        silk_text(x0 + 4.0 + i * PITCH, y0 + 16.5 - 2.85, lab, 1.0, angle=90)
-    for i, lab in enumerate(["VM"] + list(outs)):
-        silk_text(x0 + 4.0 + i * PITCH, y0 + 1.5 + 2.85, lab, 1.0, angle=90)
+    silk_rect(x0, y0, x0 + 21.0, y0 + DRV_GAP + 3.0)
+    silk_text(x0 + 10.5, y0 + DRV_GAP / 2 + 2.2, "DRV8833 " + nm, 1.0)
+    silk_text(x0 + 10.5, y0 + DRV_GAP / 2 + 0.4, "white plug v", 1.0)
+    for i, lab in enumerate(["IN1", "IN2", "VCC", "GND", "IN3", "IN4"]):
+        silk_text(hx + i * PITCH, top_y - 2.85, lab, 1.0, angle=90)
+    for i, lab in enumerate(["EEP", "OUT1", "OUT2", "OUT3", "OUT4", "ULT"]):
+        silk_text(hx + i * PITCH, bot_y + 3.2, lab, 1.0, angle=90)
 
 # ------------------------------------------------------------------ PCA9685 (63 x 25.4 mm; 6-pin header on a SHORT end)
 PX, PY, PL, PWD = 11.0, 2.0, 63.0, 25.4
@@ -219,26 +227,26 @@ for i, n in enumerate(("INT", "AD0", "XCL", "XDA", "SDA", "SCL", "GND", "VCC")):
     silk_text(GX + 1.4 + i * PITCH, gyro_y - 3.4, n, 1.0, angle=90)
 
 # screens and the spare header sit in the free strip above the ESP32, next to the pins they use
-TOP_Y = 96.0
-SCR_PINS = ["VCC", "GND", "CS", "RST", "DC", "SDA", "SCL"]
+TOP_Y = 95.8
+SCR_PINS = ["CS", "DC", "RST", "SDA", "SCL", "VCC", "GND"]
 SCR_L_X, SCR_R_X = 37.0, 55.0
-footprint("SCR_L", "SCREEN L", pads_from(row(SCR_L_X, TOP_Y, ["RAILC", "GND", "CS_L", "LCD_RST", "LCD_DC", "MOSI", "SCK"])))
-footprint("SCR_R", "SCREEN R", pads_from(row(SCR_R_X, TOP_Y, ["RAILC", "GND", "CS_R", "LCD_RST", "LCD_DC", "MOSI", "SCK"])))
-silk_text(SCR_L_X + 3 * PITCH, 94.2, "SCREEN L", 1.0)
-silk_text(SCR_R_X + 3 * PITCH, 94.2, "SCREEN R", 1.0)
+footprint("SCR_L", "SCREEN L", pads_from(row(SCR_L_X, TOP_Y, ["CS_L", "LCD_DC", "LCD_RST", "MOSI", "SCK", "RAILC", "GND"])))
+footprint("SCR_R", "SCREEN R", pads_from(row(SCR_R_X, TOP_Y, ["CS_R", "LCD_DC", "LCD_RST", "MOSI", "SCK", "RAILC", "GND"])))
+silk_text(SCR_L_X + 3 * PITCH, TOP_Y - 1.8, "SCREEN L", 1.0)
+silk_text(SCR_R_X + 3 * PITCH, TOP_Y - 1.8, "SCREEN R", 1.0)
 for x0 in (SCR_L_X, SCR_R_X):
     for i, lab in enumerate(SCR_PINS):
-        silk_text(x0 + i * PITCH, TOP_Y + 2.3, lab, 1.0, angle=90)
+        silk_text(x0 + i * PITCH, TOP_Y + 2.6, lab, 1.0, angle=90)
 spare_names = ["GND", "ESP3V3"] + ["SPARE%d" % g for g in SPARE_GPIOS]
 spare_x = 73.2
 footprint("SPARE", "SPARE IO", pads_from(row(spare_x, TOP_Y, spare_names)))
-silk_text(spare_x + 8.9, 94.2, "SPARE IO", 1.0)
+silk_text(spare_x + 8.9, TOP_Y - 1.8, "SPARE IO", 1.0)
 for i, lab in enumerate(["GND", "3V3"] + [str(g) for g in SPARE_GPIOS]):
-    silk_text(spare_x + i * PITCH, TOP_Y + 2.3, lab, 1.0, angle=90)
+    silk_text(spare_x + i * PITCH, TOP_Y + 2.6, lab, 1.0, angle=90)
 
 # ------------------------------------------------------------------ cable headers on two strips
 S1, S2, X0 = 61.0, 56.6, 35.0
-HDR_GAP = float(os.environ.get("HDR_GAP", "2.8"))      # extra space between neighbouring cable headers
+HDR_GAP = float(os.environ.get("HDR_GAP", "3.0"))      # extra space between neighbouring cable headers
 strip_x = {}
 
 
@@ -322,11 +330,11 @@ footprint("C2", "100uF 3V3", [(78.25, 6.0, "RAILC"), (80.75, 6.0, "GND")], drill
 footprint("C3", "100nF pack", [(87.0, 8.23, "VBAT"), (87.0, 10.77, "GND")], drill=0.8, dia=1.6, first_square=False)
 footprint("C4", "100nF 3V3", [(87.0, 2.73, "RAILC"), (87.0, 5.27, "GND")], drill=0.8, dia=1.6, first_square=False)
 silk_text(75.6, 15.0, "+", 1.0)                      # electrolytic: the square pad and the long leg are plus
-silk_text(80.0, 17.3, "C1 470uF", 1.0)
+silk_text(81.0, 17.3, "C1 470uF 16V", 1.0)
 silk_text(76.1, 6.0, "+", 1.0)
-silk_text(79.3, 3.7, "C2 100uF", 1.0)
-silk_text(84.6, 9.5, "C3", 1.0)
-silk_text(84.6, 4.0, "C4", 1.0)
+silk_text(80.0, 3.7, "C2 100uF 10V", 1.0)
+silk_text(81.5, 9.5, "C3 100n", 1.0)
+silk_text(81.5, 1.7, "C4 100n", 1.0)
 
 # CLEAN 5V also feeds the sonar VCC pins (separate from the diode-protected ESP5V pin)
 for p in board.GetPads():
@@ -394,7 +402,7 @@ else:
     zone([pcbnew.In1_Cu], gnd_pts, "GND")
     zone([pcbnew.B_Cu], gnd_pts, "GND")
 
-silk_text(14, 82, "ABADI MOTHERBOARD v4 (%dL)" % LAYERS, 1.0, angle=90)
+silk_text(14, 82, "ABADI MOTHERBOARD v5 (%dL)" % LAYERS, 1.0, angle=90)
 
 # aux origin = lower-left corner so Gerber/drill files come out in plain mm, y up
 ds.SetAuxOrigin(P(0, 0))

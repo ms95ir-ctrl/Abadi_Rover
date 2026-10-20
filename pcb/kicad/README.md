@@ -1,64 +1,42 @@
-# Robot motherboard - routed draft v4, 2 layers, 100 x 100 mm
+# Robot motherboard - routed draft v5, 2 layers, 100 x 100 mm
 
-**Status: DRAFT. Do not order yet.** v4 is built from a real paper test-fit (your photos and notes) and measured module
-data. It is fully routed and passes every check I could run on the files. One more paper test-fit with the new
-template is the last step before ordering.
+**Status: DRAFT. Do not order yet.** v5 is built from the owner's paper test-fits, photos and readings of the real modules. It is fully
+routed and passes every check I could run on the files. Before ordering: print the new template, check the two DRV8833 modules
+and a screen cable against it (see "Still to confirm"), and read the independent-review notes below.
 
-## What changed in v4 (power wiring)
+## What changed in v5
 
-- **The three TO BUCK terminals are gone.** The three buck modules now get their battery power straight from the pack, outside the board
-  (see "How to wire the power" below). The left edge has four terminals: SERVO 5V IN, BATT IN, CLEAN 5V IN, 3.3V IN.
-- **The relay series resistors (330R) are gone.** The relay modules are 3 V types with their own input circuit, so each relay header's IN pin
-  now goes straight to its ESP32 pin. (Set each module's high/low trigger jumper to match your code.)
-- **More room:** the cable headers are spaced 2.8 mm apart instead of 1.9 mm, the I2C / UART headers moved up 2 mm to give space above the DRV8833 modules,
-  and diode D1 moved to the right edge of the strip.
-- **Motor connectors are now 2-pin spots for your JST plugs** (2.54 mm grid, vertical or side-entry, your choice of part) instead of screw terminals.
-  M1 = DRV A output 1, M2 = DRV A output 2, M3 = DRV B output 1, M4 = DRV B output 2. The DRV8833 pin names (IN1..IN4, GND, VM, M1A...) are printed beside the DRV holes so you can compare them with the labels on your module.
-- **New POWER OUT header** (left edge, where the old terminals were): 2 x clean 5 V, 2 x 3.3 V (from the 3.3 V buck, not the ESP32's own pin)
-  and 4 x GND, 2.54 mm pins, each power pin with a ground pin directly below it.
+- **DRV8833 (HW-627) footprints redrawn: two rows of 6 holes**, as read from the real module. Top row, left to right: IN1 IN2 VCC GND IN3 IN4
+  (VCC is the motor supply = the battery). Bottom row, the side with the white plug: EEP OUT1 OUT2 OUT3 OUT4 ULT (EEP and ULT are not used).
+  The pin names are printed beside the holes. M1/M2 are DRV A's OUT1-2 / OUT3-4, M3/M4 are DRV B's.
+- **Screen headers follow the screens' own order:** CS DC RST SDA SCL VCC GND (pin 1 = square pad = CS).
+- **Capacitor ratings are printed on the board** (C1 470uF 16V, C2 100uF 10V, C3/C4 100n) and listed in `parts-list.md`.
+- **Board size is exactly 100.0 x 100.0 mm** (the outline line used to add 0.1 mm), so it stays in the cheapest price tier.
+- **30 ground stitching vias** tie the top and bottom ground pours together (the farthest spot from a tie is now 11 mm instead of 37 mm).
+- Cable headers are 3.0 mm apart, labels on the top header row moved away from the pads, version text says v5.
+- New files: `shopping-list.md` (everything to buy, including the parts that are not on the board) and `stitch_ground.py`.
+
+Carried over from v4: four 5.08 mm left-edge screw terminals (SERVO 5V IN, BATT IN, CLEAN 5V IN, 3.3V IN), the POWER OUT header
+(2 x clean 5 V, 2 x 3.3 V from the 3.3 V buck, 4 x GND), 2-pin JST-style motor spots M1-M4, no series resistors on the relay inputs
+(3 V relay modules have their own input circuit), sonar echo dividers 1k/2k (ESP32-S3 pins are not 5 V tolerant).
 
 ## How to wire the power
 
 The three bucks are separate modules (not on the board). Each one has an input pair (IN+ / IN-) and an output pair (OUT+ / OUT-).
 
 ```
-battery pack -> BMS -> FUSE -> splice (insulated lever connectors, one for + and one for -) ->
-     |-> board terminal BATT IN        (the motors; DRV8833 modules take the battery voltage from here)
+battery pack -> BMS -> main switch -> splice (5-way lever connectors, one for + and one for -), one FUSE per branch:
+     |-> board terminal BATT IN        (motors; fuse about 7.5 A. The board's 2 mm battery copper is a roughly 6 A design)
      |-> servo buck IN+/IN-            its OUT+/OUT- go to the board terminal SERVO 5V IN   (-> PCA9685 V+ pin)
      |-> clean 5V buck IN+/IN-         its OUT+/OUT- go to the board terminal CLEAN 5V IN   (-> ESP32 5V pin via diode D1, both sonars, POWER OUT 5V pins)
-     '-> 3.3V buck IN+/IN-             its OUT+/OUT- go to the board terminal 3.3V IN       (-> relays, screens, POWER OUT 3V3 pins)
+     |-> 3.3V buck IN+/IN-             its OUT+/OUT- go to the board terminal 3.3V IN       (-> relays, screens, POWER OUT 3V3 pins)
+     '-> (optional) Raspberry Pi 5: own 5.1 V buck, 5 A fuse, straight to the Pi. It does not touch the board.
 ```
 
-Terminal pairs: **+** is the square pad. All **-** terminals and all GND pins are one common ground. Before connecting a buck to the board,
-power it from the battery alone and set its output with a multimeter (servo buck 5.0 V, clean buck 5.0 V, 3.3 V buck 3.3 V). The board has
-no fuse and no reverse-polarity protection: use one fuse (10-15 A) in the battery + lead before the splice.
-
-## What changed since v2 (from your test-fit notes)
-
-| Your note | What I did |
-|---|---|
-| "3 mm displacement" (ESP32) | The ESP32's two pin rows are **25.4 mm** apart (measured from your photo and the listing drawing), not the 22.86 mm I assumed. Footprint rebuilt: 57 x 28 mm board, 22 + 22 pins at 2.54 mm, 6.3 x 18 mm antenna part with a no-copper zone under it, two USB-C marks. |
-| "missing pin" (ESP32) | Same cause: your board sat 1.7 mm off along its length because my pin positions were wrong. Fixed by the rebuilt footprint. |
-| "numbered GPIOs should be there" | The ESP32 pin numbers are printed beside both rows, and the SPARE IO header now has GPIO numbers above every pin. |
-| Touch headers crossed out | Removed. |
-| DRV8833 "perfectly fine" | Left exactly as it was. |
-| PCA9685 circled holes | The PCA9685's control header is on a **short end** of the module (it has one at each end), not on the long edge. Footprint moved to the left short end. V+ is now wired to a new **SERVO 5V IN** terminal. |
-| "should be 2 mm larger" near M1-M4 | Became 5.08 mm screw terminals in v3. In v4 the motor connectors are 2-pin JST spots on a 2.54 mm grid (your plugs fit that spacing); the four left-edge power terminals are 5.08 mm. |
-
-Added after an independent review of v3 (kept in v4):
-
-- **Polarity and values are printed on the board:** `+` and a square pad on the two big capacitors (C1, C2), `A` / `K` and `1N5819` at the
-  diode D1 (K = the band side = the ESP32 5V pin), and `1k` / `2k` under each sonar divider
-  (swapped, the ESP32 would see only 1.7 V from the sonar and read nothing). The sonar divider is needed because the ESP32-S3's pins
-  are not 5 V tolerant (maximum about 3.6 V) and the sonar's ECHO pin gives 5 V.
-- **Every header now prints its pin functions** next to the pins (relay VCC IN GND, sonar VCC TRG ECH GND, screens VCC GND CS RST DC SDA SCL,
-  I2C, UART; the spare IO header already showed its GPIO numbers). The DRV8833 holes now show their pin names too.
-- **The two screen headers are 2.54 mm apart** (v3 had them closer together than one pin).
-- **The antenna keep-out is bigger:** no copper on either layer from 7 mm in front of the antenna tip and 4 mm beside it, so Wi-Fi/Bluetooth is not detuned.
-- Floating scraps of ground copper are removed automatically.
-
-Also fixed, found while reading your photos: the GY-521's pin order. The module reads INT AD0 XCL XDA SDA SCL GND VCC left to
-right, so the board's holes now follow that order (v2 had VCC on the wrong end).
+**+** is the square pad of each terminal. All **-** terminals and all GND pins are one common ground. Before connecting a buck to the board,
+power it from the battery alone and set its output with a multimeter (servo buck 5.0 V, clean buck 5.0 V, 3.3 V buck 3.3 V).
+The board has no fuse and no reverse-polarity protection. Each POWER OUT rail (two pins) is good for about **2 A in total**; the ESP32
+reaches 5 V through D1 and its own diode, so check on first power-up that its 3.3 V pin stays at 3.2 V or higher with Wi-Fi transmitting.
 
 ## What is here
 
@@ -70,57 +48,75 @@ right, so the board's holes now follow that order (v2 had VCC on the wrong end).
 | `abadi-motherboard.kicad_pcb` + `.kicad_pro` | the board in KiCad 7 (keep both files together: the .kicad_pro holds the design rules) |
 | `gerber/` and `abadi-motherboard-2layer-gerber.zip` | the fab files (this zip is what you upload to the PCB maker) |
 | `pin-table.md` | which ESP32 pin carries which signal, and every connector's pin order |
-| `parts-list.md` | headers, terminals, resistors, capacitors to buy |
+| `parts-list.md` | what to buy for every footprint, with ratings |
+| `shopping-list.md` | everything to buy, on and off the board, plus the first power-up steps |
 | `reports/` | KiCad's design-rule report and my independent check of the Gerber files |
+
+## Still to confirm (paper test-fit with the new template)
+
+1. **DRV8833 row gap.** The two rows of holes are drawn 16.0 mm apart (estimated from a photo). Measure the real distance between the
+   centres of the two rows and tell me; it moves by a fraction of a millimetre at most, but the pins must fall in the holes.
+2. **DRV8833 alignment.** I assumed EEP sits directly across from IN1 (and ULT across from IN4), which matches the seller's pin table.
+   Check on the real module. If EEP is across from IN4, the two rows are mirrored and I must redraw them.
+3. **Screen cable.** Pin 1 of each screen header is CS. Check against the pin labels printed on your screen.
+4. Also lay down the ESP32 (USB-C to the right), PCA9685 (header at the left end), gyro, a sonar cable and a screw terminal.
 
 ## What was checked
 
-- KiCad design-rule check: **0 errors, 0 unconnected pads.** (43 notes say the footprints are not from a KiCad library; they
-  are drawn in code, so that is expected and harmless.)
-- A separate checker I wrote reads only the exported Gerber and drill files, rebuilds which copper touches which, and compares
-  with the intended nets: **0 shorts, 0 opens**, all 177 plated holes match the design (the 4 mounting holes are in a separate unplated file).
-  I tested the checker by cutting a track in a copy: it reported the break.
-- Fab limits (typical cheap 2-layer): smallest copper gap 0.152 mm, narrowest track 0.25 mm, smallest drill 0.30 mm,
-  copper at least 0.5 mm from the edge.
-- Independent reviewers (separate agents) checked the footprints against your photos, the netlist, the fab files and your notes.
+- KiCad design-rule check: **0 errors, 0 unconnected pads.** (38 notes say the footprints are not from a KiCad library; they are
+  drawn in code, so that is expected and harmless.)
+- A separate checker I wrote reads only the exported Gerber and drill files, rebuilds which copper touches which, and compares with the
+  intended nets: **0 shorts, 0 opens**, all 211 plated holes (pads and vias) match the design (the 4 mounting holes are in a separate unplated file).
+  Smallest copper gap 0.152 mm, narrowest track 0.25 mm, smallest drill 0.30 mm, copper at least 0.5 mm from the edge.
+- Independent reviewers (separate agents, v4 design): netlist and pin tables (0 mismatches), grounding (all 32 ground pads are one
+  connected piece; motor-return resistance about 1 mOhm), fab files, silkscreen, documents, electrical safety. They found the DRV8833 and
+  screen mismatches, the missing capacitor ratings and the 100.1 mm size; those are fixed here. The v5 changes (DRV, screens,
+  stitching vias) have been checked by KiCad and the Gerber audit; see `reports/` for the latest numbers.
 
 ## What is NOT checked
 
-1. **Module pin orders and sizes** other than the ESP32 (measured) and the GY-521 (read from your photo). PCA9685 header position
-   (centred on the short end, 1.3 mm in) is an estimate from the photo. The relay, sonar and screen pin orders are assumptions.
-2. The ESP32 pin map is my optimized proposal. `plan.md` is **not** updated, and its locked pin table still describes the old build.
+1. **Module pin orders** other than those listed above as read from the owner's modules: the relay (VCC IN GND), sonar (VCC TRIG ECHO GND),
+   GY-521 and PCA9685 match the owner's photos and the usual orders; the I2C and UART headers have no module behind them.
+2. The ESP32 pin map is my optimized proposal. `plan.md` and `wiring.md` are **not** updated, and their locked pin table still
+   describes the old build. SPARE IO pins 3, 45, 46 are boot-strapping pins (46 is input-only) and 38/48 drive the devkit's RGB LED.
 3. No schematic and no electrical simulation. The netlist lives in `build_board.py`.
-4. Current limits: the battery copper is 2-3 mm wide, servo power 1.5 mm, motor traces 1 mm. Nothing is tested under load. A header
-   pin carries the PCA9685's V+ (a header pin is good for roughly 2-3 A): for big servos also use the module's own screw terminal.
+4. Current limits: VBAT copper is 2.0 mm (a roughly 6 A design), SERVO5 1.5 mm, motor traces 1.0 mm, CLEAN5 / RAILC 0.5 mm. A PCA9685 header
+   pin is good for roughly 2-3 A: for big servos also use the module's own screw terminal. Nothing is tested under load.
 5. **The ESP32 board only fits one way round:** the USB-C end toward the **right** edge, the antenna toward the left (marked on the board,
    with the two USB-C sockets drawn). Turned around, its 3V3 pins land on the GND pins. The first hole of each row (square pad) is the antenna end.
-6. PCA9685 orientation (header at the left end, servo plugs toward the bottom edge) still needs your OK. The DRV8833 holes were checked by you on the paper template; compare their printed names with your module's own labels
-   Whether the PCA9685 sits flat or needs spacers/screws is not designed yet: there is no mounting hole for it.
+6. The PCA9685 has no mounting hole: it sits on its header pins. The DRV8833 modules can be pushed in 180 degrees rotated (the hole
+   pattern is point-symmetric); check that the white plug side matches the "white plug v" mark.
+7. The power-track widths (VBAT 2.0, SERVO5 1.5, motors 1.0, 5 V / 3.3 V 0.5 mm) exist only in the routed copper, not as rules in the .kicad_pro;
+   keep them if you edit the board.
+8. The I2C bus has no pull-up resistors on the board; it relies on the PCA9685 and GY-521 modules' own.
 
 ## Paper test-fit (10 minutes, free)
 
-Print `fit-template-1to1.pdf` at 100 %. Check the 50 mm ruler. Lay each module on the sheet: its pins should fall in the
-holes, its body inside the printed outline. Check polarity marks on the terminals (+ is the square pad) against your wiring.
-Tell me anything that does not line up.
+Print `fit-template-1to1.pdf` at 100 %. Check the 50 mm ruler. Lay each module on the sheet: its pins should fall in the holes, its body
+inside the printed outline. Check polarity marks on the terminals (+ is the square pad) against your wiring. Tell me anything that does not line up.
 
 ## Ordering (when the test-fit passes)
 
-JLCPCB, 2 layers, 100 x 100 mm, 5 pieces, 1.6 mm, lead-free HASL, any solder-mask colour, bare board only (no assembly).
-JLCPCB's help page lists $2 for five 2-layer boards up to 10 x 10 cm; shipping and German VAT are added at checkout. The
-final price appears on their quote page before you pay.
+JLCPCB, 2 layers, 100 x 100 mm, 5 pieces, 1.6 mm, any solder-mask colour, bare board only (no assembly); HASL with lead is the cheapest
+finish, lead-free costs a little more. Upload `abadi-motherboard-2layer-gerber.zip` as it is. JLCPCB's help page lists $2 for five 2-layer
+boards up to 10 x 10 cm; shipping and German VAT are added at checkout. The preview must show 100 x 100 mm; the final price appears on their
+quote page before you pay. The soldered parts are all through-hole, so assembly by the fab is not an option; buy the parts (see `shopping-list.md`).
 
 ## How it was made (to redo it after a change)
 
 ```
 python3 build_board.py board.kicad_pcb --layers 2 --fine --pinmap     # parts, nets, outline, pours
 python3 route_board.py board.kicad_pcb routed.kicad_pcb freerouting-2.0.1.jar 80
-python3 finish_board.py routed.kicad_pcb final.kicad_pcb              # silk size, pour refill, DRC report
+python3 stitch_ground.py routed.kicad_pcb stitched.kicad_pcb 30        # ground stitching vias (copy the .kicad_pro next to each file)
+python3 finish_board.py stitched.kicad_pcb final.kicad_pcb              # silk size, pour refill, DRC report
 kicad-cli pcb export gerbers ... ; kicad-cli pcb export drill ...        # fab files
+python3 dump_board.py final.kicad_pcb design.json
 python3 audit_kicad_gerbers.py gerber design.json                       # independent check
+python3 render_board.py gerber pics ; python3 make_docs.py final.kicad_pcb docs   # pictures, template PDF, pin table, parts list
 ```
 
-The auto-router gives a different result each time the board is rebuilt. Rebuild and re-route until the report shows 0 unconnected
-(it took 2 builds here). `assign_pins.py` re-optimizes which ESP32 pin drives which signal (run `build_board.py` once without
-`--pinmap`, dump it with `dump_board.py`, then run `assign_pins.py`). Needs KiCad 7 (python3 `pcbnew`), Java 21 and
-[Freerouting 2.0.1](https://github.com/freerouting/freerouting/releases/tag/v2.0.1).
-The earlier `pcb/` files from Cursor (the 4-layer 105 x 84 mm draft) are superseded by this folder.
+The auto-router gives a different result each time the board is rebuilt (even with the file name changed). Rebuild and re-route, or change
+`HDR_GAP` slightly, until the report shows 0 unconnected and the audit shows no copper gap below 0.14 mm. `assign_pins.py` re-optimizes which
+ESP32 pin drives which signal. Needs KiCad 7 (python3 `pcbnew`), Java 21 and
+[Freerouting 2.0.1](https://github.com/freerouting/freerouting/releases/tag/v2.0.1). The earlier `pcb/` files from Cursor (the 4-layer
+105 x 84 mm draft) are superseded by this folder.

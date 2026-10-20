@@ -26,8 +26,8 @@ for ref, names in (("J1", J1), ("J3", J3)):
     for (n, net), g in zip(pads(ref), names):
         L.append("| %s | %d | %s | %s |" % (ref, n, g, net or "-"))
 L.append("\n## Other connectors (pin 1 = square pad)\n")
-labels = {"DRVA": "DRV8833 A (2 rows: inputs row first, then power/outputs row)", "DRVB": "DRV8833 B", "PCA": "PCA9685 header at its LEFT short end (top to bottom)",
-          "GYRO": "GY-521 (left to right as printed on the module)", "SCR_L": "Screen L", "SCR_R": "Screen R", "SPARE": "Spare IO (GPIO numbers are printed on the board)",
+labels = {"DRVA": "DRV8833 A, HW-627 module (pins 1-6 = top row left to right IN1 IN2 VCC GND IN3 IN4, VCC = battery; pins 7-12 = bottom row, the side with the white plug, EEP OUT1 OUT2 OUT3 OUT4 ULT; EEP and ULT are not used)", "DRVB": "DRV8833 B (same layout as DRV A)", "PCA": "PCA9685 header at its LEFT short end (top to bottom)",
+          "GYRO": "GY-521 (left to right as printed on the module)", "SCR_L": "Screen L (CS DC RST SDA SCL VCC GND)", "SCR_R": "Screen R (CS DC RST SDA SCL VCC GND)", "SPARE": "Spare IO (GPIO numbers are printed on the board)",
           "RLY1H": "Relay 1", "RLY2H": "Relay 2", "RLY3H": "Relay 3", "SON1": "Sonar 1", "SON2": "Sonar 2", "I2C": "I2C sensor", "UART": "UART",
           "TL0": "SERVO 5V IN (output of the servo buck)", "TL1": "BATT IN (battery pack, for the motors)",
           "TL2": "CLEAN 5V IN (output of the clean 5V buck)", "TL3": "3.3V IN (output of the 3.3V buck)", "PWR": "POWER OUT: upper row = clean 5V, clean 5V, 3.3V, 3.3V (from the bucks); lower row = GND x4", "TM1": "MOTOR 1 (2-pin, for a JST plug)", "TM2": "MOTOR 2 (2-pin)", "TM3": "MOTOR 3 (2-pin)", "TM4": "MOTOR 4 (2-pin)"}
@@ -44,9 +44,31 @@ for fp in sorted(b.GetFootprints(), key=lambda f: f.GetReference()):
     else:
         key = (val, n)
     groups.setdefault(key, []).append(ref)
+BUY = {
+    "C1": "470 uF electrolytic capacitor, 16 V or higher (25 V is fine), radial, 3.5 mm lead spacing; long leg / no stripe = + (square pad)",
+    "C2": "100 uF electrolytic capacitor, 10 V or higher, radial, 2.5 mm lead spacing; long leg / no stripe = + (square pad)",
+    "C3": "100 nF ceramic capacitor (marked 104), 16 V or higher, 2.54 mm lead spacing, no polarity",
+    "C4": "100 nF ceramic capacitor (marked 104), 16 V or higher, 2.54 mm lead spacing, no polarity",
+    "D1": "1N5819 Schottky diode; the stripe end = K, goes to the hole marked K",
+    "RD1a": "1 kOhm resistor, 1/4 W, stands upright", "RD2a": "1 kOhm resistor, 1/4 W, stands upright",
+    "RD1b": "2 kOhm resistor, 1/4 W, stands upright", "RD2b": "2 kOhm resistor, 1/4 W, stands upright",
+    "TL0": "screw terminal, 2-pole, 5.08 mm pitch (hole 1.3 mm)", "TL1": "screw terminal, 2-pole, 5.08 mm pitch (hole 1.3 mm)",
+    "TL2": "screw terminal, 2-pole, 5.08 mm pitch (hole 1.3 mm)", "TL3": "screw terminal, 2-pole, 5.08 mm pitch (hole 1.3 mm)",
+    "TM1": "2-pin 2.54 mm header or JST socket for the motor plug", "TM2": "2-pin 2.54 mm header or JST socket for the motor plug",
+    "TM3": "2-pin 2.54 mm header or JST socket for the motor plug", "TM4": "2-pin 2.54 mm header or JST socket for the motor plug",
+    "J1": "22-pin female socket, 2.54 mm (the ESP32-S3 devkit's pins plug in)", "J3": "22-pin female socket, 2.54 mm (the ESP32-S3 devkit's pins plug in)",
+    "DRVA": "two 1x6 female sockets, 2.54 mm (or solder the module's pins straight in)", "DRVB": "two 1x6 female sockets, 2.54 mm (or solder the module's pins straight in)",
+    "PCA": "1x6 pin header (pins down, plastic on the module's underside) plus a 1x6 socket on the board, or solder straight in",
+    "GYRO": "1x8 female socket, 2.54 mm",
+    "PWR": "2x4 pin header, 2.54 mm",
+}
 P = ["# Parts list (generated from the board file)\n", "| Qty | Item | Pads | Refs |", "|---|---|---|---|"]
 for (val, n), refs in groups.items():
-    P.append("| %d | %s | %d | %s |" % (len(refs), val, n, ", ".join(refs)))
-P.append("\nHeaders are standard 2.54 mm pitch; hole 1.0 mm. Resistors and the diode stand upright or lie flat on 2.54 / 7.62 mm spacing as drawn.")
+    item = BUY.get(refs[0]) or (val if val.startswith("M3 mounting") else "%d-pin 2.54 mm male header or JST-XH socket (%s)" % (n, val))
+    P.append("| %d | %s | %d | %s |" % (len(refs), item, n, ", ".join(refs)))
+P.append("\nCable ports (relay, sonar, screen, I2C, UART, SPARE IO): standard 2.54 mm male pin headers, or JST-XH sockets (2.5 mm pitch; "
+         "the owner's plugs fit this spacing). Power outputs and ground on the POWER OUT header: about 2 A per rail at most. "
+         "The two resistors per sonar stand upright (holes 2.54 mm apart); D1 lies flat (holes 7.62 mm apart). "
+         "See shopping-list.md for the parts that are not on the board (bucks, BMS, charger, fuses, connectors).")
 open(out + "/parts-list.md", "w").write("\n".join(P) + "\n")
 print("wrote pin-table.md and parts-list.md")

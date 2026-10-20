@@ -1,3 +1,5 @@
+> **Superseded.** This quote note describes the old 4-layer 105 x 84 mm draft. The current board is the 2-layer 100 x 100 mm motherboard in `pcb/kicad/` (see `pcb/kicad/README.md` and `pcb/kicad/shopping-list.md`).
+
 # File to upload for a PCB quote
 
 Upload this zip file:

@@ -53,12 +53,12 @@ Everything here follows the module pin orders I assumed. Check each one against 
 
 ## Other connectors (pin 1 = square pad)
 
-- **DRV8833 A (2 rows: inputs row first, then power/outputs row)** (DRVA): 1=IN1A, 2=IN2A, 3=IN3A, 4=IN4A, 5=GND, 6=VBAT, 7=M1A, 8=M1B, 9=M2A, 10=M2B
-- **DRV8833 B** (DRVB): 1=IN1B, 2=IN2B, 3=IN3B, 4=IN4B, 5=GND, 6=VBAT, 7=M3A, 8=M3B, 9=M4A, 10=M4B
+- **DRV8833 A, HW-627 module (pins 1-6 = top row left to right IN1 IN2 VCC GND IN3 IN4, VCC = battery; pins 7-12 = bottom row, the side with the white plug, EEP OUT1 OUT2 OUT3 OUT4 ULT; EEP and ULT are not used)** (DRVA): 1=IN1A, 2=IN2A, 3=VBAT, 4=GND, 5=IN3A, 6=IN4A, 7=-, 8=M1A, 9=M1B, 10=M2A, 11=M2B, 12=-
+- **DRV8833 B (same layout as DRV A)** (DRVB): 1=IN1B, 2=IN2B, 3=VBAT, 4=GND, 5=IN3B, 6=IN4B, 7=-, 8=M3A, 9=M3B, 10=M4A, 11=M4B, 12=-
 - **PCA9685 header at its LEFT short end (top to bottom)** (PCA): 1=GND, 2=-, 3=SCL, 4=SDA, 5=ESP3V3, 6=SERVO5
 - **GY-521 (left to right as printed on the module)** (GYRO): 1=-, 2=-, 3=-, 4=-, 5=SDA, 6=SCL, 7=GND, 8=ESP3V3
-- **Screen L** (SCR_L): 1=RAILC, 2=GND, 3=CS_L, 4=LCD_RST, 5=LCD_DC, 6=MOSI, 7=SCK
-- **Screen R** (SCR_R): 1=RAILC, 2=GND, 3=CS_R, 4=LCD_RST, 5=LCD_DC, 6=MOSI, 7=SCK
+- **Screen L (CS DC RST SDA SCL VCC GND)** (SCR_L): 1=CS_L, 2=LCD_DC, 3=LCD_RST, 4=MOSI, 5=SCK, 6=RAILC, 7=GND
+- **Screen R (CS DC RST SDA SCL VCC GND)** (SCR_R): 1=CS_R, 2=LCD_DC, 3=LCD_RST, 4=MOSI, 5=SCK, 6=RAILC, 7=GND
 - **Spare IO (GPIO numbers are printed on the board)** (SPARE): 1=GND, 2=ESP3V3, 3=SPARE3, 4=SPARE46, 5=SPARE45, 6=SPARE48, 7=SPARE38, 8=SPARE21
 - **Relay 1** (RLY1H): 1=RAILC, 2=RLY1, 3=GND
 - **Relay 2** (RLY2H): 1=RAILC, 2=RLY2, 3=GND
