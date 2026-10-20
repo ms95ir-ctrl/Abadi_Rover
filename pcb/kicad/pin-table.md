@@ -67,13 +67,11 @@ Everything here follows the module pin orders I assumed. Check each one against 
 - **Sonar 2** (SON2): 1=CLEAN5, 2=TRIG, 3=ECHO2_5V, 4=GND
 - **I2C sensor** (I2C): 1=ESP3V3, 2=GND, 3=SDA, 4=SCL
 - **UART** (UART): 1=GND, 2=UART_TX, 3=UART_RX
-- **SERVO 5V IN** (TL0): 1=SERVO5, 2=GND
-- **BATT IN** (TL1): 1=VBAT, 2=GND
-- **TO BUCK 1 (servo 5V)** (TL2): 1=VBAT, 2=GND
-- **TO BUCK 2 (clean 5V)** (TL3): 1=VBAT, 2=GND
-- **TO BUCK 3 (3.3V)** (TL4): 1=VBAT, 2=GND
-- **CLEAN 5V IN** (TL5): 1=CLEAN5, 2=GND
-- **3.3V IN** (TL6): 1=RAILC, 2=GND
+- **SERVO 5V IN (output of the servo buck)** (TL0): 1=SERVO5, 2=GND
+- **BATT IN (battery pack, for the motors)** (TL1): 1=VBAT, 2=GND
+- **CLEAN 5V IN (output of the clean 5V buck)** (TL2): 1=CLEAN5, 2=GND
+- **3.3V IN (output of the 3.3V buck)** (TL3): 1=RAILC, 2=GND
+- **POWER OUT: upper row = clean 5V, clean 5V, 3.3V, 3.3V (from the bucks); lower row = GND x4** (PWR): 1=CLEAN5, 2=CLEAN5, 3=RAILC, 4=RAILC, 5=GND, 6=GND, 7=GND, 8=GND
 - **MOTOR 1** (TM1): 1=M1A, 2=M1B
 - **MOTOR 2** (TM2): 1=M2A, 2=M2B
 - **MOTOR 3** (TM3): 1=M3A, 2=M3B

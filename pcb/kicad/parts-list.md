@@ -15,6 +15,7 @@
 | 1 | ESP32-S3 row 1 (3V3 RST 4 5 ...) | 22 | J1 |
 | 1 | ESP32-S3 row 2 (GND TX RX 1 2 ...) | 22 | J3 |
 | 1 | PCA9685 header (GND OE SCL SDA VCC V+) | 6 | PCA |
+| 1 | POWER OUT (5V 5V 3V3 3V3 / GND x4) | 8 | PWR |
 | 2 | 1k | 2 | RD1a, RD2a |
 | 2 | 2k | 2 | RD1b, RD2b |
 | 1 | RELAY 1 | 3 | RLY1H |
@@ -28,11 +29,8 @@
 | 1 | SPARE IO | 8 | SPARE |
 | 1 | SERVO 5V IN | 2 | TL0 |
 | 1 | BATT IN | 2 | TL1 |
-| 1 | TO BUCK 1 | 2 | TL2 |
-| 1 | TO BUCK 2 | 2 | TL3 |
-| 1 | TO BUCK 3 | 2 | TL4 |
-| 1 | CLEAN 5V IN | 2 | TL5 |
-| 1 | 3.3V IN | 2 | TL6 |
+| 1 | CLEAN 5V IN | 2 | TL2 |
+| 1 | 3.3V IN | 2 | TL3 |
 | 1 | MOTOR 1 | 2 | TM1 |
 | 1 | MOTOR 2 | 2 | TM2 |
 | 1 | MOTOR 3 | 2 | TM3 |

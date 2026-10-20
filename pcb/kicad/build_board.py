@@ -291,17 +291,26 @@ silk_text(90.7, 56.0, "A", 1.0)       # square pad = anode, from CLEAN 5V
 silk_text(90.7, 63.62, "K", 1.0)      # cathode (band side) = ESP32 5V pin
 
 # ------------------------------------------------------------------ screw terminals, all 5.08 mm pitch (PROVISIONAL polarity: lower pin = +)
-# left edge, bottom to top: servo power in, battery in, three feeds out to the bucks, then the clean 5V and 3.3V returns
-LEFT = [("SERVO 5V IN", "SERVO5"), ("BATT IN", "VBAT"), ("TO BUCK 1", "VBAT"), ("TO BUCK 2", "VBAT"),
-        ("TO BUCK 3", "VBAT"), ("CLEAN 5V IN", "CLEAN5"), ("3.3V IN", "RAILC")]
-left_y0 = []
-for i, (label, plus) in enumerate(LEFT):
-    y0 = 10.0 + i * 2 * 5.08
-    left_y0.append(y0)
+# left edge: the battery in, and the three outputs of the OFF-BOARD buck modules coming back in (the bucks get their battery
+# power from the pack directly, outside the board). The slot number is the position along the edge (10.16 mm per terminal).
+LEFT = [("SERVO 5V IN", "SERVO5", 0), ("BATT IN", "VBAT", 1), ("CLEAN 5V IN", "CLEAN5", 5), ("3.3V IN", "RAILC", 6)]
+for i, (label, plus, slot) in enumerate(LEFT):
+    y0 = 10.0 + slot * 2 * 5.08
     footprint("TL%d" % i, label, [(5.5, y0 + 2.54, plus), (5.5, y0 + 7.62, "GND")], drill=1.3, dia=2.8)
     silk_text(7.9, y0 + 2.54, "+", 1.0)
     silk_text(7.9, y0 + 7.62, "-", 1.0)
     silk_text(9.3, y0 + 5.08, label, 1.0, angle=90)
+# extra power outlets in the gap the three removed terminals left: 2 x clean 5 V and 2 x 3.3 V (both from the bucks, not the ESP32
+# pin) in the upper row, 4 x GND in the lower row, so every power pin has a ground right below it for a 2-wire plug
+PW_X, PW_Y = 6.0, 36.0
+pw_up = ["CLEAN5", "CLEAN5", "RAILC", "RAILC"]
+footprint("PWR", "POWER OUT (5V 5V 3V3 3V3 / GND x4)",
+          [(PW_X + i * PITCH, PW_Y + PITCH, n) for i, n in enumerate(pw_up)] + [(PW_X + i * PITCH, PW_Y, "GND") for i in range(4)])
+for i, lab in enumerate(("5V", "5V", "3V3", "3V3")):
+    silk_text(PW_X + i * PITCH, PW_Y + PITCH + 2.55, lab, 1.0, angle=90)
+for i in range(4):
+    silk_text(PW_X + i * PITCH, PW_Y - 2.85, "GND", 1.0, angle=90)
+silk_text(PW_X + 1.5 * PITCH, PW_Y + PITCH + 6.3, "POWER OUT", 1.0)
 # right edge: the four motors
 for k, (a, b) in enumerate((("M1A", "M1B"), ("M2A", "M2B"), ("M3A", "M3B"), ("M4A", "M4B")), start=1):
     y0 = 10.0 + (k - 1) * 2 * 5.08
@@ -319,23 +328,6 @@ silk_text(76.1, 6.0, "+", 1.0)
 silk_text(79.3, 3.7, "C2 100uF", 1.0)
 silk_text(84.6, 9.5, "C3", 1.0)
 silk_text(84.6, 4.0, "C4", 1.0)
-
-# thick VBAT bus beside the battery terminals (3 mm, bottom layer): BATT IN + the three feeds to the bucks
-def track(x1, y1, x2, y2, width, netname, layer=pcbnew.B_Cu):
-    t = pcbnew.PCB_TRACK(board)
-    t.SetStart(P(x1, y1))
-    t.SetEnd(P(x2, y2))
-    t.SetWidth(FromMM(width))
-    t.SetLayer(layer)
-    t.SetNet(net(netname))
-    board.Add(t)
-
-
-BUS_X = 2.1
-vb_ys = [left_y0[i] + 2.54 for i in (1, 2, 3, 4)]
-track(BUS_X, vb_ys[0], BUS_X, vb_ys[-1], 3.0, "VBAT")
-for vy in vb_ys:
-    track(BUS_X, vy, 5.5, vy, 3.0, "VBAT")
 
 # CLEAN 5V also feeds the sonar VCC pins (separate from the diode-protected ESP5V pin)
 for p in board.GetPads():
@@ -403,7 +395,7 @@ else:
     zone([pcbnew.In1_Cu], gnd_pts, "GND")
     zone([pcbnew.B_Cu], gnd_pts, "GND")
 
-silk_text(14, 82, "ABADI MOTHERBOARD v3 (%dL)" % LAYERS, 1.0, angle=90)
+silk_text(14, 82, "ABADI MOTHERBOARD v4 (%dL)" % LAYERS, 1.0, angle=90)
 
 # aux origin = lower-left corner so Gerber/drill files come out in plain mm, y up
 ds.SetAuxOrigin(P(0, 0))

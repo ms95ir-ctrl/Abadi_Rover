@@ -1,136 +1,130 @@
-** Drc report for /tmp/claude-0/-home-user-Abadi-Rover/2e40e7c1-9ccc-529a-8cb9-c3782861ad82/scratchpad/kb/e5_BEST.kicad_pcb **
-** Created on 2026-10-19 19:45:45 **
+** Drc report for /tmp/claude-0/-home-user-Abadi-Rover/2e40e7c1-9ccc-529a-8cb9-c3782861ad82/scratchpad/kb/f1_BEST.kicad_pcb **
+** Created on 2026-10-20 16:06:39 **
 
-** Found 43 DRC violations **
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(163.5600 mm, 89.0000 mm): Footprint SON1
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(173.2000 mm, 54.0000 mm): Footprint SPARE
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(155.0000 mm, 54.0000 mm): Footprint SCR_R
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(196.0000 mm, 146.0000 mm): Footprint H2
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(136.2700 mm, 92.5000 mm): Footprint RS1
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(105.5000 mm, 106.9800 mm): Footprint TL3
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(105.5000 mm, 76.5000 mm): Footprint TL6
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(194.5000 mm, 137.4600 mm): Footprint TM1
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(112.4000 mm, 87.1000 mm): Footprint GYRO
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(164.0000 mm, 104.0000 mm): Footprint DRVB
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(137.0000 mm, 58.0000 mm): Footprint J3
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(165.0600 mm, 92.5000 mm): Footprint RD1a
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(177.1200 mm, 92.5000 mm): Footprint RD2a
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(177.7500 mm, 135.0000 mm): Footprint C1
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(194.5000 mm, 127.3000 mm): Footprint TM2
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(104.0000 mm, 54.0000 mm): Footprint H3
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(196.0000 mm, 54.0000 mm): Footprint H4
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(145.7900 mm, 92.5000 mm): Footprint RS2
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(187.0000 mm, 141.7700 mm): Footprint C3
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(137.0000 mm, 54.0000 mm): Footprint SCR_L
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(178.2500 mm, 144.0000 mm): Footprint C2
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(138.0000 mm, 104.0000 mm): Footprint DRVA
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(104.0000 mm, 146.0000 mm): Footprint H1
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(170.0600 mm, 92.5000 mm): Footprint RD1b
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(105.5000 mm, 127.3000 mm): Footprint TL1
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(105.5000 mm, 96.8200 mm): Footprint TL4
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(154.0400 mm, 89.0000 mm): Footprint RLY3H
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(182.1200 mm, 92.5000 mm): Footprint RD2b
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(147.0600 mm, 95.5000 mm): Footprint UART
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(135.0000 mm, 89.0000 mm): Footprint RLY1H
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(105.5000 mm, 117.1400 mm): Footprint TL2
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(105.5000 mm, 137.4600 mm): Footprint TL0
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(144.5200 mm, 89.0000 mm): Footprint RLY2H
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(135.0000 mm, 95.5000 mm): Footprint I2C
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(188.5000 mm, 94.0000 mm): Footprint D1
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(175.6200 mm, 89.0000 mm): Footprint SON2
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(112.3000 mm, 128.9500 mm): Footprint PCA
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(155.3100 mm, 92.5000 mm): Footprint RS3
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(187.0000 mm, 147.2700 mm): Footprint C4
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(137.0000 mm, 83.4000 mm): Footprint J1
-[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
-    Local override; Severity: warning
-    @(105.5000 mm, 86.6600 mm): Footprint TL5
+** Found 41 DRC violations **
 [lib_footprint_issues]: The current configuration does not include the library 'abadi'.
     Local override; Severity: warning
     @(194.5000 mm, 117.1400 mm): Footprint TM3
 [lib_footprint_issues]: The current configuration does not include the library 'abadi'.
     Local override; Severity: warning
+    @(106.0000 mm, 111.4600 mm): Footprint PWR
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(137.0000 mm, 58.0000 mm): Footprint J3
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(104.0000 mm, 146.0000 mm): Footprint H1
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(194.5000 mm, 137.4600 mm): Footprint TM1
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(173.2000 mm, 54.0000 mm): Footprint SPARE
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(145.7900 mm, 92.5000 mm): Footprint RS2
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(154.0400 mm, 89.0000 mm): Footprint RLY3H
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(188.5000 mm, 94.0000 mm): Footprint D1
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(112.4000 mm, 87.1000 mm): Footprint GYRO
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(155.0000 mm, 54.0000 mm): Footprint SCR_R
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(177.7500 mm, 135.0000 mm): Footprint C1
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(177.1200 mm, 92.5000 mm): Footprint RD2a
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(104.0000 mm, 54.0000 mm): Footprint H3
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(164.0000 mm, 104.0000 mm): Footprint DRVB
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(194.5000 mm, 127.3000 mm): Footprint TM2
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(136.2700 mm, 92.5000 mm): Footprint RS1
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(112.3000 mm, 128.9500 mm): Footprint PCA
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
     @(194.5000 mm, 106.9800 mm): Footprint TM4
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(163.5600 mm, 89.0000 mm): Footprint SON1
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(165.0600 mm, 92.5000 mm): Footprint RD1a
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(135.0000 mm, 89.0000 mm): Footprint RLY1H
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(135.0000 mm, 95.5000 mm): Footprint I2C
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(155.3100 mm, 92.5000 mm): Footprint RS3
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(105.5000 mm, 86.6600 mm): Footprint TL2
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(196.0000 mm, 146.0000 mm): Footprint H2
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(138.0000 mm, 104.0000 mm): Footprint DRVA
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(105.5000 mm, 137.4600 mm): Footprint TL0
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(175.6200 mm, 89.0000 mm): Footprint SON2
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(182.1200 mm, 92.5000 mm): Footprint RD2b
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(170.0600 mm, 92.5000 mm): Footprint RD1b
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(144.5200 mm, 89.0000 mm): Footprint RLY2H
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(147.0600 mm, 95.5000 mm): Footprint UART
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(105.5000 mm, 76.5000 mm): Footprint TL3
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(178.2500 mm, 144.0000 mm): Footprint C2
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(105.5000 mm, 127.3000 mm): Footprint TL1
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(137.0000 mm, 54.0000 mm): Footprint SCR_L
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(137.0000 mm, 83.4000 mm): Footprint J1
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(187.0000 mm, 147.2700 mm): Footprint C4
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(187.0000 mm, 141.7700 mm): Footprint C3
+[lib_footprint_issues]: The current configuration does not include the library 'abadi'.
+    Local override; Severity: warning
+    @(196.0000 mm, 54.0000 mm): Footprint H4
 
 ** Found 0 unconnected pads **
 

@@ -1,8 +1,31 @@
-# Robot motherboard - routed draft v3, 2 layers, 100 x 100 mm
+# Robot motherboard - routed draft v4, 2 layers, 100 x 100 mm
 
-**Status: DRAFT. Do not order yet.** v3 is built from a real paper test-fit (your photos and notes) and measured module
+**Status: DRAFT. Do not order yet.** v4 is built from a real paper test-fit (your photos and notes) and measured module
 data. It is fully routed and passes every check I could run on the files. One more paper test-fit with the new
 template is the last step before ordering.
+
+## What changed in v4 (power wiring)
+
+- **The three TO BUCK terminals are gone.** The three buck modules now get their battery power straight from the pack, outside the board
+  (see "How to wire the power" below). The left edge has four terminals: SERVO 5V IN, BATT IN, CLEAN 5V IN, 3.3V IN.
+- **New POWER OUT header** (left edge, where the old terminals were): 2 x clean 5 V, 2 x 3.3 V (from the 3.3 V buck, not the ESP32's own pin)
+  and 4 x GND, 2.54 mm pins, each power pin with a ground pin directly below it.
+
+## How to wire the power
+
+The three bucks are separate modules (not on the board). Each one has an input pair (IN+ / IN-) and an output pair (OUT+ / OUT-).
+
+```
+battery pack -> BMS -> FUSE -> splice (insulated lever connectors, one for + and one for -) ->
+     |-> board terminal BATT IN        (the motors; DRV8833 modules take the battery voltage from here)
+     |-> servo buck IN+/IN-            its OUT+/OUT- go to the board terminal SERVO 5V IN   (-> PCA9685 V+ pin)
+     |-> clean 5V buck IN+/IN-         its OUT+/OUT- go to the board terminal CLEAN 5V IN   (-> ESP32 5V pin via diode D1, both sonars, POWER OUT 5V pins)
+     '-> 3.3V buck IN+/IN-             its OUT+/OUT- go to the board terminal 3.3V IN       (-> relays, screens, POWER OUT 3V3 pins)
+```
+
+Terminal pairs: **+** is the square pad. All **-** terminals and all GND pins are one common ground. Before connecting a buck to the board,
+power it from the battery alone and set its output with a multimeter (servo buck 5.0 V, clean buck 5.0 V, 3.3 V buck 3.3 V). The board has
+no fuse and no reverse-polarity protection: use one fuse (10-15 A) in the battery + lead before the splice.
 
 ## What changed since v2 (from your test-fit notes)
 
@@ -16,7 +39,7 @@ template is the last step before ordering.
 | PCA9685 circled holes | The PCA9685's control header is on a **short end** of the module (it has one at each end), not on the long edge. Footprint moved to the left short end. V+ is now wired to a new **SERVO 5V IN** terminal. |
 | "should be 2 mm larger" near M1-M4 | My reading: terminal spacing should be 5.08 mm, not 3.5 mm. All screw terminals are now 5.08 mm. **Please confirm.** |
 
-Added after an independent review of v3:
+Added after an independent review of v3 (kept in v4):
 
 - **Polarity and values are printed on the board:** `+` and a square pad on the two big capacitors (C1, C2), `A` / `K` and `1N5819` at the
   diode D1 (K = the band side = the ESP32 5V pin), `330R` beside each relay resistor and `1k` / `2k` under each sonar divider
@@ -48,7 +71,7 @@ right, so the board's holes now follow that order (v2 had VCC on the wrong end).
 - KiCad design-rule check: **0 errors, 0 unconnected pads.** (43 notes say the footprints are not from a KiCad library; they
   are drawn in code, so that is expected and harmless.)
 - A separate checker I wrote reads only the exported Gerber and drill files, rebuilds which copper touches which, and compares
-  with the intended nets: **0 shorts, 0 opens**, all 176 plated holes match the design (the 4 mounting holes are in a separate unplated file).
+  with the intended nets: **0 shorts, 0 opens**, all 177 plated holes match the design (the 4 mounting holes are in a separate unplated file).
   I tested the checker by cutting a track in a copy: it reported the break.
 - Fab limits (typical cheap 2-layer): smallest copper gap 0.152 mm, narrowest track 0.25 mm, smallest drill 0.30 mm,
   copper at least 0.5 mm from the edge.
@@ -61,7 +84,7 @@ right, so the board's holes now follow that order (v2 had VCC on the wrong end).
 2. The ESP32 pin map is my optimized proposal. `plan.md` is **not** updated, and its locked pin table still describes the old build.
 3. No schematic and no electrical simulation. The netlist lives in `build_board.py`.
 4. Current limits: the battery copper is 2-3 mm wide, servo power 1.5 mm, motor traces 1 mm. Nothing is tested under load. A header
-   pin carries the PCA9685's V+ (about 3 A at most): for big servos also use the module's own screw terminal.
+   pin carries the PCA9685's V+ (a header pin is good for roughly 2-3 A): for big servos also use the module's own screw terminal.
 5. **The ESP32 board only fits one way round:** the USB-C end toward the **right** edge, the antenna toward the left (marked on the board,
    with the two USB-C sockets drawn). Turned around, its 3V3 pins land on the GND pins. The first hole of each row (square pad) is the antenna end.
 6. PCA9685 orientation (header at the left end, servo plugs toward the bottom edge) and the DRV8833 pin layout still need your OK
