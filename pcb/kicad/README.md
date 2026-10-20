@@ -10,8 +10,10 @@ template is the last step before ordering.
   (see "How to wire the power" below). The left edge has four terminals: SERVO 5V IN, BATT IN, CLEAN 5V IN, 3.3V IN.
 - **The relay series resistors (330R) are gone.** The relay modules are 3 V types with their own input circuit, so each relay header's IN pin
   now goes straight to its ESP32 pin. (Set each module's high/low trigger jumper to match your code.)
-- **More room:** the cable headers are spaced 3 mm apart instead of 1.9 mm, the I2C / UART headers moved up 2 mm to give space above the DRV8833 modules,
+- **More room:** the cable headers are spaced 2.8 mm apart instead of 1.9 mm, the I2C / UART headers moved up 2 mm to give space above the DRV8833 modules,
   and diode D1 moved to the right edge of the strip.
+- **Motor connectors are now 2-pin spots for your JST plugs** (2.54 mm grid, vertical or side-entry, your choice of part) instead of screw terminals.
+  M1 = DRV A output 1, M2 = DRV A output 2, M3 = DRV B output 1, M4 = DRV B output 2. The DRV8833 pin names (IN1..IN4, GND, VM, M1A...) are printed beside the DRV holes so you can compare them with the labels on your module.
 - **New POWER OUT header** (left edge, where the old terminals were): 2 x clean 5 V, 2 x 3.3 V (from the 3.3 V buck, not the ESP32's own pin)
   and 4 x GND, 2.54 mm pins, each power pin with a ground pin directly below it.
 
@@ -41,7 +43,7 @@ no fuse and no reverse-polarity protection: use one fuse (10-15 A) in the batter
 | Touch headers crossed out | Removed. |
 | DRV8833 "perfectly fine" | Left exactly as it was. |
 | PCA9685 circled holes | The PCA9685's control header is on a **short end** of the module (it has one at each end), not on the long edge. Footprint moved to the left short end. V+ is now wired to a new **SERVO 5V IN** terminal. |
-| "should be 2 mm larger" near M1-M4 | My reading: terminal spacing should be 5.08 mm, not 3.5 mm. All screw terminals are now 5.08 mm. **Please confirm.** |
+| "should be 2 mm larger" near M1-M4 | Became 5.08 mm screw terminals in v3. In v4 the motor connectors are 2-pin JST spots on a 2.54 mm grid (your plugs fit that spacing); the four left-edge power terminals are 5.08 mm. |
 
 Added after an independent review of v3 (kept in v4):
 
@@ -50,7 +52,7 @@ Added after an independent review of v3 (kept in v4):
   (swapped, the ESP32 would see only 1.7 V from the sonar and read nothing). The sonar divider is needed because the ESP32-S3's pins
   are not 5 V tolerant (maximum about 3.6 V) and the sonar's ECHO pin gives 5 V.
 - **Every header now prints its pin functions** next to the pins (relay VCC IN GND, sonar VCC TRG ECH GND, screens VCC GND CS RST DC SDA SCL,
-  I2C, UART; the spare IO header already showed its GPIO numbers). The DRV8833 holes have no labels yet: follow the pin-table.
+  I2C, UART; the spare IO header already showed its GPIO numbers). The DRV8833 holes now show their pin names too.
 - **The two screen headers are 2.54 mm apart** (v3 had them closer together than one pin).
 - **The antenna keep-out is bigger:** no copper on either layer from 7 mm in front of the antenna tip and 4 mm beside it, so Wi-Fi/Bluetooth is not detuned.
 - Floating scraps of ground copper are removed automatically.
@@ -92,8 +94,8 @@ right, so the board's holes now follow that order (v2 had VCC on the wrong end).
    pin carries the PCA9685's V+ (a header pin is good for roughly 2-3 A): for big servos also use the module's own screw terminal.
 5. **The ESP32 board only fits one way round:** the USB-C end toward the **right** edge, the antenna toward the left (marked on the board,
    with the two USB-C sockets drawn). Turned around, its 3V3 pins land on the GND pins. The first hole of each row (square pad) is the antenna end.
-6. PCA9685 orientation (header at the left end, servo plugs toward the bottom edge) and the DRV8833 pin layout still need your OK
-   (see the questions in the chat). Whether the PCA9685 sits flat or needs spacers/screws is not designed yet: there is no mounting hole for it.
+6. PCA9685 orientation (header at the left end, servo plugs toward the bottom edge) still needs your OK. The DRV8833 holes were checked by you on the paper template; compare their printed names with your module's own labels
+   Whether the PCA9685 sits flat or needs spacers/screws is not designed yet: there is no mounting hole for it.
 
 ## Paper test-fit (10 minutes, free)
 

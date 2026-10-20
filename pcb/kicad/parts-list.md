@@ -30,10 +30,10 @@
 | 1 | BATT IN | 2 | TL1 |
 | 1 | CLEAN 5V IN | 2 | TL2 |
 | 1 | 3.3V IN | 2 | TL3 |
-| 1 | MOTOR 1 | 2 | TM1 |
-| 1 | MOTOR 2 | 2 | TM2 |
-| 1 | MOTOR 3 | 2 | TM3 |
-| 1 | MOTOR 4 | 2 | TM4 |
+| 1 | MOTOR 1 (2-pin JST) | 2 | TM1 |
+| 1 | MOTOR 2 (2-pin JST) | 2 | TM2 |
+| 1 | MOTOR 3 (2-pin JST) | 2 | TM3 |
+| 1 | MOTOR 4 (2-pin JST) | 2 | TM4 |
 | 1 | UART | 3 | UART |
 
 Headers are standard 2.54 mm pitch; hole 1.0 mm. Resistors and the diode stand upright or lie flat on 2.54 / 7.62 mm spacing as drawn.

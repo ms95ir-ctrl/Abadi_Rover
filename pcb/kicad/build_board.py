@@ -187,6 +187,10 @@ for nm, x0, ins in (("A", 34.0, ("IN1A", "IN2A", "IN3A", "IN4A")), ("B", 60.0, (
     footprint("DRV" + nm, "DRV8833 " + nm, pads_from(upper) + pads_from(lower))
     silk_rect(x0, y0, x0 + 21.0, y0 + 18.0)
     silk_text(x0 + 10.5, y0 + 9.0, "DRV8833 " + nm, 1.0)
+    for i, lab in enumerate(["IN1", "IN2", "IN3", "IN4", "GND"]):
+        silk_text(x0 + 4.0 + i * PITCH, y0 + 16.5 - 2.85, lab, 1.0, angle=90)
+    for i, lab in enumerate(["VM"] + list(outs)):
+        silk_text(x0 + 4.0 + i * PITCH, y0 + 1.5 + 2.85, lab, 1.0, angle=90)
 
 # ------------------------------------------------------------------ PCA9685 (63 x 25.4 mm; 6-pin header on a SHORT end)
 PX, PY, PL, PWD = 11.0, 2.0, 63.0, 25.4
@@ -234,7 +238,7 @@ for i, lab in enumerate(["GND", "3V3"] + [str(g) for g in SPARE_GPIOS]):
 
 # ------------------------------------------------------------------ cable headers on two strips
 S1, S2, X0 = 61.0, 56.6, 35.0
-HDR_GAP = 3.0            # extra space between neighbouring cable headers
+HDR_GAP = float(os.environ.get("HDR_GAP", "2.8"))      # extra space between neighbouring cable headers
 strip_x = {}
 
 
@@ -306,11 +310,11 @@ for i, lab in enumerate(("5V", "5V", "3V3", "3V3")):
 for i in range(4):
     silk_text(PW_X + i * PITCH, PW_Y - 2.85, "GND", 1.0, angle=90)
 silk_text(PW_X + 1.5 * PITCH, PW_Y + PITCH + 6.3, "POWER OUT", 1.0)
-# right edge: the four motors
+# right edge: the four motors, 2-pin positions on a 2.54 mm grid for the 2-pin JST plugs (pad 1 / pad 2 = the two motor wires)
 for k, (a, b) in enumerate((("M1A", "M1B"), ("M2A", "M2B"), ("M3A", "M3B"), ("M4A", "M4B")), start=1):
-    y0 = 10.0 + (k - 1) * 2 * 5.08
-    footprint("TM%d" % k, "MOTOR %d" % k, [(94.5, y0 + 2.54, a), (94.5, y0 + 7.62, b)], drill=1.3, dia=2.8)
-    silk_text(91.0, y0 + 5.08, "M%d" % k, 1.0, angle=90)
+    yc = 10.0 + (k - 1) * 2 * 5.08 + 5.08
+    footprint("TM%d" % k, "MOTOR %d (2-pin JST)" % k, [(94.5, yc - 1.27, a), (94.5, yc + 1.27, b)])
+    silk_text(90.0, yc, "M%d" % k, 1.0, angle=90)
 
 # ------------------------------------------------------------------ capacitors
 footprint("C1", "470uF pack", [(77.75, 15.0, "VBAT"), (81.25, 15.0, "GND")], drill=1.0, dia=2.0)

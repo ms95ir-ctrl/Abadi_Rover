@@ -72,9 +72,9 @@ Everything here follows the module pin orders I assumed. Check each one against 
 - **CLEAN 5V IN (output of the clean 5V buck)** (TL2): 1=CLEAN5, 2=GND
 - **3.3V IN (output of the 3.3V buck)** (TL3): 1=RAILC, 2=GND
 - **POWER OUT: upper row = clean 5V, clean 5V, 3.3V, 3.3V (from the bucks); lower row = GND x4** (PWR): 1=CLEAN5, 2=CLEAN5, 3=RAILC, 4=RAILC, 5=GND, 6=GND, 7=GND, 8=GND
-- **MOTOR 1** (TM1): 1=M1A, 2=M1B
-- **MOTOR 2** (TM2): 1=M2A, 2=M2B
-- **MOTOR 3** (TM3): 1=M3A, 2=M3B
-- **MOTOR 4** (TM4): 1=M4A, 2=M4B
+- **MOTOR 1 (2-pin, for a JST plug)** (TM1): 1=M1A, 2=M1B
+- **MOTOR 2 (2-pin)** (TM2): 1=M2A, 2=M2B
+- **MOTOR 3 (2-pin)** (TM3): 1=M3A, 2=M3B
+- **MOTOR 4 (2-pin)** (TM4): 1=M4A, 2=M4B
 
-Terminals (all 5.08 mm pitch): the lower/first pin is **+**, marked on the board. Motor terminals: M1 = DRV A out 1/2, M2 = DRV A out 3/4, M3/M4 = DRV B.
+Left-edge screw terminals (5.08 mm pitch): the lower/first pin is **+**, marked on the board. Motor connectors are 2-pin spots on a 2.54 mm grid for JST plugs (motors have no polarity; swap the two wires to reverse): M1 = DRV A out 1, M2 = DRV A out 2, M3 = DRV B out 1, M4 = DRV B out 2.
