@@ -21,7 +21,6 @@
 | 1 | RELAY 1 | 3 | RLY1H |
 | 1 | RELAY 2 | 3 | RLY2H |
 | 1 | RELAY 3 | 3 | RLY3H |
-| 3 | 330R | 2 | RS1, RS2, RS3 |
 | 1 | SCREEN L | 7 | SCR_L |
 | 1 | SCREEN R | 7 | SCR_R |
 | 1 | SONAR 1 | 4 | SON1 |

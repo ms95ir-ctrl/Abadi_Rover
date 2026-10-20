@@ -1,4 +1,4 @@
-PTH holes 177, NPTH holes 4, copper islands top 106 bottom 109
+PTH holes 177, NPTH holes 4, copper islands top 103 bottom 104
 drill hits without a matching designed pad/via: 0   designed pads/vias without a drill hit: 0
 
 SHORTS (copper joining different nets): 0
@@ -9,7 +9,7 @@ smallest copper gap on top: 0.152 mm   [fab minimum ~0.127]
 smallest copper gap on bot: 0.152 mm   [fab minimum ~0.127]
 narrowest track: 0.250 mm   [fab minimum ~0.127]
 smallest pad ring: 0.350 mm, smallest via ring: 0.150 mm   [fab minimum ~0.13]
-smallest wall between two holes: 1.121 mm   [fab minimum ~0.25]
+smallest wall between two holes: 0.665 mm   [fab minimum ~0.25]
 copper to board edge on top: 0.500 mm   [fab minimum ~0.3]
 copper to board edge on bot: 0.500 mm   [fab minimum ~0.3]
 unplated mounting holes with copper closer than 0.1 mm: 0

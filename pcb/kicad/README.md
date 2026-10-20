@@ -8,6 +8,10 @@ template is the last step before ordering.
 
 - **The three TO BUCK terminals are gone.** The three buck modules now get their battery power straight from the pack, outside the board
   (see "How to wire the power" below). The left edge has four terminals: SERVO 5V IN, BATT IN, CLEAN 5V IN, 3.3V IN.
+- **The relay series resistors (330R) are gone.** The relay modules are 3 V types with their own input circuit, so each relay header's IN pin
+  now goes straight to its ESP32 pin. (Set each module's high/low trigger jumper to match your code.)
+- **More room:** the cable headers are spaced 3 mm apart instead of 1.9 mm, the I2C / UART headers moved up 2 mm to give space above the DRV8833 modules,
+  and diode D1 moved to the right edge of the strip.
 - **New POWER OUT header** (left edge, where the old terminals were): 2 x clean 5 V, 2 x 3.3 V (from the 3.3 V buck, not the ESP32's own pin)
   and 4 x GND, 2.54 mm pins, each power pin with a ground pin directly below it.
 
@@ -42,8 +46,9 @@ no fuse and no reverse-polarity protection: use one fuse (10-15 A) in the batter
 Added after an independent review of v3 (kept in v4):
 
 - **Polarity and values are printed on the board:** `+` and a square pad on the two big capacitors (C1, C2), `A` / `K` and `1N5819` at the
-  diode D1 (K = the band side = the ESP32 5V pin), `330R` beside each relay resistor and `1k` / `2k` under each sonar divider
-  (swapped, the ESP32 would see only 1.7 V from the sonar and read nothing).
+  diode D1 (K = the band side = the ESP32 5V pin), and `1k` / `2k` under each sonar divider
+  (swapped, the ESP32 would see only 1.7 V from the sonar and read nothing). The sonar divider is needed because the ESP32-S3's pins
+  are not 5 V tolerant (maximum about 3.6 V) and the sonar's ECHO pin gives 5 V.
 - **Every header now prints its pin functions** next to the pins (relay VCC IN GND, sonar VCC TRG ECH GND, screens VCC GND CS RST DC SDA SCL,
   I2C, UART; the spare IO header already showed its GPIO numbers). The DRV8833 holes have no labels yet: follow the pin-table.
 - **The two screen headers are 2.54 mm apart** (v3 had them closer together than one pin).

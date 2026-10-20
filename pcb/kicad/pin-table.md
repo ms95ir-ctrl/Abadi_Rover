@@ -60,9 +60,9 @@ Everything here follows the module pin orders I assumed. Check each one against 
 - **Screen L** (SCR_L): 1=RAILC, 2=GND, 3=CS_L, 4=LCD_RST, 5=LCD_DC, 6=MOSI, 7=SCK
 - **Screen R** (SCR_R): 1=RAILC, 2=GND, 3=CS_R, 4=LCD_RST, 5=LCD_DC, 6=MOSI, 7=SCK
 - **Spare IO (GPIO numbers are printed on the board)** (SPARE): 1=GND, 2=ESP3V3, 3=SPARE3, 4=SPARE46, 5=SPARE45, 6=SPARE48, 7=SPARE38, 8=SPARE21
-- **Relay 1** (RLY1H): 1=RAILC, 2=RLY1_H, 3=GND
-- **Relay 2** (RLY2H): 1=RAILC, 2=RLY2_H, 3=GND
-- **Relay 3** (RLY3H): 1=RAILC, 2=RLY3_H, 3=GND
+- **Relay 1** (RLY1H): 1=RAILC, 2=RLY1, 3=GND
+- **Relay 2** (RLY2H): 1=RAILC, 2=RLY2, 3=GND
+- **Relay 3** (RLY3H): 1=RAILC, 2=RLY3, 3=GND
 - **Sonar 1** (SON1): 1=CLEAN5, 2=TRIG, 3=ECHO1_5V, 4=GND
 - **Sonar 2** (SON2): 1=CLEAN5, 2=TRIG, 3=ECHO2_5V, 4=GND
 - **I2C sensor** (I2C): 1=ESP3V3, 2=GND, 3=SDA, 4=SCL

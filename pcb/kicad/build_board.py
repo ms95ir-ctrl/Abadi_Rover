@@ -233,7 +233,8 @@ for i, lab in enumerate(["GND", "3V3"] + [str(g) for g in SPARE_GPIOS]):
     silk_text(spare_x + i * PITCH, TOP_Y + 2.3, lab, 1.0, angle=90)
 
 # ------------------------------------------------------------------ cable headers on two strips
-S1, S2, X0 = 61.0, 54.5, 35.0
+S1, S2, X0 = 61.0, 56.6, 35.0
+HDR_GAP = 3.0            # extra space between neighbouring cable headers
 strip_x = {}
 
 
@@ -250,12 +251,12 @@ def strip(y, items):
                 silk_text(x + i * PITCH, y - 2.75, f, 1.0, angle=90)
         silk_text(x + (len(names) - 1) * PITCH / 2, y - 1.75 if y == S1 else y - 5.3, label, 1.0)
         strip_x[ref] = x
-        x += len(names) * PITCH + 1.9
+        x += len(names) * PITCH + HDR_GAP
 
 
-strip(S1, [("RLY1H", "RELAY 1", ["RAILC", "RLY1_H", "GND"], ["VCC", "IN", "GND"]),
-           ("RLY2H", "RELAY 2", ["RAILC", "RLY2_H", "GND"], ["VCC", "IN", "GND"]),
-           ("RLY3H", "RELAY 3", ["RAILC", "RLY3_H", "GND"], ["VCC", "IN", "GND"]),
+strip(S1, [("RLY1H", "RELAY 1", ["RAILC", "RLY1", "GND"], ["VCC", "IN", "GND"]),
+           ("RLY2H", "RELAY 2", ["RAILC", "RLY2", "GND"], ["VCC", "IN", "GND"]),
+           ("RLY3H", "RELAY 3", ["RAILC", "RLY3", "GND"], ["VCC", "IN", "GND"]),
            ("SON1", "SONAR 1", ["ESP5V_S", "TRIG", "ECHO1_5V", "GND"], ["VCC", "TRG", "ECH", "GND"]),
            ("SON2", "SONAR 2", ["ESP5V_S", "TRIG", "ECHO2_5V", "GND"], ["VCC", "TRG", "ECH", "GND"])])
 strip(S2, [("I2C", "I2C SENSOR", ["ESP3V3", "GND", "SDA", "SCL"], ["3V3", "GND", "SDA", "SCL"]),
@@ -269,15 +270,9 @@ def resistor(ref, value, x, y, a, b):
     footprint(ref, value, [(x, y, a), (x, y + 2.54, b)], drill=0.9, dia=1.7, first_square=False)
 
 
-# relay series resistors: GPIO net -> header IN net (value printed right of each one)
-for i, rx in enumerate((35.0 + 2.54, 35.0 + 7.62 + 1.9 + 2.54, 35.0 + 2 * (7.62 + 1.9) + 2.54), start=1):
-    footprint("RS%d" % i, "330R", [(rx - 1.27, RY, "RLY%d" % i), (rx + 1.27, RY, "RLY%d_H" % i)],
-              drill=0.9, dia=1.7, first_square=False)
-    silk_text(rx + 1.27 + 3.25, RY, "330R", 1.0)
 # sonar echo dividers: 5V echo -1k- 3V echo -2k- GND (value printed under each; swapping them would give the ESP only 1.7 V)
-sx = strip_x["SON1"]
 for k, (ech5, ech3) in enumerate((("ECHO1_5V", "ECHO1_3V"), ("ECHO2_5V", "ECHO2_3V"))):
-    bx = sx + k * 12.06 + 1.5
+    bx = strip_x["SON%d" % (k + 1)] + 1.5
     footprint("RD%da" % (k + 1), "1k", [(bx, RY, ech5), (bx + 2.54, RY, ech3)], drill=0.9, dia=1.7, first_square=False)
     footprint("RD%db" % (k + 1), "2k", [(bx + 5.0, RY, ech3), (bx + 7.54, RY, "GND")], drill=0.9, dia=1.7,
               first_square=False)
@@ -285,10 +280,10 @@ for k, (ech5, ech3) in enumerate((("ECHO1_5V", "ECHO1_3V"), ("ECHO2_5V", "ECHO2_
     silk_text(bx + 6.27, RY - 2.05, "2k", 1.0)
 
 # Schottky diode: 5V clean -> ESP 5V pin (so USB power can never back-feed the buck)
-footprint("D1", "Schottky 1N5819", [(88.5, 56.0, "CLEAN5"), (88.5, 63.62, "ESP5V")], drill=1.0, dia=1.8)
-silk_text(86.0, 59.8, "D1 1N5819", 1.0, angle=90)
-silk_text(90.7, 56.0, "A", 1.0)       # square pad = anode, from CLEAN 5V
-silk_text(90.7, 63.62, "K", 1.0)      # cathode (band side) = ESP32 5V pin
+footprint("D1", "Schottky 1N5819", [(91.0, 56.0, "CLEAN5"), (91.0, 63.62, "ESP5V")], drill=1.0, dia=1.8)
+silk_text(95.4, 59.8, "D1 1N5819", 1.0, angle=90)
+silk_text(93.2, 56.0, "A", 1.0)       # square pad = anode, from CLEAN 5V
+silk_text(93.2, 63.62, "K", 1.0)      # cathode (band side) = ESP32 5V pin
 
 # ------------------------------------------------------------------ screw terminals, all 5.08 mm pitch (PROVISIONAL polarity: lower pin = +)
 # left edge: the battery in, and the three outputs of the OFF-BOARD buck modules coming back in (the bucks get their battery
