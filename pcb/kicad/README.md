@@ -56,6 +56,7 @@ reaches 5 V through D1 and its own diode, so check on first power-up that its 3.
 | `pin-table.md` | which ESP32 pin carries which signal, and every connector's pin order |
 | `parts-list.md` | what to buy for every footprint, with ratings |
 | `shopping-list.md` | everything to buy, on and off the board, plus the first power-up steps |
+| `power-wiring.png` / `.svg` | wiring diagram: cells, BMS, charger, splice, fuses, bucks, motherboard terminals |
 | `reports/` | KiCad's design-rule report and my independent check of the Gerber files |
 
 ## Still to confirm (paper test-fit with the new template)
