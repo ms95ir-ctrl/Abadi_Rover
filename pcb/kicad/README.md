@@ -57,6 +57,7 @@ reaches 5 V through D1 and its own diode, so check on first power-up that its 3.
 | `parts-list.md` | what to buy for every footprint, with ratings |
 | `shopping-list.md` | everything to buy, on and off the board, plus the first power-up steps |
 | `power-wiring.png` / `.svg` | wiring diagram: cells, BMS, charger, splice, fuses, bucks, motherboard terminals |
+| `battery-wiring.png` / `.svg` | wiring diagram for the battery only: 2 cells, the BMS (P+ P- / B+ BM B-) and the IP2326 USB-C charger board |
 | `reports/` | KiCad's design-rule report and my independent check of the Gerber files |
 
 ## Still to confirm (paper test-fit with the new template)
