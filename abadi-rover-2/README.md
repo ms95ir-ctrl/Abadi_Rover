@@ -12,7 +12,7 @@ This folder is separate from **Abadi Rover 1** (the tracked robot with the Raspb
 
 ![Robot 2, isometric view](3d/renders/robot2-iso.png)
 
-- **Body:** a round printed base, 260 mm wide, with two 65 mm drive wheels and one ball caster. A 214 mm mast carries the head. Total height 504 mm. Weight about 2.6 kg (first estimate).
+- **Body:** a round printed base, 260 mm wide, with two 65 mm drive wheels and one ball caster. A 214 mm mast carries the head. Total height 504 mm. Weight about 2.6 kg by the CAD (cheap build, first estimate); the parts list adds up to about 2.8 kg because it weighs every pack and cable in full.
 - **Head:** a 7 inch HDMI screen with the webcam above it, on a pan and tilt fork (two MG996R servos).
 - **Brain, two parts:** a **Raspberry Pi 5** does the video call and the internet link; the **ESP32 on the motherboard** drives the motors, servos and sensors and stops everything if the Pi stops talking. The Pi and the ESP32 talk over one USB cable.
 - **Power:** the 2S Li-ion pack, BMS, charger and fused branches as in `../pcb/kicad/power-wiring.png`. A second XL4016 module set to 5.1 V feeds the Pi and the screen.
@@ -35,6 +35,7 @@ Wiring diagram: `diagrams/wiring-robot2.png`.
 | `docs/peripherals.md` | **Screen, camera, sound, sensors, battery monitor.** Includes the camera test for your SC-012-SN259 and the echo test. |
 | `docs/software-plan.md` | **What has to be coded, and in which order.** Video call, remote access, family screen, Wi-Fi in a new place, ESP32 firmware plan, 10 build stages with pass tests, risks. |
 | `docs/esp32-serial-protocol.md` | **The USB language between the Pi and the ESP32** (commands, messages, fault codes, stopping rules). |
+| `docs/review-log.md` | What the independent review found, what was changed, and the points that are still open. |
 | `docs/00-brief.md` | The brief the helper agents worked from (your request and the fixed facts). |
 
 ---
@@ -52,7 +53,7 @@ Wiring diagram: `diagrams/wiring-robot2.png`.
 | Screen | 7 inch HDMI touch screen (Waveshare (C) about 58 EUR, or a no-name one about 45 EUR). | `docs/peripherals.md` |
 | Camera | Test your **SC-012-SN259** first (it could not be found online). Fallback: a cheap wide-angle 1080p webcam, about 22 EUR. | same |
 | Pan/tilt | My default (two MG996R servos in a fork), **with a swappable plate** (INTERFACE 1) for your own design. | `docs/mechanical-design.md`, section 7 |
-| Money | Cheap build about **517 EUR** if everything is bought new (371 EUR with spares from your drawer; 320 EUR if robot 1 lends parts). Comfortable build about **796 EUR** (601 / 473 EUR). | `docs/parts-list.md` |
+| Money | Cheap build about **582 EUR** if everything is bought new (417 EUR with spares from your drawer; 366 EUR if robot 1 lends parts). Comfortable build about **821 EUR** (614 / 487 EUR). The totals leave out a bench power supply (borrow one if you can) and the optional parts. | `docs/parts-list.md` |
 
 ---
 
@@ -60,7 +61,7 @@ Wiring diagram: `diagrams/wiring-robot2.png`.
 
 The software plan has the full pass tests. **Before the trip** these must be finished: stages 1 to 5, 7 and 9, **plus the safety part of stage 8** (stair-edge sensors, tilt and pick-up detection, family STOP). Stage 6 (pan and tilt) is strongly recommended. Rule: remote driving stays switched off in the software until the stair-edge and tilt tests pass. The first drives at your sister's home are with her standing next to the robot, away from stairs.
 
-0. **Today, before any stage:** order the Pololu motors (they can take 2 to 3 weeks from the USA) and the screen; start printing (about 44 hours of printing in total); check that the boards you ordered are version v5; do the 10 minute camera test. The mechanical assembly (`docs/mechanical-design.md`, section 11) and the first power-up (`docs/wiring.md`, section 4) happen before stage 3.
+0. **Today, before any stage:** order the Pololu motors (they can take 2 to 3 weeks from the USA) and the screen; check that the boards you ordered are version v5; do the 10 minute camera test. Start printing the base parts (about 43 hours for the whole first build) only after you have checked every size marked (A) with the real parts (button, speaker, servo plugs, LED, webcam: `docs/mechanical-design.md`, section 11, step 1). Print `head_shell`, the lid, the yoke and the turntable only after the real screen, webcam and servos have arrived and been measured (make a paper template of the screen first). The mechanical assembly (`docs/mechanical-design.md`, section 11) and the first power-up (`docs/wiring.md`, section 4) run together: power-up steps 1 and 2 come before the deck goes on; steps 3 to 6 belong to stages 3 to 6 and are done with the cover still off (assembly step 7). Close the cover (assembly step 9) only after stages 3 to 5 and the servo check (power-up step 5) have passed.
 1. Bench call: Pi, screen, webcam and audio only. Measures whether the Pi copes with the call.
 2. The robot service: idle screen, call button, auto-start.
 3. Power: the Pi and screen on the robot's own supply.
@@ -99,9 +100,9 @@ A "terminal" is a window where you type one line and press Enter. On the Raspber
 - No part was built, measured or tested. The weight, tip-over and runtime numbers are calculations.
 - No tested 720p Chromium video call was found for any small board, including the Raspberry Pi. The home test in `docs/sbc-selection.md` section 10 decides this.
 - Prices come from web search results, not from shop pages (the shops could not be opened). Check the live price when you buy.
-- The mass (about 2.6 to 3.2 kg) is higher than your 1.5 to 2 kg wish, and the robot tips with about 4.4 N of push at head height (a ramp of about 22 degrees tips it). A shorter mast, ballast and a software tilt guard are described in `docs/mechanical-design.md`, section 8.
+- The mass (about 2.6 kg by the CAD for the cheap build, about 3.0 kg for the comfortable build; the parts list adds up to about 2.8 and 3.3 kg) is higher than the 1.5 to 2 kg target of the first draft, and the robot tips with about 4.4 N of push at head height (a ramp of about 22 degrees tips it). A shorter mast, ballast and a software tilt guard are described in `docs/mechanical-design.md`, section 8.
 - **Runtime is short.** On 2 cells the robot calls for only about 1.1 to 1.4 hours (about 1 hour if it also drives); 4 cells give about 2.2 to 2.8 hours (all ASSUMED, measured in stage 3). Charging while the robot is on is not decided yet.
 - The pan cable path in the head is not proven: until the real cable bundle is tested in stage 6, the pan range is limited to +/-30 degrees in the software.
 - The stair-edge sensors see an edge only a few centimetres before the robot is lost, so keep the robot away from stairs; nothing protects driving backwards (`docs/mechanical-design.md`, section 5.6).
 - Li-ion cells and power banks go in **carry-on luggage only**.
-- The first 3D design has no place yet for the speaker, the camera light, the call button and a camera cover (open item C5 in `docs/peripherals.md`).
+- The 3D design now has a 30 mm hole for the call / STOP button, a speaker grille on the cover top, a 5 mm camera-light hole and a camera slide-cover slot in the head. Their sizes are ASSUMED (open item C5 in `docs/peripherals.md`): measure your real button, speaker, LED and webcam and compare with `3d/robot2_params.scad` before you print the large parts.

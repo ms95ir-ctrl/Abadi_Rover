@@ -30,7 +30,7 @@ edit them). **Robot 2 is a telepresence robot**, built on the same motherboard.
   Four left-edge 5.08 mm screw terminals: BATT IN (raw pack, motors), SERVO 5V IN (buck output, PCA9685 V+), CLEAN 5V IN (buck output: ESP32 5V via diode D1, sonars,
   POWER OUT 5 V pins), 3.3V IN (buck output: relays, screens, POWER OUT 3V3 pins). POWER OUT header: 2 x 5 V, 2 x 3.3 V, 4 x GND (about 1 A usable per rail).
 - Power system: 2S Li-ion pack (6.0-8.4 V) -> 2S balancing BMS (HX-2S-JH20 type) -> USB-C charger board (IP2326, 5 V in, 8.4 V out) -> main switch -> splice -> one fuse per
-  branch -> bucks: XL4016 module (servo 5 V), fixed 5 V 1.8 A (clean 5 V), fixed 3.3 V 2 A, and for a Raspberry Pi 5 a second XL4016 set to 5.1 V. BATT IN branch 5 A slow-blow
+  branch -> bucks: XL4016 module (servo 5 V), fixed 5 V 1.8 A (clean 5 V), fixed 3.3 V 2 A (the shared design; robot 2 does not fit the 3.3 V buck, see `wiring.md` C7 and `parts-list.md`), and for a Raspberry Pi 5 a second XL4016 set to 5.1 V. BATT IN branch 5 A slow-blow
   (the board's 2 mm battery copper is a roughly 6 A design). The owner owns an XL4016, a 2 A 3.3 V fixed buck and a 1.8 A 5 V fixed buck, a BMS and the charger board.
 - The owner already owns (for robot 1, may or may not be re-usable): USB webcam SC-012-SN259, MG996R / MZ996 servos, 1:48 TT-style geared motors, ELEGOO Conqueror tracked chassis,
   Raspberry Pi 5 8 GB, 5 V cooling fan, key switch, lots of old 18650 cells (must be matched pairs).
