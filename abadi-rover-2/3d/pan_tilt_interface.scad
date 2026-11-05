@@ -10,7 +10,7 @@
 //                 His tilt output (platform / bracket) bolts to these 4 inserts.
 // My DEFAULT pan/tilt (two MG996R servos): neck_plate + turntable + 2 yoke halves + the head's own servo pocket.
 // If you use his design: print neck_plate only, skip turntable and yoke_half, and tell me the numbers listed in
-// docs/mechanical-design.md, section "What I need from you for the pan/tilt".
+// docs/mechanical-design.md, section 7.4.
 // Default output of this file = the mast-top plate.
 // =====================================================================
 _robot2_lib = true;   // tells robot2_params.scad that it is used as a library (no demo shape)

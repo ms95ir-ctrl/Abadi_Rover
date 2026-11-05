@@ -144,7 +144,8 @@ rules = ["• Same batch and same model for all 4 cells. No damaged cells. Never
          "• The wires inside the pack have no fuse: keep them short, AWG 18 or thicker, bare ends taped.",
          "• Before anything else is connected: B+ to B− reads 7.4 to 8.4 V; B+ to BM and BM to B− read about",
          "    3.0 to 4.2 V each. Charger B+ to B− must read about 8.4 V (2S); 12 V or more = set to 3S: do NOT connect it.",
-         "• The robot weighs about 3.2 kg with 4 cells; about 2.2 to 2.8 hours of calling (ASSUMED, measure in Stage 3)."]
+         "• The robot weighs about 3.0 kg by the CAD (about 3.3 kg by the sum of the parts list) with 4 cells;",
+         "    about 2.2 to 2.8 hours of calling (ASSUMED, measure in Stage 3)."]
 for i, s in enumerate(rules):
     txt(94.5, 29.2 - i * 3.3, s, 7.1, "#333", ha="left")
 

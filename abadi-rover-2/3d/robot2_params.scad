@@ -236,7 +236,7 @@ sonar_r     = 126;
 sonar_z     = 45;
 sonar_l=45; sonar_w=20; sonar_t=15; sonar_hole=16.6; sonar_pitch=26;   // (V mostly: 45x20x15, 16 mm transducers; pitch A)
 cliff_ang   = 52;      // cliff sensors: degrees left/right of the front. KEPT after a search for a place nearer the caster (x 105..125):
-cliff_r     = 112;     //   centre radius -> x = 68.96, y = +-88.3. That is 35 mm behind the caster (x 104) and 42.5 mm ahead of the balance point (x 26.5).
+cliff_r     = 112;     //   centre radius -> x = 68.96, y = +-88.3. That is 35 mm behind the caster (x 104) and about 43 mm ahead of the balance point (x 25.9).
                        //   A 30 x 14 mm module has no room ahead of about x = 77: caster flange (to x 123), XL4016 bays (to x 85), columns, sonar cheeks.
                        //   A much smaller module (about 16 x 10 mm) might fit near x = 115, y = +-22 (flat 2D search only, not checked in 3D). So the cliff margin is SHORT: see docs/mechanical-design.md.
 

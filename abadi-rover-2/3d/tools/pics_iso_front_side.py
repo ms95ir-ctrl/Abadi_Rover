@@ -33,7 +33,7 @@ def front_side():
     dim(ax, cam, Pw(70, 485), Pw(70, 0), off=(180, 0), text='camera lens 485', fs=17)
     dim(ax, cam, Pw(-130, 0), Pw(130, 0), off=(0, 60), text='base diameter 260', fs=17)
     dim(ax, cam, Pw(-117, 0), Pw(117, 0), off=(0, 115), text='wheel track 234 (centres)', fs=17)
-    dim(ax, cam, Pw(-103, 300), Pw(103, 300), off=(0, 0), text='yoke 206 (outer)', fs=17, ext=False, text_off=(0, -18))
+    dim(ax, cam, Pw(-103.5, 300), Pw(103.5, 300), off=(0, 0), text='yoke 207 (outer)', fs=17, ext=False, text_off=(0, -18))
     dim(ax, cam, Pw(-HEAD_W/2, 470), Pw(HEAD_W/2, 470), off=(0, -95), text='head %.1f wide x %.1f high (screen 165 x 107)' % (HEAD_W, HEAD_H), fs=17, text_off=(0, -26))
     dim(ax, cam, Pw(-28, 150), Pw(28, 150), off=(0, 0), text='mast 56', fs=17, ext=False, text_off=(0, -18))
     dim(ax, cam, Pw(-130, 105), Pw(-130, 0), off=(-175, 0), text='base height 105', fs=17)

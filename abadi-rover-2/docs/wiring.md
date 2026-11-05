@@ -43,7 +43,7 @@ Pin numbers come from `../../pcb/kicad/pin-table.md` (locked). Nothing here chan
 | C6 | Motor voltage setting in the software | `mot_vmax` = **8.0**: a speed cap, not the motor rating. The motors are Pololu 25D 12 V, run from a 6.0 to 8.4 V pack. | It is a setting, not a wiring change. Stage 5 starts at 8.0 and never goes above the pack voltage (8.4 V); duty is limited to 100 percent. Speed is about 0.36 m/s at 7.4 V (about 0.29 m/s at 6 V, ASSUMED). |
 | C10 | LED dimming on the PCA9685 | Camera LED **on or off only** | All PCA9685 channels share one PWM speed (50 Hz); dimming would flicker. |
 | C3, C4, C8, C12 | Charging while on, runtime, mass, Pi 5 USB limit | **Not decided here.** They are the open questions in section 6. | They need the owner's answer or a bench measurement. |
-| C5 | Places for the speaker, camera LED and call button | **In the 3D design now** (`mechanical-design.md` 7.1). Question 5 in section 6 only asks you to measure the real parts. | The sizes are ASSUMED until the real parts arrive. |
+| C5 | Places for the speaker, camera LED and call button | **In the 3D design now:** a 30 mm button hole, a 5 mm camera-LED hole, a camera slide-cover slot and a speaker grille (`mechanical-design.md`, section 7.1). Question 5 in section 6 only asks you to measure the real parts. | The sizes are ASSUMED until the real parts arrive: measure them before the large parts are printed. |
 
 ---
 
@@ -94,15 +94,17 @@ SPARE IO pin order and GPIO numbers: `../../pcb/kicad/pin-table.md`. GPIO3, GPIO
 
 ---
 
-## 4. First power-up order (details in `software-plan.md`, Stage 3 to 5)
+## 4. First power-up order (details in `software-plan.md`, Stage 3 to 6)
 
 Keep the DRV8833 motor driver module OUT of its socket on the motherboard until step 6. If the pack is four cells, build it first by section 7.
+
+Steps 3 to 6 are done while the cover is still off and the deck lies loose on the tray posts (`mechanical-design.md`, section 11, assembly step 7). The wires that come up from the lower compartment need about 15 cm of slack, so that you can lift the deck by one edge to reach the fuses and the two XL4016 modules.
 
 1. **Pack alone:** measure the voltage at the splice with the main switch on (6.0 to 8.4 V). Nothing else connected.
 2. **Set each buck with a multimeter, loads not connected:** XL4016 #1 to 5.0 V, the fixed buck reads 5.0 V, XL4016 #2 to 5.1 V. Turn the screw slowly. Do not glue yet: each XL4016 is locked after its load test (steps 4 and 5).
 3. **CLEAN 5V IN only:** ESP32 alone. Measure its 3V3 pin; it must read 3.2 V or more. (The ESP32 here does no Wi-Fi, which is the case the board README worries about.)
-4. **Pi branch:** connect the Pi and the screen. In a call, the voltage at the Pi (probe points: section 3, "Pi branch current and where to measure") must stay above 4.95 V and `vcgencmd get_throttled` must say `0x0`. Then repeat with the pack at **6.4 V and at 6.0 V** (a bench supply) with the Pi busy. When it passes, lock the adjust screw of XL4016 #2 with a drop of glue or nail varnish over the screw head and the little box it sits in. When it is dry, put a dab of paint across the screw and the box: if the paint is cracked later, the screw has turned. Then do the two cable tests A and B of section 6, question 7 (the link to the ESP32).
-5. **SERVO 5V IN and the servos.** First wire the second power path: the short AWG 18 pair from the servo buck OUT+ and OUT- to the PCA9685 module's own V+ and GND screw terminal (check the polarity against the marking on the module). Check the servo plug colours (section 3). Then connect the servos one at a time, wheels or head unloaded first, with the firmware soft limits well inside the servo end stops. When it passes, lock the adjust screw of XL4016 #1 the same way (glue or nail varnish, then a dab of paint across the screw and the box).
+4. **Pi branch:** connect the Pi and the screen. In a call, the voltage at the Pi (probe points: section 3, "Pi branch current and where to measure") must stay above 4.95 V and `vcgencmd get_throttled` must say `0x0`. Then repeat with the pack at **6.4 V and at 6.0 V** (a bench supply) with the Pi busy. No bench power supply? Borrow one, or use the real pack once it has dropped to about 6.4 V and measure the pack voltage at the splice. When it passes, lock the adjust screw of XL4016 #2 with a drop of glue or nail varnish over the screw head and the little box it sits in. When it is dry, put a dab of nail varnish (or any paint) across the screw and the box: if the dab is cracked later, the screw has turned. Then do the two cable tests A and B of section 6, question 7 (the link to the ESP32).
+5. **SERVO 5V IN and the servos.** First wire the second power path: the short AWG 18 pair from the servo buck OUT+ and OUT- to the PCA9685 module's own V+ and GND screw terminal (check the polarity against the marking on the module). Check the servo plug colours (section 3). Then connect the servos one at a time, wheels or head unloaded first, with the firmware soft limits well inside the servo end stops. When it passes, lock the adjust screw of XL4016 #1 the same way (glue or nail varnish, then a dab of nail varnish (or any paint) across the screw and the box).
 6. **The DRV8833 and the motors**, with the robot on a stand, wheels in the air (Stage 5):
    - Measure the winding resistance of each motor with the multimeter on its two wires. 12 V / 1.8 A is about 6.7 Ohm. If it reads well below 5 Ohm, stop: the real stall current is higher. Do not fit the motors to the DRV8833 until the figure is rechecked.
    - Insert the DRV A module only now, with the thick bar (the white-plug side) toward the bottom edge of the board (board print: "white plug v"). Check this **before BATT IN is connected**: a module turned by 180 degrees fits the holes and puts battery voltage on the ESP32 pins GPIO1 and GPIO16.
@@ -111,7 +113,7 @@ Keep the DRV8833 motor driver module OUT of its socket on the motherboard until 
 
 Steps 5 and 6 may be done in either order.
 
-**After ANY transport (luggage, car, a hard knock), every time:** look at the dab of paint on both XL4016 adjust screws. A cracked dab means the screw has turned. Then measure all three buck outputs with **nothing connected to them**:
+**After ANY transport (luggage, car, a hard knock), every time:** look at the dab of nail varnish (or paint) on both XL4016 adjust screws. A cracked dab means the screw has turned. Then measure all three buck outputs with **nothing connected to them**:
 1. Take a photo of the wiring first. Switch the main switch off. Take every wire off the output side of the three bucks (at the buck's own OUT+ and OUT- terminals, or at the lever connector they share) and tape the bare ends:
    - XL4016 #1 (servo buck): the wires to the SERVO 5V IN terminal **and** the second-path AWG 18 pair that goes to the PCA9685 module's own terminal.
    - Fixed 5 V buck: the wires to the CLEAN 5V IN terminal.
@@ -148,7 +150,7 @@ Optional (not in the parts totals): a TVS diode, type SMBJ5.0A, across the Pi su
 ## 6. Open questions for the owner (they change wiring or parts)
 
 1. **Can the robot be charged while it is on?** The shopping list says charge with the robot off. A robot that is off cannot be called. Choices: the family switches it on at agreed call times and charges it with the robot off (the default for now), or later a charge-while-on design is made. (conflict C3)
-2. **2 cells or 4 cells (2S2P)?** About 1.1 to 1.4 hours of video calling on 2 cells (18 Wh), about 1 hour or less if the robot also drives, and about 2.2 to 2.8 hours on 4 cells. All ASSUMED; Stage 3 measures them (the servo holding current, and so the runtime, depends on how well the head is balanced). The buying decision assumes about 1 hour. Four cells weigh about 3.2 kg in all and need a larger battery cradle. How to wire four cells: section 7. (C3, C4)
+2. **2 cells or 4 cells (2S2P)?** About 1.1 to 1.4 hours of video calling on 2 cells (18 Wh), about 1 hour or less if the robot also drives, and about 2.2 to 2.8 hours on 4 cells. All ASSUMED; Stage 3 measures them (the servo holding current, and so the runtime, depends on how well the head is balanced). The buying decision assumes about 1 hour. Four cells weigh about 3.0 kg by the CAD (about 3.3 kg by the sum of the parts list) and need a larger battery cradle. How to wire four cells: section 7. (C3, C4)
 3. **Which screen exactly?** One or two micro-USB sockets (power and touch)? HDMI socket type? (peripherals)
 4. **Does the SC-012-SN259 webcam pass the 10 minute test?** No information about it could be found online. (peripherals.md, section 3)
 5. **Where do the speaker, camera LED and call button go?** The 3D design now has a 30 mm button hole, a 5 mm camera-LED hole, a camera-cover slot and a speaker grille (`mechanical-design.md` 7.1). Their sizes are ASSUMED: measure your real button, LED, speaker and webcam before you print the large parts. (C5)
@@ -162,7 +164,7 @@ Optional (not in the parts totals): a TVS diode, type SMBJ5.0A, across the Pi su
 
 ## 7. Four-cell option (2S2P)
 
-The first build uses 2 cells (2S, drawn in `../../pcb/kicad/battery-wiring.png`, which is locked and not changed). The comfortable build can use 4 cells: about 2.2 to 2.8 hours of calling instead of 1.1 to 1.4 (ASSUMED, section 6 question 2), and the robot weighs about 3.2 kg. The sketch for four cells is `../diagrams/battery-4cell.png` (and `.svg`), drawn by `../diagrams/draw_battery_4cell.py`.
+The first build uses 2 cells (2S, drawn in `../../pcb/kicad/battery-wiring.png`, which is locked and not changed). The comfortable build can use 4 cells: about 2.2 to 2.8 hours of calling instead of 1.1 to 1.4 (ASSUMED, section 6 question 2), and the robot weighs about 3.0 kg by the CAD (about 3.3 kg by the sum of the parts list). The sketch for four cells is `../diagrams/battery-4cell.png` (and `.svg`), drawn by `../diagrams/draw_battery_4cell.py`.
 
 **How to build it: 2P first, then 2S.** Name the cells A1, B1, A2, B2.
 1. Pair 1: join cell A1 and cell B1, plus to plus and minus to minus.
@@ -170,7 +172,7 @@ The first build uses 2 cells (2S, drawn in `../../pcb/kicad/battery-wiring.png`,
 3. Put the pairs in series: plus of pair 1 to minus of pair 2. This is the junction between the pairs.
 4. BMS wires, one at a time, in this order: **B-** to the minus of pair 1, **BM** (the balance wire to the point between the cells; here it is the junction between the pairs) to that junction, **B+** to the plus of pair 2.
 
-**If you use the two 2-cell holders from the parts list instead of four single-cell holders.** This works only if each holder has a wire or a solder tag at the point between its two cells (check when the holders arrive; if there is none, buy four single-cell holders). Each holder is then a small 2S string with three points: plus end, middle point, minus end. Joining the two strings in parallel gives the same 2S2P pack: the two bottom cells (next to the minus ends) are pair 1, the two top cells are pair 2.
+**If you use two 2-cell holders (the parts-list lines "Battery holder for 2 x 18650" and "Battery holder, 2nd set for the 4-cell option") instead of four single-cell holders.** This works only if each holder has a wire or a solder tag at the point between its two cells (check when the holders arrive; if there is none, buy four single-cell holders). Each holder is then a small 2S string with three points: plus end, middle point, minus end. Joining the two strings in parallel gives the same 2S2P pack: the two bottom cells (next to the minus ends) are pair 1, the two top cells are pair 2.
 1. With the cells **out** of the holders, put the two holders side by side the same way round. Join the two plus ends, the two minus ends and the two middle points with short AWG 18 wire (three joints). Tape every bare end.
 2. Check with the multimeter on its beep (continuity) setting: plus end to minus end must **not** beep.
 3. Measure all four cells alone (0.05 V rule below), then put them in, one at a time, each the right way round by the marks in the holder.
@@ -178,7 +180,7 @@ The first build uses 2 cells (2S, drawn in `../../pcb/kicad/battery-wiring.png`,
 
 **Rules (all of them):**
 - All four cells come from the same batch and are the same model. No damaged cells.
-- Before any joint, measure every cell alone with the multimeter. All four must be within **0.05 V** of each other. If not, charge the lower cells alone (single-cell charger) until they match. Never join cells of different charge, and never "equalise" by joining them.
+- Before any joint, measure every cell alone with the multimeter. All four must be within **0.05 V** of each other. If not, charge the lower cells alone with the single-cell 18650 charger (TP4056 type, in the parts list for the 4-cell option) until they match. Never join cells of different charge, and never "equalise" by joining them.
 - One BMS only, for the whole pack.
 - **No fuse between the pairs.** The BMS limit (10 A) and the 5 A branch fuses stay as they are. The wires inside the battery pack have no fuse, so keep them short, use AWG 18 or thicker wire, and tape every bare end.
 - Build with the BMS, the charger and the robot disconnected, one wire at a time.

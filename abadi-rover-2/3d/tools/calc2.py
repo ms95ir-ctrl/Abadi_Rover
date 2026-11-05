@@ -79,7 +79,7 @@ def compute(M_kg, m_tilt_kg, m_pan_extra_kg):
     X, Y = np.meshgrid(xs, ys)
     def inside(X, Y, a, b, rc):
         qx = np.abs(X)-(a-rc); qy = np.abs(Y)-(b-rc)
-        d = np.where((qx > 0) & (qy > 0), np.hypot(qx, qy)-rc, np.maximum(qx, qy)); return d <= 0
+        d = np.hypot(np.maximum(qx, 0), np.maximum(qy, 0)) + np.minimum(np.maximum(qx, qy), 0) - rc; return d <= 0   # rounded rectangle: distance to the outline, minus the corner radius
     mask = inside(X, Y, a_out, b_out, mr) & ~inside(X, Y, a_out-mwall, b_out-mwall, mr-mwall)
     dA = (xs[1]-xs[0])*(ys[1]-ys[0])
     A = mask.sum()*dA; Ix = (Y[mask]**2).sum()*dA; Iy = (X[mask]**2).sum()*dA

@@ -3094,19 +3094,19 @@
   "pan_friction": 0.083,
   "pan_total": 0.099,
   "mast_section": {
-   "A": 160.1,
-   "I_about_x": 89386,
-   "I_about_y": 49997
+   "A": 522.5,
+   "I_about_x": 214956,
+   "I_about_y": 148463
   },
   "mast_push_5N": {
-   "defl_front_back_mm": 0.88,
-   "defl_side_mm": 0.49,
-   "stress_MPa": 0.75
+   "defl_front_back_mm": 0.3,
+   "defl_side_mm": 0.2,
+   "stress_MPa": 0.25
   },
   "mast_push_10N": {
-   "defl_front_back_mm": 1.76,
-   "defl_side_mm": 0.99,
-   "stress_MPa": 1.5
+   "defl_front_back_mm": 0.59,
+   "defl_side_mm": 0.41,
+   "stress_MPa": 0.51
   }
  },
  "print": {
