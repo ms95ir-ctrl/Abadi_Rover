@@ -1,0 +1,44 @@
+ABADI ROVER 2: NUMBERS FROM THE CAD (made by tools/summary.py). (A) = my calculation, not measured.
+
+SIZE
+  total height 504.3 mm | tilt axis 420 | screen centre 412 | camera lens 485.3 | cover top 105 | plug hood top 116.6 | base diameter 260
+  head 174.6 x 116.6 x 44 mm
+MASS AND BALANCE POINT (first build: cheap build, route B speaker, 2 cells, no bumper)
+  total 2610 g (2.61 kg) | balance point x 25.9, y 0.7, z 168.2 mm | base 1562 g, mast 229 g, head 818 g
+  printed 1126 g | bought 1259 g | small parts and cables 225 g
+TIP-OVER (skids 1.5 mm above the floor; push at head centre 412 mm; slow push; A)
+  direction            tip angle (ramp)   smallest push   braking limit
+  forward               24.7 deg   4.8 N  braking 4.52 m/s2  (lever 71.2 mm)
+  backward              32.6 deg   6.7 N  braking 6.28 m/s2  (lever 107.9 mm)
+  sideways              28.1 deg   5.7 N  braking 5.24 m/s2  (lever 91.3 mm)
+  worst direction      22.4 deg (at 9 deg off forward) | smallest push 4.36 N (at 9 deg) | braking while turning 4.05 m/s2, straight 4.52 m/s2
+  without skids: 8.7 deg (edge 25.9 mm from the balance point). Skids touch after 1.0 deg backwards, 2.7 deg forwards/sideways (front skid 31.8 mm outside the wheel-caster edge).
+  wheel grip against sliding sideways 12.2 N (caster carries 24.9 percent of the weight)
+  effect of the skid gap on the worst direction:
+    gap 0.0 mm: tip angle 24.6 deg, smallest push 4.79 N, forward 24.9, sideways 30.8, backward 33.4 deg, braking while turning 4.50 m/s2
+    gap 1.5 mm: tip angle 22.4 deg, smallest push 4.36 N, forward 24.7, sideways 28.1, backward 32.6 deg, braking while turning 4.05 m/s2
+    gap 4.0 mm: tip angle 19.7 deg, smallest push 3.80 N, forward 24.7, sideways 27.4, backward 31.3 deg, braking while turning 3.50 m/s2
+  variants:        mass kg | balance height mm | tip angle deg (worst) | smallest push N | sideways push N | braking turning m/s2
+    axis 340 mm (short mast)                                       2.52 |   140 |  27.0 | 5.41 | 6.94 | 5.01
+    axis 420 mm (DEFAULT)                                          2.61 |   168 |  22.4 | 4.36 | 5.66 | 4.05
+    axis 500 mm (tall mast)                                        2.69 |   197 |  18.9 | 3.66 | 4.78 | 3.35
+    axis 420 mm + 400 g steel ballast                              3.01 |   148 |  25.9 | 5.24 | 6.70 | 4.76
+    10.1 inch head (+0.55 kg), axis 420 mm                         3.16 |   211 |  15.8 | 4.53 | 6.29 | 2.78
+    comfortable build: 4 cells + speakerphone on the cover top (A) 3.03 |   159 |  24.9 | 5.39 | 6.35 | 4.55
+    with the optional bumper                                       2.64 |   166 |  22.4 | 4.37 | 5.70 | 4.04
+DRIVE
+  wheel torque per wheel, design mass: flat 0.042 N m, ramp 5 deg on carpet 0.078 N m (0.79 kg cm); at 3.0 kg: ramp 0.089 N m (0.91 kg cm)
+  Pololu 25D MP 12 V 47:1 at 6.0 V: no load 0.29 m/s, stall 2.59 kg cm | flat 16% of stall, 0.24 m/s, 0.19 A | ramp 35% of stall, 0.19 m/s, 0.35 A
+  Pololu 25D MP 12 V 47:1 at 7.4 V: no load 0.36 m/s, stall 3.19 kg cm | flat 13% of stall, 0.31 m/s, 0.20 A | ramp 28% of stall, 0.25 m/s, 0.36 A
+  Pololu 25D MP 12 V 47:1 at 8.0 V: no load 0.39 m/s, stall 3.45 kg cm | flat 12% of stall, 0.34 m/s, 0.21 A | ramp 26% of stall, 0.28 m/s, 0.37 A
+  Pololu 25D MP 12 V 47:1 at 8.4 V: no load 0.41 m/s, stall 3.62 kg cm | flat 12% of stall, 0.36 m/s, 0.21 A | ramp 25% of stall, 0.30 m/s, 0.37 A
+SERVOS AND MAST
+  tilting mass 0.604 kg: tilt torque 0.099 N m nominal, 0.188 N m worst (servo 0.92 N m at 4.8 V) | pan: 0.773 kg, 0.099 N m (inertia 0.00260 kg m2)
+  mast push 5 N at head height: {'defl_front_back_mm': 0.88, 'defl_side_mm': 0.49, 'stress_MPa': 0.75} | 10 N: {'defl_front_back_mm': 1.76, 'defl_side_mm': 0.99, 'stress_MPa': 1.5}
+PRINTING (PETG, rough, A)
+  all                              35 different parts, 41 pieces, 1152 g, 44.6 h
+  first_build_without_optional     31 different parts, 37 pieces, 1124 g, 43.0 h
+  first_build_without_bumper       32 different parts, 38 pieces, 1125 g, 43.2 h
+  bumper_only                       3 different parts,  3 pieces,   27 g, 1.4 h
+HARDWARE (see numbers.json for the notes)
+  drive wheels 2, gearmotors 2, motor caps 4, ball caster 1, skids 4, tray to deck columns 6, deck to cover posts 4, xl4016 bucks 2, mini bucks 2, fuse holder bays in the cad 5, lever connector bays in the cad 2, sonar modules 2, cliff modules 2, mg996r servos 2

@@ -1,10 +1,10 @@
 # Robot 2: the full parts list
 
-Written 5 November 2026 for the telepresence robot. This is everything you need to buy to build robot 2 **from the motherboard onwards**, with prices, shops, weights and a shopping split. The same list is in `parts-list.csv` (one line per part, for a spreadsheet). The reasons behind the choices are in `peripherals.md` (screen, camera, sound, sensors) and in the other files named below.
+Written 5 November 2026 for the telepresence robot. This is everything you need to buy to build robot 2 **from the motherboard onwards**, with prices, shops, weights and a shopping split. The same list is in `parts-list.csv` (one line per part, same rows, same words, for a spreadsheet; section 2 says how to add up a build). The reasons behind the choices are in `peripherals.md` (screen, camera, sound, sensors) and in the other files named below.
 
-**Words used here.** SBC = single board computer (the Raspberry Pi). Motherboard = your 100 x 100 mm ESP32 board (the v5 board you ordered). Buck = a module that lowers a voltage. BMS = the battery protection board. Carry-on = hand luggage. EUR prices are "about" prices for Germany, from web search snapshots; I could not open most shop pages. Check the live price when you buy.
+**Words used here.** SBC = single board computer (the Raspberry Pi). Motherboard = your 100 x 100 mm ESP32 board (version v5; you report 5 boards ordered: confirm they are v5, see group 8). Buck = a module that lowers a voltage. BMS = the battery protection board. Carry-on = hand luggage. EUR prices are "about" prices for Germany, from web search snapshots; I could not open most shop pages. Check the live price when you buy.
 
-**How sure am I.** (V) = I saw it in a web source or file. (A) = assumed or my own guess. The "Note" column says which. Prices without (V) are estimates.
+**How sure am I.** (V) = I saw it in a web source or file. For a web page whose text I could not open this means "search summary only, re-check the page". (A) = assumed or my own guess. The "Note" column says which. Prices without (V) are estimates.
 
 ---
 
@@ -15,61 +15,66 @@ Written 5 November 2026 for the telepresence robot. This is everything you need 
 | SBC | Raspberry Pi 4 Model B 2 GB | Raspberry Pi 5 2 GB with Active Cooler |
 | Screen | no-name 7 inch HDMI touch | Waveshare 7 inch HDMI LCD (C) |
 | Camera | your own SC-012-SN259 (if it passes the test) | a new wide-angle 1080p webcam with microphone |
-| Sound | USB audio adapter + small speaker (route B, about 12 EUR) | USB speakerphone with echo cancelling (route A, about 75 EUR) |
+| Sound | USB audio adapter + small speaker + amplifier with its own fuse (route B, about 15 EUR) | USB speakerphone with echo cancelling (route A, about 75 EUR) |
 | Battery | 2 cells (2S) | 4 cells (2S2P): double the runtime |
-| Extras | none | spares, tools, call button, data-only cables, travel kit |
-| **Price, everything bought new** | **516.80 EUR** | **796.20 EUR** |
-| of which the robot itself (groups 1 to 8) | 503.80 EUR | 683.20 EUR |
+| Extras | none (the data-only adapters and the call / STOP button are in both builds) | spares, tools, travel kit |
+| **Price, everything bought new** | **532.60 EUR** | **795.80 EUR** |
+| of which the robot itself (groups 1 to 8) | 519.60 EUR | 682.80 EUR |
 | of which tools, spares and travel kit (groups 9 and 10) | 13.00 EUR | 113.00 EUR |
-| **Cash needed if you already have the "maybe-spare" items** (old cells, wire, screws, tools) **and the board-order parts** | **371.20 EUR** | **600.60 EUR** |
-| Cash needed if robot 1 also waits (you take its Pi 5, servos, BMS, charger, bucks, switch, sonar and fan) | 320.20 EUR | 473.10 EUR |
-| Parts to buy in Germany **before the trip** | 358.00 EUR | 565.90 EUR |
-| Parts easy to buy **anywhere** | 158.80 EUR | 230.30 EUR |
-| **Weight of the finished robot** | **2.7 kg** | **3.2 kg** |
+| **Cash needed if you already have the "maybe-spare" items** (old cells, wire, screws, tools, cables) **and the board-order parts** | **385.50 EUR** | **600.20 EUR** |
+| Cash needed if robot 1 also waits (you take its Pi 5, servos, BMS, charger, bucks, switch, sonar and fan) | 334.50 EUR | 472.70 EUR |
+| Parts to buy in Germany **before the trip** | 372.70 EUR | 565.90 EUR |
+| Parts easy to buy **anywhere** | 159.90 EUR | 229.90 EUR |
+| In-line fuse holders (5 x 20 mm) | 6 (5 + one for the amplifier, route B) | 5 |
+| **Weight of the finished robot** | **2.8 kg** | **3.2 kg** |
 | Carried extras (spares, tools, charger, box) | 0.1 kg | 1.0 kg |
+
+Optional parts that are in no total (bump switches, clip-on microphone, 8.4 V charger adapter, TVS diode): 20.50 EUR.
 
 **Four things to know:**
 
 1. **The three biggest costs are the motors (about 72 EUR for two Pololu motors including shipping and VAT), the SBC (72 to 83 EUR) and the screen (45 to 58 EUR).** Together about 35 percent of the cheap build.
-2. **You can lower the cost by taking robot 1's parts.** Your own Pi 5 8 GB saves 72 EUR (cheap) or 82.50 EUR (comfortable) but leaves robot 1 without a brain during the trip. Old 18650 cells save 12 to 24 EUR (test them; matched pairs only).
-3. **The weight of the comfortable build is above the 3.0 kg that the motors were sized for.** The cheap build is about 2.7 kg. See `peripherals.md` section 8, conflict C4.
-4. **The runtime on two cells is short: about 1.1 to 1.4 hours of calling** (my sum, `peripherals.md` section 6.3). That is why the comfortable build has four cells.
+2. **You can lower the cost by taking robot 1's parts.** Your own Pi 5 8 GB saves 72 EUR (cheap) or 82.50 EUR (comfortable) but leaves robot 1 without a brain during the trip. Old 18650 cells save 12 to 24 EUR (test them; matched cells only, same voltage within 0.05 V before joining).
+3. **The weight of the comfortable build is above the 3.0 kg that the motors were sized for.** The cheap build is about 2.8 kg. See `peripherals.md` section 8, conflict C4.
+4. **The runtime on two cells is short: about 1.1 to 1.4 hours of calling, and about 1 hour or less if the robot also drives; four cells give about 2.2 to 2.8 hours of calling** (my sums, all ASSUMED, `peripherals.md` section 6.3; Stage 3 measures them). The buy decision (2 or 4 cells) assumes about 1 hour. That is why the comfortable build has four cells. Family routine: switch the robot on at the agreed call times and charge it with the robot off.
 
 ---
 
 ## 2. How to read the tables
 
 - **Build:** `both` = in both builds. `cheap` = only in the cheap build. `comfort` = only in the comfortable build. `opt` = optional, in no total.
-- **Owned?** `no` = you do not own it. `maybe-spare` = probably in your drawer (old cells, wire, screws, tools, cables). `maybe-robot1` = **you own one for robot 1; robot 2 needs its own: buy twice** (or take robot 1's and wait). `maybe-board` = comes from the parts order for the five boards; check what you ordered.
+- **Owned?** `no` = you do not own it. `maybe-spare` = probably in your drawer (old cells, wire, screws, tools, cables). `maybe-robot1` = **you own one for robot 1; robot 2 needs its own: buy twice** (or take robot 1's and wait). `maybe-board` = comes from the parts order for the boards (you report 5 boards ordered); check what you ordered and that it is version v5.
 - **Trip:** `DE` = **buy in Germany before the trip** (special part, slow delivery, or it must be tested at home). `any` = easy to buy abroad too.
 - **g** (grams) are in `parts-list.csv` and in the weight tables in section 7.
 - Prices are for the whole line (quantity times price each).
+- **The CSV file** has the same rows, in the same order, with the same words in the Build, Owned? and Trip columns. Its columns are: `group`, `item`, `quantity`, `unit_price_eur`, `total_eur`, `build`, `already_owned_maybe`, `buy_where`, `buy_before_trip`, `weight_g`, `on_robot` (`yes` = counts in the robot's weight, `no` = carried in the luggage) and `notes`.
+- **How to add up a build in a spreadsheet.** In the CSV, `build` is column F and `total_eur` is column E. Type the formulas with those column letters. Cheap build = `=SUMIF(F:F,"both",E:E)+SUMIF(F:F,"cheap",E:E)` = 532.60 EUR. Comfortable build = `=SUMIF(F:F,"both",E:E)+SUMIF(F:F,"comfort",E:E)` = 795.80 EUR. In a German-language spreadsheet the function is called `SUMMEWENN` and the separator is a semicolon, for example `=SUMMEWENN(F:F;"both";E:E)+SUMMEWENN(F:F;"cheap";E:E)`; when you open the CSV, choose English (USA) for the number columns, or the decimal points are misread. Never add the `opt` lines. A plain sum of the whole column is wrong (it counts both builds and the optional parts). Cash needed: leave out the lines whose `already_owned_maybe` is `maybe-spare` or `maybe-board` (and `maybe-robot1` for the lowest figure). Before the trip: only the lines with `buy_before_trip` = `DE`.
 
 ---
 
 ## 3. The list
 
-Robot 2 is built for **stages 1 to 5, 7 and 9 of the software plan at home, before the trip** (7 evenings). That is why nearly everything has to be bought in Germany first.
+Robot 2 is built at home, before the trip. **Required before the trip:** stages 1 to 5, 7 and 9 of the software plan, plus the safety part of stage 8 (cliff sensors, tilt and pick-up detection, family STOP). Stage 6 (pan and tilt) is strongly recommended: it is a Must function. The rest of stage 8 (sonar tuning, bumpers) is recommended. Remote driving stays switched off in the software until the cliff and tilt tests pass, and the first drives at the destination are with your sister next to the robot, away from stairs. The required stages take about 7 evenings (A; more with stage 6 and the rest of stage 8). So nearly everything has to be bought in Germany first.
 
 #### Group 1 Brain and screen
 
 | Item | Qty | EUR each | EUR total | Build | Owned? | Buy where | Trip | Note |
 |---|---|---|---|---|---|---|---|---|
-| Raspberry Pi 4 Model B, 2 GB (the cheapest board that really works) | 1 | 72.00 | 72.00 | cheap | no | Berrybase, Reichelt, Welectron | DE | About 71.90 EUR on 1 Oct 2026 (Notebookcheck). Runs near full load in a 720p call: fan and performance mode needed. |
+| Raspberry Pi 4 Model B, 2 GB (the cheapest board that really works) | 1 | 72.00 | 72.00 | cheap | no | Berrybase, Reichelt, Welectron | DE | About 71.90 EUR on 1 Oct 2026 (Notebookcheck). Runs near full load in a 720p call, so the first call is asked at 480p. Fan and performance mode needed (sbc-selection.md, section 3). |
 | Raspberry Pi 5, 2 GB (recommended board) | 1 | 82.50 | 82.50 | comfort | maybe-robot1 | Berrybase, Reichelt, Welectron | DE | About 82.50 EUR (Notebookcheck, 1 Oct 2026). 4 GB costs about 115-150 EUR. Free option: take your own Pi 5 8 GB if robot 1 can wait. |
 | Raspberry Pi 5 Active Cooler (official) | 1 | 5.90 | 5.90 | comfort | no | Welectron (5.90 EUR incl. VAT, art. RP9-111480) | DE | Pi 5 only. Fits under the cover (cooler 13.7 mm high). |
-| Heatsink plus small 5 V fan for the Pi 4 | 1 | 6.00 | 6.00 | cheap | maybe-robot1 | Amazon.de, Berrybase | DE | You own a 5 V fan for robot 1. About price (ASSUMED). |
-| microSD card 32 GB, A1 or A2, SanDisk or Samsung (main card) | 1 | 9.00 | 9.00 | both | no | any shop | any | About price (ASSUMED). Buy a known brand, not an unnamed one. |
+| Heatsink plus small 5 V fan for the Pi 4 | 1 | 6.00 | 6.00 | cheap | maybe-robot1 | Amazon.de, Berrybase | DE | You own a 5 V fan for robot 1; robot 2 needs its own. About price (ASSUMED). |
+| microSD card 32 GB, A1 or A2, SanDisk or Samsung (main card) | 1 | 9.00 | 9.00 | both | no | any shop | any | About price (ASSUMED). Buy a known brand, not an unnamed one. The cheap build has this one card only. |
 | microSD card 32 GB (clone = spare card) | 1 | 9.00 | 9.00 | comfort | no | any shop | any | Clone the finished card onto it. Packed in the luggage, not in the robot. |
 | 7 inch HDMI screen, 1024x600 IPS, touch: no-name type | 1 | 45.00 | 45.00 | cheap | no | eBay.de, Amazon.de | DE | Listings 43-57 EUR (eBay.de search). Check outline about 165x100-107 mm, full-size HDMI, 5 V micro-USB. Weight varies. |
-| Waveshare 7 inch HDMI LCD (C), 1024x600 IPS, 5-point touch (recommended screen) | 1 | 58.00 | 58.00 | comfort | no | exp-tech.de, Eckstein, Welectron, elecena.pl, melopero.com | DE | Seen 45-62 EUR incl. VAT depending on shop (V). 164.9x107x8 mm, 5 V 500 mA (V). Stock varies: order early. |
-| HDMI cable, micro-HDMI to HDMI-A, flat and slim, 0.8 m | 1 | 12.00 | 12.00 | both | no | Amazon.de, Reichelt | DE | Needs about 0.65 m (mast route). Not the 30-50 cm from sbc-selection.md. Right-angle plug at the screen end is better. |
+| Waveshare 7 inch HDMI LCD (C), 1024x600 IPS, 5-point touch (recommended screen) | 1 | 58.00 | 58.00 | comfort | no | exp-tech.de, Eckstein, Welectron, elecena.pl, melopero.com | DE | Seen 45-62 EUR incl. VAT depending on shop (search summaries, re-check the shop page). 164.9x107x8 mm, 5 V 500 mA (Waveshare wiki). Stock varies: order early. |
+| HDMI cable, micro-HDMI to HDMI-A, flat and slim, 0.8 m | 1 | 12.00 | 12.00 | both | no | Amazon.de, Reichelt | DE | Needs about 0.65 m (mast route); sbc-selection.md now says the same. Right-angle plug at the screen end is better. |
 | Screen power lead: micro-USB plug with bare wires, power only | 1 | 3.00 | 3.00 | both | maybe-spare | any (cut an old micro-USB cable) | any | Wires go to the 5.1 V SBC buck branch (not to the clean 5 V). Via the 1 A fuse. |
-| USB-C plug with bare wires (pigtail) for the SBC power | 1 | 5.00 | 5.00 | both | no | Amazon.de, eBay.de | DE | Use thick wire (AWG 18 for the Pi 5). Short: under 40 cm. |
+| USB-C plug breakout board with solder pads, for the SBC power pigtail (you solder your own AWG 18-20 silicone wire to ALL the VBUS and GND pads) | 1 | 5.00 | 5.00 | both | no | Amazon.de, eBay.de | DE | Or cut a thick 5 A USB-C cable and read the wire gauge printed on its jacket. If the wire is thinner than AWG 20, use a 3 A fuse on this branch (the fuse assortment in group 4 has one) and accept a Pi 5 peak limit; with a Pi 4 get thicker wire instead (sbc-selection.md, section 7, points 4 and 5). Short: under 40 cm. The wire is the silicone wire line in group 4. About price (ASSUMED). |
 | Capacitor 1000 uF, 16 V, low-ESR (at the SBC power input) | 1 | 0.60 | 0.60 | both | maybe-spare | Reichelt | any | Across 5.1 V and GND at the Pi end. 470 uF also fine. |
-| USB-A to USB-C cable, short (20 cm), for the ESP32 COM socket | 1 | 4.00 | 4.00 | both | maybe-spare | any | any | Tape over the 5 V pin of the USB-A plug if you have no data-only cable (see peripherals.md). |
-| USB data-only adapter or cable (no 5 V wire), for ESP32 link and touch | 2 | 5.00 | 10.00 | comfort | no | Amazon.de (search: USB power blocker / Stromsperre) | DE | Not the same as a 'data blocker' (that blocks data). About price (ASSUMED). |
-| **Group total** | | | | | | | | **cheap build 156.60 EUR, comfortable build 199.00 EUR** |
+| USB-A to USB-C cable, short (20 cm), ordinary (has the 5 V wire), for the ESP32 COM socket | 1 | 4.00 | 4.00 | both | maybe-spare | any | any | Plug it into the data-only adapter below. It is also the one spare ordinary cable: if bench test B fails (the two bench tests are written out in peripherals.md, 6.1), use it on its own. Taping the 5 V contact (pin 1 of the USB-A plug) is a backup only. |
+| USB data-only adapter (power blocker, no 5 V wire), for the ESP32 link and for touch | 2 | 5.00 | 10.00 | both | no | Amazon.de (search: USB power blocker / Stromsperre) | DE | One for the ESP32 link, one for the touch cable. Not the same as a 'data blocker' (that blocks data). Check the ESP32 one with bench test A (the devkit's LED stays dark, peripherals.md, 6.1) and the touch one with the screen-dark check (peripherals.md, 2.2). About price (ASSUMED). |
+| **Group total** | | | | | | | | **cheap build 166.60 EUR, comfortable build 199.00 EUR** |
 
 #### Group 2 Camera and audio
 
@@ -78,12 +83,13 @@ Robot 2 is built for **stages 1 to 5, 7 and 9 of the software plan at home, befo
 | Webcam: your own SC-012-SN259, if it passes the test | 1 | 0.00 | 0.00 | cheap | maybe-robot1 | from robot 1 (phase 3 has not started) | DE | Model not found on the web: size, view angle and microphone are ASSUMED. Test first (peripherals.md). Buy another for robot 1 later. |
 | Wide-angle USB webcam, 1080p, UVC, with microphone (fallback or comfort) | 1 | 22.00 | 22.00 | comfort | no | Amazon.de | DE | About 15-30 EUR (ASSUMED). Check body fits the brow 60x30x28 mm and view angle 90-110 degrees. |
 | USB audio adapter (3.5 mm speaker out) | 1 | 7.00 | 7.00 | cheap | no | Amazon.de, eBay.de | any | Cheap audio route B. Not needed with route A (speakerphone). |
-| Speaker 40 mm, 4 ohm, 3 W | 1 | 2.50 | 2.50 | cheap | no | Reichelt, eBay.de | any | Put it in the base, not in the head lid (echo): see peripherals.md. |
-| PAM8403 amplifier board, 5 V | 1 | 2.50 | 2.50 | cheap | no | eBay.de, AZ-Delivery | any | Powered from the 5.1 V branch. Input from the USB audio adapter. |
-| USB speakerphone with real echo cancelling (Jabra Speak 410 class) | 1 | 75.00 | 75.00 | comfort | no | Amazon.de, Galaxus.de, eBay.de | DE | Seen 60-85 EUR (eBay new 59.99, a shop 84.99 in Jun 2026). Weight and size ASSUMED. Doubles as ballast. Needs a place on the base. |
-| LEDs 5 mm red, 5 pieces, plus 220 ohm resistors | 1 | 2.00 | 2.00 | both | maybe-spare | Reichelt, any | any | Camera-live LED on PCA9685 channel 2 (and button light on channel 3). |
+| Speaker 40 mm, 4 ohm, 3 W | 1 | 2.50 | 2.50 | cheap | no | Reichelt, eBay.de | any | Put it in the base, not in the head lid (echo): see peripherals.md. The 3D design gets a place for it (open item C5). |
+| PAM8403 amplifier board, 5 V | 1 | 2.50 | 2.50 | cheap | no | eBay.de, AZ-Delivery | any | Powered from the 5.1 V Pi-buck output through its OWN 1 A fuse (6th fuse holder, group 4), not through the screen fuse. Input from the USB audio adapter through the audio cable below. |
+| Audio cable, 3.5 mm plug to bare wires (or a cut aux cable), for the amplifier input | 1 | 1.50 | 1.50 | cheap | maybe-spare | any (cut an old aux cable) | any | Route B only. Two wires (signal and ground) go to the amplifier input; the plug goes into the green socket of the USB audio adapter. |
+| USB speakerphone with real echo cancelling (Jabra Speak 410 class) | 1 | 75.00 | 75.00 | comfort | no | Amazon.de, Galaxus.de, eBay.de | DE | Seen 60-85 EUR (eBay new 59.99, a shop 84.99 in Jun 2026). Cheaper ones (17-31 EUR) do not say 'echo cancellation': do not trust them. Weight and size ASSUMED. Doubles as ballast. Needs a place on the base (open item C5). |
+| LEDs 5 mm red, 5 pieces, plus 220 ohm resistors | 1 | 2.00 | 2.00 | both | maybe-spare | Reichelt, any | any | Plain red LEDs that light at 3.3 V. Camera-live LED on PCA9685 channel 2 (and button light on channel 3). If every PCA9685 output already has a 220 ohm resistor (small SMD parts marked 221), connect the LED with NO extra resistor and check the brightness. |
 | USB clip-on microphone (only if the webcam has no microphone) | 1 | 8.00 | 8.00 | opt | no | Amazon.de | any | Only needed if the webcam test finds no microphone and you use route B. |
-| **Group total** | | | | | | | | **cheap build 14.00 EUR, comfortable build 99.00 EUR** |
+| **Group total** | | | | | | | | **cheap build 15.50 EUR, comfortable build 99.00 EUR** |
 
 #### Group 3 Sensing
 
@@ -95,43 +101,44 @@ Robot 2 is built for **stages 1 to 5, 7 and 9 of the software plan at home, befo
 | IR floor sensor spares, to find a pair that reads your floor | 2 | 1.50 | 3.00 | comfort | no | eBay.de, Amazon.de | DE | Dark carpet can fool IR sensors. |
 | ADS1115 16-bit analog-to-digital board (battery monitor) | 1 | 4.50 | 4.50 | both | no | eBay.de, AZ-Delivery, Reichelt | DE | 3.5-5 EUR on eBay.de, up to about 13 EUR in local shops (software-plan listing check). |
 | ADS1115 spare | 1 | 4.50 | 4.50 | comfort | no | eBay.de, AZ-Delivery, Reichelt | DE | Spare. |
-| Resistor and capacitor kit: 47k x2, 27k x2 (1 %), 10k x4, 100 nF x4 | 1 | 5.00 | 5.00 | both | maybe-spare | Reichelt, any | any | Battery divider 47k/27k + 100 nF. Charger sense 2 x 10k (optional). |
-| Call button, arcade type 30 mm (optionally with LED ring) | 1 | 3.50 | 3.50 | comfort | no | Amazon.de, Reichelt | DE | GPIO45 to GND. Mechanical design has no hole for it yet. |
-| Micro switch with lever (KW12-3 type), 2 pieces, bumper | 1 | 2.00 | 2.00 | opt | no | Amazon.de, eBay.de | any | Optional. No ESP32 pin is assigned yet (software plan). |
-| **Group total** | | | | | | | | **cheap build 16.50 EUR, comfortable build 29.50 EUR** |
+| Resistor and capacitor kit: 47k x2, 27k x2 (1 %), 10k x4, 100 nF x4 | 1 | 5.00 | 5.00 | both | maybe-spare | Reichelt, any | any | Battery divider 47k/27k + 100 nF (the 47k sits on the splice-plus wire, the 27k and 100 nF at the ADS1115). Charger sense 2 x 10k (optional). A 10k is also the bump-switch pull-down (optional). |
+| Call / STOP button, arcade type 30 mm (optionally with a 3.3 V LED ring) | 1 | 3.50 | 3.50 | both | no | Amazon.de, Reichelt | DE | GPIO45 to GND. A physical STOP / call button is a Must before the trip (functions.md, rows 9 and 12), so it is in both builds. The 3D design gets a 30 mm hole (open item C5). A button light must work at 3.3 V: not a 12 V arcade ring. |
+| Micro switch with lever (KW12-3 type), 2 pieces, bumper | 1 | 2.00 | 2.00 | opt | no | Amazon.de, eBay.de | any | Optional, not in the first build. If fitted: switches between GPIO46 and 3V3, plus a 10k pull-DOWN from GPIO46 to GND (peripherals.md, 5.4). The protocol lists GPIO46 as 'optional bump input' (event ev btn id:bump). |
+| **Group total** | | | | | | | | **cheap build 20.00 EUR, comfortable build 29.50 EUR** |
 
 #### Group 4 Power
 
 | Item | Qty | EUR each | EUR total | Build | Owned? | Buy where | Trip | Note |
 |---|---|---|---|---|---|---|---|---|
-| 18650 Li-ion cell, genuine Samsung 25R / LG MJ1 / Molicel P28A class | 2 | 6.00 | 12.00 | both | maybe-spare | Akkuman, Akkuteile.de, Nkon | DE | Seen 3.99-10 EUR per cell. You own old cells: test them first and use a matched pair. Carry-on only. |
-| 18650 cells, 2 more (makes a 2S2P pack: double runtime) | 2 | 6.00 | 12.00 | comfort | maybe-spare | Akkuman, Akkuteile.de, Nkon | DE | Needs a bigger battery cradle in the base (about 77 x 80 x 21 mm). |
-| Battery holder for 2 x 18650 | 1 | 2.00 | 2.00 | both | no | Amazon.de, Reichelt | any | 77x40x21 mm per mechanical doc. |
-| Battery holder for 2 x 18650 (second one for 2S2P) | 1 | 2.00 | 2.00 | comfort | no | Amazon.de, Reichelt | any |  |
-| 2S BMS (HX-2S-JH20 type), balancing | 1 | 3.00 | 3.00 | both | maybe-robot1 | Amazon.de, eBay.de | DE | Buy twice if robot 1 keeps its own. |
+| 18650 Li-ion cell, genuine Samsung 25R / LG MJ1 / Molicel P28A class | 2 | 6.00 | 12.00 | both | maybe-spare | Akkuman, Akkuteile.de, Nkon | DE | Seen 3.99-10 EUR per cell. You own old cells: test them first and use a matched pair (same voltage within 0.05 V before joining). Carry-on only. |
+| 18650 cells, 2 more (the 4-cell option, 2S2P: double runtime) | 2 | 6.00 | 12.00 | comfort | maybe-spare | Akkuman, Akkuteile.de, Nkon | DE | All four cells from the same batch and the same model, brought to the same voltage within 0.05 V before joining. Build 2P, then 2S, one BMS only: see wiring.md, section 'Four-cell option (2S2P)' and diagrams/battery-4cell.png. Needs a bigger battery cradle in the base (about 77 x 80 x 21 mm). The robot then weighs about 3.2 kg. |
+| Battery holder for 2 x 18650 | 1 | 2.00 | 2.00 | both | no | Amazon.de, Reichelt | any | 77x40x21 mm per mechanical doc. The BMS needs a wire at the point between the two cells (BM): use a 2-cell holder where you can reach that point, or two single-cell holders. 4-cell option: four single-cell holders in total, or two 2-cell holders whose middle point you can reach and join (next line). |
+| Battery holder, 2nd set for the 4-cell option (four single-cell holders in total, or two 2-cell holders whose middle point you can reach and join) | 1 | 2.00 | 2.00 | comfort | no | Amazon.de, Reichelt | any | This line is one more 2-cell holder or two more single-cell holders (about 2 EUR either way, ASSUMED). A 2-cell holder that is wired in series inside has no middle wire and cannot make the pairs: check this when it arrives, and if there is no middle wire or tag, use single-cell holders. How to join them (2P, then 2S): wiring.md, section 7 'Four-cell option (2S2P)' and diagrams/battery-4cell.png. |
+| 2S BMS (HX-2S-JH20 type), balancing | 1 | 3.00 | 3.00 | both | maybe-robot1 | Amazon.de, eBay.de | DE | Buy twice if robot 1 keeps its own. One BMS only, also with 4 cells. |
 | 2S USB-C charger board (IP2326 type, 5 V in, 8.4 V out) | 1 | 5.00 | 5.00 | both | maybe-robot1 | Amazon.de, eBay.de | DE | Charge with the robot off (power list). See conflict C3 in peripherals.md. |
 | USB-C wall charger 5 V, at least 2 A (for the charger board) | 1 | 9.00 | 9.00 | both | maybe-spare | any (plug type of the destination) | any | Buy it where you stay if the plug differs. |
 | USB-A to USB-C charging cable, 1 m | 1 | 4.00 | 4.00 | both | maybe-spare | any | any |  |
 | Main switch, round rocker, 10 A or more, 19 mm hole | 1 | 2.50 | 2.50 | both | maybe-robot1 | Amazon.de, Reichelt | any | You own a key switch for robot 1. This one is for the rear wall. |
 | In-line fuse holder for 5 x 20 mm fuses | 5 | 1.20 | 6.00 | both | no | Reichelt, Amazon.de | DE | Five branches: BATT IN, servo buck, clean 5 V buck, SBC buck, screen. The 3.3 V buck is not used in robot 2. |
-| Slow-blow fuses 5 x 20 mm, assortment (1 A, 2 A, 5 A) | 1 | 5.00 | 5.00 | both | no | Reichelt, Amazon.de | DE | Needs: 5 A x3, 2 A x1, 1 A x1, plus spares. |
-| Lever connector Wago 221-415 (5-way) | 3 | 1.20 | 3.60 | both | no | Berrybase, Reichelt, Hornbach | any | Splice plus and splice minus (the minus side has 6 wires: use two joined). Seen 0.55-1.2 EUR per piece. |
-| Lever connector Wago 221-412 (2-way) | 2 | 0.80 | 1.60 | both | no | Berrybase, Reichelt, Hornbach | any | To join two 5-way connectors. |
-| XL4016 buck module with heatsink (servo 5.0 V, and SBC 5.1 V) | 2 | 6.00 | 12.00 | both | maybe-robot1 | eBay.de 3-5 EUR, Amazon.de or AZ-Delivery 8-11 EUR | DE | Two are needed. You own one for robot 1: buy two new. |
-| Fixed 5 V buck, 1.8 A (clean 5 V) | 1 | 2.50 | 2.50 | both | maybe-robot1 | eBay.de, Amazon.de | DE | Input range must cover 6-8.4 V. |
-| Silicone wire 1.0 mm2 (AWG 18), red and black, 3 m each | 1 | 7.00 | 7.00 | both | maybe-spare | Amazon.de, Reichelt | any | Battery, buck and SBC branches. Weight = what is used. |
+| In-line fuse holder for 5 x 20 mm fuses, 6th holder (route B: own 1 A fuse for the speaker amplifier) | 1 | 1.20 | 1.20 | cheap | no | Reichelt, Amazon.de | DE | Route B (cheap build) only. The amplifier gets its own tap from the 5.1 V Pi-buck output through its own 1 A fuse; the screen keeps its own 1 A fuse. With the speakerphone (route A) there is no amplifier and five holders are enough. The 1 A fuse comes from the assortment below. |
+| Slow-blow fuses 5 x 20 mm, assortment (1 A, 2 A, 3 A, 5 A) | 1 | 5.00 | 5.00 | both | no | Reichelt, Amazon.de | DE | Needs: 5 A x3 (BATT IN, servo buck, Pi buck), 2 A x1 (clean 5 V buck), 1 A x2 (screen, and the amplifier in route B), plus spares. The 3 A is only for a Pi pigtail wire thinner than AWG 20 (it replaces the 5 A on the Pi branch). Check that the assortment you buy lists 3 A; if it does not, buy one single 3 A slow-blow only if your wire turns out to be thin. Optional: one 6.3 A slow-blow for the Pi branch, only if the 5 A blows in rare peaks (peripherals.md, 6.2). |
+| Lever connector Wago 221-415 (5-way) | 4 | 1.20 | 4.80 | both | no | Berrybase, Reichelt, Hornbach | any | Splice plus and splice minus: two connectors per side, each pair joined by a 10 cm jumper wire in a free slot of each. The plus side has 6 wires, the minus side up to 7. Seen 0.55-1.2 EUR per piece. |
+| XL4016 buck module with heatsink (servo 5.0 V, and SBC 5.1 V) | 2 | 6.00 | 12.00 | both | maybe-robot1 | eBay.de 3-5 EUR, Amazon.de or AZ-Delivery 8-11 EUR | DE | Two are needed. You own one for robot 1: buy two new. After setting each one with a multimeter, lock the adjust screw with a drop of glue or nail varnish. |
+| Fixed 5 V buck, 1.8 A (clean 5 V) | 1 | 2.50 | 2.50 | both | maybe-robot1 | eBay.de, Amazon.de | DE | Input range must cover 6-8.4 V. After any luggage trip, re-measure all three buck outputs with nothing connected before you plug in the Pi or the ESP32. |
+| Silicone wire 1.0 mm2 (AWG 18), red and black, 3 m each | 1 | 7.00 | 7.00 | both | maybe-spare | Amazon.de, Reichelt | any | Battery, buck and SBC branches, the 10 cm jumpers between the lever connectors, and the second servo feed to the PCA9685 screw terminal. Weight = what is used. |
 | Wire 0.5 mm2 and thinner, several colours | 1 | 8.00 | 8.00 | both | maybe-spare | Amazon.de, Reichelt | any | Sensors, LED, screen power. |
 | JST-XH plug kit 2/3/4-pin with crimped wires | 1 | 9.00 | 9.00 | both | maybe-spare | Amazon.de | any | Board headers are JST-XH / 2.54 mm. You said your plugs fit. |
 | Wire end ferrules, assortment | 1 | 5.00 | 5.00 | comfort | no | Amazon.de | any | For the screw terminals and lever connectors. |
-| Servo extension cable 50 cm, 3-wire | 3 | 2.00 | 6.00 | both | no | Amazon.de, eBay.de | DE | Pan, tilt, and the camera LED up the mast. |
+| Servo extension cable 50 cm, 3-wire | 3 | 2.00 | 6.00 | both | no | Amazon.de, eBay.de | DE | Pan, tilt, and the camera LED up the mast. For the LED use a 3-pin plug with the red (V+) wire cut off or taped. |
+| TVS diode SMBJ5.0A (optional protection across the Pi supply wires) | 1 | 0.50 | 0.50 | opt | no | Reichelt, eBay.de | any | Optional, not in the totals. |
 | 8.4 V 2 A charger adapter with DC jack (idea for charging while on) | 1 | 10.00 | 10.00 | opt | no | Amazon.de | DE | Only if the power design decides to charge while the robot runs. Not decided: conflict C3. |
-| **Group total** | | | | | | | | **cheap build 98.20 EUR, comfortable build 117.20 EUR** |
+| **Group total** | | | | | | | | **cheap build 99.00 EUR, comfortable build 116.80 EUR** |
 
 #### Group 5 Drive
 
 | Item | Qty | EUR each | EUR total | Build | Owned? | Buy where | Trip | Note |
 |---|---|---|---|---|---|---|---|---|
-| Pololu 25D metal gearmotor 12 V, medium power, 47:1 (item 3229) | 2 | 36.00 | 72.00 | both | no | Pololu.com, or an EU reseller (Eckstein, Botland) | DE | Pololu US$29.95 each (V). Plus shipping, 19 % VAT, maybe a courier fee: about 30-45 EUR each delivered (ASSUMED). 2-3 weeks. |
+| Pololu 25D metal gearmotor 12 V, medium power, 47:1 (item 3229) | 2 | 36.00 | 72.00 | both | no | Pololu.com, or an EU reseller (Eckstein, Botland) | DE | Pololu US$29.95 each (search summary only, re-check the page). Plus shipping, 19 % VAT, maybe a courier fee: about 30-45 EUR each delivered (ASSUMED). 2-3 weeks. When they arrive, measure the winding resistance with a multimeter: about 6.7 ohm is expected (12 V / 1.8 A). If it reads well below 5 ohm, do not fit them to the DRV8833 (peripherals.md, section 8). |
 | Robot wheels 65 mm, rubber tyre, hub for 4 mm D-shaft (pair) | 1 | 10.00 | 10.00 | both | no | Amazon.de, eBay.de, robot shops | DE | Bore is ASSUMED to fit the Pololu 4 mm D-shaft: check before buying. |
 | Hub adapters 4 mm D-shaft for wheels (only if the wheel bore does not fit) | 1 | 8.00 | 8.00 | comfort | no | Pololu, Amazon.de | DE | Insurance. |
 | Steel ball 16 mm (or 5/8 inch) for the caster | 1 | 1.50 | 1.50 | both | no | hardware store, Amazon.de | any |  |
@@ -152,25 +159,25 @@ Robot 2 is built for **stages 1 to 5, 7 and 9 of the software plan at home, befo
 | Item | Qty | EUR each | EUR total | Build | Owned? | Buy where | Trip | Note |
 |---|---|---|---|---|---|---|---|---|
 | Heat-set insert assortment M2-M5, brass | 1 | 11.00 | 11.00 | both | no | Amazon.de | DE | Needs 37 x M3 and 8 x M4 (plus 20 % spare). Mechanical doc, section 10. |
-| Screw and nut assortment M2.5/M3/M4/M5 hex socket, 6-30 mm | 1 | 16.00 | 16.00 | both | maybe-spare | Amazon.de, Reichelt | any | Counts in mechanical doc section 10: about 64 x M3, 12 x M4, 4 x M2.5. |
+| Screw and nut assortment M2.5/M3/M4/M5 hex socket, 6-30 mm | 1 | 16.00 | 16.00 | both | maybe-spare | Amazon.de, Reichelt | any | Counts in mechanical doc section 10: about 64 x M3, 12 x M4, 4 x M2.5. The 4 motherboard screws are M3 x 6. |
 | M5 x 30 bolt with lock nut and 2 washers | 1 | 1.00 | 1.00 | both | maybe-spare | any | any | Head pivot. |
 | PTFE adhesive tape 0.2 mm (turntable glide ring) | 1 | 6.00 | 6.00 | both | no | Amazon.de | DE | About price (ASSUMED). |
 | PETG filament 1 kg spool, 1.75 mm (printed parts weigh about 1.14 kg) | 2 | 13.00 | 26.00 | both | no | Amazon.de, eBay.de | any | Seen 9.75-13.45 EUR per kg (deals Jun 2026). Weight = printed parts. No tube needed: the mast is printed. |
 | Super glue plus 2-part epoxy | 1 | 6.00 | 6.00 | both | maybe-spare | any | any | Base seams. |
 | Double-sided foam mounting tape | 1 | 4.00 | 4.00 | both | maybe-spare | any | any | Modules, screen, webcam. |
 | Zip ties 2.5 x 100 mm, 100 pieces | 1 | 3.00 | 3.00 | both | maybe-spare | any | any | About 25 needed. |
-| Foam pads 3 mm and Kapton tape | 1 | 3.00 | 3.00 | both | maybe-spare | any | any | Screen retention, covering the USB 5 V pin. |
+| Foam pads 3 mm and Kapton tape | 1 | 3.00 | 3.00 | both | maybe-spare | any | any | Screen retention. The Kapton tape is the backup for the USB 5 V contact (pin 1 of the USB-A plug). |
 | **Group total** | | | | | | | | **cheap build 76.00 EUR, comfortable build 76.00 EUR** |
 
 #### Group 8 Motherboard fit-out
 
 | Item | Qty | EUR each | EUR total | Build | Owned? | Buy where | Trip | Note |
 |---|---|---|---|---|---|---|---|---|
-| Motherboard v5 bare PCB (already ordered, 5 pieces) | 1 | 0.00 | 0.00 | both | maybe-board | JLCPCB (done) | DE | Bare board. |
+| Motherboard v5 bare PCB (5 pieces; order only after the paper test-fit passes, see pcb/kicad/README.md) | 1 | 0.00 | 0.00 | both | maybe-board | JLCPCB (confirm the order status) | DE | Bare board. You report 5 boards ordered: confirm they are version v5 (pcb/kicad/pin-table.md). If they are not v5, the pin numbers in these files do not apply. |
 | ESP32-S3 DevKitC-1, N16R8, dual USB-C, headers soldered | 1 | 12.00 | 12.00 | both | maybe-board | Amazon.de, AZ-Delivery, AliExpress | DE | About price (ASSUMED). Check it has two USB-C sockets. |
 | DRV8833 motor driver module HW-627 (driver A only) | 1 | 2.50 | 2.50 | both | maybe-board | Amazon.de, eBay.de | DE | Robot 2 uses M1 and M2 only, so driver B can stay empty. |
 | DRV8833 HW-627 spare | 1 | 2.50 | 2.50 | comfort | no | Amazon.de, eBay.de | DE | Spare. |
-| PCA9685 16-channel servo driver board | 1 | 6.00 | 6.00 | both | maybe-board | Amazon.de, AZ-Delivery | DE |  |
+| PCA9685 16-channel servo driver board | 1 | 6.00 | 6.00 | both | maybe-board | Amazon.de, AZ-Delivery | DE | Check that it has its own V+ screw terminal: a second AWG 18 feed from the servo buck goes there (peripherals.md, 5.5). |
 | GY-521 gyro board (MPU-6050) | 1 | 3.50 | 3.50 | both | maybe-board | Amazon.de, AZ-Delivery | DE |  |
 | Sockets, headers and 5.08 mm screw terminals for the board | 1 | 9.00 | 9.00 | both | maybe-board | Reichelt, AZ-Delivery | DE | Full list in pcb/kicad/parts-list.md. Robot 2 fits 3 of the 4 terminals (not 3.3V IN). |
 | Capacitors 470 uF and 100 uF, 2 x 100 nF, 1N5819 diode, 4 resistors 1k/2k | 1 | 3.00 | 3.00 | both | maybe-board | Reichelt | any |  |
@@ -185,7 +192,7 @@ Robot 2 is built for **stages 1 to 5, 7 and 9 of the software plan at home, befo
 | Digital caliper | 1 | 12.00 | 12.00 | comfort | no | Amazon.de | DE | To check servo, webcam and screen sizes before printing. |
 | Precision screwdriver and hex key set | 1 | 10.00 | 10.00 | comfort | maybe-spare | any | any |  |
 | Wire stripper and flush cutter | 1 | 10.00 | 10.00 | comfort | maybe-spare | any | any |  |
-| USB-C power meter (voltage and current) | 1 | 10.00 | 10.00 | comfort | no | Amazon.de | DE | Handy for the power tests in stage 3. |
+| USB-C power meter (voltage and current) | 1 | 10.00 | 10.00 | comfort | no | Amazon.de | DE | Handy for the power tests in stage 3, and needed for the fallback of bench test B (peripherals.md, 6.1). Get an in-line meter with a USB-C plug on one side and a USB-C socket on the other (or two sockets and a short USB-C to USB-C cable). It goes between the ordinary cable's USB-C end and the devkit's COM socket, not at the Pi (the Pi's port is USB-A, so it does not fit there). Comfortable build: in the list. Cheap build: not in the total. Do bench test B at home first; only if it fails, buy one (about 10 EUR) or borrow one before the trip. |
 | **Group total** | | | | | | | | **cheap build 13.00 EUR, comfortable build 55.00 EUR** |
 
 #### Group 10 Travel and spares
@@ -196,7 +203,7 @@ Robot 2 is built for **stages 1 to 5, 7 and 9 of the software plan at home, befo
 | LAN cable 2 m (Wi-Fi plan D) | 1 | 3.00 | 3.00 | comfort | no | any | any |  |
 | Small USB keyboard (Wi-Fi plan E) | 1 | 10.00 | 10.00 | comfort | maybe-spare | any | any |  |
 | Travel plug adapter | 1 | 8.00 | 8.00 | comfort | no | any | any | Country not known yet. |
-| Spare USB cables (USB-A to USB-C, data) | 2 | 4.00 | 8.00 | comfort | maybe-spare | any | any |  |
+| Spare USB cables (USB-A to USB-C, ordinary, with data and 5 V) | 2 | 4.00 | 8.00 | comfort | maybe-spare | any | any |  |
 | Laminating pouches for the family card | 1 | 2.00 | 2.00 | comfort | no | any | any |  |
 | Hard box or organiser for the trip (about 30 x 25 x 20 cm) | 1 | 15.00 | 15.00 | comfort | no | any | any | Printed parts stack into this size. |
 | **Group total** | | | | | | | | **cheap build 0.00 EUR, comfortable build 58.00 EUR** |
@@ -204,7 +211,9 @@ Robot 2 is built for **stages 1 to 5, 7 and 9 of the software plan at home, befo
 
 **Not on the list, because you probably own them:** soldering iron, multimeter, 3D printer, a computer with a microSD card reader, a phone. Robot 1's TB6612 driver, 20000 mAh power bank, relay board and SPI screens are not used in robot 2.
 
-**What changed against the draft shopping lists.** The motherboard's `shopping-list.md` has a 3.3 V fixed buck and a sixth fuse holder; robot 2 has **no 3.3 V buck** (no SPI screens, no relays) and uses five fuse holders: BATT IN, servo buck, clean 5 V buck, SBC buck, screen (`peripherals.md` conflict C7). The DRV8833 driver B is not needed either: robot 2 uses motors M1 and M2 only.
+**What changed against the draft shopping lists.** The motherboard's `shopping-list.md` has a 3.3 V fixed buck and a sixth fuse holder; robot 2 has **no 3.3 V buck** (no SPI screens, no relays) and uses five fuse holders: BATT IN, servo buck, clean 5 V buck, SBC buck, screen. The cheap build with route B sound adds a sixth holder with its own 1 A fuse for the speaker amplifier (`peripherals.md` conflict C7). The DRV8833 driver B is not needed either: robot 2 uses motors M1 and M2 only.
+
+**The splice.** The plus side has 6 wires (switch in, four fused branches, the divider resistor). The minus side has up to 7 wires (battery minus, BATT IN return, servo buck, clean buck, Pi buck, screen return, amplifier return). That is why the list has four 5-way Wago 221-415 connectors: two per side, each pair joined by a 10 cm jumper wire. The 2-way connectors of the first draft are dropped.
 
 ### The PCA9685 channels (servo board)
 
@@ -247,28 +256,28 @@ The Raspberry Pi 5 8 GB, the 5 V fan, the key switch and the ELEGOO chassis are 
 
 Order the **Pololu motors first**: 2 to 3 weeks from the US (A), or ask an EU reseller (Eckstein, Botland). Then the screen (stock varies), the SBC and cards, the ESP32 and small modules, the aluminium horns and heat-set inserts.
 
-- **1 Brain and screen:** Raspberry Pi 4 Model B, 2 GB (the cheapest board that really works) x1 [cheap build only]; Raspberry Pi 5, 2 GB (recommended board) x1 [comfortable build only]; Raspberry Pi 5 Active Cooler (official) x1 [comfortable build only]; Heatsink plus small 5 V fan for the Pi 4 x1 [cheap build only]; 7 inch HDMI screen, 1024x600 IPS, touch: no-name type x1 [cheap build only]; Waveshare 7 inch HDMI LCD x1 [comfortable build only]; HDMI cable, micro-HDMI to HDMI-A, flat and slim, 0.8 m x1; USB-C plug with bare wires (pigtail) for the SBC power x1; USB data-only adapter or cable (no 5 V wire), for ESP32 link and touch x2 [comfortable build only]
-- **2 Camera and audio:** Wide-angle USB webcam, 1080p, UVC, with microphone x1 [comfortable build only]; USB speakerphone with real echo cancelling (Jabra Speak 410 class) x1 [comfortable build only]
-- **3 Sensing:** HC-SR04 ultrasonic sensor, 5 V type (not the 3.3 V HC-SR04P) x2; HC-SR04 spare x1 [comfortable build only]; IR floor sensor module, TCRT5000 type, digital output, 3.3-5 V (cliff) x2; IR floor sensor spares, to find a pair that reads your floor x2 [comfortable build only]; ADS1115 16-bit analog-to-digital board (battery monitor) x1; ADS1115 spare x1 [comfortable build only]; Call button, arcade type 30 mm (optionally with LED ring) x1 [comfortable build only]
-- **4 Power:** 18650 Li-ion cell, genuine Samsung 25R / LG MJ1 / Molicel P28A class x2; 18650 cells, 2 more (makes a 2S2P pack: double runtime) x2 [comfortable build only]; 2S BMS (HX-2S-JH20 type), balancing x1; 2S USB-C charger board (IP2326 type, 5 V in, 8.4 V out) x1; In-line fuse holder for 5 x 20 mm fuses x5; Slow-blow fuses 5 x 20 mm, assortment (1 A, 2 A, 5 A) x1; XL4016 buck module with heatsink (servo 5.0 V, and SBC 5.1 V) x2; Fixed 5 V buck, 1.8 A (clean 5 V) x1; Servo extension cable 50 cm, 3-wire x3
-- **5 Drive:** Pololu 25D metal gearmotor 12 V, medium power, 47:1 (item 3229) x2; Robot wheels 65 mm, rubber tyre, hub for 4 mm D-shaft (pair) x1; Hub adapters 4 mm D-shaft for wheels x1 [comfortable build only]
+- **1 Brain and screen:** Raspberry Pi 4 Model B, 2 GB (the cheapest board that really works) x1 [cheap build only]; Raspberry Pi 5, 2 GB (recommended board) x1 [comfortable build only]; Raspberry Pi 5 Active Cooler (official) x1 [comfortable build only]; Heatsink plus small 5 V fan for the Pi 4 x1 [cheap build only]; 7 inch HDMI screen, 1024x600 IPS, touch: no-name type x1 [cheap build only]; Waveshare 7 inch HDMI LCD (C), 1024x600 IPS, 5-point touch (recommended screen) x1 [comfortable build only]; HDMI cable, micro-HDMI to HDMI-A, flat and slim, 0.8 m x1; USB-C plug breakout board with solder pads, for the SBC power pigtail (you solder your own AWG 18-20 silicone wire to ALL the VBUS and GND pads) x1; USB data-only adapter (power blocker, no 5 V wire), for the ESP32 link and for touch x2
+- **2 Camera and audio:** Webcam: your own SC-012-SN259, if it passes the test x1 [cheap build only; from robot 1, 0.00 EUR]; Wide-angle USB webcam, 1080p, UVC, with microphone (fallback or comfort) x1 [comfortable build only]; USB speakerphone with real echo cancelling (Jabra Speak 410 class) x1 [comfortable build only]
+- **3 Sensing:** HC-SR04 ultrasonic sensor, 5 V type (not the 3.3 V HC-SR04P) x2; HC-SR04 spare x1 [comfortable build only]; IR floor sensor module, TCRT5000 type, digital output, 3.3-5 V (cliff) x2; IR floor sensor spares, to find a pair that reads your floor x2 [comfortable build only]; ADS1115 16-bit analog-to-digital board (battery monitor) x1; ADS1115 spare x1 [comfortable build only]; Call / STOP button, arcade type 30 mm (optionally with a 3.3 V LED ring) x1
+- **4 Power:** 18650 Li-ion cell, genuine Samsung 25R / LG MJ1 / Molicel P28A class x2; 18650 cells, 2 more (the 4-cell option, 2S2P: double runtime) x2 [comfortable build only]; 2S BMS (HX-2S-JH20 type), balancing x1; 2S USB-C charger board (IP2326 type, 5 V in, 8.4 V out) x1; In-line fuse holder for 5 x 20 mm fuses x5; In-line fuse holder for 5 x 20 mm fuses, 6th holder (route B: own 1 A fuse for the speaker amplifier) x1 [cheap build only]; Slow-blow fuses 5 x 20 mm, assortment (1 A, 2 A, 3 A, 5 A) x1; XL4016 buck module with heatsink (servo 5.0 V, and SBC 5.1 V) x2; Fixed 5 V buck, 1.8 A (clean 5 V) x1; Servo extension cable 50 cm, 3-wire x3
+- **5 Drive:** Pololu 25D metal gearmotor 12 V, medium power, 47:1 (item 3229) x2; Robot wheels 65 mm, rubber tyre, hub for 4 mm D-shaft (pair) x1; Hub adapters 4 mm D-shaft for wheels (only if the wheel bore does not fit) x1 [comfortable build only]
 - **6 Pan/tilt:** MG996R servo, metal gear (pan and tilt) x2; Aluminium servo horn 25T, 20 mm disc, 4 x M3 holes x2; MG996R spare x1 [comfortable build only]
 - **7 Mechanical hardware:** Heat-set insert assortment M2-M5, brass x1; PTFE adhesive tape 0.2 mm (turntable glide ring) x1
-- **8 Motherboard fit-out:** ESP32-S3 DevKitC-1, N16R8, dual USB-C, headers soldered x1; DRV8833 motor driver module HW-627 (driver A only) x1; DRV8833 HW-627 spare x1 [comfortable build only]; PCA9685 16-channel servo driver board x1; GY-521 gyro board (MPU-6050) x1; Sockets, headers and 5.08 mm screw terminals for the board x1
+- **8 Motherboard fit-out:** Motherboard v5 bare PCB (5 pieces; order only after the paper test-fit passes, see pcb/kicad/README.md) x1 [0.00 EUR here: you report 5 boards ordered, confirm they are v5]; ESP32-S3 DevKitC-1, N16R8, dual USB-C, headers soldered x1; DRV8833 motor driver module HW-627 (driver A only) x1; DRV8833 HW-627 spare x1 [comfortable build only]; PCA9685 16-channel servo driver board x1; GY-521 gyro board (MPU-6050) x1; Sockets, headers and 5.08 mm screw terminals for the board x1
 - **9 Tools and consumables:** Digital caliper x1 [comfortable build only]; USB-C power meter (voltage and current) x1 [comfortable build only]
 - **10 Travel and spares:** Spare ESP32-S3 DevKitC-1 x1 [comfortable build only]
 
 ### Easy to buy **anywhere** (can wait, or buy abroad if you forget)
 
-- **1 Brain and screen:** microSD card 32 GB, A1 or A2, SanDisk or Samsung (main card) x1; microSD card 32 GB (clone = spare card) x1 [comfortable build only]; Screen power lead: micro-USB plug with bare wires, power only x1; Capacitor 1000 uF, 16 V, low-ESR (at the SBC power input) x1; USB-A to USB-C cable, short (20 cm), for the ESP32 COM socket x1
-- **2 Camera and audio:** USB audio adapter (3.5 mm speaker out) x1 [cheap build only]; Speaker 40 mm, 4 ohm, 3 W x1 [cheap build only]; PAM8403 amplifier board, 5 V x1 [cheap build only]; LEDs 5 mm red, 5 pieces, plus 220 ohm resistors x1
+- **1 Brain and screen:** microSD card 32 GB, A1 or A2, SanDisk or Samsung (main card) x1; microSD card 32 GB (clone = spare card) x1 [comfortable build only]; Screen power lead: micro-USB plug with bare wires, power only x1; Capacitor 1000 uF, 16 V, low-ESR (at the SBC power input) x1; USB-A to USB-C cable, short (20 cm), ordinary (has the 5 V wire), for the ESP32 COM socket x1
+- **2 Camera and audio:** USB audio adapter (3.5 mm speaker out) x1 [cheap build only]; Speaker 40 mm, 4 ohm, 3 W x1 [cheap build only]; PAM8403 amplifier board, 5 V x1 [cheap build only]; Audio cable, 3.5 mm plug to bare wires (or a cut aux cable), for the amplifier input x1 [cheap build only]; LEDs 5 mm red, 5 pieces, plus 220 ohm resistors x1
 - **3 Sensing:** Resistor and capacitor kit: 47k x2, 27k x2 (1 %), 10k x4, 100 nF x4 x1
-- **4 Power:** Battery holder for 2 x 18650 x1; Battery holder for 2 x 18650 (second one for 2S2P) x1 [comfortable build only]; USB-C wall charger 5 V, at least 2 A (for the charger board) x1; USB-A to USB-C charging cable, 1 m x1; Main switch, round rocker, 10 A or more, 19 mm hole x1; Lever connector Wago 221-415 (5-way) x3; Lever connector Wago 221-412 (2-way) x2; Silicone wire 1.0 mm2 (AWG 18), red and black, 3 m each x1; Wire 0.5 mm2 and thinner, several colours x1; JST-XH plug kit 2/3/4-pin with crimped wires x1; Wire end ferrules, assortment x1 [comfortable build only]
+- **4 Power:** Battery holder for 2 x 18650 x1; Battery holder, 2nd set for the 4-cell option (four single-cell holders in total, or two 2-cell holders whose middle point you can reach and join) x1 [comfortable build only]; USB-C wall charger 5 V, at least 2 A (for the charger board) x1; USB-A to USB-C charging cable, 1 m x1; Main switch, round rocker, 10 A or more, 19 mm hole x1; Lever connector Wago 221-415 (5-way) x4; Silicone wire 1.0 mm2 (AWG 18), red and black, 3 m each x1; Wire 0.5 mm2 and thinner, several colours x1; JST-XH plug kit 2/3/4-pin with crimped wires x1; Wire end ferrules, assortment x1 [comfortable build only]
 - **5 Drive:** Steel ball 16 mm (or 5/8 inch) for the caster x1; Steel ball 16 mm, spare x1 [comfortable build only]
 - **7 Mechanical hardware:** Screw and nut assortment M2.5/M3/M4/M5 hex socket, 6-30 mm x1; M5 x 30 bolt with lock nut and 2 washers x1; PETG filament 1 kg spool, 1.75 mm (printed parts weigh about 1.14 kg) x2; Super glue plus 2-part epoxy x1; Double-sided foam mounting tape x1; Zip ties 2.5 x 100 mm, 100 pieces x1; Foam pads 3 mm and Kapton tape x1
 - **8 Motherboard fit-out:** Capacitors 470 uF and 100 uF, 2 x 100 nF, 1N5819 diode, 4 resistors 1k/2k x1
 - **9 Tools and consumables:** Heat-shrink tubing assortment x1; Solder 1 mm, 100 g x1; Precision screwdriver and hex key set x1 [comfortable build only]; Wire stripper and flush cutter x1 [comfortable build only]
-- **10 Travel and spares:** LAN cable 2 m (Wi-Fi plan D) x1 [comfortable build only]; Small USB keyboard (Wi-Fi plan E) x1 [comfortable build only]; Travel plug adapter x1 [comfortable build only]; Spare USB cables (USB-A to USB-C, data) x2 [comfortable build only]; Laminating pouches for the family card x1 [comfortable build only]; Hard box or organiser for the trip (about 30 x 25 x 20 cm) x1 [comfortable build only]
+- **10 Travel and spares:** LAN cable 2 m (Wi-Fi plan D) x1 [comfortable build only]; Small USB keyboard (Wi-Fi plan E) x1 [comfortable build only]; Travel plug adapter x1 [comfortable build only]; Spare USB cables (USB-A to USB-C, ordinary, with data and 5 V) x2 [comfortable build only]; Laminating pouches for the family card x1 [comfortable build only]; Hard box or organiser for the trip (about 30 x 25 x 20 cm) x1 [comfortable build only]
 
 **Plug note:** the wall charger for the charger board must have the plug of the country you stay in. Buy it there if you do not know the plug yet.
 
@@ -284,6 +293,7 @@ Order the **Pololu motors first**: 2 to 3 weeks from the US (A), or ask an EU re
 - **Checked luggage is fine for:** printed parts, motors, screen (padded), SBC, cables, screws, tools, the steel ball. Put sharp tools (hobby knife, side cutters) in checked luggage; check the airline's rule for a soldering iron.
 - Pack the printed base pieces flat. They stack into about 30 x 25 x 20 cm (mechanical doc).
 - Carry the **screen, SBC and microSD cards** in your hand luggage if you can: they are the parts that hurt most to lose.
+- **After any transport in luggage,** measure all three buck outputs again with nothing connected, before you plug in the Pi or the ESP32. A knock can turn the adjust screw. The screws are locked with a drop of glue or nail varnish, but measure anyway.
 
 ---
 
@@ -292,28 +302,28 @@ Order the **Pololu motors first**: 2 to 3 weeks from the US (A), or ask an EU re
 | | Cheap build | Comfortable build |
 |---|---|---|
 | Printed parts (about 1.14 kg of PETG, from the mechanical print list) | 1.14 kg | 1.14 kg |
-| Bought parts on the robot | 1.58 kg | 2.07 kg |
-| **Finished robot** | **2.7 kg** | **3.2 kg** |
+| Bought parts on the robot | 1.64 kg | 2.07 kg |
+| **Finished robot** | **2.8 kg** | **3.2 kg** |
 | Mechanical design estimate (for comparison) | 2.59 kg | 2.59 kg |
 | Carried extras (spares, tools, charger, box, keyboard) | 0.1 kg | 1.0 kg |
-| **Everything you carry on the trip** (robot parts, if you take it apart, plus extras) | about 2.8 kg | about 4.2 kg |
+| **Everything you carry on the trip** (robot parts, if you take it apart, plus extras) | about 2.9 kg | about 4.2 kg |
 
 Weight by group (robot parts only):
 
 | Group | Cheap build | Comfortable build |
 |---|---|---|
-| 1 Brain and screen | 406 g | 418 g |
-| 2 Camera and audio | 90 g | 422 g |
-| 3 Sensing | 34 g | 54 g |
-| 4 Power | 436 g | 542 g |
+| 1 Brain and screen | 426 g | 418 g |
+| 2 Camera and audio | 105 g | 422 g |
+| 3 Sensing | 54 g | 54 g |
+| 4 Power | 443 g | 541 g |
 | 5 Drive | 259 g | 279 g |
 | 6 Pan/tilt | 126 g | 126 g |
 | 7 Mechanical hardware | 1280 g | 1280 g |
 | 8 Motherboard fit-out | 81 g | 81 g |
 | 9 Tools and consumables | 3 g | 3 g |
-| **Total on the robot** | **2715 g** | **3205 g** |
+| **Total on the robot** | **2777 g** | **3204 g** |
 
-The mechanical design sized the motors for **3.0 kg**. The cheap build is within it. The comfortable build is over it by about 205 g: the speakerphone (about 350 g, a guess) and two extra cells add most of it. See `peripherals.md` conflict C4. The weights of small parts are my assumptions (A); weigh the real parts and tell me.
+The mechanical design sized the motors for **3.0 kg**. The cheap build is within it. The comfortable build is over it by about 200 g: the speakerphone (about 350 g, a guess) and two extra cells add most of it. See `peripherals.md` conflict C4. The weights of small parts are my assumptions (A); weigh the real parts and tell me.
 
 ---
 
@@ -322,15 +332,17 @@ The mechanical design sized the motors for **3.0 kg**. The cheap build is within
 The long table with recommendations is in `peripherals.md` section 8. The ones that change what you buy:
 
 1. **Screen power:** from the SBC's 5.1 V buck with a 1 A fuse (not from the motherboard's POWER OUT). The list follows the draft wiring diagram. (C1)
-2. **HDMI cable length:** 0.8 m, not 30 to 50 cm. (C2)
-3. **Runtime and charging:** two cells give about 1.1 to 1.4 hours of calling; the power list says "charge only with the robot off"; a robot that is off cannot be called. The comfortable build has four cells and an optional 8.4 V charger adapter (not in the totals) for the power specialist to judge. (C3)
+2. **HDMI cable length:** 0.8 m (an earlier draft said 30 to 50 cm, which is too short; `sbc-selection.md` now says 0.8 m too). (C2)
+3. **Runtime and charging:** two cells give about 1.1 to 1.4 hours of calling (about 1 hour or less if the robot also drives); the power list says "charge only with the robot off"; a robot that is off cannot be called. The comfortable build has four cells (about 2.2 to 2.8 hours) and an optional 8.4 V charger adapter (not in the totals) for the power specialist to judge. All ASSUMED, measured in Stage 3. (C3)
 4. **Mass and battery cradle:** four cells need a bigger cradle in the base. (C4)
-5. **No place in the design for:** the speaker (the lid grille faces backward), a speakerphone, the camera LED, the call button, the camera cover and the third cable up the mast. (C5)
-6. **No 3.3 V buck is needed**, and driver B is not needed. (C7)
-7. **Motor voltage:** the Pololu motors are 12 V types; the software default assumes 6 V motors. A setting only. (C6)
+5. **Places the 3D design must get before the large parts are printed:** the speaker (the lid grille faces backward), a speakerphone, the camera LED, the call / STOP button, the camera cover and the third cable up the mast. (C5)
+6. **No 3.3 V buck is needed**, and driver B is not needed. Route B sound adds a sixth fuse holder (the amplifier's own 1 A fuse). (C7)
+7. **Motor voltage:** the Pololu motors are 12 V types; the software setting `mot_vmax` is 8.0, a speed cap and not the motor rating. A setting only. (C6)
 8. **Pi 5 USB limit** with a webcam and speakerphone on a bare USB-C cable. (C12)
 9. **A screen that is too heavy for the servos?** No. Checked in `peripherals.md` section 2.4.
-10. **A buck that cannot feed the SBC?** Not for normal use (2 to 3 A). Test at 6.4 V and 6.0 V input. (C8)
+10. **A buck that cannot feed the SBC?** Not for normal use (typical 1.5 to 2 A; worst case on paper 5.5 to 6 A, which is why a 6.3 A slow-blow is allowed on this branch if the 5 A fuse blows). Test with the pack at 6.4 V and at 6.0 V. (C8)
+11. **The USB link to the ESP32:** a data-only adapter in both builds, checked by two bench tests (`peripherals.md` 6.1). The ordinary cable in the list is the fallback. (C9)
+12. **Splice:** four 5-way lever connectors, not three, and no 2-way ones. (`wiring.md`)
 
 ---
 
@@ -344,11 +356,11 @@ All prices are web-search snapshots (shop pages mostly could not be opened). Whe
 | Pi 5 Active Cooler | 5.90 EUR incl. VAT | Welectron (art. RP9-111480); 5.67 to 7.95 EUR elsewhere |
 | Waveshare 7 inch (C) | 44.95 EUR without VAT (exp-tech.de), 48.47 EUR (melopero), 58 EUR (elecena.pl), 60.75 EUR (opencircuit.shop), 62.26 EUR (elty.pl) | shop listings |
 | No-name 7 inch HDMI touch | 42.99 to 56.99 EUR | eBay.de listings |
-| Jabra Speak 410 | 59.99 EUR (eBay, new, plus shipping), 84.99 EUR (June 2026, Latvian shop), 92 to 154 EUR elsewhere | shop listings |
-| Pololu 25D MP 47:1 (3229) | US$29.95 each | pololu.com page (search snippet) |
+| Jabra Speak 410 | 59.99 EUR (eBay, new, plus shipping), 84.99 EUR (June 2026, Latvian shop), 92 to 154 EUR elsewhere. Cheaper no-name "conference speakers" (17 to 31 EUR) are not trustworthy: they say nothing about echo cancelling. | shop listings |
+| Pololu 25D MP 47:1 (3229) | US$29.95 each; stall current 1.8 A at 12 V (used for the driver margin) | pololu.com page (search summary only, re-check the page; no copy is in the repository). Check the stall current by measuring the winding resistance (`peripherals.md` section 8). |
 | 18650 cells | 3.99 EUR (Nkon NL), 5.95 to 10.05 EUR (Kaufland sellers) | listings |
 | XL4016 module | 3.25 to 4.50 EUR (eBay.de), 6.01 to 6.95 EUR (NL shops), 10.99 EUR (AZ-Delivery via elecena.pl) | listings |
-| Wago 221 | 0.39 EUR (Berrybase, "from"), about 0.55 EUR (Hornbach, pack of 25) | listings; single pieces cost more |
+| Wago 221 | 0.39 EUR (Berrybase, "from"), about 0.55 EUR (Hornbach, pack of 25) | listings (2-way and mixed packs); single 5-way pieces cost more, I budget 1.20 EUR (A) |
 | MG996R | 4.50 to 7 EUR (eBay.de), 13.29 EUR (Waveshare) | listings |
 | PETG 1 kg | 9.75 EUR per kg (4-pack deal, June 2026), 12.32 to 13.45 EUR single | mydealz, eBay.de |
 | ADS1115 | 3.5 to 5 EUR (eBay.de), up to about 13 EUR (local shops) | `software-plan.md` listing check |
@@ -362,16 +374,18 @@ All prices are web-search snapshots (shop pages mostly could not be opened). Whe
 
 ## 10. What is verified and what is assumed
 
-**Verified (V):** prices named in section 9; screen size and power; motor model and Pololu price; the motherboard's connectors and pins; the SBC's recommended boards and their prices.
+**Verified (V):** prices named in section 9 (search summaries, re-check the shop page); screen size and power; motor model and Pololu price (search summary only, re-check the page); the motherboard's connectors and pins; the SBC's recommended boards and their prices.
 
-**Assumed (A):** every small-part price not named in section 9; all weights except the printed parts (mechanical doc) and the MG996R (55 g, V); the Pololu import cost; the wheel bore of 4 mm; the screen's HDMI socket; the SC-012-SN259 (no data found); the speakerphone weight; the number of 5 x 20 mm fuses and connectors needed.
+**Assumed (A):** every small-part price not named in section 9; all weights except the printed parts (mechanical doc) and the MG996R (55 g, V); the Pololu import cost; the Pololu stall current of 1.8 A (check with a multimeter when the motors arrive); the wheel bore of 4 mm; the screen's HDMI socket; the SC-012-SN259 (no data found); the speakerphone weight; the number of 5 x 20 mm fuses and connectors needed; the price of the USB-C breakout board and the data-only adapters; whether the data-only adapter lets the devkit's USB chip appear on the Pi (bench tests in `peripherals.md` 6.1).
 
 **Open questions that change this list:**
 
 1. Can robot 1 spare the Pi 5 8 GB, the servos, BMS, charger and bucks for the trip? (changes the cash needed)
 2. Does the SC-012-SN259 pass the camera test? (saves or costs 22 EUR)
-3. Does the echo test pass with route B? (saves 63 EUR, or not)
+3. Does the echo test pass with route B? (saves about 60 EUR, or not)
 4. Which exact screen, and which HDMI socket does it have? (changes the cable)
-5. 2 cells or 4 cells? (runtime, cradle, mass)
+5. 2 cells or 4 cells? (runtime, cradle, mass; the buy decision assumes about 1 hour of calling while driving, Stage 3 measures it)
 6. Which country, and what plug? (charger, travel adapter)
 7. Which 3D printer? (the design needs at least a 180 x 180 mm bed)
+8. Are the 5 boards you ordered version v5? (if not, the pin numbers in these files do not apply; `pcb/kicad/pin-table.md`)
+9. Does the devkit's USB chip appear on the Pi through the data-only adapter? (two bench tests, `peripherals.md` 6.1; the ordinary cable is the fallback)

@@ -35,6 +35,11 @@ module mb_pca()  {      // PCA9685 board 63 x 25.4 on 1x6 header, servo plugs fa
     color("lightgray") translate([12, 2, z0 + 10.1]) cube([61, 5, 9]);
     color("lightgreen") translate([58, 20, z0 + 10.1]) cube([14, 7, 9.5]);
 }
+module mb_plugs() {     // servo plugs standing on the PCA9685 header strip, plus the room the wires need to bend away (A: plug_h and plug_bend in robot2_params.scad)
+    z0 = mb_pcb_t + pca_top_h + hdr_plastic_h;       // top of the header plastic (board frame, z = 0 under the PCB)
+    color("deepskyblue", 0.6) translate([12, 0.5, z0]) cube([61, 8, plug_h]);                 // plug housings (3 pins = 7.6 mm wide), worst case: all channels used
+    color("gold", 0.4) translate([12, -8, z0 + plug_h]) cube([61, 16.5, plug_bend]);          // wire bend room, toward the mast (-by)
+}
 module mb_gyro() {
     z0 = mb_pcb_t;
     color("royalblue") translate([11, 48, z0 + 8.5]) cube([21.2, 16.4, 1.6]);
@@ -100,8 +105,28 @@ module ghost_sonar() {          // local: lens side toward +x (front face of the
     color("steelblue") translate([-13.6, -sonar_l/2, -sonar_w/2]) cube([1.6, sonar_l, sonar_w]);
     for (s = [-1, 1]) color("silver") translate([-12, s * sonar_pitch/2, 0]) rotate([0, 90, 0]) cylinder(d = 16, h = 12, $fn = 30);
 }
-module ghost_cliff() { color("steelblue") translate([-15, -7, 0]) cube([30, 14, 7]); color("black") translate([-2, -3, -3]) cube([4, 6, 3]); }
+module ghost_cliff() { color("steelblue") translate([-15, -7, 0]) cube([30, 14, 7]); color("black") translate([-2, -3, -3]) cube([4, 6, 3]); }   // long side along local x; assembly.scad turns it so that the long side runs along the arc
 module ghost_switch() { color("red") rotate([0, 90, 0]) cylinder(d = 15, h = 18, $fn = 30); }
+module ghost_bump_switch() { color("red") translate([-bump_sw_w / 2, -bump_sw_l / 2, 0]) cube([bump_sw_w, bump_sw_l, bump_sw_t]); }   // optional bumper micro switch, lying flat: local x = radial, local y = along the arc
+
+// ---- R23 places: call / STOP button, 40 mm speaker, speakerphone, camera-live LED (sizes ASSUMED, see robot2_params.scad)
+module ghost_button() {         // origin = top face of the panel, axis +z: body behind the panel (down), cap above it
+    color("red") translate([0, 0, -btn_depth]) cylinder(d = btn_body_d, h = btn_depth, $fn = 40);
+    color("firebrick") cylinder(d = btn_cap_d, h = btn_cap_h, $fn = 40);
+}
+module ghost_speaker40() {      // origin = cone face against the underside of the plate, body below (-z)
+    color("dimgray") translate([0, 0, -spk_body_h]) cylinder(d = speaker_d, h = spk_body_h, $fn = 48);
+}
+module ghost_speakerphone() {   // origin = cover top face; a flat puck (A: size and weight not verified)
+    color("slategray", 0.7) cylinder(d = spkA_d, h = spkA_h, $fn = 64);
+}
+module ghost_led5() {           // 5 mm LED in the brow front wall, axis along head x (front = +x). Origin = rear face of the wall (flange face), at the LED axis
+    color("red") translate([-8.6, 0, 0]) rotate([0, 90, 0]) cylinder(d = 5.0, h = 8.6 + brow_front_t + 1.0, $fn = 24);   // body + dome, 1 mm out of the wall
+    color("firebrick") translate([-1, 0, 0]) rotate([0, 90, 0]) cylinder(d = 5.8, h = 1.0, $fn = 24);                   // flange behind the wall
+}
+// ---- cable bundle and HDMI plug for the pan test (finding 20): vertical, origin = centre of the bottom face, long side along x
+module ghost_bundle(l = 60) { color("orange", 0.6) translate([-bundle_w / 2, -bundle_t / 2, 0]) cube([bundle_w, bundle_t, l]); }
+module ghost_hdmi_plug(l = hdmi_plug_l) { color("silver") translate([-hdmi_plug_w / 2, -hdmi_plug_t / 2, 0]) cube([hdmi_plug_w, hdmi_plug_t, l]); }
 
 module ghost_row() {
     ghost_motherboard();

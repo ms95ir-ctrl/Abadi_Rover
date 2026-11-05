@@ -3,7 +3,8 @@
 //
 // Two interfaces, both with their numbers in robot2_params.scad (section PAN / TILT):
 //   INTERFACE 1  "mast top":  the round MAST-TOP PLATE (neck_plate) below. It carries 4 x M4 holes on a
-//                 if1_bolt_dx x if1_bolt_dy pattern, a cable slot, and the stadium socket that the mast shells slide into.
+//                 if1_bolt_dx x if1_bolt_dy pattern, a cable opening (a kidney shape: the swept envelope of the cable bundle for
+//                 +-pan_cable_deg, see CABLE PATH in robot2_params.scad), and the stadium socket that the mast shells slide into.
 //                 His pan/tilt base bolts to these 4 holes.
 //   INTERFACE 2  "head back": a pad on the head lid with 4 x M3 inserts on an if2_bolt_dx x if2_bolt_dy pattern.
 //                 His tilt output (platform / bracket) bolts to these 4 inserts.
@@ -18,6 +19,17 @@ include <robot2_params.scad>
 show = "plate";    // "plate" | "turntable" | "yoke_servo" | "yoke_plain" | "stack"
 
 // ------------------------------------------------------------------ INTERFACE 1: mast-top plate  (print 1)
+// Cable opening (finding 20 / R21). The bundle (bundle_w x bundle_t, centre y = bundle_cy) is held by the turntable slot and turns with the head. The plate is fixed, so its opening must hold the
+// bundle at every pan angle from -pan_cable_deg to +pan_cable_deg: it is the union of the bundle rectangle (plus cable_clr all round) turned in steps of cable_sweep_step degrees.
+// It is clipped to the inside of the mast socket below (44.4 x 56.4 mm), so it never cuts into the socket wall. At +-30 degrees a straight, stiff bundle still pokes about 1 mm into the socket wall at one corner
+// and about 4 mm into the shell wall under the plate (the shells are 3 mm thick, their cavity is 38 x 50 mm): a soft bundle squeezes in there.
+module plate_cable_opening2d() {
+    intersection() {
+        union() for (a = [-pan_cable_deg : cable_sweep_step : pan_cable_deg])
+            rotate(a) translate([0, bundle_cy]) square([bundle_w + 2 * cable_clr, bundle_t + 2 * cable_clr], center = true);
+        rrect2(mast_d + 0.4, mast_w + 0.4, mast_r + 0.2);
+    }
+}
 // local z = 0 is the underside of the plate; the socket reaches down to z = -neck_sock_h
 module neck_plate() {
     difference() {
@@ -26,8 +38,8 @@ module neck_plate() {
             translate([0, 0, -neck_sock_h]) linear_extrude(height = neck_sock_h + eps)       // socket for the mast shells
                 difference() { rrect2(mast_d + 5.6, mast_w + 5.6, mast_r + 2.8); rrect2(mast_d + 0.4, mast_w + 0.4, mast_r + 0.2); }
         }
-        // cable slot: x +-19, y -25 ... -12.5 (inside the mast cavity, beside the pan servo)
-        translate([-19, -25, -1]) cube([38, 12.5, neck_plate_t + 2]);
+        // cable opening: swept envelope of the bundle for pan -pan_cable_deg ... +pan_cable_deg (inside the mast cavity, beside the pan servo). Was a fixed 38 x 12.5 slot.
+        translate([0, 0, -1]) linear_extrude(height = neck_plate_t + 2) plate_cable_opening2d();
         // pan horn (aluminium 25T disc, M3 threads in the horn): 4 x M3 x 14 from BELOW through plain holes, and a centre hole for the horn screw
         for (a = [45, 135, 225, 315]) translate([horn_pcd / 2 * cos(a), horn_pcd / 2 * sin(a), -1]) cylinder(d = horn_hole, h = neck_plate_t + 2, $fn = 16);
         translate([0, 0, -1]) cylinder(d = 8, h = neck_plate_t + 2, $fn = 30);
@@ -48,12 +60,13 @@ module turntable() {
             cylinder(r = skirt_r + skirt_t, h = tt_t);
             translate([0, 0, -skirt_h]) ring(skirt_r + skirt_t, skirt_r, skirt_h + eps);
             for (x = [srv_ear_hole_dx / 2 + ear_cx, -srv_ear_hole_dx / 2 + ear_cx], y = [-srv_ear_hole_dy / 2, srv_ear_hole_dy / 2])
-                translate([x, y, -3]) cylinder(d = 11, h = 3 + eps, $fn = 30);          // pads under the ear screws (insert depth)
+                translate([x, y, -3]) cylinder(d = 11, h = 3 + eps, $fn = 30);          // pads under the ear screws (insert depth); the case cut-out below trims their inner side flat
         }
-        translate([-(srv_l - srv_shaft_off) - 0.2, -srv_w / 2 - 0.3, -1]) cube([srv_l + 0.4, srv_w + 0.6, tt_t + 2]);   // servo case cut-out
+        // servo case cut-out. It starts BELOW the pads (z -4), so it also trims the inner edge of the 4 ear pads: before, the pads (d 11) reached 1.1 mm into the servo case.
+        translate([-(srv_l - srv_shaft_off) - 0.2, -srv_w / 2 - 0.3, -4]) cube([srv_l + 0.4, srv_w + 0.6, tt_t + 5]);
         for (x = [srv_ear_hole_dx / 2 + ear_cx, -srv_ear_hole_dx / 2 + ear_cx], y = [-srv_ear_hole_dy / 2, srv_ear_hole_dy / 2])
             translate([x, y, tt_t - 6]) cylinder(d = 5.6, h = 10, $fn = 24);          // M4 insert holes from the top
-        translate([-19, -25, -1]) cube([38, 12.5, tt_t + 2]);                           // cable slot (matches the plate)
+        translate([tt_slot_x0, tt_slot_y0, -1]) cube([tt_slot_x1 - tt_slot_x0, tt_slot_y1 - tt_slot_y0, tt_t + 2]);   // cable slot 38 x 14 (turns with the head; the bundle sits at y = bundle_cy in it; the plate opening below follows the bundle, see neck_plate)
         for (sy = [-1, 1], sx = [-12, 12], y = [30, 37]) translate([sx, sy * y, -1]) cylinder(d = 3.4, h = tt_t + 2, $fn = 16);   // yoke screws from below
     }
 }

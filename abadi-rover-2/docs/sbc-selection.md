@@ -4,7 +4,11 @@ Written 5 November 2026 for the telepresence robot. This file only chooses the s
 
 **Words used here.** SBC = single board computer, the small "brain" board (a Raspberry Pi is an SBC). CPU = the processor. RAM = working memory. WebRTC = the technology browsers use for video calls (Google Meet, Jitsi and most call web pages use it). Chromium = the free browser that comes with Raspberry Pi OS. Hardware video = a small special part of the chip that decodes or encodes video without using the CPU. OTG = a USB port that can act as a plug for a keyboard or hub. DP Alt Mode = a USB-C port that can also send a screen picture.
 
-**How sure am I.** VERIFIED = I saw it in a web source (listed at the bottom). ASSUMED = my own knowledge or a sensible guess; check it. In the tables, (V) = verified, (A) = assumed.
+**How sure am I.** VERIFIED = I saw it in a web source (listed at the bottom). For a page whose text I could not open this means "search summary only, re-check the page". ASSUMED = my own knowledge or a sensible guess; check it. In the tables, (V) = verified, (A) = assumed.
+
+**Which file wins.** Where this file and `parts-list.md` disagree on prices, lengths, fuses or quantities, `parts-list.md` wins.
+
+**How to type a command on the Pi.** Some steps below use a *terminal*: a window where you type one line and press Enter. On the Raspberry Pi desktop, open it with the taskbar icon (a black box with `>_`) or press Ctrl+Alt+T (A, check on your image). Type the line exactly as shown (or paste it with Ctrl+Shift+V), then press Enter. `sudo` means "do this as administrator". The first time, it asks for your password: nothing appears on the screen while you type it, and that is normal; press Enter when done. In the text editor `nano`, the keys at the bottom of the window show what to press: Ctrl+O then Enter saves, Ctrl+X leaves.
 
 ---
 
@@ -19,7 +23,7 @@ Written 5 November 2026 for the telepresence robot. This file only chooses the s
 
 The cheap boards you named (Orange Pi Zero 2W, Radxa Cubie A7S) look 2 to 3 times cheaper than a Pi. They are not a good deal for a trip: you cannot afford days of fiddling at your sister's house. The A7S has a second problem: it has **no HDMI port at all** (section 4).
 
-**The one honest unknown.** I found **no test of a 720p Chromium video call on any of these boards**, only hints. Nobody has proven that a call is smooth on the Pi 4 or the Pi 5 either. The plan therefore includes a short test at home before you leave (section 10).
+**The one honest unknown.** I found **no test of a 720p Chromium video call on any of these boards**, only hints. Nobody has proven that a call is smooth on the Pi 4 or the Pi 5 either. The plan therefore includes a short test at home before you leave (section 10). The first call is asked at 480p; 720p at 30 fps is the camera test and the upgrade.
 
 ---
 
@@ -52,9 +56,13 @@ What I found, board family by board family:
 | Allwinner A733 (Cubie A7Z, A7A, A7S, Orange Pi Zero 3W) | Vendor claims 8K H.265 decode. (V) | **No.** A Radxa forum post says Chromium on the A7A reports hardware decoding disabled. (V) |
 
 **What this means for the software plan (for the other specialists):**
-- Plan for **software VP8 or H.264 at 720p, 1-to-1, with the frame rate capped at about 24 to 30 fps**. A plain peer-to-peer call page is much lighter than Jitsi or Google Meet, which are built for many people.
-- The webcam should be set to **720p, not 1080p** (a Balena forum user got lag with a 1080p webcam on a Pi). (V)
-- The CPU should be set to its "performance" mode, because Raspberry Pi OS does not always do it by itself. (V, Balena forum)
+- Plan for **software VP8 or H.264, 1-to-1, with the frame rate capped at about 24 to 30 fps**. The first call is asked at 480p; 720p is the camera test and the upgrade, once the home test (section 10) shows the Pi copes. A plain peer-to-peer call page is much lighter than Jitsi or Google Meet, which are built for many people.
+- The webcam should be set to **720p at most, never 1080p** (a Balena forum user got lag with a 1080p webcam on a Pi). (V, search summary only, re-check the page)
+- The CPU should be set to its "performance" mode, because Raspberry Pi OS does not always do it by itself. (V, Balena forum, search summary only, re-check the page.) Type these lines in a terminal (see "How to type a command" at the top), one at a time, pressing Enter after each:
+  - `echo performance | sudo tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor` sets the mode. On a Pi 4 and a Pi 5 all four cores share one setting, so cpu0 is enough (A).
+  - `cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor` shows the mode. It must print `performance`.
+  - **This lasts only until the next reboot.** For the home test (section 10) that is enough: it is a test-only step.
+  - To keep it after a reboot (A: test it on your image; the software plan decides what the finished robot does): first make a backup copy with `sudo cp /boot/firmware/cmdline.txt /boot/firmware/cmdline.txt.bak`. Then open the file with `sudo nano /boot/firmware/cmdline.txt`. It is ONE long line. Press the End key to go to the end of that line, type one space and then `cpufreq.default_governor=performance`. Do not press Enter (no new line). Save with Ctrl+O, Enter, then leave with Ctrl+X. Type `sudo reboot`, and after the restart run the `cat` line again. If the Pi no longer starts, put the card in another computer and copy `cmdline.txt.bak` over `cmdline.txt` (the card shows up as a small drive).
 - A special app (not Chromium) can use the Pi 4 or Zero 2 W hardware H.264 encoder. A project does that on a Zero 2 W (one-way, about 1 second delay). (V) That is a possible later upgrade, not a reason to pick a board.
 
 ---
@@ -154,10 +162,10 @@ Prices are EUR, delivered to Germany, "about", from news articles and shop snaps
 
 | Item | Pi 4 2 GB | Pi 5 (own or new) |
 |---|---|---|
-| **HDMI cable** | **micro-HDMI** to the screen's connector. Which end the screen needs is decided in the screen file. Use the HDMI0 port, the one closest to the USB-C power port (A). Cable must bend through the neck: pick a **thin, flexible, 30 to 50 cm** cable. About 6 to 10 EUR (A). | The same: 2x micro-HDMI, use HDMI0 (A). |
-| **Storage** | microSD 32 GB, A1 or A2 rating, a known brand (SanDisk, Samsung). About 8 to 12 EUR (A). Buy **two** and clone the first as a spare. | The same. A 64 GB card is fine. |
-| **Cooling** | Heatsink plus a small 5 V fan. You own a 5 V fan. Without it the Pi 4 may throttle in a long call (A). | **Official Active Cooler** for the Pi 5, about 5 to 6 EUR (A, check). It plugs into the fan connector on the board. |
-| **Power cable** | USB-C plug with bare wires (a "pigtail"), or a cut USB-C cable. About 3 to 8 EUR (A). | Same, plus the config flag below. |
+| **HDMI cable** | **micro-HDMI** to the screen's connector. Which end the screen needs is decided in the screen file. Use the HDMI0 port, the one closest to the USB-C power port (A). Cable must bend through the neck: pick a **thin, flat, flexible, 0.8 m** cable (the mast route needs about 0.65 m; see `parts-list.md` and `peripherals.md` C2). About 12 EUR (A). | The same: 2x micro-HDMI, use HDMI0 (A). |
+| **Storage** | microSD 32 GB, A1 or A2 rating, a known brand (SanDisk, Samsung). About 8 to 12 EUR (A). The cheap build buys **one** card. | The same. A 64 GB card is fine. The comfortable build buys a second card and clones the first onto it as a spare. |
+| **Cooling** | Heatsink plus a small 5 V fan. Buy one for robot 2 (it is in the cheap-build parts list; the fan you own is for robot 1). Without it the Pi 4 may throttle in a long call (A). | **Official Active Cooler** for the Pi 5, about 5 to 6 EUR (A, check). It plugs into the fan connector on the board. |
+| **Power cable** | A USB-C plug breakout board with solder pads and your own AWG 18 to 20 silicone wire (a "pigtail"), or a cut thick 5 A USB-C cable. About 5 EUR (A). | Same, plus the config flag below. |
 | **USB** | Webcam on a blue USB 3.0 port, ESP32 on a USB 2.0 port. No hub. | Same. |
 | **Audio out** | 3.5 mm jack on the board, or HDMI sound to the screen, or a small USB speaker (A). | **No 3.5 mm jack on a Pi 5.** HDMI sound or a USB speaker (A). |
 
@@ -167,16 +175,27 @@ This follows the power design in the motherboard documents: a second XL4016 buck
 
 1. **Use the USB-C plug end, not the 5 V header pins.** The USB-C input goes through the board's own protection parts. The header pins skip them (the project's shopping list says the same). Use the header pins only if the USB-C route fails.
 2. **Pi 4:** a bare USB-C cable end works. The board does not need a power negotiation (A).
-3. **Pi 5:** a bare cable end boots, but the Pi 5 expects a 5 A supply that "talks" to it. Without that it limits all USB ports together to **600 mA** and shows a warning (V). Your webcam and the ESP32 together may use more. The fix is the line `usb_max_current_enable=1` in the file `/boot/firmware/config.txt`. It tells the Pi to allow more USB power anyway. A third-party guide gives this setting (V); **check it in the official Raspberry Pi docs before relying on it**. Only turn it on if the buck and the wire really can give 5 A.
-4. **Wire.** Short (under 40 cm) and thick: 1.0 mm² (AWG 18) for the Pi 5; 0.75 mm² (AWG 20) is enough for the Pi 4. Thin USB cable wires (AWG 24) lose about 0.17 V at 2 A over 1 m round trip (A, my calculation). Set the buck to **5.1 V measured at the Pi end with the Pi busy**, not on the bench.
-5. **Fuse.** 3 A for the Pi 4. 5 A for the Pi 5 (as in the shopping list). Slow-blow type.
+3. **Pi 5:** a bare cable end boots, but the Pi 5 expects a 5 A supply that "talks" to it. Without that it limits all USB ports together to **600 mA** and shows a warning (V). Your webcam and the ESP32 together may use more. The fix is the line `usb_max_current_enable=1` in the file `/boot/firmware/config.txt`. It tells the Pi to allow more USB power anyway. Only turn it on if the buck and the wire really can give 5 A. A third-party guide gives this setting (V, third-party guides; I could not open the official page). Steps, in this order (see "How to type a command" at the top):
+   1. Type `sudo nano /boot/firmware/config.txt` and press Enter. The file opens in the `nano` editor.
+   2. Use the arrow keys to go to the end of the file. The default file ends under an `[all]` line; add the new line under an `[all]` line (if the last header in your file is something else, such as `[cm4]`, type a new line `[all]` first). Type `usb_max_current_enable=1` on its own line.
+   3. Save with Ctrl+O, then Enter. Leave with Ctrl+X.
+   4. Type `sudo reboot` and press Enter.
+   5. Confirm the line on the official page: https://www.raspberrypi.com/documentation/computers/config_txt.html (look for `usb_max_current_enable`). If the page says something different, follow the page.
+4. **Wire.** Short (under 40 cm) and thick: your own silicone wire, AWG 18 (1.0 mm²) to AWG 20 (0.5 mm²), soldered to ALL the VBUS and GND pads of a USB-C plug breakout board; or cut a thick 5 A USB-C cable and read the wire gauge printed on its jacket. AWG 20 is enough for the Pi 4. Thin USB cable wires (AWG 24) lose about 0.17 V at 2 A over 1 m round trip (A, my calculation). If the wire is thinner than AWG 20, read point 5 (the 3 A fuse, and what to do for a Pi 4). Set the buck to **5.1 V measured at the Pi end with the Pi busy**, not on the bench. After you have set it, lock the adjust screw of the buck with a drop of glue or nail varnish.
+5. **Fuse.** A **5 A slow-blow** at the buck input for the Pi 4 and for the Pi 5 (this is what `parts-list.md` buys; `wiring.md` branch 4). A 3 A fuse is only a fallback for a pigtail wire thinner than AWG 20 (point 4). The fuse assortment in `parts-list.md` includes a 3 A (if the one you buy has none, buy a single 3 A slow-blow, and only if your wire is thin). What to do: **Pi 5 with thin wire:** use the 3 A fuse and accept that the Pi 5 may brown out in its peaks. **Pi 4 with thin wire:** do not use the 3 A fuse. At its 3 A peak with a 6.0 V pack it is too tight and would blow. Get AWG 20 or thicker wire and use the 5 A fuse. If the 5 A fuse blows in rare peaks, a 6.3 A slow-blow is also allowed for this branch (`peripherals.md` 6.2).
 6. **Capacitor.** Put a 470 to 1000 uF, 10 V or higher, capacitor across the 5 V and ground at the Pi end (A). It helps when the motors pull the battery down.
-7. **XL4016 warning.** This module needs about 1 to 1.5 V more input than output at higher currents (A). With the 2S pack near empty (6.0 V) a 5.1 V output may sag. Test it at 6.0 V in, with the Pi busy, before the trip. The simple fix is to set the battery cutoff a little higher (about 6.4 V, 3.2 V per cell).
+7. **XL4016 warning.** This module needs about 1 to 1.5 V more input than output at higher currents (A). With the 2S pack near empty (6.0 V) a 5.1 V output may sag. Test it with the pack (or a bench supply) at 6.4 V AND at 6.0 V in, with the Pi busy, before the trip. Measure at the two pigtail wires right at the USB-C plug, or on the Pi's header pin 2 (5 V) and pin 6 (GND), while a call runs. The simple fix is to set the battery cutoff a little higher (about 6.4 V, 3.2 V per cell).
 8. **Ground.** Join the SBC ground to the robot's star ground like the other parts. One wire is enough.
+9. **After a trip in luggage,** measure all three buck outputs again with nothing connected before you plug in the Pi or the ESP32.
 
 ### The ESP32 USB cable: a power question for the wiring file
 
-The ESP32 devkit gets 5 V from the motherboard (clean 5 V, through diode D1). If you also plug it into the SBC's USB port, there are **two 5 V sources** on the same pin through a USB cable. The diodes make this probably harmless, but it also joins the two grounds and lets USB current flow back and forth (A). Safest: use a **data-only USB cable or adapter** (no 5 V wire), about 5 EUR (A), so the ESP32 is powered only by the motherboard. The wiring specialist should confirm.
+The ESP32 devkit gets 5 V from the motherboard (clean 5 V, through diode D1). If you also plug it into the SBC's USB port, there are **two 5 V sources** on the same pin through a USB cable. The diodes make this probably harmless, but it also joins the two grounds and lets USB current flow back and forth (A). The plan: use a **USB data-only adapter** (no 5 V wire, about 5 EUR each, in the cheap build too) with a short ordinary cable, so the ESP32 is powered only by the motherboard. Tape over pin 1 (the 5 V contact) of the USB-A plug is a backup only.
+
+It is not known (A) whether the devkit's USB-serial chip needs the cable's 5 V to show up on the Pi. Two 5-minute bench tests settle it before the trip (all steps are written out in `peripherals.md`, section 6.1):
+- **Test A:** Pi on, the clean 5 V buck off (take out its 2 A fuse), the adapter and cable between the Pi and the devkit's COM socket. The devkit's red power LED must stay dark.
+- **Test B:** clean 5 V buck on (its 2 A fuse back in, the battery or a bench supply connected, the main switch on; the Pi stays on its wall supply), same cable. On the Pi, `lsusb` must show a line with `10c4:ea60` (CP210x) or `1a86:7523` or `1a86:55d3` (CH340 / CH343), and `ls /dev/ttyUSB* /dev/ttyACM*` must list one device. `ls` will probably also print one error line such as `cannot access '/dev/ttyACM*': No such file or directory`. That is normal (one of the two patterns matches nothing); it is a pass as long as one device is listed.
+- If Test B fails, use an ordinary cable on its own, put a USB power meter in line between the cable's USB-C plug and the devkit's COM socket (not at the Pi: its port is USB-A, so a USB-C meter does not fit there), and check that about 0 mA flows from the Pi port while the clean 5 V buck feeds the ESP32. If the Pi port does give current, ask before running that way.
 
 Also, some Allwinner/Radxa kernels may lack the USB-serial driver for the chip on the ESP32's "COM" port (CP2102 or CH340). The Pi's kernel has them (A). If a non-Pi board is ever used, test `ls /dev/ttyUSB*` (it lists connected USB serial adapters) before anything else.
 
@@ -186,8 +205,8 @@ Also, some Allwinner/Radxa kernels may lack the USB-serial driver for the chip o
 
 | Pick | You see (their face) | They see (your robot's camera) | Notes |
 |---|---|---|---|
-| **Pi 5** | 720p, 24 to 30 fps, smooth | 720p, 24 to 30 fps | CPU about half used. Keeps up in a 30-minute call if cooled. |
-| **Pi 4 2 GB** | 720p at 24 to 30 fps if you use a simple page | 480p to 720p; the browser lowers the quality by itself when the CPU is full | Fan and performance mode are a must. A busy CPU can also make the video lag after 10 to 20 minutes in a warm room. |
+| **Pi 5** | 720p, 24 to 30 fps, smooth (the first call is asked at 480p; 720p is the upgrade) | 720p, 24 to 30 fps | CPU about half used. Keeps up in a 30-minute call if cooled. |
+| **Pi 4 2 GB** | 720p at 24 to 30 fps if you use a simple page (first call asked at 480p) | 480p to 720p; the browser lowers the quality by itself when the CPU is full | Fan and performance mode are a must. A busy CPU can also make the video lag after 10 to 20 minutes in a warm room. |
 | **Cubie / Orange Pi / Radxa Zero** | 480p at best; stutter likely | 360p to 480p | Not tested by anybody I could find. |
 | **Pi Zero 2 W** | Not usable in Chromium | | |
 
@@ -210,9 +229,9 @@ Wi-Fi quality matters as much as the board: put the SBC's antenna away from the 
 
 Do this with the parts you will actually take: board, microSD, cooler, camera, screen, the buck on the real battery.
 
-1. Boot, join your Wi-Fi, open a free test call (for example a 1-to-1 meeting on Jitsi) with your phone as the other person. Set the camera to 720p.
-2. Run the call for **30 minutes**. Look at: CPU use (the system monitor), whether the picture stutters, whether the fan is needed.
-3. In a terminal, type `vcgencmd measure_temp`. It prints the board's temperature. Under 80 degrees C is fine. Then type `vcgencmd get_throttled`. It prints a code. `0x0` means no power or heat trouble so far. Any other value means the board has been short of power or too hot (Raspberry Pi boards only).
+1. Boot, join your Wi-Fi, set the CPU to performance mode (the commands are in section 3; for this test the mode only has to last until the next reboot), open a free test call (for example a 1-to-1 meeting on Jitsi) with your phone as the other person. Start with the camera at 480p (the setting the robot will ask for). Then repeat the test at 720p, 30 fps: that is the camera test and the upgrade.
+2. Run each call for **30 minutes**. Look at: CPU use (the system monitor), whether the picture stutters, whether the fan is needed.
+3. In a terminal (see "How to type a command" at the top), type `vcgencmd measure_temp`. It prints the board's temperature. Under 80 degrees C is fine. Then type `vcgencmd get_throttled`. It prints a code. `0x0` means no power or heat trouble so far. Any other value means the board has been short of power or too hot (Raspberry Pi boards only).
 4. In Chromium, open `chrome://webrtc-internals`. It shows which video encoder and decoder the call really uses ("software" or "hardware"). This also answers the open question in section 3.
 5. Drive the motors (wheels lifted) while the call runs. If the board reboots or the picture freezes, the 5.1 V branch is too weak.
 6. Note the result in the project log. If the Pi 4 fails, you know you need the Pi 5 before you leave.
@@ -231,10 +250,12 @@ Do not buy the Orange Pi Zero 2W or the Cubie A7S for this trip. Their lower pri
 |---|---|---|---|
 | Raspberry Pi 5, 2 GB (or 4 GB) | Berrybase, Reichelt, Welectron | 2 GB about 82.50 EUR; 4 GB about 115 to 150 EUR (check live) | Skip if you take your own. A Pi is easy to find abroad, but prices and stock vary. |
 | Active Cooler for Pi 5 | same shop | about 5 to 6 EUR (A) | |
-| 2 microSD cards 32 or 64 GB, A2 | any | about 20 to 25 EUR for both (A) | Flash one, clone to the second |
-| micro-HDMI to HDMI cable, thin, 30 to 50 cm | any | 6 to 10 EUR (A) | Adjust to the screen's connector |
-| USB-C pigtail or USB-C cable to cut | any | 3 to 8 EUR (A) | |
-| Data-only USB adapter ("power blocker") or cable | any | about 5 EUR (A) | For the ESP32 link |
+| microSD cards 32 or 64 GB, A2 | any | about 9 EUR each (A) | Comfortable build (Pi 5): two cards, flash one and clone it to the second. Cheap build (Pi 4): one card. |
+| micro-HDMI to HDMI-A cable, flat and slim, 0.8 m (right-angle plug at the screen end is better) | any | about 12 EUR (A) | Adjust to the screen's connector |
+| USB-C plug breakout board with solder pads (plus your own AWG 18 to 20 silicone wire), or a thick 5 A USB-C cable to cut | any | about 5 EUR (A) | |
+| XL4016 buck x2 (servo 5.0 V and SBC 5.1 V; the one you own is for robot 1) | any | about 12 EUR for two (A) | As in `parts-list.md` |
+| 5 A slow-blow fuses 5 x 20 mm and an in-line holder | any | about 1.20 EUR for the holder (A); fuses come in an assortment | As in `parts-list.md` |
+| Data-only USB adapter ("power blocker"), two of them | any | about 5 EUR each (A) | One for the ESP32 link, one for the touch cable. Both builds. |
 | Small USB 2.0 hub | any | 6 to 10 EUR (A) | Only if a third device is added |
 | Small USB keyboard, or phone hotspot plan | any | about 10 EUR (A) | For first Wi-Fi setup at your sister's |
 
@@ -244,7 +265,7 @@ microSD card, HDMI cable, USB cables, USB speaker, hub, keyboard.
 
 ### Already owned / in the existing lists
 
-Second XL4016 buck (set to 5.1 V), a 3 A or 5 A fuse and holder, thick wire, a 5 V fan, the USB webcam, the 2S pack and charger.
+Thick wire, the USB webcam (test it first), old 18650 cells. The XL4016 modules, the fuse and holder and the 5 V fan are **not** on this list: you own one XL4016 and one fan for robot 1, and robot 2 needs its own (see `parts-list.md`, "What must be bought twice"). The 2S pack and charger parts are yours only if robot 1 can wait.
 
 ### Luggage rule
 
@@ -259,8 +280,8 @@ The 2S pack, old 18650 cells and any power bank go in **carry-on luggage only**,
 3. **Is the Pi 5 8 GB free for the trip?** Your decision about robot 1.
 4. **Screen connector type** decides the micro-HDMI cable end. Screen file must say.
 5. **Sound** (speaker) is not decided yet; the Pi 5 has no headphone jack.
-6. **ESP32 power over USB** (section 7): data-only cable or not. The wiring file decides.
-7. **The Pi 5 flag** `usb_max_current_enable=1` is from a third-party guide. Check the official docs.
+6. **ESP32 power over USB** (section 7): the plan is a data-only adapter; two bench tests (A and B, `peripherals.md` 6.1) show whether the devkit's USB chip still appears on the Pi. If not, an ordinary cable plus a current check.
+7. **The Pi 5 flag** `usb_max_current_enable=1` is from third-party guides. Confirm it on the official page, https://www.raspberrypi.com/documentation/computers/config_txt.html (the commands are in section 7, point 3).
 8. **XL4016 at 6.0 V input** may not hold 5.1 V under load. Test it.
 9. **Raspberry Pi stock and prices keep changing** because of the memory shortage (four rounds of price rises in 2026). Buy early.
 10. **Trip details** (date, country, the sister's Wi-Fi type, hotel or home power plug) are unknown.
@@ -280,4 +301,5 @@ The 2S pack, old 18650 cells and any power bank go in **carry-on luggage only**,
 - Radxa Zero 3W: product brief https://dl2.radxa.com/zero3/docs/hw/3w/radxa_zero_3w_product_brief.pdf ; https://www.neven7.eu/p/radxa-zero-3w ; https://shop.allnet.de/detail/index/sArticle/359780
 - Chromium and video calls: Pi 4 Chromium hardware accel (video files) https://linuxuprising.com/2021/04/how-to-enable-hardware-acceleration-in.html ; WebRTC H.264 hardware decode thread https://groups.google.com/a/chromium.org/g/chromium-dev/c/D9LsobXOfN8 ; Pi 5 H.264 hardware missing, Chromium software only https://gist.github.com/schickling/089f4faf412b5267508f758408f0645f ; Pi video call box on Balena https://forums.balena.io/t/turn-a-raspberry-pi-a-webcam-and-a-tv-into-a-video-call-device/209644
 - Geekbench Browser entries (scores differ from run to run, so treat them as rough): Pi 5 (796 to 846 single-core in the entries I saw) https://browser.geekbench.com/v6/cpu/baseline/12933706 ; Cubie A7Z (519 single, 1181 multi) https://browser.geekbench.com/v6/cpu/baseline/15776780
+- Pi 5 USB current flag, official page (not opened by me): https://www.raspberrypi.com/documentation/computers/config_txt.html
 - Not reachable by my tool (so only search summaries were used): cnx-software.com article text, docs.radxa.com, omgubuntu.co.uk page text, and all shop pages. If you need those pages fetched, they have to be allowed in the session's network settings.

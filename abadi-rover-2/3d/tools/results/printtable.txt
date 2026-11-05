@@ -1,0 +1,40 @@
+part             qty        size x,y,z mm    volume       g     time  orientation / supports
+tray_FL            1           178x133x56    96.6cm3     92g    3h07  floor down, rim and posts up | none; use a brim (the 53 mm posts are tall and thin). The 19.4 mm bumper slots in the rim are short bridges
+tray_FR            1           178x125x56    95.4cm3     91g    3h05  floor down, rim and posts up | none; use a brim (the 53 mm posts are tall and thin). The 19.4 mm bumper slots in the rim are short bridges
+tray_RL            1            90x131x56    44.4cm3     42g    1h32  floor down, rim and posts up | none; use a brim (the 53 mm posts are tall and thin). The 19.4 mm bumper slots in the rim are short bridges
+tray_RR            1            90x123x56    44.4cm3     42g    1h32  floor down, rim and posts up | none; use a brim (the 53 mm posts are tall and thin). The 19.4 mm bumper slots in the rim are short bridges
+deck_FL            1           178x138x35    74.2cm3     47g    1h42  flat, plate down, standoffs up | none
+deck_FR            1           178x130x35    72.6cm3     46g    1h40  flat, plate down, standoffs up | none
+deck_RL            1            90x131x35    34.3cm3     22g    0h53  flat, plate down, standoffs up | none
+deck_RR            1            90x123x35    31.6cm3     20g    0h50  flat, plate down, standoffs up | none
+cover_FL           1           178x138x33    54.8cm3     52g    1h51  upside down: top plate on the bed, skirt up | none (the speaker pocket ring stands up from the bed)
+cover_FR           1           178x130x33    54.6cm3     52g    1h51  upside down: top plate on the bed, skirt up | none (the speaker pocket ring stands up from the bed)
+cover_RL           1            90x131x33    28.5cm3     27g    1h04  upside down: top plate on the bed, skirt up | none (the speaker pocket ring stands up from the bed)
+cover_RR           1            90x123x33    28.0cm3     27g    1h03  upside down: top plate on the bed, skirt up | none (the speaker pocket ring stands up from the bed)
+caster_cup         1           38x38x13.6     7.9cm3      9g    0h29  flange down | none
+caster_ring        1            28x28x1.8     0.8cm3      1g    0h14  flat | none
+motor_cap          4         40x12.0x16.0     4.2cm3      5g    0h21  flat, top face down (as exported) | none
+skid               4       14.0x14.0x10.5     1.5cm3      2g    0h15  as exported | none
+plug_hood          1           35x81x11.6    10.4cm3     12g    0h35  upside down: hood top on the bed, flange up | none: a 45 degree fillet under the flange holds it up (glue the flat flange face to the cover top)
+bumper_R           1           88x75x16.0     7.9cm3      9g    0h29  arc standing on its edge, arm lying flat on the bed (as exported) (OPTIONAL) | none
+bumper_C           1        16.2x114x16.0     7.4cm3      8g    0h28  arc standing on its edge (as exported) (OPTIONAL) | none
+bumper_L           1           88x75x16.0     7.9cm3      9g    0h29  arc standing on its edge, arm lying flat on the bed (as exported) (OPTIONAL) | none
+mast_lo_front      1            107x56x24    28.7cm3     31g    1h11  lying on the outer back face, open side up | none
+mast_lo_back       1            107x56x22    27.7cm3     30g    1h09  lying on the outer back face, open side up | none
+mast_up_front      1            107x56x24    28.7cm3     31g    1h11  lying on the outer back face, open side up | none
+mast_up_back       1            107x56x22    27.7cm3     30g    1h09  lying on the outer back face, open side up | none
+collar_front       1             25x77x40    16.3cm3     17g    0h43  as exported (standing) | none
+collar_back        1             25x77x40    16.5cm3     17g    0h44  as exported (standing) | none
+foot_plate         1             70x84x22    25.2cm3     19g    0h48  plate down, socket up | none
+neck_plate         1           100x100x25    70.3cm3     40g    1h28  top face down, socket up | none
+turntable          1           92x92x16.0    28.0cm3     20g    0h49  top face down, skirt up | none
+yoke_servo_side    1            46x78x125    74.5cm3     47g    1h42  bar flat on the bed, arm standing (125 mm high) | none; add a brim
+yoke_plain_side    1            46x78x125    74.9cm3     48g    1h42  bar flat on the bed, arm standing (125 mm high) | none; add a brim
+head_shell         1           151x175x42   128.0cm3    130g    4h19  front face down | none; a support only under the 41 mm servo window if it sags. The 22 mm bridge over the camera-cover slot may sag: then use a 1 mm plastic card as the cover
+head_lid           1          151x175x6.4    71.9cm3     55g    1h56  interface-pad side down | none
+pivot_bush         1        14.0x14.0x8.6     1.1cm3      1g    0h15  as exported | none
+cam_cover          1            62x20x1.0     1.2cm3      2g    0h15  flat (OPTIONAL) | none (or use a 1 mm plastic card)
+all: 35 different parts, 41 pieces, 1152 g, 44.6 h
+first_build_without_optional: 31 different parts, 37 pieces, 1124 g, 43.0 h
+first_build_without_bumper: 32 different parts, 38 pieces, 1125 g, 43.2 h
+bumper_only: 3 different parts, 3 pieces, 27 g, 1.4 h

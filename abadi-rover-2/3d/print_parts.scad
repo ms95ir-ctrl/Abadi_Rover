@@ -1,7 +1,7 @@
 // =====================================================================
 // PRINT PARTS: every printed part, already turned into its printing orientation (lowest point on z = 0).
 // Export one part:   openscad -D 'part="head_shell"' -o stl/head_shell.stl print_parts.scad
-// Part names are listed in docs/mechanical-design.md (print list). Default output = the small parts together.
+// Part names are listed in docs/mechanical-design.md (print list). Default output = the small parts together, spaced at least 5 mm apart (checked: the parts do not touch).
 // =====================================================================
 _robot2_lib = true;   // tells robot2_params.scad that it is used as a library (no demo shape)
 include <robot2_params.scad>
@@ -34,9 +34,11 @@ module print_part(name) {
     else if (name == "caster_ring") flat(3) caster_ring();
     else if (name == "motor_cap") translate([0, 0, 16]) rotate([180, 0, 0]) motor_cap();                  // flat top down
     else if (name == "skid") skid();
-    else if (name == "bumper_R") bumper_seg(0);
-    else if (name == "bumper_C") bumper_seg(1);
-    else if (name == "bumper_L") bumper_seg(2);
+    else if (name == "plug_hood") translate([-relief_cx, relief_cy, hood_top_z]) rotate([180, 0, 0]) plug_hood();   // upside down (hood top on the bed), flange up; the 45 degree fillet under the flange makes supports unnecessary
+    // optional bumper (not in the first build): arc standing up, arm lying on the bed (arc and arm both start at z = bump_z0): no supports
+    else if (name == "bumper_R") flat(bump_z0) bumper_seg(0);
+    else if (name == "bumper_C") flat(bump_z0) bumper_seg(1);
+    else if (name == "bumper_L") flat(bump_z0) bumper_seg(2);
     // ---- mast: half shells lie on their outer back face, open side up
     else if (name == "mast_lo_front") translate([0, 0, 22]) rotate([0, 90, 0]) shell_half(+1, seg_h_p, [foot_sock_h / 2]);
     else if (name == "mast_lo_back")  translate([0, 0, 22]) rotate([0, -90, 0]) shell_half(-1, seg_h_p, [foot_sock_h / 2]);
@@ -54,16 +56,20 @@ module print_part(name) {
     else if (name == "head_shell") translate([0, 0, head_d / 2]) rotate([0, 90, 0]) head_shell_full();      // front face down
     else if (name == "head_lid") translate([0, 0, head_d / 2 + 4]) rotate([0, -90, 0]) head_lid();            // interface pad down
     else if (name == "pivot_bush") pivot_bush();
+    else if (name == "cam_cover") cam_cover();                                                                 // optional camera slide cover, 62 x 20 x 1 mm, lies flat
 }
 
 module small_parts() {
     print_part("caster_cup");
     translate([45, 0, 0]) print_part("caster_ring");
     for (i = [0 : 3]) translate([90 + i * 45, 0, 0]) print_part("motor_cap");
-    for (i = [0 : 1]) translate([i * 20, 40, 0]) print_part("skid");
-    translate([60, 40, 0]) print_part("pivot_bush");
-    translate([0, 80, 0]) print_part("collar_front");
-    translate([0, 150, 0]) print_part("collar_back");
+    for (i = [0 : 3]) translate([i * 20, 40, 0]) print_part("skid");
+    translate([90, 40, 0]) print_part("pivot_bush");
+    translate([150, 90, 0]) print_part("plug_hood");
+    translate([45, 100, 0]) print_part("cam_cover");
+    // the two collar halves stand side by side (each is 25 x 77 mm in plan), clear of the skid row
+    translate([6, 95, 0]) print_part("collar_front");
+    translate([-6, 95, 0]) print_part("collar_back");
 }
 
 if (part == "small_parts") small_parts();

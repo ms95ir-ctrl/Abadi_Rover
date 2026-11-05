@@ -99,7 +99,7 @@ A "terminal" is a window where you type one line and press Enter. On the Raspber
 - No part was built, measured or tested. The weight, tip-over and runtime numbers are calculations.
 - No tested 720p Chromium video call was found for any small board, including the Raspberry Pi. The home test in `docs/sbc-selection.md` section 10 decides this.
 - Prices come from web search results, not from shop pages (the shops could not be opened). Check the live price when you buy.
-- The mass (about 2.6 to 3.2 kg) is higher than your 1.5 to 2 kg wish, and the robot tips with about 4.7 N of push at head height. A shorter mast, ballast and a software tilt guard are described in `docs/mechanical-design.md`, section 8.
+- The mass (about 2.6 to 3.2 kg) is higher than your 1.5 to 2 kg wish, and the robot tips with about 4.4 N of push at head height (a ramp of about 22 degrees tips it). A shorter mast, ballast and a software tilt guard are described in `docs/mechanical-design.md`, section 8.
 - **Runtime is short.** On 2 cells the robot calls for only about 1.1 to 1.4 hours (about 1 hour if it also drives); 4 cells give about 2.2 to 2.8 hours (all ASSUMED, measured in stage 3). Charging while the robot is on is not decided yet.
 - The pan cable path in the head is not proven: until the real cable bundle is tested in stage 6, the pan range is limited to +/-30 degrees in the software.
 - The stair-edge sensors see an edge only a few centimetres before the robot is lost, so keep the robot away from stairs; nothing protects driving backwards (`docs/mechanical-design.md`, section 5.6).

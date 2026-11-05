@@ -1,0 +1,37 @@
+part                 x mm    y mm    z mm    zmin       cm3    wt bodies result
+tray_FL             178.0   133.3    56.0    0.00     96.60   yes      1 ok
+tray_FR             178.0   125.3    56.0    0.00     95.36   yes      1 ok
+tray_RL              90.0   131.4    56.0    0.00     44.44   yes      1 ok
+tray_RR              90.0   123.4    56.0    0.00     44.38   yes      1 ok
+deck_FL             178.0   138.0    34.6    0.00     74.19   yes      1 ok
+deck_FR             178.0   130.0    34.6    0.00     72.58   yes      1 ok
+deck_RL              90.0   131.4    34.6    0.00     34.34   yes      1 ok
+deck_RR              90.0   123.4    34.6    0.00     31.63   yes      1 ok
+cover_FL            178.0   138.0    33.0    0.00     54.85   yes      1 ok
+cover_FR            178.0   130.0    33.0    0.00     54.60   yes      1 ok
+cover_RL             90.0   131.4    33.0    0.00     28.47   yes      1 ok
+cover_RR             90.0   123.4    33.0    0.00     28.04   yes      1 ok
+caster_cup           38.0    38.0    13.6    0.00      7.87   yes      1 ok
+caster_ring          28.0    28.0     1.8    0.00      0.78   yes      1 ok
+motor_cap            40.0    12.0    16.0    0.00      4.21   yes      1 ok
+skid                 14.0    14.0    10.5    0.00      1.49   yes      1 ok
+plug_hood            35.0    81.0    11.6    0.00     10.43   yes      1 ok
+bumper_R             88.4    75.0    16.0    0.00      7.92   yes      1 ok
+bumper_C             16.2   114.1    16.0    0.00      7.42   yes      1 ok
+bumper_L             88.4    75.0    16.0    0.00      7.92   yes      1 ok
+mast_lo_front       106.8    56.0    23.5    0.00     28.70   yes      1 ok
+mast_lo_back        106.8    56.0    22.0    0.00     27.74   yes      1 ok
+mast_up_front       106.8    56.0    23.5    0.00     28.70   yes      1 ok
+mast_up_back        106.8    56.0    22.0    0.00     27.74   yes      1 ok
+collar_front         25.2    77.4    40.0    0.00     16.31   yes      1 ok
+collar_back          25.2    77.4    40.0    0.00     16.46   yes      1 ok
+foot_plate           70.0    84.0    22.0    0.00     25.16   yes      1 ok
+neck_plate          100.0   100.0    25.0    0.00     70.29   yes      1 ok
+turntable            92.0    92.0    16.0    0.00     27.97   yes      1 ok
+yoke_servo_side      46.0    77.5   125.0    0.00     74.52   yes      1 ok
+yoke_plain_side      46.0    77.5   125.0    0.00     74.93   yes      1 ok
+head_shell          150.6   174.6    41.6    0.00    128.01   yes      1 ok
+head_lid            150.6   174.6     6.4    0.00     71.85   yes      1 ok
+pivot_bush           14.0    14.0     8.6    0.00      1.11   yes      1 ok
+cam_cover            62.0    20.0     1.0    0.00      1.24   yes      1 ok
+35 parts, 0 with a problem

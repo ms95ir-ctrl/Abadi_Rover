@@ -1,0 +1,555 @@
+{
+ "rows": [
+  {
+   "name": "tray_FL",
+   "qty": 1,
+   "size_mm": [
+    178.0,
+    133.3,
+    56.0
+   ],
+   "volume_cm3": 96.6,
+   "mass_g": 92.0,
+   "minutes": 187,
+   "orientation": "floor down, rim and posts up",
+   "supports": "none; use a brim (the 53 mm posts are tall and thin). The 19.4 mm bumper slots in the rim are short bridges",
+   "optional": false
+  },
+  {
+   "name": "tray_FR",
+   "qty": 1,
+   "size_mm": [
+    178.0,
+    125.3,
+    56.0
+   ],
+   "volume_cm3": 95.4,
+   "mass_g": 90.8,
+   "minutes": 185,
+   "orientation": "floor down, rim and posts up",
+   "supports": "none; use a brim (the 53 mm posts are tall and thin). The 19.4 mm bumper slots in the rim are short bridges",
+   "optional": false
+  },
+  {
+   "name": "tray_RL",
+   "qty": 1,
+   "size_mm": [
+    90.0,
+    131.4,
+    56.0
+   ],
+   "volume_cm3": 44.4,
+   "mass_g": 42.3,
+   "minutes": 92,
+   "orientation": "floor down, rim and posts up",
+   "supports": "none; use a brim (the 53 mm posts are tall and thin). The 19.4 mm bumper slots in the rim are short bridges",
+   "optional": false
+  },
+  {
+   "name": "tray_RR",
+   "qty": 1,
+   "size_mm": [
+    90.0,
+    123.4,
+    56.0
+   ],
+   "volume_cm3": 44.4,
+   "mass_g": 42.3,
+   "minutes": 92,
+   "orientation": "floor down, rim and posts up",
+   "supports": "none; use a brim (the 53 mm posts are tall and thin). The 19.4 mm bumper slots in the rim are short bridges",
+   "optional": false
+  },
+  {
+   "name": "deck_FL",
+   "qty": 1,
+   "size_mm": [
+    178.0,
+    138.0,
+    34.6
+   ],
+   "volume_cm3": 74.2,
+   "mass_g": 47.1,
+   "minutes": 102,
+   "orientation": "flat, plate down, standoffs up",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "deck_FR",
+   "qty": 1,
+   "size_mm": [
+    178.0,
+    130.0,
+    34.6
+   ],
+   "volume_cm3": 72.6,
+   "mass_g": 46.1,
+   "minutes": 100,
+   "orientation": "flat, plate down, standoffs up",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "deck_RL",
+   "qty": 1,
+   "size_mm": [
+    90.0,
+    131.4,
+    34.6
+   ],
+   "volume_cm3": 34.3,
+   "mass_g": 21.8,
+   "minutes": 53,
+   "orientation": "flat, plate down, standoffs up",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "deck_RR",
+   "qty": 1,
+   "size_mm": [
+    90.0,
+    123.4,
+    34.6
+   ],
+   "volume_cm3": 31.6,
+   "mass_g": 20.1,
+   "minutes": 50,
+   "orientation": "flat, plate down, standoffs up",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "cover_FL",
+   "qty": 1,
+   "size_mm": [
+    178.0,
+    138.0,
+    33.0
+   ],
+   "volume_cm3": 54.8,
+   "mass_g": 52.2,
+   "minutes": 111,
+   "orientation": "upside down: top plate on the bed, skirt up",
+   "supports": "none (the speaker pocket ring stands up from the bed)",
+   "optional": false
+  },
+  {
+   "name": "cover_FR",
+   "qty": 1,
+   "size_mm": [
+    178.0,
+    130.0,
+    33.0
+   ],
+   "volume_cm3": 54.6,
+   "mass_g": 52.0,
+   "minutes": 111,
+   "orientation": "upside down: top plate on the bed, skirt up",
+   "supports": "none (the speaker pocket ring stands up from the bed)",
+   "optional": false
+  },
+  {
+   "name": "cover_RL",
+   "qty": 1,
+   "size_mm": [
+    90.0,
+    131.4,
+    33.0
+   ],
+   "volume_cm3": 28.5,
+   "mass_g": 27.1,
+   "minutes": 64,
+   "orientation": "upside down: top plate on the bed, skirt up",
+   "supports": "none (the speaker pocket ring stands up from the bed)",
+   "optional": false
+  },
+  {
+   "name": "cover_RR",
+   "qty": 1,
+   "size_mm": [
+    90.0,
+    123.4,
+    33.0
+   ],
+   "volume_cm3": 28.0,
+   "mass_g": 26.7,
+   "minutes": 63,
+   "orientation": "upside down: top plate on the bed, skirt up",
+   "supports": "none (the speaker pocket ring stands up from the bed)",
+   "optional": false
+  },
+  {
+   "name": "caster_cup",
+   "qty": 1,
+   "size_mm": [
+    38.0,
+    38.0,
+    13.6
+   ],
+   "volume_cm3": 7.9,
+   "mass_g": 9.0,
+   "minutes": 29,
+   "orientation": "flange down",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "caster_ring",
+   "qty": 1,
+   "size_mm": [
+    28.0,
+    28.0,
+    1.8
+   ],
+   "volume_cm3": 0.8,
+   "mass_g": 0.9,
+   "minutes": 14,
+   "orientation": "flat",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "motor_cap",
+   "qty": 4,
+   "size_mm": [
+    40.0,
+    12.0,
+    16.0
+   ],
+   "volume_cm3": 4.2,
+   "mass_g": 4.8,
+   "minutes": 21,
+   "orientation": "flat, top face down (as exported)",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "skid",
+   "qty": 4,
+   "size_mm": [
+    14.0,
+    14.0,
+    10.5
+   ],
+   "volume_cm3": 1.5,
+   "mass_g": 1.7,
+   "minutes": 15,
+   "orientation": "as exported",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "plug_hood",
+   "qty": 1,
+   "size_mm": [
+    35.0,
+    81.0,
+    11.6
+   ],
+   "volume_cm3": 10.4,
+   "mass_g": 11.9,
+   "minutes": 35,
+   "orientation": "upside down: hood top on the bed, flange up",
+   "supports": "none: a 45 degree fillet under the flange holds it up (glue the flat flange face to the cover top)",
+   "optional": false
+  },
+  {
+   "name": "bumper_R",
+   "qty": 1,
+   "size_mm": [
+    88.4,
+    75.0,
+    16.0
+   ],
+   "volume_cm3": 7.9,
+   "mass_g": 9.1,
+   "minutes": 29,
+   "orientation": "arc standing on its edge, arm lying flat on the bed (as exported)",
+   "supports": "none",
+   "optional": true
+  },
+  {
+   "name": "bumper_C",
+   "qty": 1,
+   "size_mm": [
+    16.2,
+    114.1,
+    16.0
+   ],
+   "volume_cm3": 7.4,
+   "mass_g": 8.5,
+   "minutes": 28,
+   "orientation": "arc standing on its edge (as exported)",
+   "supports": "none",
+   "optional": true
+  },
+  {
+   "name": "bumper_L",
+   "qty": 1,
+   "size_mm": [
+    88.4,
+    75.0,
+    16.0
+   ],
+   "volume_cm3": 7.9,
+   "mass_g": 9.1,
+   "minutes": 29,
+   "orientation": "arc standing on its edge, arm lying flat on the bed (as exported)",
+   "supports": "none",
+   "optional": true
+  },
+  {
+   "name": "mast_lo_front",
+   "qty": 1,
+   "size_mm": [
+    106.8,
+    56.0,
+    23.5
+   ],
+   "volume_cm3": 28.7,
+   "mass_g": 31.0,
+   "minutes": 71,
+   "orientation": "lying on the outer back face, open side up",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "mast_lo_back",
+   "qty": 1,
+   "size_mm": [
+    106.8,
+    56.0,
+    22.0
+   ],
+   "volume_cm3": 27.7,
+   "mass_g": 29.9,
+   "minutes": 69,
+   "orientation": "lying on the outer back face, open side up",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "mast_up_front",
+   "qty": 1,
+   "size_mm": [
+    106.8,
+    56.0,
+    23.5
+   ],
+   "volume_cm3": 28.7,
+   "mass_g": 31.0,
+   "minutes": 71,
+   "orientation": "lying on the outer back face, open side up",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "mast_up_back",
+   "qty": 1,
+   "size_mm": [
+    106.8,
+    56.0,
+    22.0
+   ],
+   "volume_cm3": 27.7,
+   "mass_g": 29.9,
+   "minutes": 69,
+   "orientation": "lying on the outer back face, open side up",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "collar_front",
+   "qty": 1,
+   "size_mm": [
+    25.2,
+    77.4,
+    40.0
+   ],
+   "volume_cm3": 16.3,
+   "mass_g": 16.6,
+   "minutes": 43,
+   "orientation": "as exported (standing)",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "collar_back",
+   "qty": 1,
+   "size_mm": [
+    25.2,
+    77.4,
+    40.0
+   ],
+   "volume_cm3": 16.5,
+   "mass_g": 16.7,
+   "minutes": 44,
+   "orientation": "as exported (standing)",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "foot_plate",
+   "qty": 1,
+   "size_mm": [
+    70.0,
+    84.0,
+    22.0
+   ],
+   "volume_cm3": 25.2,
+   "mass_g": 19.2,
+   "minutes": 48,
+   "orientation": "plate down, socket up",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "neck_plate",
+   "qty": 1,
+   "size_mm": [
+    100.0,
+    100.0,
+    25.0
+   ],
+   "volume_cm3": 70.3,
+   "mass_g": 40.2,
+   "minutes": 88,
+   "orientation": "top face down, socket up",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "turntable",
+   "qty": 1,
+   "size_mm": [
+    92.0,
+    92.0,
+    16.0
+   ],
+   "volume_cm3": 28.0,
+   "mass_g": 19.5,
+   "minutes": 49,
+   "orientation": "top face down, skirt up",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "yoke_servo_side",
+   "qty": 1,
+   "size_mm": [
+    46.0,
+    77.5,
+    125.0
+   ],
+   "volume_cm3": 74.5,
+   "mass_g": 47.3,
+   "minutes": 102,
+   "orientation": "bar flat on the bed, arm standing (125 mm high)",
+   "supports": "none; add a brim",
+   "optional": false
+  },
+  {
+   "name": "yoke_plain_side",
+   "qty": 1,
+   "size_mm": [
+    46.0,
+    77.5,
+    125.0
+   ],
+   "volume_cm3": 74.9,
+   "mass_g": 47.6,
+   "minutes": 102,
+   "orientation": "bar flat on the bed, arm standing (125 mm high)",
+   "supports": "none; add a brim",
+   "optional": false
+  },
+  {
+   "name": "head_shell",
+   "qty": 1,
+   "size_mm": [
+    150.6,
+    174.6,
+    41.6
+   ],
+   "volume_cm3": 128.0,
+   "mass_g": 130.1,
+   "minutes": 259,
+   "orientation": "front face down",
+   "supports": "none; a support only under the 41 mm servo window if it sags. The 22 mm bridge over the camera-cover slot may sag: then use a 1 mm plastic card as the cover",
+   "optional": false
+  },
+  {
+   "name": "head_lid",
+   "qty": 1,
+   "size_mm": [
+    150.6,
+    174.6,
+    6.4
+   ],
+   "volume_cm3": 71.9,
+   "mass_g": 54.8,
+   "minutes": 116,
+   "orientation": "interface-pad side down",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "pivot_bush",
+   "qty": 1,
+   "size_mm": [
+    14.0,
+    14.0,
+    8.6
+   ],
+   "volume_cm3": 1.1,
+   "mass_g": 1.4,
+   "minutes": 15,
+   "orientation": "as exported",
+   "supports": "none",
+   "optional": false
+  },
+  {
+   "name": "cam_cover",
+   "qty": 1,
+   "size_mm": [
+    62.0,
+    20.0,
+    1.0
+   ],
+   "volume_cm3": 1.2,
+   "mass_g": 1.6,
+   "minutes": 15,
+   "orientation": "flat",
+   "supports": "none (or use a 1 mm plastic card)",
+   "optional": true
+  }
+ ],
+ "summary": {
+  "all": {
+   "parts": 35,
+   "pieces": 41,
+   "mass_g": 1152,
+   "hours": 44.6
+  },
+  "first_build_without_optional": {
+   "parts": 31,
+   "pieces": 37,
+   "mass_g": 1124,
+   "hours": 43.0
+  },
+  "first_build_without_bumper": {
+   "parts": 32,
+   "pieces": 38,
+   "mass_g": 1125,
+   "hours": 43.2
+  },
+  "bumper_only": {
+   "parts": 3,
+   "pieces": 3,
+   "mass_g": 27,
+   "hours": 1.4
+  }
+ }
+}

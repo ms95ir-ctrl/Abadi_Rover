@@ -1,0 +1,355 @@
+{
+ "need": [
+  {
+   "mass_kg": 2.0,
+   "case": "flat carpet, steady",
+   "force_N": 1.96,
+   "torque_per_wheel_Nm": 0.032,
+   "torque_per_wheel_kgcm": 0.33
+  },
+  {
+   "mass_kg": 2.0,
+   "case": "flat carpet, accelerating 0.3 m/s2",
+   "force_N": 2.56,
+   "torque_per_wheel_Nm": 0.042,
+   "torque_per_wheel_kgcm": 0.42
+  },
+  {
+   "mass_kg": 2.0,
+   "case": "5 deg ramp on carpet",
+   "force_N": 3.66,
+   "torque_per_wheel_Nm": 0.06,
+   "torque_per_wheel_kgcm": 0.61
+  },
+  {
+   "mass_kg": 2.61,
+   "case": "flat carpet, steady",
+   "force_N": 2.56,
+   "torque_per_wheel_Nm": 0.042,
+   "torque_per_wheel_kgcm": 0.42
+  },
+  {
+   "mass_kg": 2.61,
+   "case": "flat carpet, accelerating 0.3 m/s2",
+   "force_N": 3.34,
+   "torque_per_wheel_Nm": 0.054,
+   "torque_per_wheel_kgcm": 0.55
+  },
+  {
+   "mass_kg": 2.61,
+   "case": "5 deg ramp on carpet",
+   "force_N": 4.78,
+   "torque_per_wheel_Nm": 0.078,
+   "torque_per_wheel_kgcm": 0.79
+  },
+  {
+   "mass_kg": 3.0,
+   "case": "flat carpet, steady",
+   "force_N": 2.94,
+   "torque_per_wheel_Nm": 0.048,
+   "torque_per_wheel_kgcm": 0.49
+  },
+  {
+   "mass_kg": 3.0,
+   "case": "flat carpet, accelerating 0.3 m/s2",
+   "force_N": 3.84,
+   "torque_per_wheel_Nm": 0.062,
+   "torque_per_wheel_kgcm": 0.64
+  },
+  {
+   "mass_kg": 3.0,
+   "case": "5 deg ramp on carpet",
+   "force_N": 5.5,
+   "torque_per_wheel_Nm": 0.089,
+   "torque_per_wheel_kgcm": 0.91
+  }
+ ],
+ "ramp_torque_design_Nm": 0.078,
+ "ramp_torque_design_kgcm": 0.79,
+ "ramp_torque_3kg_Nm": 0.089,
+ "ramp_torque_3kg_kgcm": 0.91,
+ "flat_torque_design_Nm": 0.042,
+ "motors": [
+  {
+   "motor": "TT 1:48 (yellow, 3-6 V)",
+   "V": 6.0,
+   "rpm0": 200,
+   "v0": 0.68,
+   "Ts_kgcm": 0.8,
+   "Ts_Nm": 0.078,
+   "Is": 1.5,
+   "flat design mass": {
+    "frac": 0.53,
+    "rpm": 94,
+    "v": 0.32,
+    "I": 0.87
+   },
+   "ramp 3.0 kg": {
+    "frac": 1.14,
+    "stalled": true
+   }
+  },
+  {
+   "motor": "TT 1:48 (yellow, 3-6 V)",
+   "V": 7.4,
+   "rpm0": 247,
+   "v0": 0.84,
+   "Ts_kgcm": 0.99,
+   "Ts_Nm": 0.097,
+   "Is": 1.85,
+   "flat design mass": {
+    "frac": 0.43,
+    "rpm": 141,
+    "v": 0.48,
+    "I": 0.9
+   },
+   "ramp 3.0 kg": {
+    "frac": 0.92,
+    "rpm": 19,
+    "v": 0.06,
+    "I": 1.72
+   }
+  },
+  {
+   "motor": "TT 1:48 (yellow, 3-6 V)",
+   "V": 8.4,
+   "rpm0": 280,
+   "v0": 0.95,
+   "Ts_kgcm": 1.12,
+   "Ts_Nm": 0.11,
+   "Is": 2.1,
+   "flat design mass": {
+    "frac": 0.38,
+    "rpm": 174,
+    "v": 0.59,
+    "I": 0.93
+   },
+   "ramp 3.0 kg": {
+    "frac": 0.81,
+    "rpm": 52,
+    "v": 0.18,
+    "I": 1.75
+   }
+  },
+  {
+   "motor": "Pololu 25D LP 12 V 47:1",
+   "V": 6.0,
+   "rpm0": 60,
+   "v0": 0.2,
+   "Ts_kgcm": 2.4,
+   "Ts_Nm": 0.235,
+   "Is": 0.45,
+   "flat design mass": {
+    "frac": 0.18,
+    "rpm": 49,
+    "v": 0.17,
+    "I": 0.1
+   },
+   "ramp 3.0 kg": {
+    "frac": 0.38,
+    "rpm": 37,
+    "v": 0.13,
+    "I": 0.19
+   }
+  },
+  {
+   "motor": "Pololu 25D LP 12 V 47:1",
+   "V": 7.4,
+   "rpm0": 74,
+   "v0": 0.25,
+   "Ts_kgcm": 2.96,
+   "Ts_Nm": 0.29,
+   "Is": 0.56,
+   "flat design mass": {
+    "frac": 0.14,
+    "rpm": 63,
+    "v": 0.22,
+    "I": 0.11
+   },
+   "ramp 3.0 kg": {
+    "frac": 0.31,
+    "rpm": 51,
+    "v": 0.17,
+    "I": 0.19
+   }
+  },
+  {
+   "motor": "Pololu 25D LP 12 V 47:1",
+   "V": 8.4,
+   "rpm0": 84,
+   "v0": 0.29,
+   "Ts_kgcm": 3.36,
+   "Ts_Nm": 0.33,
+   "Is": 0.63,
+   "flat design mass": {
+    "frac": 0.13,
+    "rpm": 73,
+    "v": 0.25,
+    "I": 0.11
+   },
+   "ramp 3.0 kg": {
+    "frac": 0.27,
+    "rpm": 61,
+    "v": 0.21,
+    "I": 0.2
+   }
+  },
+  {
+   "motor": "Pololu 25D MP 12 V 47:1",
+   "V": 6.0,
+   "rpm0": 85,
+   "v0": 0.29,
+   "Ts_kgcm": 2.59,
+   "Ts_Nm": 0.254,
+   "Is": 0.9,
+   "flat design mass": {
+    "frac": 0.16,
+    "rpm": 71,
+    "v": 0.24,
+    "I": 0.19
+   },
+   "ramp 3.0 kg": {
+    "frac": 0.35,
+    "rpm": 55,
+    "v": 0.19,
+    "I": 0.35
+   }
+  },
+  {
+   "motor": "Pololu 25D MP 12 V 47:1",
+   "V": 7.4,
+   "rpm0": 105,
+   "v0": 0.36,
+   "Ts_kgcm": 3.19,
+   "Ts_Nm": 0.313,
+   "Is": 1.11,
+   "flat design mass": {
+    "frac": 0.13,
+    "rpm": 91,
+    "v": 0.31,
+    "I": 0.2
+   },
+   "ramp 3.0 kg": {
+    "frac": 0.29,
+    "rpm": 75,
+    "v": 0.25,
+    "I": 0.36
+   }
+  },
+  {
+   "motor": "Pololu 25D MP 12 V 47:1",
+   "V": 8.4,
+   "rpm0": 119,
+   "v0": 0.41,
+   "Ts_kgcm": 3.62,
+   "Ts_Nm": 0.355,
+   "Is": 1.26,
+   "flat design mass": {
+    "frac": 0.12,
+    "rpm": 105,
+    "v": 0.36,
+    "I": 0.21
+   },
+   "ramp 3.0 kg": {
+    "frac": 0.25,
+    "rpm": 89,
+    "v": 0.3,
+    "I": 0.37
+   }
+  },
+  {
+   "motor": "generic 25GA-370 12 V 130 rpm",
+   "V": 6.0,
+   "rpm0": 65,
+   "v0": 0.22,
+   "Ts_kgcm": 1.0,
+   "Ts_Nm": 0.098,
+   "Is": 0.45,
+   "flat design mass": {
+    "frac": 0.42,
+    "rpm": 37,
+    "v": 0.13,
+    "I": 0.22
+   },
+   "ramp 3.0 kg": {
+    "frac": 0.91,
+    "rpm": 6,
+    "v": 0.02,
+    "I": 0.41
+   }
+  },
+  {
+   "motor": "generic 25GA-370 12 V 130 rpm",
+   "V": 7.4,
+   "rpm0": 80,
+   "v0": 0.27,
+   "Ts_kgcm": 1.23,
+   "Ts_Nm": 0.121,
+   "Is": 0.56,
+   "flat design mass": {
+    "frac": 0.34,
+    "rpm": 53,
+    "v": 0.18,
+    "I": 0.23
+   },
+   "ramp 3.0 kg": {
+    "frac": 0.74,
+    "rpm": 21,
+    "v": 0.07,
+    "I": 0.42
+   }
+  },
+  {
+   "motor": "generic 25GA-370 12 V 130 rpm",
+   "V": 8.4,
+   "rpm0": 91,
+   "v0": 0.31,
+   "Ts_kgcm": 1.4,
+   "Ts_Nm": 0.137,
+   "Is": 0.63,
+   "flat design mass": {
+    "frac": 0.3,
+    "rpm": 63,
+    "v": 0.22,
+    "I": 0.23
+   },
+   "ramp 3.0 kg": {
+    "frac": 0.65,
+    "rpm": 32,
+    "v": 0.11,
+    "I": 0.43
+   }
+  }
+ ],
+ "tilt_mass_kg": 0.604,
+ "tilt_static_off10mm": 0.059,
+ "tilt_static_off25mm": 0.148,
+ "tilt_inertia": 0.00084,
+ "tilt_dyn": 0.0196,
+ "tilt_total_nominal": 0.099,
+ "tilt_total_worst": 0.188,
+ "servo_torque_Nm": {
+  "4.8V": 0.92,
+  "6V": 1.08
+ },
+ "pan_mass_kg": 0.773,
+ "pan_inertia": 0.0026,
+ "pan_dyn": 0.016,
+ "pan_friction": 0.083,
+ "pan_total": 0.099,
+ "mast_section": {
+  "A": 160.1,
+  "I_about_x": 89386,
+  "I_about_y": 49997
+ },
+ "mast_push_5N": {
+  "defl_front_back_mm": 0.88,
+  "defl_side_mm": 0.49,
+  "stress_MPa": 0.75
+ },
+ "mast_push_10N": {
+  "defl_front_back_mm": 1.76,
+  "defl_side_mm": 0.99,
+  "stress_MPa": 1.5
+ }
+}

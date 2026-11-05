@@ -1,0 +1,3723 @@
+{
+ "mass": {
+  "total_g": 2610,
+  "total_kg": 2.61,
+  "cog_mm": [
+   25.9,
+   0.7,
+   168.2
+  ],
+  "by_class_g": {
+   "base": 1562,
+   "mast": 229,
+   "head": 818
+  },
+  "by_class_cog_mm": {
+   "base": [
+    -0.7,
+    -0.9,
+    47.6
+   ],
+   "mast": [
+    62.0,
+    -3.5,
+    178.0
+   ],
+   "head": [
+    66.4,
+    4.9,
+    395.5
+   ]
+  },
+  "printed_g_in_mass_table": 1126,
+  "bought_g": 1259,
+  "extra_g": 225,
+  "biggest_items": [
+   {
+    "name": "tray",
+    "g": 268,
+    "z_mm": 25,
+    "kind": "printed"
+   },
+   {
+    "name": "screen",
+    "g": 230,
+    "z_mm": 408,
+    "kind": "bought"
+   },
+   {
+    "name": "motors",
+    "g": 180,
+    "z_mm": 33,
+    "kind": "bought"
+   },
+   {
+    "name": "cover",
+    "g": 158,
+    "z_mm": 98,
+    "kind": "printed"
+   },
+   {
+    "name": "deck",
+    "g": 135,
+    "z_mm": 71,
+    "kind": "printed"
+   },
+   {
+    "name": "head_shell",
+    "g": 130,
+    "z_mm": 427,
+    "kind": "printed"
+   },
+   {
+    "name": "battery",
+    "g": 115,
+    "z_mm": 26,
+    "kind": "bought"
+   },
+   {
+    "name": "xl",
+    "g": 110,
+    "z_mm": 26,
+    "kind": "bought"
+   },
+   {
+    "name": "yoke",
+    "g": 95,
+    "z_mm": 353,
+    "kind": "printed"
+   },
+   {
+    "name": "wheels",
+    "g": 60,
+    "z_mm": 32,
+    "kind": "bought"
+   },
+   {
+    "name": "tilt_servo",
+    "g": 60,
+    "z_mm": 410,
+    "kind": "bought"
+   },
+   {
+    "name": "webcam",
+    "g": 60,
+    "z_mm": 485,
+    "kind": "bought"
+   },
+   {
+    "name": "wiring, connectors, zip ties (base)",
+    "g": 60,
+    "z_mm": 40,
+    "kind": "extra"
+   },
+   {
+    "name": "pan_servo",
+    "g": 55,
+    "z_mm": 326,
+    "kind": "bought"
+   },
+   {
+    "name": "head_lid",
+    "g": 55,
+    "z_mm": 414,
+    "kind": "printed"
+   },
+   {
+    "name": "fuses",
+    "g": 54,
+    "z_mm": 21,
+    "kind": "bought"
+   }
+  ]
+ },
+ "heights": {
+  "total_height_mm": 504.3,
+  "tilt_axis_mm": 420.0,
+  "screen_centre_mm": 412.0,
+  "camera_lens_mm": 485.3,
+  "cover_top_mm": 105.0,
+  "plug_hood_top_mm": 116.6,
+  "base_diameter_mm": 260.0,
+  "head_w_mm": 174.6,
+  "head_h_mm": 116.6,
+  "head_d_mm": 44.0
+ },
+ "tip": {
+  "label": "design: axis 420 mm",
+  "M": 2.6096094795707168,
+  "cg": [
+   25.9,
+   0.7,
+   168.2
+  ],
+  "push_point": [
+   65.0,
+   0.0,
+   412.0
+  ],
+  "skid_gap": 1.5,
+  "dirs": {
+   "forward": {
+    "angle": 0.0,
+    "slope_deg": 24.7,
+    "F_tip": 4.82,
+    "tilt_body_deg": 24.7,
+    "brake_ms2": 4.52,
+    "lever_mm": 71.2,
+    "stages": [
+     {
+      "stage": 1,
+      "ray_mm": 77.5,
+      "edge_dist_mm": 57.9,
+      "cog_height_mm": 168.2,
+      "push_height_mm": 412.0,
+      "F_N": 4.82,
+      "slope_deg": 24.75,
+      "pivot": [
+       [
+        104.0,
+        0.0
+       ],
+       [
+        0.0,
+        117.0
+       ]
+      ],
+      "skid_lands_after_deg": 2.7,
+      "tip_after_deg": 19.01,
+      "contact": 3
+     },
+     {
+      "stage": 2,
+      "ray_mm": 71.2,
+      "edge_dist_mm": 70.4,
+      "cog_height_mm": 170.7,
+      "push_height_mm": 412.9,
+      "F_N": 4.42,
+      "slope_deg": 22.65,
+      "pivot": [
+       [
+        104.0,
+        0.0
+       ],
+       [
+        95.0,
+        58.0
+       ]
+      ],
+      "skid_lands_after_deg": null,
+      "tip_after_deg": 22.41,
+      "contact": 3
+     }
+    ]
+   },
+   "backward": {
+    "angle": 180.0,
+    "slope_deg": 32.6,
+    "F_tip": 6.69,
+    "tilt_body_deg": 33.6,
+    "brake_ms2": 6.28,
+    "lever_mm": 107.9,
+    "stages": [
+     {
+      "stage": 1,
+      "ray_mm": 25.9,
+      "edge_dist_mm": 25.9,
+      "cog_height_mm": 168.2,
+      "push_height_mm": 412.0,
+      "F_N": 1.61,
+      "slope_deg": 8.75,
+      "pivot": [
+       [
+        0.0,
+        117.0
+       ],
+       [
+        0.0,
+        -117.0
+       ]
+      ],
+      "skid_lands_after_deg": 1.01,
+      "tip_after_deg": 8.75,
+      "contact": 3
+     },
+     {
+      "stage": 2,
+      "ray_mm": 107.9,
+      "edge_dist_mm": 107.9,
+      "cog_height_mm": 168.6,
+      "push_height_mm": 413.1,
+      "F_N": 6.69,
+      "slope_deg": 32.62,
+      "pivot": [
+       [
+        -85.0,
+        85.0
+       ],
+       [
+        -85.0,
+        -85.0
+       ]
+      ],
+      "skid_lands_after_deg": null,
+      "tip_after_deg": 32.62,
+      "contact": 4
+     }
+    ]
+   },
+   "sideways left": {
+    "angle": 90.0,
+    "slope_deg": 28.1,
+    "F_tip": 5.66,
+    "tilt_body_deg": 27.0,
+    "brake_ms2": 5.24,
+    "lever_mm": 91.3,
+    "stages": [
+     {
+      "stage": 1,
+      "ray_mm": 87.2,
+      "edge_dist_mm": 57.9,
+      "cog_height_mm": 168.2,
+      "push_height_mm": 412.0,
+      "F_N": 5.42,
+      "slope_deg": 27.41,
+      "pivot": [
+       [
+        104.0,
+        0.0
+       ],
+       [
+        0.0,
+        117.0
+       ]
+      ],
+      "skid_lands_after_deg": 2.7,
+      "tip_after_deg": 19.01,
+      "contact": 3
+     },
+     {
+      "stage": 2,
+      "ray_mm": 91.3,
+      "edge_dist_mm": 77.5,
+      "cog_height_mm": 170.7,
+      "push_height_mm": 412.9,
+      "F_N": 5.66,
+      "slope_deg": 28.13,
+      "pivot": [
+       [
+        95.0,
+        58.0
+       ],
+       [
+        -0.0,
+        117.0
+       ]
+      ],
+      "skid_lands_after_deg": null,
+      "tip_after_deg": 24.43,
+      "contact": 3
+     }
+    ]
+   },
+   "sideways right": {
+    "angle": 270.0,
+    "slope_deg": 28.5,
+    "F_tip": 5.74,
+    "tilt_body_deg": 27.3,
+    "brake_ms2": 5.32,
+    "lever_mm": 92.6,
+    "stages": [
+     {
+      "stage": 1,
+      "ray_mm": 88.6,
+      "edge_dist_mm": 58.8,
+      "cog_height_mm": 168.2,
+      "push_height_mm": 412.0,
+      "F_N": 5.5,
+      "slope_deg": 27.77,
+      "pivot": [
+       [
+        0.0,
+        -117.0
+       ],
+       [
+        104.0,
+        0.0
+       ]
+      ],
+      "skid_lands_after_deg": 2.7,
+      "tip_after_deg": 19.28,
+      "contact": 3
+     },
+     {
+      "stage": 2,
+      "ray_mm": 92.6,
+      "edge_dist_mm": 78.7,
+      "cog_height_mm": 170.8,
+      "push_height_mm": 412.9,
+      "F_N": 5.74,
+      "slope_deg": 28.47,
+      "pivot": [
+       [
+        0.0,
+        -117.0
+       ],
+       [
+        95.0,
+        -58.0
+       ]
+      ],
+      "skid_lands_after_deg": null,
+      "tip_after_deg": 24.74,
+      "contact": 3
+     }
+    ]
+   }
+  },
+  "sideways": {
+   "angle": 90.0,
+   "slope_deg": 28.1,
+   "F_tip": 5.66,
+   "tilt_body_deg": 27.0,
+   "brake_ms2": 5.24,
+   "lever_mm": 91.3
+  },
+  "worst_slope": {
+   "angle": 9.0,
+   "slope_deg": 22.4,
+   "F_tip": 4.36,
+   "tilt_body_deg": 24.7,
+   "stages": [
+    {
+     "stage": 1,
+     "ray_mm": 68.8,
+     "edge_dist_mm": 57.9,
+     "cog_height_mm": 168.2,
+     "push_height_mm": 412.0,
+     "F_N": 4.28,
+     "slope_deg": 22.25,
+     "pivot": [
+      [
+       104.0,
+       0.0
+      ],
+      [
+       0.0,
+       117.0
+      ]
+     ],
+     "skid_lands_after_deg": 2.7,
+     "tip_after_deg": 19.01,
+     "contact": 3
+    },
+    {
+     "stage": 2,
+     "ray_mm": 70.4,
+     "edge_dist_mm": 70.4,
+     "cog_height_mm": 170.7,
+     "push_height_mm": 412.9,
+     "F_N": 4.36,
+     "slope_deg": 22.41,
+     "pivot": [
+      [
+       104.0,
+       0.0
+      ],
+      [
+       95.0,
+       58.0
+      ]
+     ],
+     "skid_lands_after_deg": null,
+     "tip_after_deg": 22.41,
+     "contact": 3
+    }
+   ]
+  },
+  "worst_push": {
+   "angle": 9.0,
+   "F_tip": 4.36,
+   "slope_deg": 22.4
+  },
+  "brake_straight_ms2": 4.52,
+  "brake_worst_ms2": 4.05,
+  "brake_worst_angle": 9.0,
+  "no_support_directions": 0,
+  "no_skids_tilt_deg": 8.7,
+  "no_skids_edge_mm": 25.9,
+  "skids_touch_backwards_deg": 1.01,
+  "front_skid_outside_edge_mm": 31.8,
+  "skids_touch_forward_deg": 2.7,
+  "N_caster": 6.4,
+  "N_wheels": 19.2,
+  "caster_share_pct": 24.9,
+  "F_slip_side": 12.2,
+  "mass_kg": 2.61
+ },
+ "tip_variants": {
+  "axis 340 mm (short mast)": {
+   "label": "axis 340 mm (short mast)",
+   "M": 2.5237193661424873,
+   "cg": [
+    24.6,
+    0.8,
+    139.8
+   ],
+   "push_point": [
+    65.0,
+    0.0,
+    332.0
+   ],
+   "skid_gap": 1.5,
+   "dirs": {
+    "forward": {
+     "angle": 0.0,
+     "slope_deg": 29.4,
+     "F_tip": 5.86,
+     "tilt_body_deg": 29.4,
+     "brake_ms2": 5.52,
+     "lever_mm": 73.6,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 78.6,
+       "edge_dist_mm": 58.8,
+       "cog_height_mm": 139.8,
+       "push_height_mm": 332.0,
+       "F_N": 5.86,
+       "slope_deg": 29.36,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 22.8,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 73.6,
+       "edge_dist_mm": 72.7,
+       "cog_height_mm": 142.4,
+       "push_height_mm": 333.0,
+       "F_N": 5.47,
+       "slope_deg": 27.32,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         95.0,
+         58.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 27.05,
+       "contact": 3
+      }
+     ]
+    },
+    "backward": {
+     "angle": 180.0,
+     "slope_deg": 37.4,
+     "F_tip": 7.97,
+     "tilt_body_deg": 38.4,
+     "brake_ms2": 7.5,
+     "lever_mm": 107.2,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 24.6,
+       "edge_dist_mm": 24.6,
+       "cog_height_mm": 139.8,
+       "push_height_mm": 332.0,
+       "F_N": 1.84,
+       "slope_deg": 10.0,
+       "pivot": [
+        [
+         0.0,
+         117.0
+        ],
+        [
+         0.0,
+         -117.0
+        ]
+       ],
+       "skid_lands_after_deg": 1.01,
+       "tip_after_deg": 10.0,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 107.2,
+       "edge_dist_mm": 107.2,
+       "cog_height_mm": 140.2,
+       "push_height_mm": 333.1,
+       "F_N": 7.97,
+       "slope_deg": 37.4,
+       "pivot": [
+        [
+         -85.0,
+         85.0
+        ],
+        [
+         -85.0,
+         -85.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 37.4,
+       "contact": 4
+      }
+     ]
+    },
+    "sideways left": {
+     "angle": 90.0,
+     "slope_deg": 33.3,
+     "F_tip": 6.94,
+     "tilt_body_deg": 31.7,
+     "brake_ms2": 6.43,
+     "lever_mm": 93.4,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 88.5,
+       "edge_dist_mm": 58.8,
+       "cog_height_mm": 139.8,
+       "push_height_mm": 332.0,
+       "F_N": 6.6,
+       "slope_deg": 32.33,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 22.8,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 93.4,
+       "edge_dist_mm": 79.3,
+       "cog_height_mm": 142.4,
+       "push_height_mm": 333.0,
+       "F_N": 6.94,
+       "slope_deg": 33.26,
+       "pivot": [
+        [
+         95.0,
+         58.0
+        ],
+        [
+         -0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 29.13,
+       "contact": 3
+      }
+     ]
+    },
+    "sideways right": {
+     "angle": 270.0,
+     "slope_deg": 33.7,
+     "F_tip": 7.06,
+     "tilt_body_deg": 32.1,
+     "brake_ms2": 6.54,
+     "lever_mm": 95.0,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 90.1,
+       "edge_dist_mm": 59.9,
+       "cog_height_mm": 139.8,
+       "push_height_mm": 332.0,
+       "F_N": 6.72,
+       "slope_deg": 32.8,
+       "pivot": [
+        [
+         0.0,
+         -117.0
+        ],
+        [
+         104.0,
+         0.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 23.18,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 95.0,
+       "edge_dist_mm": 80.7,
+       "cog_height_mm": 142.4,
+       "push_height_mm": 333.0,
+       "F_N": 7.06,
+       "slope_deg": 33.7,
+       "pivot": [
+        [
+         0.0,
+         -117.0
+        ],
+        [
+         95.0,
+         -58.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 29.54,
+       "contact": 3
+      }
+     ]
+    }
+   },
+   "sideways": {
+    "angle": 90.0,
+    "slope_deg": 33.3,
+    "F_tip": 6.94,
+    "tilt_body_deg": 31.7,
+    "brake_ms2": 6.43,
+    "lever_mm": 93.4
+   },
+   "worst_slope": {
+    "angle": 9.0,
+    "slope_deg": 27.0,
+    "F_tip": 5.41,
+    "tilt_body_deg": 29.4,
+    "stages": [
+     {
+      "stage": 1,
+      "ray_mm": 69.8,
+      "edge_dist_mm": 58.8,
+      "cog_height_mm": 139.8,
+      "push_height_mm": 332.0,
+      "F_N": 5.2,
+      "slope_deg": 26.53,
+      "pivot": [
+       [
+        104.0,
+        0.0
+       ],
+       [
+        0.0,
+        117.0
+       ]
+      ],
+      "skid_lands_after_deg": 2.7,
+      "tip_after_deg": 22.8,
+      "contact": 3
+     },
+     {
+      "stage": 2,
+      "ray_mm": 72.7,
+      "edge_dist_mm": 72.7,
+      "cog_height_mm": 142.4,
+      "push_height_mm": 333.0,
+      "F_N": 5.41,
+      "slope_deg": 27.05,
+      "pivot": [
+       [
+        104.0,
+        0.0
+       ],
+       [
+        95.0,
+        58.0
+       ]
+      ],
+      "skid_lands_after_deg": null,
+      "tip_after_deg": 27.05,
+      "contact": 3
+     }
+    ]
+   },
+   "worst_push": {
+    "angle": 9.0,
+    "F_tip": 5.41,
+    "slope_deg": 27.0
+   },
+   "brake_straight_ms2": 5.52,
+   "brake_worst_ms2": 5.01,
+   "brake_worst_angle": 9.0,
+   "no_support_directions": 0,
+   "no_skids_tilt_deg": 10.0,
+   "no_skids_edge_mm": 24.6,
+   "skids_touch_backwards_deg": 1.01,
+   "front_skid_outside_edge_mm": 31.8,
+   "skids_touch_forward_deg": 2.7,
+   "N_caster": 5.9,
+   "N_wheels": 18.9,
+   "caster_share_pct": 23.7,
+   "F_slip_side": 11.9,
+   "mass_kg": 2.524
+  },
+  "axis 420 mm (DEFAULT)": {
+   "label": "design: axis 420 mm",
+   "M": 2.6096094795707168,
+   "cg": [
+    25.9,
+    0.7,
+    168.2
+   ],
+   "push_point": [
+    65.0,
+    0.0,
+    412.0
+   ],
+   "skid_gap": 1.5,
+   "dirs": {
+    "forward": {
+     "angle": 0.0,
+     "slope_deg": 24.7,
+     "F_tip": 4.82,
+     "tilt_body_deg": 24.7,
+     "brake_ms2": 4.52,
+     "lever_mm": 71.2,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 77.5,
+       "edge_dist_mm": 57.9,
+       "cog_height_mm": 168.2,
+       "push_height_mm": 412.0,
+       "F_N": 4.82,
+       "slope_deg": 24.75,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 19.01,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 71.2,
+       "edge_dist_mm": 70.4,
+       "cog_height_mm": 170.7,
+       "push_height_mm": 412.9,
+       "F_N": 4.42,
+       "slope_deg": 22.65,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         95.0,
+         58.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 22.41,
+       "contact": 3
+      }
+     ]
+    },
+    "backward": {
+     "angle": 180.0,
+     "slope_deg": 32.6,
+     "F_tip": 6.69,
+     "tilt_body_deg": 33.6,
+     "brake_ms2": 6.28,
+     "lever_mm": 107.9,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 25.9,
+       "edge_dist_mm": 25.9,
+       "cog_height_mm": 168.2,
+       "push_height_mm": 412.0,
+       "F_N": 1.61,
+       "slope_deg": 8.75,
+       "pivot": [
+        [
+         0.0,
+         117.0
+        ],
+        [
+         0.0,
+         -117.0
+        ]
+       ],
+       "skid_lands_after_deg": 1.01,
+       "tip_after_deg": 8.75,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 107.9,
+       "edge_dist_mm": 107.9,
+       "cog_height_mm": 168.6,
+       "push_height_mm": 413.1,
+       "F_N": 6.69,
+       "slope_deg": 32.62,
+       "pivot": [
+        [
+         -85.0,
+         85.0
+        ],
+        [
+         -85.0,
+         -85.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 32.62,
+       "contact": 4
+      }
+     ]
+    },
+    "sideways left": {
+     "angle": 90.0,
+     "slope_deg": 28.1,
+     "F_tip": 5.66,
+     "tilt_body_deg": 27.0,
+     "brake_ms2": 5.24,
+     "lever_mm": 91.3,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 87.2,
+       "edge_dist_mm": 57.9,
+       "cog_height_mm": 168.2,
+       "push_height_mm": 412.0,
+       "F_N": 5.42,
+       "slope_deg": 27.41,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 19.01,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 91.3,
+       "edge_dist_mm": 77.5,
+       "cog_height_mm": 170.7,
+       "push_height_mm": 412.9,
+       "F_N": 5.66,
+       "slope_deg": 28.13,
+       "pivot": [
+        [
+         95.0,
+         58.0
+        ],
+        [
+         -0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 24.43,
+       "contact": 3
+      }
+     ]
+    },
+    "sideways right": {
+     "angle": 270.0,
+     "slope_deg": 28.5,
+     "F_tip": 5.74,
+     "tilt_body_deg": 27.3,
+     "brake_ms2": 5.32,
+     "lever_mm": 92.6,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 88.6,
+       "edge_dist_mm": 58.8,
+       "cog_height_mm": 168.2,
+       "push_height_mm": 412.0,
+       "F_N": 5.5,
+       "slope_deg": 27.77,
+       "pivot": [
+        [
+         0.0,
+         -117.0
+        ],
+        [
+         104.0,
+         0.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 19.28,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 92.6,
+       "edge_dist_mm": 78.7,
+       "cog_height_mm": 170.8,
+       "push_height_mm": 412.9,
+       "F_N": 5.74,
+       "slope_deg": 28.47,
+       "pivot": [
+        [
+         0.0,
+         -117.0
+        ],
+        [
+         95.0,
+         -58.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 24.74,
+       "contact": 3
+      }
+     ]
+    }
+   },
+   "sideways": {
+    "angle": 90.0,
+    "slope_deg": 28.1,
+    "F_tip": 5.66,
+    "tilt_body_deg": 27.0,
+    "brake_ms2": 5.24,
+    "lever_mm": 91.3
+   },
+   "worst_slope": {
+    "angle": 9.0,
+    "slope_deg": 22.4,
+    "F_tip": 4.36,
+    "tilt_body_deg": 24.7,
+    "stages": [
+     {
+      "stage": 1,
+      "ray_mm": 68.8,
+      "edge_dist_mm": 57.9,
+      "cog_height_mm": 168.2,
+      "push_height_mm": 412.0,
+      "F_N": 4.28,
+      "slope_deg": 22.25,
+      "pivot": [
+       [
+        104.0,
+        0.0
+       ],
+       [
+        0.0,
+        117.0
+       ]
+      ],
+      "skid_lands_after_deg": 2.7,
+      "tip_after_deg": 19.01,
+      "contact": 3
+     },
+     {
+      "stage": 2,
+      "ray_mm": 70.4,
+      "edge_dist_mm": 70.4,
+      "cog_height_mm": 170.7,
+      "push_height_mm": 412.9,
+      "F_N": 4.36,
+      "slope_deg": 22.41,
+      "pivot": [
+       [
+        104.0,
+        0.0
+       ],
+       [
+        95.0,
+        58.0
+       ]
+      ],
+      "skid_lands_after_deg": null,
+      "tip_after_deg": 22.41,
+      "contact": 3
+     }
+    ]
+   },
+   "worst_push": {
+    "angle": 9.0,
+    "F_tip": 4.36,
+    "slope_deg": 22.4
+   },
+   "brake_straight_ms2": 4.52,
+   "brake_worst_ms2": 4.05,
+   "brake_worst_angle": 9.0,
+   "no_support_directions": 0,
+   "no_skids_tilt_deg": 8.7,
+   "no_skids_edge_mm": 25.9,
+   "skids_touch_backwards_deg": 1.01,
+   "front_skid_outside_edge_mm": 31.8,
+   "skids_touch_forward_deg": 2.7,
+   "N_caster": 6.4,
+   "N_wheels": 19.2,
+   "caster_share_pct": 24.9,
+   "F_slip_side": 12.2,
+   "mass_kg": 2.61
+  },
+  "axis 500 mm (tall mast)": {
+   "label": "axis 500 mm (tall mast)",
+   "M": 2.695499592998947,
+   "cg": [
+    27.0,
+    0.5,
+    197.1
+   ],
+   "push_point": [
+    65.0,
+    0.0,
+    492.0
+   ],
+   "skid_gap": 1.5,
+   "dirs": {
+    "forward": {
+     "angle": 0.0,
+     "slope_deg": 21.2,
+     "F_tip": 4.11,
+     "tilt_body_deg": 21.2,
+     "brake_ms2": 3.81,
+     "lever_mm": 68.9,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 76.5,
+       "edge_dist_mm": 57.2,
+       "cog_height_mm": 197.1,
+       "push_height_mm": 492.0,
+       "F_N": 4.11,
+       "slope_deg": 21.21,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 16.17,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 68.9,
+       "edge_dist_mm": 68.1,
+       "cog_height_mm": 199.6,
+       "push_height_mm": 492.8,
+       "F_N": 3.7,
+       "slope_deg": 19.06,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         95.0,
+         58.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 18.85,
+       "contact": 3
+      }
+     ]
+    },
+    "backward": {
+     "angle": 180.0,
+     "slope_deg": 28.8,
+     "F_tip": 5.82,
+     "tilt_body_deg": 29.8,
+     "brake_ms2": 5.39,
+     "lever_mm": 108.6,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 27.0,
+       "edge_dist_mm": 27.0,
+       "cog_height_mm": 197.1,
+       "push_height_mm": 492.0,
+       "F_N": 1.45,
+       "slope_deg": 7.81,
+       "pivot": [
+        [
+         0.0,
+         117.0
+        ],
+        [
+         0.0,
+         -117.0
+        ]
+       ],
+       "skid_lands_after_deg": 1.01,
+       "tip_after_deg": 7.81,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 108.6,
+       "edge_dist_mm": 108.6,
+       "cog_height_mm": 197.6,
+       "push_height_mm": 493.1,
+       "F_N": 5.82,
+       "slope_deg": 28.79,
+       "pivot": [
+        [
+         -85.0,
+         85.0
+        ],
+        [
+         -85.0,
+         -85.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 28.79,
+       "contact": 4
+      }
+     ]
+    },
+    "sideways left": {
+     "angle": 90.0,
+     "slope_deg": 24.1,
+     "F_tip": 4.78,
+     "tilt_body_deg": 23.4,
+     "brake_ms2": 4.38,
+     "lever_mm": 89.1,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 86.1,
+       "edge_dist_mm": 57.2,
+       "cog_height_mm": 197.1,
+       "push_height_mm": 492.0,
+       "F_N": 4.62,
+       "slope_deg": 23.58,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 16.17,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 89.1,
+       "edge_dist_mm": 75.7,
+       "cog_height_mm": 199.6,
+       "push_height_mm": 492.8,
+       "F_N": 4.78,
+       "slope_deg": 24.07,
+       "pivot": [
+        [
+         95.0,
+         58.0
+        ],
+        [
+         -0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 20.78,
+       "contact": 3
+      }
+     ]
+    },
+    "sideways right": {
+     "angle": 270.0,
+     "slope_deg": 24.3,
+     "F_tip": 4.84,
+     "tilt_body_deg": 23.6,
+     "brake_ms2": 4.43,
+     "lever_mm": 90.2,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 87.1,
+       "edge_dist_mm": 57.9,
+       "cog_height_mm": 197.1,
+       "push_height_mm": 492.0,
+       "F_N": 4.68,
+       "slope_deg": 23.85,
+       "pivot": [
+        [
+         0.0,
+         -117.0
+        ],
+        [
+         104.0,
+         0.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 16.37,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 90.2,
+       "edge_dist_mm": 76.7,
+       "cog_height_mm": 199.6,
+       "push_height_mm": 492.8,
+       "F_N": 4.84,
+       "slope_deg": 24.32,
+       "pivot": [
+        [
+         0.0,
+         -117.0
+        ],
+        [
+         95.0,
+         -58.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 21.01,
+       "contact": 3
+      }
+     ]
+    }
+   },
+   "sideways": {
+    "angle": 90.0,
+    "slope_deg": 24.1,
+    "F_tip": 4.78,
+    "tilt_body_deg": 23.4,
+    "brake_ms2": 4.38,
+    "lever_mm": 89.1
+   },
+   "worst_slope": {
+    "angle": 10.0,
+    "slope_deg": 18.9,
+    "F_tip": 3.66,
+    "tilt_body_deg": 21.2,
+    "stages": [
+     {
+      "stage": 1,
+      "ray_mm": 67.1,
+      "edge_dist_mm": 57.2,
+      "cog_height_mm": 197.1,
+      "push_height_mm": 492.0,
+      "F_N": 3.61,
+      "slope_deg": 18.81,
+      "pivot": [
+       [
+        104.0,
+        0.0
+       ],
+       [
+        0.0,
+        117.0
+       ]
+      ],
+      "skid_lands_after_deg": 2.7,
+      "tip_after_deg": 16.17,
+      "contact": 3
+     },
+     {
+      "stage": 2,
+      "ray_mm": 68.1,
+      "edge_dist_mm": 68.1,
+      "cog_height_mm": 199.6,
+      "push_height_mm": 492.8,
+      "F_N": 3.66,
+      "slope_deg": 18.85,
+      "pivot": [
+       [
+        104.0,
+        0.0
+       ],
+       [
+        95.0,
+        58.0
+       ]
+      ],
+      "skid_lands_after_deg": null,
+      "tip_after_deg": 18.85,
+      "contact": 3
+     }
+    ]
+   },
+   "worst_push": {
+    "angle": 9.0,
+    "F_tip": 3.66,
+    "slope_deg": 19.0
+   },
+   "brake_straight_ms2": 3.81,
+   "brake_worst_ms2": 3.35,
+   "brake_worst_angle": 10.0,
+   "no_support_directions": 0,
+   "no_skids_tilt_deg": 7.8,
+   "no_skids_edge_mm": 27.0,
+   "skids_touch_backwards_deg": 1.01,
+   "front_skid_outside_edge_mm": 31.8,
+   "skids_touch_forward_deg": 2.7,
+   "N_caster": 6.9,
+   "N_wheels": 19.6,
+   "caster_share_pct": 26.0,
+   "F_slip_side": 12.4,
+   "mass_kg": 2.695
+  },
+  "axis 420 mm + 400 g steel ballast": {
+   "label": "axis 420 mm + 400 g steel ballast",
+   "M": 3.0096094795707167,
+   "cg": [
+    23.8,
+    0.6,
+    148.5
+   ],
+   "push_point": [
+    65.0,
+    0.0,
+    412.0
+   ],
+   "skid_gap": 1.5,
+   "dirs": {
+    "forward": {
+     "angle": 0.0,
+     "slope_deg": 28.2,
+     "F_tip": 5.71,
+     "tilt_body_deg": 28.2,
+     "brake_ms2": 5.27,
+     "lever_mm": 74.1,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 79.7,
+       "edge_dist_mm": 59.6,
+       "cog_height_mm": 148.5,
+       "push_height_mm": 412.0,
+       "F_N": 5.71,
+       "slope_deg": 28.23,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 21.86,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 74.1,
+       "edge_dist_mm": 73.3,
+       "cog_height_mm": 151.1,
+       "push_height_mm": 412.9,
+       "F_N": 5.3,
+       "slope_deg": 26.13,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         95.0,
+         58.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 25.87,
+       "contact": 3
+      }
+     ]
+    },
+    "backward": {
+     "angle": 180.0,
+     "slope_deg": 35.5,
+     "F_tip": 7.59,
+     "tilt_body_deg": 36.5,
+     "brake_ms2": 7.0,
+     "lever_mm": 106.2,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 23.8,
+       "edge_dist_mm": 23.8,
+       "cog_height_mm": 148.5,
+       "push_height_mm": 412.0,
+       "F_N": 1.7,
+       "slope_deg": 9.09,
+       "pivot": [
+        [
+         0.0,
+         117.0
+        ],
+        [
+         0.0,
+         -117.0
+        ]
+       ],
+       "skid_lands_after_deg": 1.01,
+       "tip_after_deg": 9.09,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 106.2,
+       "edge_dist_mm": 106.2,
+       "cog_height_mm": 148.9,
+       "push_height_mm": 413.1,
+       "F_N": 7.59,
+       "slope_deg": 35.49,
+       "pivot": [
+        [
+         -85.0,
+         85.0
+        ],
+        [
+         -85.0,
+         -85.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 35.49,
+       "contact": 4
+      }
+     ]
+    },
+    "sideways left": {
+     "angle": 90.0,
+     "slope_deg": 31.8,
+     "F_tip": 6.7,
+     "tilt_body_deg": 30.4,
+     "brake_ms2": 6.08,
+     "lever_mm": 93.7,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 89.7,
+       "edge_dist_mm": 59.6,
+       "cog_height_mm": 148.5,
+       "push_height_mm": 412.0,
+       "F_N": 6.43,
+       "slope_deg": 31.13,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 21.86,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 93.7,
+       "edge_dist_mm": 79.6,
+       "cog_height_mm": 151.1,
+       "push_height_mm": 412.9,
+       "F_N": 6.7,
+       "slope_deg": 31.8,
+       "pivot": [
+        [
+         95.0,
+         58.0
+        ],
+        [
+         -0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 27.78,
+       "contact": 3
+      }
+     ]
+    },
+    "sideways right": {
+     "angle": 270.0,
+     "slope_deg": 32.1,
+     "F_tip": 6.78,
+     "tilt_body_deg": 30.7,
+     "brake_ms2": 6.16,
+     "lever_mm": 94.9,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 90.8,
+       "edge_dist_mm": 60.4,
+       "cog_height_mm": 148.5,
+       "push_height_mm": 412.0,
+       "F_N": 6.51,
+       "slope_deg": 31.46,
+       "pivot": [
+        [
+         0.0,
+         -117.0
+        ],
+        [
+         104.0,
+         0.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 22.12,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 94.9,
+       "edge_dist_mm": 80.6,
+       "cog_height_mm": 151.2,
+       "push_height_mm": 412.9,
+       "F_N": 6.78,
+       "slope_deg": 32.11,
+       "pivot": [
+        [
+         0.0,
+         -117.0
+        ],
+        [
+         95.0,
+         -58.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 28.07,
+       "contact": 3
+      }
+     ]
+    }
+   },
+   "sideways": {
+    "angle": 90.0,
+    "slope_deg": 31.8,
+    "F_tip": 6.7,
+    "tilt_body_deg": 30.4,
+    "brake_ms2": 6.08,
+    "lever_mm": 93.7
+   },
+   "worst_slope": {
+    "angle": 9.0,
+    "slope_deg": 25.9,
+    "F_tip": 5.24,
+    "tilt_body_deg": 28.2,
+    "stages": [
+     {
+      "stage": 1,
+      "ray_mm": 70.7,
+      "edge_dist_mm": 59.6,
+      "cog_height_mm": 148.5,
+      "push_height_mm": 412.0,
+      "F_N": 5.07,
+      "slope_deg": 25.48,
+      "pivot": [
+       [
+        104.0,
+        0.0
+       ],
+       [
+        0.0,
+        117.0
+       ]
+      ],
+      "skid_lands_after_deg": 2.7,
+      "tip_after_deg": 21.86,
+      "contact": 3
+     },
+     {
+      "stage": 2,
+      "ray_mm": 73.3,
+      "edge_dist_mm": 73.3,
+      "cog_height_mm": 151.1,
+      "push_height_mm": 412.9,
+      "F_N": 5.24,
+      "slope_deg": 25.87,
+      "pivot": [
+       [
+        104.0,
+        0.0
+       ],
+       [
+        95.0,
+        58.0
+       ]
+      ],
+      "skid_lands_after_deg": null,
+      "tip_after_deg": 25.87,
+      "contact": 3
+     }
+    ]
+   },
+   "worst_push": {
+    "angle": 9.0,
+    "F_tip": 5.24,
+    "slope_deg": 25.9
+   },
+   "brake_straight_ms2": 5.27,
+   "brake_worst_ms2": 4.76,
+   "brake_worst_angle": 9.0,
+   "no_support_directions": 0,
+   "no_skids_tilt_deg": 9.1,
+   "no_skids_edge_mm": 23.8,
+   "skids_touch_backwards_deg": 1.01,
+   "front_skid_outside_edge_mm": 31.8,
+   "skids_touch_forward_deg": 2.7,
+   "N_caster": 6.7,
+   "N_wheels": 22.8,
+   "caster_share_pct": 22.9,
+   "F_slip_side": 14.3,
+   "mass_kg": 3.01
+  },
+  "10.1 inch head (+0.55 kg), axis 420 mm": {
+   "label": "10.1 inch head (+0.55 kg), axis 420 mm",
+   "M": 3.1596094795707166,
+   "cg": [
+    34.4,
+    0.6,
+    210.6
+   ],
+   "push_point": [
+    65.0,
+    0.0,
+    412.0
+   ],
+   "skid_gap": 1.5,
+   "dirs": {
+    "forward": {
+     "angle": 0.0,
+     "slope_deg": 18.2,
+     "F_tip": 5.2,
+     "tilt_body_deg": 18.1,
+     "brake_ms2": 3.22,
+     "lever_mm": 61.0,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 69.1,
+       "edge_dist_mm": 51.6,
+       "cog_height_mm": 210.6,
+       "push_height_mm": 412.0,
+       "F_N": 5.2,
+       "slope_deg": 18.16,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 13.77,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 61.0,
+       "edge_dist_mm": 60.3,
+       "cog_height_mm": 212.8,
+       "push_height_mm": 412.9,
+       "F_N": 4.58,
+       "slope_deg": 15.99,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         95.0,
+         58.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 15.82,
+       "contact": 3
+      }
+     ]
+    },
+    "backward": {
+     "angle": 180.0,
+     "slope_deg": 28.7,
+     "F_tip": 8.68,
+     "tilt_body_deg": 29.7,
+     "brake_ms2": 5.38,
+     "lever_mm": 115.7,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 34.4,
+       "edge_dist_mm": 34.4,
+       "cog_height_mm": 210.6,
+       "push_height_mm": 412.0,
+       "F_N": 2.59,
+       "slope_deg": 9.28,
+       "pivot": [
+        [
+         0.0,
+         117.0
+        ],
+        [
+         0.0,
+         -117.0
+        ]
+       ],
+       "skid_lands_after_deg": 1.01,
+       "tip_after_deg": 9.28,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 115.7,
+       "edge_dist_mm": 115.7,
+       "cog_height_mm": 211.2,
+       "push_height_mm": 413.1,
+       "F_N": 8.68,
+       "slope_deg": 28.72,
+       "pivot": [
+        [
+         -85.0,
+         85.0
+        ],
+        [
+         -85.0,
+         -85.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 28.72,
+       "contact": 4
+      }
+     ]
+    },
+    "sideways left": {
+     "angle": 90.0,
+     "slope_deg": 21.5,
+     "F_tip": 6.29,
+     "tilt_body_deg": 21.1,
+     "brake_ms2": 3.86,
+     "lever_mm": 83.8,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 77.7,
+       "edge_dist_mm": 51.6,
+       "cog_height_mm": 210.6,
+       "push_height_mm": 412.0,
+       "F_N": 5.85,
+       "slope_deg": 20.25,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 13.77,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 83.8,
+       "edge_dist_mm": 71.2,
+       "cog_height_mm": 212.8,
+       "push_height_mm": 412.9,
+       "F_N": 6.29,
+       "slope_deg": 21.5,
+       "pivot": [
+        [
+         95.0,
+         58.0
+        ],
+        [
+         -0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 18.5,
+       "contact": 3
+      }
+     ]
+    },
+    "sideways right": {
+     "angle": 270.0,
+     "slope_deg": 21.8,
+     "F_tip": 6.38,
+     "tilt_body_deg": 21.3,
+     "brake_ms2": 3.91,
+     "lever_mm": 84.9,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 78.8,
+       "edge_dist_mm": 52.4,
+       "cog_height_mm": 210.6,
+       "push_height_mm": 412.0,
+       "F_N": 5.93,
+       "slope_deg": 20.52,
+       "pivot": [
+        [
+         0.0,
+         -117.0
+        ],
+        [
+         104.0,
+         0.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 13.96,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 84.9,
+       "edge_dist_mm": 72.2,
+       "cog_height_mm": 212.8,
+       "push_height_mm": 412.9,
+       "F_N": 6.38,
+       "slope_deg": 21.75,
+       "pivot": [
+        [
+         0.0,
+         -117.0
+        ],
+        [
+         95.0,
+         -58.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 18.73,
+       "contact": 3
+      }
+     ]
+    }
+   },
+   "sideways": {
+    "angle": 90.0,
+    "slope_deg": 21.5,
+    "F_tip": 6.29,
+    "tilt_body_deg": 21.1,
+    "brake_ms2": 3.86,
+    "lever_mm": 83.8
+   },
+   "worst_slope": {
+    "angle": 11.5,
+    "slope_deg": 15.8,
+    "F_tip": 4.53,
+    "tilt_body_deg": 18.1,
+    "stages": [
+     {
+      "stage": 1,
+      "ray_mm": 59.7,
+      "edge_dist_mm": 51.6,
+      "cog_height_mm": 210.6,
+      "push_height_mm": 412.0,
+      "F_N": 4.49,
+      "slope_deg": 15.82,
+      "pivot": [
+       [
+        104.0,
+        0.0
+       ],
+       [
+        0.0,
+        117.0
+       ]
+      ],
+      "skid_lands_after_deg": 2.7,
+      "tip_after_deg": 13.77,
+      "contact": 3
+     },
+     {
+      "stage": 2,
+      "ray_mm": 60.4,
+      "edge_dist_mm": 60.3,
+      "cog_height_mm": 212.8,
+      "push_height_mm": 412.9,
+      "F_N": 4.53,
+      "slope_deg": 15.83,
+      "pivot": [
+       [
+        104.0,
+        0.0
+       ],
+       [
+        95.0,
+        58.0
+       ]
+      ],
+      "skid_lands_after_deg": null,
+      "tip_after_deg": 15.82,
+      "contact": 3
+     }
+    ]
+   },
+   "worst_push": {
+    "angle": 11.0,
+    "F_tip": 4.53,
+    "slope_deg": 15.9
+   },
+   "brake_straight_ms2": 3.22,
+   "brake_worst_ms2": 2.78,
+   "brake_worst_angle": 11.5,
+   "no_support_directions": 0,
+   "no_skids_tilt_deg": 9.3,
+   "no_skids_edge_mm": 34.4,
+   "skids_touch_backwards_deg": 1.01,
+   "front_skid_outside_edge_mm": 31.8,
+   "skids_touch_forward_deg": 2.7,
+   "N_caster": 10.3,
+   "N_wheels": 20.7,
+   "caster_share_pct": 33.1,
+   "F_slip_side": 13.5,
+   "mass_kg": 3.16
+  },
+  "comfortable build: 4 cells + speakerphone on the cover top (A)": {
+   "label": "comfortable build: 4 cells + speakerphone on the cover top",
+   "M": 3.031609479570717,
+   "cg": [
+    20.2,
+    7.8,
+    159.1
+   ],
+   "push_point": [
+    65.0,
+    0.0,
+    412.0
+   ],
+   "skid_gap": 1.5,
+   "dirs": {
+    "forward": {
+     "angle": 0.0,
+     "slope_deg": 25.8,
+     "F_tip": 5.55,
+     "tilt_body_deg": 27.3,
+     "brake_ms2": 4.74,
+     "lever_mm": 76.1,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 76.8,
+       "edge_dist_mm": 57.4,
+       "cog_height_mm": 159.1,
+       "push_height_mm": 412.0,
+       "F_N": 5.55,
+       "slope_deg": 25.79,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 19.86,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 76.1,
+       "edge_dist_mm": 75.2,
+       "cog_height_mm": 161.6,
+       "push_height_mm": 412.9,
+       "F_N": 5.48,
+       "slope_deg": 25.23,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         95.0,
+         58.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 24.97,
+       "contact": 3
+      }
+     ]
+    },
+    "backward": {
+     "angle": 180.0,
+     "slope_deg": 32.7,
+     "F_tip": 7.37,
+     "tilt_body_deg": 33.7,
+     "brake_ms2": 6.3,
+     "lever_mm": 102.4,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 20.2,
+       "edge_dist_mm": 20.2,
+       "cog_height_mm": 159.1,
+       "push_height_mm": 412.0,
+       "F_N": 1.46,
+       "slope_deg": 7.25,
+       "pivot": [
+        [
+         0.0,
+         117.0
+        ],
+        [
+         0.0,
+         -117.0
+        ]
+       ],
+       "skid_lands_after_deg": 1.01,
+       "tip_after_deg": 7.25,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 102.4,
+       "edge_dist_mm": 102.4,
+       "cog_height_mm": 159.4,
+       "push_height_mm": 413.1,
+       "F_N": 7.37,
+       "slope_deg": 32.73,
+       "pivot": [
+        [
+         -85.0,
+         85.0
+        ],
+        [
+         -85.0,
+         -85.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 32.73,
+       "contact": 4
+      }
+     ]
+    },
+    "sideways left": {
+     "angle": 90.0,
+     "slope_deg": 28.6,
+     "F_tip": 6.35,
+     "tilt_body_deg": 27.5,
+     "brake_ms2": 5.35,
+     "lever_mm": 88.1,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 86.5,
+       "edge_dist_mm": 57.4,
+       "cog_height_mm": 159.1,
+       "push_height_mm": 412.0,
+       "F_N": 6.24,
+       "slope_deg": 28.53,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 19.86,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 88.1,
+       "edge_dist_mm": 74.9,
+       "cog_height_mm": 161.6,
+       "push_height_mm": 412.9,
+       "F_N": 6.35,
+       "slope_deg": 28.61,
+       "pivot": [
+        [
+         95.0,
+         58.0
+        ],
+        [
+         -0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 24.86,
+       "contact": 3
+      }
+     ]
+    },
+    "sideways right": {
+     "angle": 270.0,
+     "slope_deg": 32.7,
+     "F_tip": 7.47,
+     "tilt_body_deg": 31.1,
+     "brake_ms2": 6.29,
+     "lever_mm": 103.7,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 102.0,
+       "edge_dist_mm": 67.8,
+       "cog_height_mm": 159.1,
+       "push_height_mm": 412.0,
+       "F_N": 7.37,
+       "slope_deg": 32.68,
+       "pivot": [
+        [
+         0.0,
+         -117.0
+        ],
+        [
+         104.0,
+         0.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 23.08,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 103.7,
+       "edge_dist_mm": 88.1,
+       "cog_height_mm": 162.1,
+       "push_height_mm": 412.9,
+       "F_N": 7.47,
+       "slope_deg": 32.61,
+       "pivot": [
+        [
+         0.0,
+         -117.0
+        ],
+        [
+         95.0,
+         -58.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 28.53,
+       "contact": 3
+      }
+     ]
+    }
+   },
+   "sideways": {
+    "angle": 90.0,
+    "slope_deg": 28.6,
+    "F_tip": 6.35,
+    "tilt_body_deg": 27.5,
+    "brake_ms2": 5.35,
+    "lever_mm": 88.1
+   },
+   "worst_slope": {
+    "angle": 58.0,
+    "slope_deg": 24.9,
+    "F_tip": 5.39,
+    "tilt_body_deg": 27.5,
+    "stages": [
+     {
+      "stage": 1,
+      "ray_mm": 59.9,
+      "edge_dist_mm": 57.4,
+      "cog_height_mm": 159.1,
+      "push_height_mm": 412.0,
+      "F_N": 4.32,
+      "slope_deg": 20.62,
+      "pivot": [
+       [
+        104.0,
+        0.0
+       ],
+       [
+        0.0,
+        117.0
+       ]
+      ],
+      "skid_lands_after_deg": 2.7,
+      "tip_after_deg": 19.86,
+      "contact": 3
+     },
+     {
+      "stage": 2,
+      "ray_mm": 74.9,
+      "edge_dist_mm": 74.9,
+      "cog_height_mm": 161.6,
+      "push_height_mm": 412.9,
+      "F_N": 5.39,
+      "slope_deg": 24.86,
+      "pivot": [
+       [
+        95.0,
+        58.0
+       ],
+       [
+        -0.0,
+        117.0
+       ]
+      ],
+      "skid_lands_after_deg": null,
+      "tip_after_deg": 24.86,
+      "contact": 3
+     }
+    ]
+   },
+   "worst_push": {
+    "angle": 58.0,
+    "F_tip": 5.39,
+    "slope_deg": 24.9
+   },
+   "brake_straight_ms2": 4.74,
+   "brake_worst_ms2": 4.55,
+   "brake_worst_angle": 58.0,
+   "no_support_directions": 0,
+   "no_skids_tilt_deg": 7.2,
+   "no_skids_edge_mm": 20.2,
+   "skids_touch_backwards_deg": 1.01,
+   "front_skid_outside_edge_mm": 31.8,
+   "skids_touch_forward_deg": 2.7,
+   "N_caster": 5.8,
+   "N_wheels": 24.0,
+   "caster_share_pct": 19.5,
+   "F_slip_side": 15.0,
+   "mass_kg": 3.032
+  },
+  "with the optional bumper": {
+   "label": "with the optional bumper",
+   "M": 2.6436094795707166,
+   "cg": [
+    26.8,
+    0.7,
+    166.3
+   ],
+   "push_point": [
+    65.0,
+    0.0,
+    412.0
+   ],
+   "skid_gap": 1.5,
+   "dirs": {
+    "forward": {
+     "angle": 0.0,
+     "slope_deg": 24.7,
+     "F_tip": 4.82,
+     "tilt_body_deg": 24.7,
+     "brake_ms2": 4.52,
+     "lever_mm": 70.4,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 76.6,
+       "edge_dist_mm": 57.3,
+       "cog_height_mm": 166.3,
+       "push_height_mm": 412.0,
+       "F_N": 4.82,
+       "slope_deg": 24.73,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 18.99,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 70.4,
+       "edge_dist_mm": 69.5,
+       "cog_height_mm": 168.9,
+       "push_height_mm": 412.9,
+       "F_N": 4.42,
+       "slope_deg": 22.63,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         95.0,
+         58.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 22.39,
+       "contact": 3
+      }
+     ]
+    },
+    "backward": {
+     "angle": 180.0,
+     "slope_deg": 33.1,
+     "F_tip": 6.84,
+     "tilt_body_deg": 34.1,
+     "brake_ms2": 6.4,
+     "lever_mm": 108.9,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 26.8,
+       "edge_dist_mm": 26.8,
+       "cog_height_mm": 166.3,
+       "push_height_mm": 412.0,
+       "F_N": 1.69,
+       "slope_deg": 9.15,
+       "pivot": [
+        [
+         0.0,
+         117.0
+        ],
+        [
+         0.0,
+         -117.0
+        ]
+       ],
+       "skid_lands_after_deg": 1.01,
+       "tip_after_deg": 9.15,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 108.9,
+       "edge_dist_mm": 108.9,
+       "cog_height_mm": 166.8,
+       "push_height_mm": 413.1,
+       "F_N": 6.84,
+       "slope_deg": 33.14,
+       "pivot": [
+        [
+         -85.0,
+         85.0
+        ],
+        [
+         -85.0,
+         -85.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 33.14,
+       "contact": 4
+      }
+     ]
+    },
+    "sideways left": {
+     "angle": 90.0,
+     "slope_deg": 28.3,
+     "F_tip": 5.7,
+     "tilt_body_deg": 27.2,
+     "brake_ms2": 5.27,
+     "lever_mm": 90.8,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 86.2,
+       "edge_dist_mm": 57.3,
+       "cog_height_mm": 166.3,
+       "push_height_mm": 412.0,
+       "F_N": 5.42,
+       "slope_deg": 27.39,
+       "pivot": [
+        [
+         104.0,
+         0.0
+        ],
+        [
+         0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 18.99,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 90.8,
+       "edge_dist_mm": 77.1,
+       "cog_height_mm": 168.9,
+       "push_height_mm": 412.9,
+       "F_N": 5.7,
+       "slope_deg": 28.27,
+       "pivot": [
+        [
+         95.0,
+         58.0
+        ],
+        [
+         -0.0,
+         117.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 24.55,
+       "contact": 3
+      }
+     ]
+    },
+    "sideways right": {
+     "angle": 270.0,
+     "slope_deg": 28.6,
+     "F_tip": 5.79,
+     "tilt_body_deg": 27.5,
+     "brake_ms2": 5.35,
+     "lever_mm": 92.1,
+     "stages": [
+      {
+       "stage": 1,
+       "ray_mm": 87.5,
+       "edge_dist_mm": 58.1,
+       "cog_height_mm": 166.3,
+       "push_height_mm": 412.0,
+       "F_N": 5.51,
+       "slope_deg": 27.75,
+       "pivot": [
+        [
+         0.0,
+         -117.0
+        ],
+        [
+         104.0,
+         0.0
+        ]
+       ],
+       "skid_lands_after_deg": 2.7,
+       "tip_after_deg": 19.27,
+       "contact": 3
+      },
+      {
+       "stage": 2,
+       "ray_mm": 92.1,
+       "edge_dist_mm": 78.3,
+       "cog_height_mm": 168.9,
+       "push_height_mm": 412.9,
+       "F_N": 5.79,
+       "slope_deg": 28.61,
+       "pivot": [
+        [
+         0.0,
+         -117.0
+        ],
+        [
+         95.0,
+         -58.0
+        ]
+       ],
+       "skid_lands_after_deg": null,
+       "tip_after_deg": 24.86,
+       "contact": 3
+      }
+     ]
+    }
+   },
+   "sideways": {
+    "angle": 90.0,
+    "slope_deg": 28.3,
+    "F_tip": 5.7,
+    "tilt_body_deg": 27.2,
+    "brake_ms2": 5.27,
+    "lever_mm": 90.8
+   },
+   "worst_slope": {
+    "angle": 9.0,
+    "slope_deg": 22.4,
+    "F_tip": 4.37,
+    "tilt_body_deg": 24.7,
+    "stages": [
+     {
+      "stage": 1,
+      "ray_mm": 68.0,
+      "edge_dist_mm": 57.3,
+      "cog_height_mm": 166.3,
+      "push_height_mm": 412.0,
+      "F_N": 4.28,
+      "slope_deg": 22.23,
+      "pivot": [
+       [
+        104.0,
+        0.0
+       ],
+       [
+        0.0,
+        117.0
+       ]
+      ],
+      "skid_lands_after_deg": 2.7,
+      "tip_after_deg": 18.99,
+      "contact": 3
+     },
+     {
+      "stage": 2,
+      "ray_mm": 69.5,
+      "edge_dist_mm": 69.5,
+      "cog_height_mm": 168.9,
+      "push_height_mm": 412.9,
+      "F_N": 4.37,
+      "slope_deg": 22.39,
+      "pivot": [
+       [
+        104.0,
+        0.0
+       ],
+       [
+        95.0,
+        58.0
+       ]
+      ],
+      "skid_lands_after_deg": null,
+      "tip_after_deg": 22.39,
+      "contact": 3
+     }
+    ]
+   },
+   "worst_push": {
+    "angle": 9.0,
+    "F_tip": 4.37,
+    "slope_deg": 22.4
+   },
+   "brake_straight_ms2": 4.52,
+   "brake_worst_ms2": 4.04,
+   "brake_worst_angle": 9.0,
+   "no_support_directions": 0,
+   "no_skids_tilt_deg": 9.2,
+   "no_skids_edge_mm": 26.8,
+   "skids_touch_backwards_deg": 1.01,
+   "front_skid_outside_edge_mm": 31.8,
+   "skids_touch_forward_deg": 2.7,
+   "N_caster": 6.7,
+   "N_wheels": 19.2,
+   "caster_share_pct": 25.8,
+   "F_slip_side": 12.2,
+   "mass_kg": 2.644
+  }
+ },
+ "skid_gap_sensitivity": {
+  "0.0": {
+   "gap_mm": 0.0,
+   "worst_slope_deg": 24.6,
+   "worst_push_N": 4.79,
+   "forward_slope_deg": 24.9,
+   "sideways_slope_deg": 30.8,
+   "backward_slope_deg": 33.4,
+   "brake_worst_ms2": 4.5
+  },
+  "1.5": {
+   "gap_mm": 1.5,
+   "worst_slope_deg": 22.4,
+   "worst_push_N": 4.36,
+   "forward_slope_deg": 24.7,
+   "sideways_slope_deg": 28.1,
+   "backward_slope_deg": 32.6,
+   "brake_worst_ms2": 4.05
+  },
+  "4.0": {
+   "gap_mm": 4.0,
+   "worst_slope_deg": 19.7,
+   "worst_push_N": 3.8,
+   "forward_slope_deg": 24.7,
+   "sideways_slope_deg": 27.4,
+   "backward_slope_deg": 31.3,
+   "brake_worst_ms2": 3.5
+  }
+ },
+ "calc2": {
+  "need": [
+   {
+    "mass_kg": 2.0,
+    "case": "flat carpet, steady",
+    "force_N": 1.96,
+    "torque_per_wheel_Nm": 0.032,
+    "torque_per_wheel_kgcm": 0.33
+   },
+   {
+    "mass_kg": 2.0,
+    "case": "flat carpet, accelerating 0.3 m/s2",
+    "force_N": 2.56,
+    "torque_per_wheel_Nm": 0.042,
+    "torque_per_wheel_kgcm": 0.42
+   },
+   {
+    "mass_kg": 2.0,
+    "case": "5 deg ramp on carpet",
+    "force_N": 3.66,
+    "torque_per_wheel_Nm": 0.06,
+    "torque_per_wheel_kgcm": 0.61
+   },
+   {
+    "mass_kg": 2.61,
+    "case": "flat carpet, steady",
+    "force_N": 2.56,
+    "torque_per_wheel_Nm": 0.042,
+    "torque_per_wheel_kgcm": 0.42
+   },
+   {
+    "mass_kg": 2.61,
+    "case": "flat carpet, accelerating 0.3 m/s2",
+    "force_N": 3.34,
+    "torque_per_wheel_Nm": 0.054,
+    "torque_per_wheel_kgcm": 0.55
+   },
+   {
+    "mass_kg": 2.61,
+    "case": "5 deg ramp on carpet",
+    "force_N": 4.78,
+    "torque_per_wheel_Nm": 0.078,
+    "torque_per_wheel_kgcm": 0.79
+   },
+   {
+    "mass_kg": 3.0,
+    "case": "flat carpet, steady",
+    "force_N": 2.94,
+    "torque_per_wheel_Nm": 0.048,
+    "torque_per_wheel_kgcm": 0.49
+   },
+   {
+    "mass_kg": 3.0,
+    "case": "flat carpet, accelerating 0.3 m/s2",
+    "force_N": 3.84,
+    "torque_per_wheel_Nm": 0.062,
+    "torque_per_wheel_kgcm": 0.64
+   },
+   {
+    "mass_kg": 3.0,
+    "case": "5 deg ramp on carpet",
+    "force_N": 5.5,
+    "torque_per_wheel_Nm": 0.089,
+    "torque_per_wheel_kgcm": 0.91
+   }
+  ],
+  "ramp_torque_design_Nm": 0.078,
+  "ramp_torque_design_kgcm": 0.79,
+  "ramp_torque_3kg_Nm": 0.089,
+  "ramp_torque_3kg_kgcm": 0.91,
+  "flat_torque_design_Nm": 0.042,
+  "motors": [
+   {
+    "motor": "TT 1:48 (yellow, 3-6 V)",
+    "V": 6.0,
+    "rpm0": 200,
+    "v0": 0.68,
+    "Ts_kgcm": 0.8,
+    "Ts_Nm": 0.078,
+    "Is": 1.5,
+    "flat design mass": {
+     "frac": 0.53,
+     "rpm": 94,
+     "v": 0.32,
+     "I": 0.87
+    },
+    "ramp 3.0 kg": {
+     "frac": 1.14,
+     "stalled": true
+    }
+   },
+   {
+    "motor": "TT 1:48 (yellow, 3-6 V)",
+    "V": 7.4,
+    "rpm0": 247,
+    "v0": 0.84,
+    "Ts_kgcm": 0.99,
+    "Ts_Nm": 0.097,
+    "Is": 1.85,
+    "flat design mass": {
+     "frac": 0.43,
+     "rpm": 141,
+     "v": 0.48,
+     "I": 0.9
+    },
+    "ramp 3.0 kg": {
+     "frac": 0.92,
+     "rpm": 19,
+     "v": 0.06,
+     "I": 1.72
+    }
+   },
+   {
+    "motor": "TT 1:48 (yellow, 3-6 V)",
+    "V": 8.0,
+    "rpm0": 267,
+    "v0": 0.91,
+    "Ts_kgcm": 1.07,
+    "Ts_Nm": 0.105,
+    "Is": 2.0,
+    "flat design mass": {
+     "frac": 0.4,
+     "rpm": 161,
+     "v": 0.55,
+     "I": 0.92
+    },
+    "ramp 3.0 kg": {
+     "frac": 0.85,
+     "rpm": 39,
+     "v": 0.13,
+     "I": 1.74
+    }
+   },
+   {
+    "motor": "TT 1:48 (yellow, 3-6 V)",
+    "V": 8.4,
+    "rpm0": 280,
+    "v0": 0.95,
+    "Ts_kgcm": 1.12,
+    "Ts_Nm": 0.11,
+    "Is": 2.1,
+    "flat design mass": {
+     "frac": 0.38,
+     "rpm": 174,
+     "v": 0.59,
+     "I": 0.93
+    },
+    "ramp 3.0 kg": {
+     "frac": 0.81,
+     "rpm": 52,
+     "v": 0.18,
+     "I": 1.75
+    }
+   },
+   {
+    "motor": "Pololu 25D LP 12 V 47:1",
+    "V": 6.0,
+    "rpm0": 60,
+    "v0": 0.2,
+    "Ts_kgcm": 2.4,
+    "Ts_Nm": 0.235,
+    "Is": 0.45,
+    "flat design mass": {
+     "frac": 0.18,
+     "rpm": 49,
+     "v": 0.17,
+     "I": 0.1
+    },
+    "ramp 3.0 kg": {
+     "frac": 0.38,
+     "rpm": 37,
+     "v": 0.13,
+     "I": 0.19
+    }
+   },
+   {
+    "motor": "Pololu 25D LP 12 V 47:1",
+    "V": 7.4,
+    "rpm0": 74,
+    "v0": 0.25,
+    "Ts_kgcm": 2.96,
+    "Ts_Nm": 0.29,
+    "Is": 0.56,
+    "flat design mass": {
+     "frac": 0.14,
+     "rpm": 63,
+     "v": 0.22,
+     "I": 0.11
+    },
+    "ramp 3.0 kg": {
+     "frac": 0.31,
+     "rpm": 51,
+     "v": 0.17,
+     "I": 0.19
+    }
+   },
+   {
+    "motor": "Pololu 25D LP 12 V 47:1",
+    "V": 8.0,
+    "rpm0": 80,
+    "v0": 0.27,
+    "Ts_kgcm": 3.2,
+    "Ts_Nm": 0.314,
+    "Is": 0.6,
+    "flat design mass": {
+     "frac": 0.13,
+     "rpm": 69,
+     "v": 0.24,
+     "I": 0.11
+    },
+    "ramp 3.0 kg": {
+     "frac": 0.28,
+     "rpm": 57,
+     "v": 0.19,
+     "I": 0.19
+    }
+   },
+   {
+    "motor": "Pololu 25D LP 12 V 47:1",
+    "V": 8.4,
+    "rpm0": 84,
+    "v0": 0.29,
+    "Ts_kgcm": 3.36,
+    "Ts_Nm": 0.33,
+    "Is": 0.63,
+    "flat design mass": {
+     "frac": 0.13,
+     "rpm": 73,
+     "v": 0.25,
+     "I": 0.11
+    },
+    "ramp 3.0 kg": {
+     "frac": 0.27,
+     "rpm": 61,
+     "v": 0.21,
+     "I": 0.2
+    }
+   },
+   {
+    "motor": "Pololu 25D MP 12 V 47:1",
+    "V": 6.0,
+    "rpm0": 85,
+    "v0": 0.29,
+    "Ts_kgcm": 2.59,
+    "Ts_Nm": 0.254,
+    "Is": 0.9,
+    "flat design mass": {
+     "frac": 0.16,
+     "rpm": 71,
+     "v": 0.24,
+     "I": 0.19
+    },
+    "ramp 3.0 kg": {
+     "frac": 0.35,
+     "rpm": 55,
+     "v": 0.19,
+     "I": 0.35
+    }
+   },
+   {
+    "motor": "Pololu 25D MP 12 V 47:1",
+    "V": 7.4,
+    "rpm0": 105,
+    "v0": 0.36,
+    "Ts_kgcm": 3.19,
+    "Ts_Nm": 0.313,
+    "Is": 1.11,
+    "flat design mass": {
+     "frac": 0.13,
+     "rpm": 91,
+     "v": 0.31,
+     "I": 0.2
+    },
+    "ramp 3.0 kg": {
+     "frac": 0.29,
+     "rpm": 75,
+     "v": 0.25,
+     "I": 0.36
+    }
+   },
+   {
+    "motor": "Pololu 25D MP 12 V 47:1",
+    "V": 8.0,
+    "rpm0": 113,
+    "v0": 0.39,
+    "Ts_kgcm": 3.45,
+    "Ts_Nm": 0.338,
+    "Is": 1.2,
+    "flat design mass": {
+     "frac": 0.12,
+     "rpm": 99,
+     "v": 0.34,
+     "I": 0.21
+    },
+    "ramp 3.0 kg": {
+     "frac": 0.26,
+     "rpm": 83,
+     "v": 0.28,
+     "I": 0.37
+    }
+   },
+   {
+    "motor": "Pololu 25D MP 12 V 47:1",
+    "V": 8.4,
+    "rpm0": 119,
+    "v0": 0.41,
+    "Ts_kgcm": 3.62,
+    "Ts_Nm": 0.355,
+    "Is": 1.26,
+    "flat design mass": {
+     "frac": 0.12,
+     "rpm": 105,
+     "v": 0.36,
+     "I": 0.21
+    },
+    "ramp 3.0 kg": {
+     "frac": 0.25,
+     "rpm": 89,
+     "v": 0.3,
+     "I": 0.37
+    }
+   },
+   {
+    "motor": "generic 25GA-370 12 V 130 rpm",
+    "V": 6.0,
+    "rpm0": 65,
+    "v0": 0.22,
+    "Ts_kgcm": 1.0,
+    "Ts_Nm": 0.098,
+    "Is": 0.45,
+    "flat design mass": {
+     "frac": 0.42,
+     "rpm": 37,
+     "v": 0.13,
+     "I": 0.22
+    },
+    "ramp 3.0 kg": {
+     "frac": 0.91,
+     "rpm": 6,
+     "v": 0.02,
+     "I": 0.41
+    }
+   },
+   {
+    "motor": "generic 25GA-370 12 V 130 rpm",
+    "V": 7.4,
+    "rpm0": 80,
+    "v0": 0.27,
+    "Ts_kgcm": 1.23,
+    "Ts_Nm": 0.121,
+    "Is": 0.56,
+    "flat design mass": {
+     "frac": 0.34,
+     "rpm": 53,
+     "v": 0.18,
+     "I": 0.23
+    },
+    "ramp 3.0 kg": {
+     "frac": 0.74,
+     "rpm": 21,
+     "v": 0.07,
+     "I": 0.42
+    }
+   },
+   {
+    "motor": "generic 25GA-370 12 V 130 rpm",
+    "V": 8.0,
+    "rpm0": 87,
+    "v0": 0.29,
+    "Ts_kgcm": 1.33,
+    "Ts_Nm": 0.131,
+    "Is": 0.6,
+    "flat design mass": {
+     "frac": 0.32,
+     "rpm": 59,
+     "v": 0.2,
+     "I": 0.23
+    },
+    "ramp 3.0 kg": {
+     "frac": 0.68,
+     "rpm": 27,
+     "v": 0.09,
+     "I": 0.43
+    }
+   },
+   {
+    "motor": "generic 25GA-370 12 V 130 rpm",
+    "V": 8.4,
+    "rpm0": 91,
+    "v0": 0.31,
+    "Ts_kgcm": 1.4,
+    "Ts_Nm": 0.137,
+    "Is": 0.63,
+    "flat design mass": {
+     "frac": 0.3,
+     "rpm": 63,
+     "v": 0.22,
+     "I": 0.23
+    },
+    "ramp 3.0 kg": {
+     "frac": 0.65,
+     "rpm": 32,
+     "v": 0.11,
+     "I": 0.43
+    }
+   }
+  ],
+  "tilt_mass_kg": 0.604,
+  "tilt_static_off10mm": 0.059,
+  "tilt_static_off25mm": 0.148,
+  "tilt_inertia": 0.00084,
+  "tilt_dyn": 0.0196,
+  "tilt_total_nominal": 0.099,
+  "tilt_total_worst": 0.188,
+  "servo_torque_Nm": {
+   "4.8V": 0.92,
+   "6V": 1.08
+  },
+  "pan_mass_kg": 0.773,
+  "pan_inertia": 0.0026,
+  "pan_dyn": 0.016,
+  "pan_friction": 0.083,
+  "pan_total": 0.099,
+  "mast_section": {
+   "A": 160.1,
+   "I_about_x": 89386,
+   "I_about_y": 49997
+  },
+  "mast_push_5N": {
+   "defl_front_back_mm": 0.88,
+   "defl_side_mm": 0.49,
+   "stress_MPa": 0.75
+  },
+  "mast_push_10N": {
+   "defl_front_back_mm": 1.76,
+   "defl_side_mm": 0.99,
+   "stress_MPa": 1.5
+  }
+ },
+ "print": {
+  "summary": {
+   "all": {
+    "parts": 35,
+    "pieces": 41,
+    "mass_g": 1152,
+    "hours": 44.6
+   },
+   "first_build_without_optional": {
+    "parts": 31,
+    "pieces": 37,
+    "mass_g": 1124,
+    "hours": 43.0
+   },
+   "first_build_without_bumper": {
+    "parts": 32,
+    "pieces": 38,
+    "mass_g": 1125,
+    "hours": 43.2
+   },
+   "bumper_only": {
+    "parts": 3,
+    "pieces": 3,
+    "mass_g": 27,
+    "hours": 1.4
+   }
+  },
+  "rows": [
+   {
+    "name": "tray_FL",
+    "qty": 1,
+    "size_mm": [
+     178.0,
+     133.3,
+     56.0
+    ],
+    "volume_cm3": 96.6,
+    "mass_g": 92.0,
+    "minutes": 187,
+    "orientation": "floor down, rim and posts up",
+    "supports": "none; use a brim (the 53 mm posts are tall and thin). The 19.4 mm bumper slots in the rim are short bridges",
+    "optional": false
+   },
+   {
+    "name": "tray_FR",
+    "qty": 1,
+    "size_mm": [
+     178.0,
+     125.3,
+     56.0
+    ],
+    "volume_cm3": 95.4,
+    "mass_g": 90.8,
+    "minutes": 185,
+    "orientation": "floor down, rim and posts up",
+    "supports": "none; use a brim (the 53 mm posts are tall and thin). The 19.4 mm bumper slots in the rim are short bridges",
+    "optional": false
+   },
+   {
+    "name": "tray_RL",
+    "qty": 1,
+    "size_mm": [
+     90.0,
+     131.4,
+     56.0
+    ],
+    "volume_cm3": 44.4,
+    "mass_g": 42.3,
+    "minutes": 92,
+    "orientation": "floor down, rim and posts up",
+    "supports": "none; use a brim (the 53 mm posts are tall and thin). The 19.4 mm bumper slots in the rim are short bridges",
+    "optional": false
+   },
+   {
+    "name": "tray_RR",
+    "qty": 1,
+    "size_mm": [
+     90.0,
+     123.4,
+     56.0
+    ],
+    "volume_cm3": 44.4,
+    "mass_g": 42.3,
+    "minutes": 92,
+    "orientation": "floor down, rim and posts up",
+    "supports": "none; use a brim (the 53 mm posts are tall and thin). The 19.4 mm bumper slots in the rim are short bridges",
+    "optional": false
+   },
+   {
+    "name": "deck_FL",
+    "qty": 1,
+    "size_mm": [
+     178.0,
+     138.0,
+     34.6
+    ],
+    "volume_cm3": 74.2,
+    "mass_g": 47.1,
+    "minutes": 102,
+    "orientation": "flat, plate down, standoffs up",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "deck_FR",
+    "qty": 1,
+    "size_mm": [
+     178.0,
+     130.0,
+     34.6
+    ],
+    "volume_cm3": 72.6,
+    "mass_g": 46.1,
+    "minutes": 100,
+    "orientation": "flat, plate down, standoffs up",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "deck_RL",
+    "qty": 1,
+    "size_mm": [
+     90.0,
+     131.4,
+     34.6
+    ],
+    "volume_cm3": 34.3,
+    "mass_g": 21.8,
+    "minutes": 53,
+    "orientation": "flat, plate down, standoffs up",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "deck_RR",
+    "qty": 1,
+    "size_mm": [
+     90.0,
+     123.4,
+     34.6
+    ],
+    "volume_cm3": 31.6,
+    "mass_g": 20.1,
+    "minutes": 50,
+    "orientation": "flat, plate down, standoffs up",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "cover_FL",
+    "qty": 1,
+    "size_mm": [
+     178.0,
+     138.0,
+     33.0
+    ],
+    "volume_cm3": 54.8,
+    "mass_g": 52.2,
+    "minutes": 111,
+    "orientation": "upside down: top plate on the bed, skirt up",
+    "supports": "none (the speaker pocket ring stands up from the bed)",
+    "optional": false
+   },
+   {
+    "name": "cover_FR",
+    "qty": 1,
+    "size_mm": [
+     178.0,
+     130.0,
+     33.0
+    ],
+    "volume_cm3": 54.6,
+    "mass_g": 52.0,
+    "minutes": 111,
+    "orientation": "upside down: top plate on the bed, skirt up",
+    "supports": "none (the speaker pocket ring stands up from the bed)",
+    "optional": false
+   },
+   {
+    "name": "cover_RL",
+    "qty": 1,
+    "size_mm": [
+     90.0,
+     131.4,
+     33.0
+    ],
+    "volume_cm3": 28.5,
+    "mass_g": 27.1,
+    "minutes": 64,
+    "orientation": "upside down: top plate on the bed, skirt up",
+    "supports": "none (the speaker pocket ring stands up from the bed)",
+    "optional": false
+   },
+   {
+    "name": "cover_RR",
+    "qty": 1,
+    "size_mm": [
+     90.0,
+     123.4,
+     33.0
+    ],
+    "volume_cm3": 28.0,
+    "mass_g": 26.7,
+    "minutes": 63,
+    "orientation": "upside down: top plate on the bed, skirt up",
+    "supports": "none (the speaker pocket ring stands up from the bed)",
+    "optional": false
+   },
+   {
+    "name": "caster_cup",
+    "qty": 1,
+    "size_mm": [
+     38.0,
+     38.0,
+     13.6
+    ],
+    "volume_cm3": 7.9,
+    "mass_g": 9.0,
+    "minutes": 29,
+    "orientation": "flange down",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "caster_ring",
+    "qty": 1,
+    "size_mm": [
+     28.0,
+     28.0,
+     1.8
+    ],
+    "volume_cm3": 0.8,
+    "mass_g": 0.9,
+    "minutes": 14,
+    "orientation": "flat",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "motor_cap",
+    "qty": 4,
+    "size_mm": [
+     40.0,
+     12.0,
+     16.0
+    ],
+    "volume_cm3": 4.2,
+    "mass_g": 4.8,
+    "minutes": 21,
+    "orientation": "flat, top face down (as exported)",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "skid",
+    "qty": 4,
+    "size_mm": [
+     14.0,
+     14.0,
+     10.5
+    ],
+    "volume_cm3": 1.5,
+    "mass_g": 1.7,
+    "minutes": 15,
+    "orientation": "as exported",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "plug_hood",
+    "qty": 1,
+    "size_mm": [
+     35.0,
+     81.0,
+     11.6
+    ],
+    "volume_cm3": 10.4,
+    "mass_g": 11.9,
+    "minutes": 35,
+    "orientation": "upside down: hood top on the bed, flange up",
+    "supports": "none (glue the flange to the cover top)",
+    "optional": false
+   },
+   {
+    "name": "bumper_R",
+    "qty": 1,
+    "size_mm": [
+     88.4,
+     75.0,
+     16.0
+    ],
+    "volume_cm3": 7.9,
+    "mass_g": 9.1,
+    "minutes": 29,
+    "orientation": "arc standing on its edge, arm lying flat on the bed (as exported)",
+    "supports": "none",
+    "optional": true
+   },
+   {
+    "name": "bumper_C",
+    "qty": 1,
+    "size_mm": [
+     16.2,
+     114.1,
+     16.0
+    ],
+    "volume_cm3": 7.4,
+    "mass_g": 8.5,
+    "minutes": 28,
+    "orientation": "arc standing on its edge (as exported)",
+    "supports": "none",
+    "optional": true
+   },
+   {
+    "name": "bumper_L",
+    "qty": 1,
+    "size_mm": [
+     88.4,
+     75.0,
+     16.0
+    ],
+    "volume_cm3": 7.9,
+    "mass_g": 9.1,
+    "minutes": 29,
+    "orientation": "arc standing on its edge, arm lying flat on the bed (as exported)",
+    "supports": "none",
+    "optional": true
+   },
+   {
+    "name": "mast_lo_front",
+    "qty": 1,
+    "size_mm": [
+     106.8,
+     56.0,
+     23.5
+    ],
+    "volume_cm3": 28.7,
+    "mass_g": 31.0,
+    "minutes": 71,
+    "orientation": "lying on the outer back face, open side up",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "mast_lo_back",
+    "qty": 1,
+    "size_mm": [
+     106.8,
+     56.0,
+     22.0
+    ],
+    "volume_cm3": 27.7,
+    "mass_g": 29.9,
+    "minutes": 69,
+    "orientation": "lying on the outer back face, open side up",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "mast_up_front",
+    "qty": 1,
+    "size_mm": [
+     106.8,
+     56.0,
+     23.5
+    ],
+    "volume_cm3": 28.7,
+    "mass_g": 31.0,
+    "minutes": 71,
+    "orientation": "lying on the outer back face, open side up",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "mast_up_back",
+    "qty": 1,
+    "size_mm": [
+     106.8,
+     56.0,
+     22.0
+    ],
+    "volume_cm3": 27.7,
+    "mass_g": 29.9,
+    "minutes": 69,
+    "orientation": "lying on the outer back face, open side up",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "collar_front",
+    "qty": 1,
+    "size_mm": [
+     25.2,
+     77.4,
+     40.0
+    ],
+    "volume_cm3": 16.3,
+    "mass_g": 16.6,
+    "minutes": 43,
+    "orientation": "as exported (standing)",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "collar_back",
+    "qty": 1,
+    "size_mm": [
+     25.2,
+     77.4,
+     40.0
+    ],
+    "volume_cm3": 16.5,
+    "mass_g": 16.7,
+    "minutes": 44,
+    "orientation": "as exported (standing)",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "foot_plate",
+    "qty": 1,
+    "size_mm": [
+     70.0,
+     84.0,
+     22.0
+    ],
+    "volume_cm3": 25.2,
+    "mass_g": 19.2,
+    "minutes": 48,
+    "orientation": "plate down, socket up",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "neck_plate",
+    "qty": 1,
+    "size_mm": [
+     100.0,
+     100.0,
+     25.0
+    ],
+    "volume_cm3": 70.3,
+    "mass_g": 40.2,
+    "minutes": 88,
+    "orientation": "top face down, socket up",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "turntable",
+    "qty": 1,
+    "size_mm": [
+     92.0,
+     92.0,
+     16.0
+    ],
+    "volume_cm3": 28.0,
+    "mass_g": 19.5,
+    "minutes": 49,
+    "orientation": "top face down, skirt up",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "yoke_servo_side",
+    "qty": 1,
+    "size_mm": [
+     46.0,
+     77.5,
+     125.0
+    ],
+    "volume_cm3": 74.5,
+    "mass_g": 47.3,
+    "minutes": 102,
+    "orientation": "bar flat on the bed, arm standing (125 mm high)",
+    "supports": "none; add a brim",
+    "optional": false
+   },
+   {
+    "name": "yoke_plain_side",
+    "qty": 1,
+    "size_mm": [
+     46.0,
+     77.5,
+     125.0
+    ],
+    "volume_cm3": 74.9,
+    "mass_g": 47.6,
+    "minutes": 102,
+    "orientation": "bar flat on the bed, arm standing (125 mm high)",
+    "supports": "none; add a brim",
+    "optional": false
+   },
+   {
+    "name": "head_shell",
+    "qty": 1,
+    "size_mm": [
+     150.6,
+     174.6,
+     41.6
+    ],
+    "volume_cm3": 128.0,
+    "mass_g": 130.1,
+    "minutes": 259,
+    "orientation": "front face down",
+    "supports": "none; a support only under the 41 mm servo window if it sags. The 22 mm bridge over the camera-cover slot may sag: then use a 1 mm plastic card as the cover",
+    "optional": false
+   },
+   {
+    "name": "head_lid",
+    "qty": 1,
+    "size_mm": [
+     150.6,
+     174.6,
+     6.4
+    ],
+    "volume_cm3": 71.9,
+    "mass_g": 54.8,
+    "minutes": 116,
+    "orientation": "interface-pad side down",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "pivot_bush",
+    "qty": 1,
+    "size_mm": [
+     14.0,
+     14.0,
+     8.6
+    ],
+    "volume_cm3": 1.1,
+    "mass_g": 1.4,
+    "minutes": 15,
+    "orientation": "as exported",
+    "supports": "none",
+    "optional": false
+   },
+   {
+    "name": "cam_cover",
+    "qty": 1,
+    "size_mm": [
+     62.0,
+     20.0,
+     1.0
+    ],
+    "volume_cm3": 1.2,
+    "mass_g": 1.6,
+    "minutes": 15,
+    "orientation": "flat",
+    "supports": "none (or use a 1 mm plastic card)",
+    "optional": true
+   }
+  ]
+ },
+ "hardware": {
+  "from_the_cad_parameters": {
+   "drive_wheels": 2,
+   "gearmotors": 2,
+   "motor_caps": 4,
+   "ball_caster": 1,
+   "skids": 4,
+   "tray_to_deck_columns": 6,
+   "deck_to_cover_posts": 4,
+   "xl4016_bucks": 2,
+   "mini_bucks": 2,
+   "fuse_holder_bays_in_the_cad": 5,
+   "lever_connector_bays_in_the_cad": 2,
+   "sonar_modules": 2,
+   "cliff_modules": 2,
+   "mg996r_servos": 2
+  },
+  "note": "Fuse holders: the CAD shows 5 bays; decision R13 asks for 6 holders in the cheap build (route B). Lever connectors: decision R14 asks for FOUR 5-way connectors; the CAD has two 40 x 17 x 17 bays, each can hold two side by side (check on the real parts).",
+  "screw_and_insert_counts": "unchanged from docs/mechanical-design.md section 10 except: motherboard screws are M3 x 6 (insert hole 6 mm deep); optional bumper adds 2 micro switches and 4 small screws (2 per switch, pilot holes 1.8 mm); no new heat-set inserts were added by the CAD stages",
+  "insert_hole_helper_counts": {
+   "M3_insert_holes_made_with_insert_hole": 30,
+   "nut_pockets_made_with_hexnut_pocket": 12,
+   "note": "counted by running the model with a counter in the two helper modules (copy of the files). Other holes (cover posts, board standoffs, caster, ...) are plain cylinders and are NOT in this count, so these two numbers do NOT add up to the 37 inserts of the doc."
+  },
+  "printed_parts": 35,
+  "printed_pieces": 41
+ },
+ "inputs": {
+  "skid_gap_mm": 1.5,
+  "push_point_mm": [
+   65.0,
+   0.0,
+   412.0
+  ],
+  "wheel_y_mm": 117.0,
+  "caster_x_mm": 104.0,
+  "skids": [
+   [
+    95,
+    58
+   ],
+   [
+    95,
+    -58
+   ],
+   [
+    -85,
+    85
+   ],
+   [
+    -85,
+    -85
+   ]
+  ],
+  "model": "quasi-static rigid body; see phys.py (A = my calculation)"
+ }
+}
