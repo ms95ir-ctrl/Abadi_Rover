@@ -1,5 +1,5 @@
 """Export every printed part to ../stl/NAME.stl (the part names are in parts.txt). Runs 4 OpenSCAD jobs at once.
-   Usage:  python export_stl.py          (old STL files are deleted first)
+   Usage:  python export_stl.py          (old STL files are deleted only after OpenSCAD has been found)
    A part is OK when OpenSCAD ends with exit code 0 and prints no WARNING or ERROR line."""
 import subprocess, sys
 from concurrent.futures import ThreadPoolExecutor
@@ -15,6 +15,10 @@ def export(name):
     return name, r.returncode, bad
 
 if __name__ == '__main__':
+    try:                                    # look for OpenSCAD first, so nothing is deleted when it is missing
+        subprocess.run([OPENSCAD, '--version'], capture_output=True, check=True)
+    except Exception:
+        sys.exit('OpenSCAD was not found. Nothing was changed. Install OpenSCAD or set the OPENSCAD variable to its full path, then run this again.')
     STL.mkdir(exist_ok=True); LOGS.mkdir(parents=True, exist_ok=True)
     for f in STL.glob('*.stl'):
         f.unlink()

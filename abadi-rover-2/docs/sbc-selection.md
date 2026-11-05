@@ -36,7 +36,7 @@ The cheap boards you named (Orange Pi Zero 2W, Radxa Cubie A7S) look 2 to 3 time
 5. Run on **5 V** from a buck converter on the 2S pack (6.0 to 8.4 V), without brown-outs when the motors start.
 6. Be **as cheap as sensible** and easy to get in Germany before you leave.
 
-**Ports we need:** HDMI out, 2 USB ports (camera and ESP32). A third USB port (speaker) is nice.
+**Ports we need:** HDMI out and 4 USB ports (webcam, sound, ESP32 link, touch).
 
 ---
 
@@ -133,7 +133,7 @@ Prices are EUR, delivered to Germany, "about", from news articles and shop snaps
 
 ### Pick 1: the cheapest that really works well enough: Raspberry Pi 4 Model B, 2 GB (about 72 EUR)
 
-- **Why.** Every part of the job is proven on it: HDMI, camera, ESP32 over USB, Wi-Fi, Chromium, Raspberry Pi OS. Millions of people use it, so any problem has an answer on the internet. 4 USB ports, no adapters. It takes a plain 5 V supply on a bare USB-C cable end without any trouble (A).
+- **Why.** Every part of the job is proven on it: HDMI, camera, ESP32 over USB, Wi-Fi, Chromium, Raspberry Pi OS. Millions of people use it, so any problem has an answer on the internet. 4 USB ports, no hub. It takes a plain 5 V supply on a bare USB-C cable end without any trouble (A).
 - **Limit.** It is at the edge. Reports say a 720p call in Chromium can push it to almost full CPU, and it gets hot. It needs a fan, the performance CPU mode, and a simple 1-to-1 call page. 2 GB of RAM is enough for one Chromium call but not roomy (A). The 3 GB model costs more (83.75 USD at launch); the 4 GB much more.
 - **Cheaper still?** A used Pi 4 on eBay or Kleinanzeigen may be 40 to 60 EUR (A, **not checked**). Only buy used if you can test it before you leave.
 
@@ -163,10 +163,10 @@ Prices are EUR, delivered to Germany, "about", from news articles and shop snaps
 | Item | Pi 4 2 GB | Pi 5 (own or new) |
 |---|---|---|
 | **HDMI cable** | **micro-HDMI** to the screen's connector. Which end the screen needs is decided in the screen file. Use the HDMI0 port, the one closest to the USB-C power port (A). Cable must bend through the neck: pick a **thin, flat, flexible, 0.8 m** cable (the mast route needs about 0.65 m; see `parts-list.md` and `peripherals.md` C2). About 12 EUR (A). | The same: 2x micro-HDMI, use HDMI0 (A). |
-| **Storage** | microSD 32 GB, A1 or A2 rating, a known brand (SanDisk, Samsung). About 8 to 12 EUR (A). The cheap build buys **one** card. | The same. A 64 GB card is fine. The comfortable build buys a second card and clones the first onto it as a spare. |
+| **Storage** | microSD 32 GB, A1 or A2 rating, a known brand (SanDisk, Samsung). About 8 to 12 EUR (A). Both builds buy **two** cards: the main card and a spare that the finished card is cloned onto (stage 9). | The same. A 64 GB card is fine. |
 | **Cooling** | Heatsink plus a small 5 V fan. Buy one for robot 2 (it is in the cheap-build parts list; the fan you own is for robot 1). Without it the Pi 4 may throttle in a long call (A). | **Official Active Cooler** for the Pi 5, about 5 to 6 EUR (A, check). It plugs into the fan connector on the board. |
 | **Power cable** | A USB-C plug breakout board with solder pads and your own AWG 18 to 20 silicone wire (a "pigtail"), or a cut thick 5 A USB-C cable. About 5 EUR (A). | Same, plus the config flag below. |
-| **USB** | Webcam on a blue USB 3.0 port, ESP32 on a USB 2.0 port. No hub. | Same. |
+| **USB** | Webcam on a blue USB 3.0 port; sound, ESP32 link and touch on the USB 2.0 ports. No hub. The ports face the rear wall of the base, so each plug gets a right-angle USB-A adapter (`parts-list.md`, group 1). | Same. |
 | **Audio out** | 3.5 mm jack on the board, or HDMI sound to the screen, or a small USB speaker (A). | **No 3.5 mm jack on a Pi 5.** HDMI sound or a USB speaker (A). |
 
 ### How to power the SBC safely from the 5.1 V buck (applies to all Raspberry Pi picks)
@@ -175,7 +175,7 @@ This follows the power design in the motherboard documents: a second XL4016 buck
 
 1. **Use the USB-C plug end, not the 5 V header pins.** The USB-C input goes through the board's own protection parts. The header pins skip them (the project's shopping list says the same). Use the header pins only if the USB-C route fails.
 2. **Pi 4:** a bare USB-C cable end works. The board does not need a power negotiation (A).
-3. **Pi 5:** a bare cable end boots, but the Pi 5 expects a 5 A supply that "talks" to it. Without that it limits all USB ports together to **600 mA** and shows a warning (V). Your webcam and the ESP32 together may use more. The fix is the line `usb_max_current_enable=1` in the file `/boot/firmware/config.txt`. It tells the Pi to allow more USB power anyway. Only turn it on if the buck and the wire really can give 5 A. A third-party guide gives this setting (V, third-party guides; I could not open the official page). Steps, in this order (see "How to type a command" at the top):
+3. **Pi 5:** a bare cable end boots, but the Pi 5 expects a 5 A supply that "talks" to it. Without that it limits all USB ports together to **600 mA** and shows a warning (V). Your webcam and the sound device together may use more. The fix is the line `usb_max_current_enable=1` in the file `/boot/firmware/config.txt`. It tells the Pi to allow more USB power anyway. Only turn it on if the buck and the wire really can give 5 A. A third-party guide gives this setting (V, third-party guides; I could not open the official page). Steps, in this order (see "How to type a command" at the top):
    1. Type `sudo nano /boot/firmware/config.txt` and press Enter. The file opens in the `nano` editor.
    2. Use the arrow keys to go to the end of the file. The default file ends under an `[all]` line; add the new line under an `[all]` line (if the last header in your file is something else, such as `[cm4]`, type a new line `[all]` first). Type `usb_max_current_enable=1` on its own line.
    3. Save with Ctrl+O, then Enter. Leave with Ctrl+X.
@@ -250,16 +250,16 @@ Do not buy the Orange Pi Zero 2W or the Cubie A7S for this trip. Their lower pri
 |---|---|---|---|
 | Raspberry Pi 5, 2 GB (or 4 GB) | Berrybase, Reichelt, Welectron | 2 GB about 82.50 EUR; 4 GB about 115 to 150 EUR (check live) | Skip if you take your own. A Pi is easy to find abroad, but prices and stock vary. |
 | Active Cooler for Pi 5 | same shop | about 5 to 6 EUR (A) | |
-| microSD cards 32 or 64 GB, A2 | any | about 9 EUR each (A) | Comfortable build (Pi 5): two cards, flash one and clone it to the second. Cheap build (Pi 4): one card. |
+| microSD cards 32 or 64 GB, A2 | any | about 9 EUR each (A) | Both builds: two cards, flash one and clone it to the second. |
 | micro-HDMI to HDMI-A cable, flat and slim, 0.8 m (right-angle plug at the screen end is better) | any | about 12 EUR (A) | Adjust to the screen's connector |
 | USB-C plug breakout board with solder pads (plus your own AWG 18 to 20 silicone wire), or a thick 5 A USB-C cable to cut | any | about 5 EUR (A) | |
 | XL4016 buck x2 (servo 5.0 V and SBC 5.1 V; the one you own is for robot 1) | any | about 12 EUR for two (A) | As in `parts-list.md` |
 | 5 A slow-blow fuses 5 x 20 mm and an in-line holder | any | about 1.20 EUR for the holder (A); fuses come in an assortment | As in `parts-list.md` |
 | Data-only USB adapter ("power blocker"), two of them | any | about 5 EUR each (A) | One for the ESP32 link, one for the touch cable. Both builds. |
-| Small USB 2.0 hub | any | 6 to 10 EUR (A) | Only if a third device is added |
+| Small USB 2.0 hub | any | 6 to 10 EUR (A) | Only if a fifth device is added |
 | Small USB keyboard, or phone hotspot plan | any | about 10 EUR (A) | For first Wi-Fi setup at your sister's |
 
-### Easy to buy anywhere (can wait)
+### Easy to buy anywhere (any shop; still buy it in time for the build at home)
 
 microSD card, HDMI cable, USB cables, USB speaker, hub, keyboard.
 

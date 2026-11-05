@@ -52,14 +52,14 @@ def exploded():
      ('motherboard 100 x 100', top_of('mb_pcb') + np.array([30, -20, 0]), 'L'),
      ('ESP32-S3 on the board', top_of('mb_esp'), 'L'),
      ('PCA9685 servo board', top_of('mb_pca'), 'L'),
-     ('2 x DRV8833 motor drivers', top_of('mb_drv'), 'L'),
+     ('2 DRV8833 sockets (robot 2 fits driver A only)', top_of('mb_drv'), 'L'),
      ('screw terminals (battery, bucks)', top_of('mb_terms'), 'L'),
      ('deck (4 pieces)', c('deck') + np.array([60, -110, 0]), 'L'),
      ('main switch (rear wall)', c('switch'), 'R'),
-     ('lever connectors (2 bays)', top_of('wagos'), 'R'),
+     ('lever connectors (2 bays drawn, 4 bought)', top_of('wagos'), 'R'),
      ('USB-C charger board', top_of('charger'), 'R'),
-     ('fuse holders (5 bays)', top_of('fuses'), 'R'),
-     ('2 fixed bucks (5 V, 3.3 V)', top_of('minibuck'), 'R'),
+     ('fuse holders (5 bays; 6 in the cheap build)', top_of('fuses'), 'R'),
+     ('fixed 5 V buck (1 only, no 3.3 V; 2nd bay spare)', top_of('minibuck'), 'R'),
      ('BMS on the battery', top_of('bms'), 'R'),
      ('2S battery: 2 x 18650 holder', top_of('battery') + np.array([0, 10, 0]), 'R'),
      ('drive wheel (x2)', c('wheels') + np.array([0, 110, 0]), 'R'),
@@ -71,7 +71,7 @@ def exploded():
      ('anti-tip skids (x4)', c('skids') + np.array([90, 30, -4]), 'L'),
      ('tray (4 pieces)', np.array([-100, 60, 15]), 'R'),
     ]
-    autolabels(ax, cam, items, W, H, fs=14, top=140, gap=38)
+    autolabels(ax, cam, items, W, H, fs=14, right_x=1300, top=140, gap=38)
     save(fig, 'robot2-base-exploded.png')
 
 if __name__ == '__main__':

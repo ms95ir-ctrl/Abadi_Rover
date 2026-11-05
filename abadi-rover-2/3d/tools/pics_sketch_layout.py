@@ -72,7 +72,7 @@ def sketch():
     hdim(Z(0)+70, -130, 130, 'base diameter 260')
     ax.plot([X(0), X(0)], [Z(0), Z(0)+190], color=GRID, lw=1.4, zorder=0); ax.plot([X(104), X(104)], [Z(0), Z(0)+190], color=GRID, lw=1.4, zorder=0)
     hdim(Z(0)+140, 0, 104, 'axle to caster 104')
-    vdim(730, 12, 105, 'base 105', right=True); ax.plot([X(135)+4, 730], [Z(105), Z(105)], color=GRID, lw=1.2, zorder=0); ax.plot([X(135)+4, 730], [Z(12), Z(12)], color=GRID, lw=1.2, zorder=0)
+    vdim(730, 0, 105, 'base 105', right=True); ax.plot([X(135)+4, 730], [Z(105), Z(105)], color=GRID, lw=1.2, zorder=0)
     # ---- call-outs (left column; every leader line runs over empty paper)
     def call(txt, pt, tpos, color=INK, fs=30, ha='left'):
         ax.annotate(txt, xy=pt, xytext=tpos, fontsize=fs, color=color, fontweight='bold', ha=ha, va='center',
@@ -114,8 +114,8 @@ def layout():
     ax.text(30, 70, 'top view, front (sonars, caster) at the top, robot left = picture left', fontsize=15, color=INK, va='center')
     ax.text(30, H+36, 'Deck level (cover removed)', fontsize=22, fontweight='bold', color=INK, va='center')
     A = [('2S battery + BMS on top', (-2, 0, 38), 'R'), ('2 x XL4016 bucks', (62, 36, 36), 'L'), ('gearmotor (x2)', (0, 80, 32), 'L'), ('drive wheel (x2)', (0, -120, 32), 'R'),
-         ('ball caster', (104, 0, 16), 'R'), ('sonar HC-SR04', (108, 58, 45), 'L'), ('cliff sensor', (69, -88, 20), 'R'), ('fuse holders (5 bays)', (-61, -30, 26), 'R'),
-         ('lever connectors (2 bays)', (-96, 30, 30), 'L'), ('USB-C charger (rear wall)', (-102, 0, 26), 'R'), ('2 fixed bucks', (-96, 56, 22), 'L'), ('main switch', (-118, 50, 45), 'L')]
+         ('ball caster', (104, 0, 16), 'R'), ('sonar HC-SR04', (108, 58, 45), 'L'), ('cliff sensor', (69, -88, 20), 'R'), ('fuse holders (5 bays;\n6 in the cheap build)', (-61, -30, 26), 'R'),
+         ('lever connectors (2 bays drawn, 4 bought)', (-96, 30, 30), 'L'), ('USB-C charger (rear wall)', (-102, 0, 26), 'R'), ('fixed 5 V buck (2nd bay spare)', (-96, 56, 22), 'L'), ('main switch', (-118, 50, 45), 'L')]
     autolabels(ax, cam, A, W, H, fs=14, left_x=12, right_x=1160, top=130, bottom=H-40, gap=40)
     B = [('motherboard 100 x 100', (-36, -38, 80), 'R'), ('ESP32-S3', (-65, -25, 88), 'R'), ('PCA9685 servo board', (-5, -44, 95), 'R'),
          ('battery / buck terminals', (-30, -81, 85), 'R'), ('SBC 85 x 56', (-62, 64, 90), 'L'), ('mast foot, 4 x M4', (62, 0, 86), 'L'), ('wire slot to the motors', (-18, 23, 72), 'L'),

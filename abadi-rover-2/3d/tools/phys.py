@@ -144,7 +144,7 @@ def analyse(c, M, label='', q=None, gap=None, step=0.5):
     for name, a in (('forward', 0.0), ('backward', 180.0), ('sideways left', 90.0), ('sideways right', 270.0)):
         r = sel(a)
         dirs[name] = dict(angle=a, slope_deg=round(r['slope_deg'], 1), F_tip=round(r['F_tip'], 2), tilt_body_deg=round(r['tilt_body_deg'], 1),
-                          brake_ms2=round(r['brake_ms2'], 2), lever_mm=r['stages'][-1].get('ray_mm'), stages=r['stages'])
+                          brake_ms2=round(r['brake_ms2'], 2), lever_mm=max(r['stages'], key=lambda s: s.get('F_N', 0)).get('ray_mm'), stages=r['stages'])   # lever of the edge that needs the biggest push (the one that decides)
     side = min(dirs['sideways left'], dirs['sideways right'], key=lambda d: d['slope_deg'])
     res['dirs'] = dirs
     res['sideways'] = dict(angle=side['angle'], slope_deg=side['slope_deg'], F_tip=side['F_tip'], tilt_body_deg=side['tilt_body_deg'], brake_ms2=side['brake_ms2'], lever_mm=side['lever_mm'])

@@ -7,7 +7,7 @@ Every script finds its files by itself, so you can start it from any folder. Cha
 | Command | What it does | Result |
 |---|---|---|
 | `python run_all.py` | runs the five steps below in order (about 3 minutes) | everything |
-| `python export_stl.py` | makes one STL file for each printed part in `parts.txt` (35 parts), 4 at a time | `../stl/` |
+| `python export_stl.py` | makes one STL file for each printed part in `parts.txt` (35 parts), 4 at a time; the old STL files are deleted only after OpenSCAD has been found (if not, it stops with a plain message and changes nothing) | `../stl/` |
 | `python check_stl.py` | checks every STL: closed, one body, lowest point at z = 0, and writes the sizes | `results/stl_check.txt` |
 | `python export_groups.py` | cuts the whole robot into named groups for the pictures | `work/groups/` (scratch, safe to delete) |
 | `python summary.py` | mass, balance point, heights, tip-over, braking, push force, wheel torque, servo torque, print time | `results/numbers.json` and `results/numbers.txt` |

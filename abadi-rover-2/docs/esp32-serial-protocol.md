@@ -149,7 +149,7 @@ SBC                                         ESP32
 | `build` | string | build date and time, for the log |
 | `hw` | string | board name, fixed: `abadi-v5` (motherboard v5) |
 | `chip` | string | `esp32s3` |
-| `boot` | string | why the ESP32 last restarted (same values as in `boot`, section 6.1) |
+| `boot` | string | why the ESP32 last restarted (the same values as the `reset` field of the `boot` message, section 6.1) |
 | `caps` | array of strings | **features compiled into the firmware** (what it could do): `drive`, `servo`, `sonar`, `cliff`, `imu`, `bat`, `btn`, `led`, `m34` (the second driver DRV B) |
 | `hwok` | object | **parts found on the I2C bus at start** (I2C is the two-wire bus the chips share, see section 16): `pca` (PCA9685 at 0x40, the 16-channel chip that drives the servos and LEDs), `imu` (GY-521 at 0x68, the motion-sensor board), `ads` (ADS1115 at 0x48, the chip that measures the battery voltage); 1 = answered, 0 = missing. A missing part also sets a fault bit (section 9). |
 
@@ -498,7 +498,7 @@ Each timer works alone: none of them needs another one to work. Timer 1 runs on 
 |---|---|---|---|---|
 | 1 | **Service dead-man** (on the SBC) | the robot service gets no steering input from the browser for this long | 250 ms | the service turns the silent browser into `stop` / `drive 0` (see `software-plan.md`, section 4) |
 | 2 | **Drive time-out** (`ttl`) | each `drive` sets "valid until now + ttl" (`ttl` is capped at `ttl_def`, see 5.3). After that, the target speed becomes 0. | 300 ms (`ttl_def` 50..500) | soft stop at `ramp_stop`, still armed, `ev ttl` |
-| 3 | **Task watchdog** (hardware) on the control task | the control loop (every 10 ms) must run at least every 500 ms | 500 ms | the chip resets itself; during and after the reset the driver pins are inputs and the DRV8833's internal pull-downs hold them low = **motors coast** (VERIFIED: TI datasheet, 150 kOhm internal pull-down on the input pins) |
+| 3 | **Task watchdog** (hardware) on the control task | the control loop (every 10 ms) must run at least every 500 ms | 500 ms | the chip resets itself; during and after the reset the driver pins are inputs and the DRV8833's internal pull-downs hold them low = **motors coast** (VERIFIED (search summary only, re-check the TI DRV8833 datasheet): 150 kOhm internal pull-down on the input pins) |
 | 4 | **Link watchdog** (`link_ms`), only while armed | if no valid line of any kind arrives for `link_ms` | 1000 ms (300..5000) | hard stop, state `disarmed`, fault bit LINK_LOST, `ev state ... why link`. Re-arming is needed after the link returns. |
 
 **About timer 3.** The Arduino-ESP32 library starts with a 5 s watchdog that only watches the idle tasks (ASSUMED, from forum reports; check in Stage 5), which is useless here. So the firmware **reconfigures it to 500 ms with panic switched on** (`timeout_ms` = 500, `trigger_panic` = true), subscribes the `control` task, and the `control` task **feeds it every 10 ms**. A panic prints a stack dump on the serial port; the SBC ignores it because it does not start with `{`. Stage 5 tests it by deliberately hanging the loop (wheels off the ground).
@@ -518,24 +518,24 @@ Order of priority: `estop` > fault/`disarm` > link watchdog > `ttl` > cliff > ob
 | Obstacle slow | below `son_slow` (500 mm) | `v` capped at 0.35 of `max_v` | 2 |
 | Obstacle behind | sonar listed as `r` below `son_stop` and `v < 0` | reverse part forced to 0 | 4 |
 | Cliff | either cliff sensor shows "no floor" (3 samples in a row) and `v > 0` | forward stops at once (`ramp_stop`), reverse allowed, turning limited to half | 8 |
-| Battery | `bat` below `bat_warn` (6800 mV) | `v` capped at 0.5 | 16 |
+| Battery | `bat` below `bat_warn` (6800 mV) for 10 s | `v` capped at 0.5 | 16 |
 | Battery critical | `bat` below `bat_crit` (6400 mV) for 10 s | state `disarmed` (why `bat_crit`), `arm` refused | (fault) |
 | Tilt | pitch or roll (size, ignoring the sign) above `tilt_stop` (10 degrees) | hard stop, fault TILT; cleared when level again | (fault) |
 | Pickup | acceleration z differs from 1 g by more than `pickup_g` (0.35 g) for 150 ms | hard stop, fault PICKUP; cleared when level for 1 s | (fault) |
 | Supply-voltage cap | the pack voltage is above `mot_vmax` | all duty cycles scaled by `mot_vmax / pack voltage` (see 7.4) | 64 |
 
-How to choose `tilt_stop`: it must be above ramp slopes and the pitch while braking (about 5 degrees) and well below the real tipping angle of the robot (about 20 degrees; the recomputed figure is in `mechanical-design.md`, section 8.2). Default 10 degrees, allowed range 10..60.
+How to choose `tilt_stop`: it must be above ramp slopes and the pitch while braking (about 5 degrees) and well below the real tipping angle of the robot (about 22 degrees on a ramp in the worst direction; the body is tilted about 25 degrees at that moment; `mechanical-design.md`, section 8.2). Default 10 degrees, allowed range 10..60.
 
 A sonar is a safety **helper**, not a guarantee: soft cushions, thin chair legs and steep surfaces can be invisible to it.
 
 ### 7.4 Motor behaviour the firmware must implement
 
-- **Driver (DRV8833) control:** each motor uses two inputs. Forward: one input held high and the other carries the PWM with inverted duty (slow decay, smoother at low speed; VERIFIED in the TI datasheet: "slow decay: one input held high, PWM on the other"). Reverse: the same with the inputs swapped. Stop: both low = coast; both high = brake.
+- **Driver (DRV8833) control:** each motor uses two inputs. Forward: one input held high and the other carries the PWM with inverted duty (slow decay, smoother at low speed; VERIFIED (search summary only, re-check the TI DRV8833 datasheet)). Reverse: the same with the inputs swapped. Stop: both low = coast; both high = brake.
 - **Which pins:** left motor M1 = IN1A (GPIO4) + IN2A (GPIO16); right motor M2 = IN3A (GPIO1) + IN4A (GPIO5); spare M3 = IN1B (GPIO8) + IN2B (GPIO11); spare M4 = IN3B (GPIO9) + IN4B (GPIO10). (VERIFIED, `pin-table.md`.) A motor that turns the wrong way is fixed with `inv_l` / `inv_r` / `swap_lr`, not by swapping wires.
 - **PWM:** 20 kHz (above hearing), 10-bit resolution. The ESP32-S3 has 8 hardware PWM channels (ASSUMED, from memory; check the datasheet); two motors use 4 of them, four motors would use all 8.
 - **Ramps** (per second, in units of full scale): speed up `ramp_up` 2.0 (0 to full in 0.5 s), slow down `ramp_down` 3.0, stop after time-out or `stop` `ramp_stop` 8.0 (full to zero in 0.125 s). Reversing direction passes through zero at `ramp_down`. Applied to each motor separately.
 - **Dead band:** the smallest value that moves the robot is `min_duty` (default 0.25, found in Stage 5). Values between 0 and 0.04 are 0; values above are mapped to `min_duty..1`.
-- **Supply-voltage scaling:** the DRV8833 modules are fed with the raw pack (6.0-8.4 V). Robot 2 uses Pololu 25D **12 V** motors (VERIFIED: `mechanical-design.md`, section 5.5), so they are run below their rating and `mot_vmax` is a **speed cap, not the motor rating**. The duty is multiplied by `min(1, mot_vmax / vpack)`; `mot_vmax` default **8.0 V**. At a full pack (8.4 V) the factor is 0.95; at 8.0 V or less there is no scaling, and the robot gets slower as the pack runs down. Stage 5 starts at 8.0 and never goes above the pack voltage (8.4 V); the duty is limited to 100 percent. With no battery reading, `vbat_assume` (8400 mV) is used = the cautious case.
+- **Supply-voltage scaling:** the DRV8833 modules are fed with the raw pack (6.0-8.4 V). Robot 2 uses Pololu 25D **12 V** motors (chosen in `mechanical-design.md`, section 5.5; the motor data is VERIFIED (search summary only, re-check the Pololu page)), so they are run below their rating and `mot_vmax` is a **speed cap, not the motor rating**. The duty is multiplied by `min(1, mot_vmax / vpack)`; `mot_vmax` default **8.0 V**. At a full pack (8.4 V) the factor is 0.95; at 8.0 V or less there is no scaling, and the robot gets slower as the pack runs down. Stage 5 starts at 8.0 and never goes above the pack voltage (8.4 V); the duty is limited to 100 percent. With no battery reading, `vbat_assume` (8400 mV) is used = the cautious case.
 - **Hard stop:** both inputs high (brake) for 200 ms, then both low (coast).
 - **At boot:** all eight pins are inputs (the driver's pull-downs keep it off), then switched to outputs low only when the firmware is ready.
 
@@ -575,7 +575,7 @@ A sonar is a safety **helper**, not a guarantee: soft cushions, thin chair legs 
 | Bit | Value | Name | Set when | Cleared when |
 |---|---|---|---|---|
 | 0 | 1 | `LINK_LOST` | link watchdog fired | a valid line arrives again (but re-arm is still needed) |
-| 1 | 2 | `BAT_LOW` | `bat` < `bat_warn` | `bat` > `bat_warn` + 150 mV for 10 s |
+| 1 | 2 | `BAT_LOW` | `bat` < `bat_warn` for 10 s | `bat` > `bat_warn` + 150 mV for 10 s |
 | 2 | 4 | `BAT_CRIT` | `bat` < `bat_crit` for 10 s | `bat` > `bat_crit` + 300 mV |
 | 3 | 8 | `TILT` | tilt beyond `tilt_stop` | level again for 1 s |
 | 4 | 16 | `PICKUP` | lifted | put down for 1 s |
@@ -612,7 +612,7 @@ The SBC keeps the real values in its own config file (`/etc/robot2/esp32.toml`) 
 | `son_dir` | string | | `"ff"` | 2 chars of `f` `r` `x` | what each sonar guards: front, rear, off (set by where they are mounted) |
 | `cliff_en` | bool | | true | | cliff sensors on/off |
 | `cliff_act` | int | | 1 | 0/1 | pin level that means "no floor" (check the real module) |
-| `tilt_stop` * | float | deg | 10 | 10..60 | tilt limit. Keep it above ramp slopes and braking pitch (about 5 degrees) and well below the tipping angle (about 20 degrees, see 7.3). |
+| `tilt_stop` * | float | deg | 10 | 10..60 | tilt limit. Keep it above ramp slopes and braking pitch (about 5 degrees) and well below the tipping angle (about 22 degrees, see 7.3). |
 | `pickup_g` | float | g | 0.35 | 0.1..1.0 | lift detection |
 | `bat_warn` | int | mV | 6800 | 6000..8000 | low-battery warning |
 | `bat_crit` | int | mV | 6400 | 5800..7500 | critical |
@@ -690,7 +690,7 @@ DRV8833 input names (VERIFIED): IN1A = GPIO4, IN2A = GPIO16, IN3A = GPIO1, IN4A 
 2. Send `hello`; wait 500 ms; retry up to 3 times, then show "ESP32 not answering" and keep retrying every 5 s (the robot can still make calls). If nothing at all comes back after the open, or only `waiting for download`, do the RTS-only reset of 2.3 first.
 3. After `hello` OK: send the settings from the config file as several `cfg set` lines (at most 6 keys and under 200 bytes per line, one `ack` each; collect every `bad` list), then `stream`, `led cam off` (or on if the camera is in use), `look` to home, and then `imu cal` (the robot must stand still and be disarmed; wait for `ev imu_cal`).
 4. If a `boot` message arrives at any time: go back to step 2. Count it. Note `reset` reason.
-5. If no `tel` arrives for 1 s: treat the link as down, close and reopen the port, go to step 2. Reopening can reset the ESP32 once (2.3), so allow 2 s for `boot` before judging the link again. Also reopen if the device vanishes (USB unplugged).
+5. If no `tel` arrives for 1 s: treat the link as down, close and reopen the port, go to step 2. Reopening can reset the ESP32 once (2.3), so allow 3 s for the first line (`boot` or `tel`), as in 2.3, before judging the link again. Also reopen if the device vanishes (USB unplugged).
 6. `arm` only when the owner has switched driving on **and** a call is active (or in test mode). `disarm` when the call ends or driving is switched off.
 7. While steering: newest `drive` every 50 ms. When the person lets go: `drive 0,0` three times, then `hb` only.
 8. Never write more than the newest `drive` into the port: if a write takes more than 50 ms, drop it and note a "slow port" warning.

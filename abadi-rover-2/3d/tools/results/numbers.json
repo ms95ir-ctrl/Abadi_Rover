@@ -164,7 +164,7 @@
     "F_tip": 4.82,
     "tilt_body_deg": 24.7,
     "brake_ms2": 4.52,
-    "lever_mm": 71.2,
+    "lever_mm": 77.5,
     "stages": [
      {
       "stage": 1,
@@ -477,7 +477,7 @@
      "F_tip": 5.86,
      "tilt_body_deg": 29.4,
      "brake_ms2": 5.52,
-     "lever_mm": 73.6,
+     "lever_mm": 78.6,
      "stages": [
       {
        "stage": 1,
@@ -789,7 +789,7 @@
      "F_tip": 4.82,
      "tilt_body_deg": 24.7,
      "brake_ms2": 4.52,
-     "lever_mm": 71.2,
+     "lever_mm": 77.5,
      "stages": [
       {
        "stage": 1,
@@ -1101,7 +1101,7 @@
      "F_tip": 4.11,
      "tilt_body_deg": 21.2,
      "brake_ms2": 3.81,
-     "lever_mm": 68.9,
+     "lever_mm": 76.5,
      "stages": [
       {
        "stage": 1,
@@ -1413,7 +1413,7 @@
      "F_tip": 5.71,
      "tilt_body_deg": 28.2,
      "brake_ms2": 5.27,
-     "lever_mm": 74.1,
+     "lever_mm": 79.7,
      "stages": [
       {
        "stage": 1,
@@ -1725,7 +1725,7 @@
      "F_tip": 5.2,
      "tilt_body_deg": 18.1,
      "brake_ms2": 3.22,
-     "lever_mm": 61.0,
+     "lever_mm": 69.1,
      "stages": [
       {
        "stage": 1,
@@ -2037,7 +2037,7 @@
      "F_tip": 5.55,
      "tilt_body_deg": 27.3,
      "brake_ms2": 4.74,
-     "lever_mm": 76.1,
+     "lever_mm": 76.8,
      "stages": [
       {
        "stage": 1,
@@ -2349,7 +2349,7 @@
      "F_tip": 4.82,
      "tilt_body_deg": 24.7,
      "brake_ms2": 4.52,
-     "lever_mm": 70.4,
+     "lever_mm": 76.6,
      "stages": [
       {
        "stage": 1,
@@ -3389,7 +3389,7 @@
     "mass_g": 11.9,
     "minutes": 35,
     "orientation": "upside down: hood top on the bed, flange up",
-    "supports": "none (glue the flange to the cover top)",
+    "supports": "none: a 45 degree fillet under the flange holds it up (glue the flat flange face to the cover top)",
     "optional": false
    },
    {

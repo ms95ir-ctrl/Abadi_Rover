@@ -8,7 +8,7 @@ MASS AND BALANCE POINT (first build: cheap build, route B speaker, 2 cells, no b
   printed 1126 g | bought 1259 g | small parts and cables 225 g
 TIP-OVER (skids 1.5 mm above the floor; push at head centre 412 mm; slow push; A)
   direction            tip angle (ramp)   smallest push   braking limit
-  forward               24.7 deg   4.8 N  braking 4.52 m/s2  (lever 71.2 mm)
+  forward               24.7 deg   4.8 N  braking 4.52 m/s2  (lever 77.5 mm)
   backward              32.6 deg   6.7 N  braking 6.28 m/s2  (lever 107.9 mm)
   sideways              28.1 deg   5.7 N  braking 5.24 m/s2  (lever 91.3 mm)
   worst direction      22.4 deg (at 9 deg off forward) | smallest push 4.36 N (at 9 deg) | braking while turning 4.05 m/s2, straight 4.52 m/s2

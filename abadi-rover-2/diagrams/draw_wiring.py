@@ -128,7 +128,7 @@ wire([(92, y + 1.5), (104, y + 1.5)], RED)
 wire([(92, y - 1.5), (94.2, y - 1.5), (94.7, y - 0.2), (95.7, y - 0.2), (96.2, y - 1.5), (104, y - 1.5)], BLK)
 txt(94.6, y + 3.6, "5.1 V", 7, RED, bold=True, ha="right")
 txt(130, 21.0, "power in: USB-C pigtail (own AWG 18-20 wire)\nfrom the 5.1 V buck, 1000 µF capacitor at the Pi", 7.4, "#325")
-txt(130, 12.2, "4 USB ports: webcam, audio, ESP32 (data-only adapter),\ntouch (data-only cable)", 7.0, "#325")
+txt(130, 12.2, "4 USB ports: webcam, audio, ESP32 (data-only adapter),\ntouch (data-only adapter)", 7.0, "#325")
 
 # 1000 uF capacitor across the Pi supply, at the Pi end
 cx = 102.0
