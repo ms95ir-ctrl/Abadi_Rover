@@ -1,0 +1,91 @@
+group,item,quantity,unit_price_eur,total_eur,already_owned_maybe,buy_where,buy_before_trip,weight_g,notes
+1 Brain and screen,"Raspberry Pi 4 Model B, 2 GB (the cheapest board that really works)",1,72.00,72.00,no,"Berrybase, Reichelt, Welectron",yes,46,[cheap build only] About 71.90 EUR on 1 Oct 2026 (Notebookcheck). Runs near full load in a 720p call: fan and performance mode needed.
+1 Brain and screen,"Raspberry Pi 5, 2 GB (recommended board)",1,82.50,82.50,maybe-robot1-buy-twice,"Berrybase, Reichelt, Welectron",yes,46,"[comfortable build only] About 82.50 EUR (Notebookcheck, 1 Oct 2026). 4 GB costs about 115-150 EUR. Free option: take your own Pi 5 8 GB if robot 1 can wait."
+1 Brain and screen,Raspberry Pi 5 Active Cooler (official),1,5.90,5.90,no,"Welectron (5.90 EUR incl. VAT, art. RP9-111480)",yes,12,[comfortable build only] Pi 5 only. Fits under the cover (cooler 13.7 mm high).
+1 Brain and screen,Heatsink plus small 5 V fan for the Pi 4,1,6.00,6.00,maybe-robot1-buy-twice,"Amazon.de, Berrybase",yes,20,[cheap build only] You own a 5 V fan for robot 1. About price (ASSUMED).
+1 Brain and screen,"microSD card 32 GB, A1 or A2, SanDisk or Samsung (main card)",1,9.00,9.00,no,any shop,either,1,"[both builds] About price (ASSUMED). Buy a known brand, not an unnamed one."
+1 Brain and screen,microSD card 32 GB (clone = spare card),1,9.00,9.00,no,any shop,either,1,"[comfortable build only] Clone the finished card onto it. Packed in the luggage, not in the robot. (weight is carried luggage, not robot weight)"
+1 Brain and screen,"7 inch HDMI screen, 1024x600 IPS, touch: no-name type",1,45.00,45.00,no,"eBay.de, Amazon.de",yes,250,"[cheap build only] Listings 43-57 EUR (eBay.de search). Check outline about 165x100-107 mm, full-size HDMI, 5 V micro-USB. Weight varies."
+1 Brain and screen,"Waveshare 7 inch HDMI LCD (C), 1024x600 IPS, 5-point touch (recommended screen)",1,58.00,58.00,no,"exp-tech.de, Eckstein, Welectron, elecena.pl, melopero.com",yes,250,"[comfortable build only] Seen 45-62 EUR incl. VAT depending on shop (V). 164.9x107x8 mm, 5 V 500 mA (V). Stock varies: order early."
+1 Brain and screen,"HDMI cable, micro-HDMI to HDMI-A, flat and slim, 0.8 m",1,12.00,12.00,no,"Amazon.de, Reichelt",yes,40,[both builds] Needs about 0.65 m (mast route). Not the 30-50 cm from sbc-selection.md. Right-angle plug at the screen end is better.
+1 Brain and screen,"Screen power lead: micro-USB plug with bare wires, power only",1,3.00,3.00,maybe-spare,any (cut an old micro-USB cable),either,15,[both builds] Wires go to the 5.1 V SBC buck branch (not to the clean 5 V). Via the 1 A fuse.
+1 Brain and screen,USB-C plug with bare wires (pigtail) for the SBC power,1,5.00,5.00,no,"Amazon.de, eBay.de",yes,20,[both builds] Use thick wire (AWG 18 for the Pi 5). Short: under 40 cm.
+1 Brain and screen,"Capacitor 1000 uF, 16 V, low-ESR (at the SBC power input)",1,0.60,0.60,maybe-spare,Reichelt,either,4,[both builds] Across 5.1 V and GND at the Pi end. 470 uF also fine.
+1 Brain and screen,"USB-A to USB-C cable, short (20 cm), for the ESP32 COM socket",1,4.00,4.00,maybe-spare,any,either,10,[both builds] Tape over the 5 V pin of the USB-A plug if you have no data-only cable (see peripherals.md).
+1 Brain and screen,"USB data-only adapter or cable (no 5 V wire), for ESP32 link and touch",2,5.00,10.00,no,Amazon.de (search: USB power blocker / Stromsperre),yes,20,[comfortable build only] Not the same as a 'data blocker' (that blocks data). About price (ASSUMED).
+2 Camera and audio,"Webcam: your own SC-012-SN259, if it passes the test",1,0.00,0.00,maybe-robot1-buy-twice,from robot 1 (phase 3 has not started),yes,60,"[cheap build only] Model not found on the web: size, view angle and microphone are ASSUMED. Test first (peripherals.md). Buy another for robot 1 later."
+2 Camera and audio,"Wide-angle USB webcam, 1080p, UVC, with microphone (fallback or comfort)",1,22.00,22.00,no,Amazon.de,yes,70,[comfortable build only] About 15-30 EUR (ASSUMED). Check body fits the brow 60x30x28 mm and view angle 90-110 degrees.
+2 Camera and audio,USB audio adapter (3.5 mm speaker out),1,7.00,7.00,no,"Amazon.de, eBay.de",either,10,[cheap build only] Cheap audio route B. Not needed with route A (speakerphone).
+2 Camera and audio,"Speaker 40 mm, 4 ohm, 3 W",1,2.50,2.50,no,"Reichelt, eBay.de",either,15,"[cheap build only] Put it in the base, not in the head lid (echo): see peripherals.md."
+2 Camera and audio,"PAM8403 amplifier board, 5 V",1,2.50,2.50,no,"eBay.de, AZ-Delivery",either,3,[cheap build only] Powered from the 5.1 V branch. Input from the USB audio adapter.
+2 Camera and audio,USB speakerphone with real echo cancelling (Jabra Speak 410 class),1,75.00,75.00,no,"Amazon.de, Galaxus.de, eBay.de",yes,350,"[comfortable build only] Seen 60-85 EUR (eBay new 59.99, a shop 84.99 in Jun 2026). Weight and size ASSUMED. Doubles as ballast. Needs a place on the base."
+2 Camera and audio,"LEDs 5 mm red, 5 pieces, plus 220 ohm resistors",1,2.00,2.00,maybe-spare,"Reichelt, any",either,2,[both builds] Camera-live LED on PCA9685 channel 2 (and button light on channel 3).
+2 Camera and audio,USB clip-on microphone (only if the webcam has no microphone),1,8.00,8.00,no,Amazon.de,either,15,"[optional, in no total] Only needed if the webcam test finds no microphone and you use route B."
+3 Sensing,"HC-SR04 ultrasonic sensor, 5 V type (not the 3.3 V HC-SR04P)",2,2.00,4.00,maybe-robot1-buy-twice,"AZ-Delivery, Berrybase, eBay.de",yes,18,[both builds] The board's 1k/2k divider expects a 5 V echo.
+3 Sensing,HC-SR04 spare,1,2.00,2.00,no,"AZ-Delivery, Berrybase, eBay.de",yes,9,"[comfortable build only] Spare. (weight is carried luggage, not robot weight)"
+3 Sensing,"IR floor sensor module, TCRT5000 type, digital output, 3.3-5 V (cliff)",2,1.50,3.00,no,"eBay.de, Amazon.de",yes,8,[both builds] About 31x14 mm per mechanical doc (ASSUMED). Must work at 12 mm from the floor.
+3 Sensing,"IR floor sensor spares, to find a pair that reads your floor",2,1.50,3.00,no,"eBay.de, Amazon.de",yes,8,"[comfortable build only] Dark carpet can fool IR sensors. (weight is carried luggage, not robot weight)"
+3 Sensing,ADS1115 16-bit analog-to-digital board (battery monitor),1,4.50,4.50,no,"eBay.de, AZ-Delivery, Reichelt",yes,3,"[both builds] 3.5-5 EUR on eBay.de, up to about 13 EUR in local shops (software-plan listing check)."
+3 Sensing,ADS1115 spare,1,4.50,4.50,no,"eBay.de, AZ-Delivery, Reichelt",yes,3,"[comfortable build only] Spare. (weight is carried luggage, not robot weight)"
+3 Sensing,"Resistor and capacitor kit: 47k x2, 27k x2 (1 %), 10k x4, 100 nF x4",1,5.00,5.00,maybe-spare,"Reichelt, any",either,5,[both builds] Battery divider 47k/27k + 100 nF. Charger sense 2 x 10k (optional).
+3 Sensing,"Call button, arcade type 30 mm (optionally with LED ring)",1,3.50,3.50,no,"Amazon.de, Reichelt",yes,20,[comfortable build only] GPIO45 to GND. Mechanical design has no hole for it yet.
+3 Sensing,"Micro switch with lever (KW12-3 type), 2 pieces, bumper",1,2.00,2.00,no,"Amazon.de, eBay.de",either,4,"[optional, in no total] Optional. No ESP32 pin is assigned yet (software plan)."
+4 Power,"18650 Li-ion cell, genuine Samsung 25R / LG MJ1 / Molicel P28A class",2,6.00,12.00,maybe-spare,"Akkuman, Akkuteile.de, Nkon",yes,92,[both builds] Seen 3.99-10 EUR per cell. You own old cells: test them first and use a matched pair. Carry-on only.
+4 Power,"18650 cells, 2 more (makes a 2S2P pack: double runtime)",2,6.00,12.00,maybe-spare,"Akkuman, Akkuteile.de, Nkon",yes,92,[comfortable build only] Needs a bigger battery cradle in the base (about 77 x 80 x 21 mm).
+4 Power,Battery holder for 2 x 18650,1,2.00,2.00,no,"Amazon.de, Reichelt",either,14,[both builds] 77x40x21 mm per mechanical doc.
+4 Power,Battery holder for 2 x 18650 (second one for 2S2P),1,2.00,2.00,no,"Amazon.de, Reichelt",either,14,[comfortable build only]
+4 Power,"2S BMS (HX-2S-JH20 type), balancing",1,3.00,3.00,maybe-robot1-buy-twice,"Amazon.de, eBay.de",yes,8,[both builds] Buy twice if robot 1 keeps its own.
+4 Power,"2S USB-C charger board (IP2326 type, 5 V in, 8.4 V out)",1,5.00,5.00,maybe-robot1-buy-twice,"Amazon.de, eBay.de",yes,6,[both builds] Charge with the robot off (power list). See conflict C3 in peripherals.md.
+4 Power,"USB-C wall charger 5 V, at least 2 A (for the charger board)",1,9.00,9.00,maybe-spare,any (plug type of the destination),either,60,"[both builds] Buy it where you stay if the plug differs. (weight is carried luggage, not robot weight)"
+4 Power,"USB-A to USB-C charging cable, 1 m",1,4.00,4.00,maybe-spare,any,either,25,"[both builds] (weight is carried luggage, not robot weight)"
+4 Power,"Main switch, round rocker, 10 A or more, 19 mm hole",1,2.50,2.50,maybe-robot1-buy-twice,"Amazon.de, Reichelt",either,10,[both builds] You own a key switch for robot 1. This one is for the rear wall.
+4 Power,In-line fuse holder for 5 x 20 mm fuses,5,1.20,6.00,no,"Reichelt, Amazon.de",yes,40,"[both builds] Five branches: BATT IN, servo buck, clean 5 V buck, SBC buck, screen. The 3.3 V buck is not used in robot 2."
+4 Power,"Slow-blow fuses 5 x 20 mm, assortment (1 A, 2 A, 5 A)",1,5.00,5.00,no,"Reichelt, Amazon.de",yes,5,"[both builds] Needs: 5 A x3, 2 A x1, 1 A x1, plus spares."
+4 Power,Lever connector Wago 221-415 (5-way),3,1.20,3.60,no,"Berrybase, Reichelt, Hornbach",either,27,[both builds] Splice plus and splice minus (the minus side has 6 wires: use two joined). Seen 0.55-1.2 EUR per piece.
+4 Power,Lever connector Wago 221-412 (2-way),2,0.80,1.60,no,"Berrybase, Reichelt, Hornbach",either,10,[both builds] To join two 5-way connectors.
+4 Power,"XL4016 buck module with heatsink (servo 5.0 V, and SBC 5.1 V)",2,6.00,12.00,maybe-robot1-buy-twice,"eBay.de 3-5 EUR, Amazon.de or AZ-Delivery 8-11 EUR",yes,110,[both builds] Two are needed. You own one for robot 1: buy two new.
+4 Power,"Fixed 5 V buck, 1.8 A (clean 5 V)",1,2.50,2.50,maybe-robot1-buy-twice,"eBay.de, Amazon.de",yes,3,[both builds] Input range must cover 6-8.4 V.
+4 Power,"Silicone wire 1.0 mm2 (AWG 18), red and black, 3 m each",1,7.00,7.00,maybe-spare,"Amazon.de, Reichelt",either,40,"[both builds] Battery, buck and SBC branches. Weight = what is used."
+4 Power,"Wire 0.5 mm2 and thinner, several colours",1,8.00,8.00,maybe-spare,"Amazon.de, Reichelt",either,20,"[both builds] Sensors, LED, screen power."
+4 Power,JST-XH plug kit 2/3/4-pin with crimped wires,1,9.00,9.00,maybe-spare,Amazon.de,either,15,[both builds] Board headers are JST-XH / 2.54 mm. You said your plugs fit.
+4 Power,"Wire end ferrules, assortment",1,5.00,5.00,no,Amazon.de,either,0,[comfortable build only] For the screw terminals and lever connectors.
+4 Power,"Servo extension cable 50 cm, 3-wire",3,2.00,6.00,no,"Amazon.de, eBay.de",yes,36,"[both builds] Pan, tilt, and the camera LED up the mast."
+4 Power,8.4 V 2 A charger adapter with DC jack (idea for charging while on),1,10.00,10.00,no,Amazon.de,yes,120,"[optional, in no total] Only if the power design decides to charge while the robot runs. Not decided: conflict C3. (weight is carried luggage, not robot weight)"
+5 Drive,"Pololu 25D metal gearmotor 12 V, medium power, 47:1 (item 3229)",2,36.00,72.00,no,"Pololu.com, or an EU reseller (Eckstein, Botland)",yes,182,"[both builds] Pololu US$29.95 each (V). Plus shipping, 19 % VAT, maybe a courier fee: about 30-45 EUR each delivered (ASSUMED). 2-3 weeks."
+5 Drive,"Robot wheels 65 mm, rubber tyre, hub for 4 mm D-shaft (pair)",1,10.00,10.00,no,"Amazon.de, eBay.de, robot shops",yes,60,[both builds] Bore is ASSUMED to fit the Pololu 4 mm D-shaft: check before buying.
+5 Drive,Hub adapters 4 mm D-shaft for wheels (only if the wheel bore does not fit),1,8.00,8.00,no,"Pololu, Amazon.de",yes,20,[comfortable build only] Insurance.
+5 Drive,Steel ball 16 mm (or 5/8 inch) for the caster,1,1.50,1.50,no,"hardware store, Amazon.de",either,17,[both builds]
+5 Drive,"Steel ball 16 mm, spare",1,1.50,1.50,no,"hardware store, Amazon.de",either,17,"[comfortable build only] (weight is carried luggage, not robot weight)"
+6 Pan/tilt,"MG996R servo, metal gear (pan and tilt)",2,8.00,16.00,maybe-robot1-buy-twice,"Amazon.de, eBay.de (4.50-7 EUR), Waveshare 13 EUR",yes,110,"[both builds] PCA9685 channel 0 = pan, channel 1 = tilt. Buy twice if robot 1 keeps its servos."
+6 Pan/tilt,"Aluminium servo horn 25T, 20 mm disc, 4 x M3 holes",2,3.50,7.00,no,"Amazon.de, AliExpress",yes,16,[both builds] Hard to find locally. The kit's plastic horn is not used.
+6 Pan/tilt,MG996R spare,1,8.00,8.00,no,"Amazon.de, eBay.de",yes,55,"[comfortable build only] Spare. (weight is carried luggage, not robot weight)"
+7 Mechanical hardware,"Heat-set insert assortment M2-M5, brass",1,11.00,11.00,no,Amazon.de,yes,15,"[both builds] Needs 37 x M3 and 8 x M4 (plus 20 % spare). Mechanical doc, section 10."
+7 Mechanical hardware,"Screw and nut assortment M2.5/M3/M4/M5 hex socket, 6-30 mm",1,16.00,16.00,maybe-spare,"Amazon.de, Reichelt",either,70,"[both builds] Counts in mechanical doc section 10: about 64 x M3, 12 x M4, 4 x M2.5."
+7 Mechanical hardware,M5 x 30 bolt with lock nut and 2 washers,1,1.00,1.00,maybe-spare,any,either,10,[both builds] Head pivot.
+7 Mechanical hardware,PTFE adhesive tape 0.2 mm (turntable glide ring),1,6.00,6.00,no,Amazon.de,yes,2,[both builds] About price (ASSUMED).
+7 Mechanical hardware,"PETG filament 1 kg spool, 1.75 mm (printed parts weigh about 1.14 kg)",2,13.00,26.00,no,"Amazon.de, eBay.de",either,1138,[both builds] Seen 9.75-13.45 EUR per kg (deals Jun 2026). Weight = printed parts. No tube needed: the mast is printed.
+7 Mechanical hardware,Super glue plus 2-part epoxy,1,6.00,6.00,maybe-spare,any,either,15,[both builds] Base seams.
+7 Mechanical hardware,Double-sided foam mounting tape,1,4.00,4.00,maybe-spare,any,either,10,"[both builds] Modules, screen, webcam."
+7 Mechanical hardware,"Zip ties 2.5 x 100 mm, 100 pieces",1,3.00,3.00,maybe-spare,any,either,15,[both builds] About 25 needed.
+7 Mechanical hardware,Foam pads 3 mm and Kapton tape,1,3.00,3.00,maybe-spare,any,either,5,"[both builds] Screen retention, covering the USB 5 V pin."
+8 Motherboard fit-out,"Motherboard v5 bare PCB (already ordered, 5 pieces)",1,0.00,0.00,maybe-board-order,JLCPCB (done),yes,33,[both builds] Bare board.
+8 Motherboard fit-out,"ESP32-S3 DevKitC-1, N16R8, dual USB-C, headers soldered",1,12.00,12.00,maybe-board-order,"Amazon.de, AZ-Delivery, AliExpress",yes,10,[both builds] About price (ASSUMED). Check it has two USB-C sockets.
+8 Motherboard fit-out,DRV8833 motor driver module HW-627 (driver A only),1,2.50,2.50,maybe-board-order,"Amazon.de, eBay.de",yes,3,"[both builds] Robot 2 uses M1 and M2 only, so driver B can stay empty."
+8 Motherboard fit-out,DRV8833 HW-627 spare,1,2.50,2.50,no,"Amazon.de, eBay.de",yes,3,"[comfortable build only] Spare. (weight is carried luggage, not robot weight)"
+8 Motherboard fit-out,PCA9685 16-channel servo driver board,1,6.00,6.00,maybe-board-order,"Amazon.de, AZ-Delivery",yes,12,[both builds]
+8 Motherboard fit-out,GY-521 gyro board (MPU-6050),1,3.50,3.50,maybe-board-order,"Amazon.de, AZ-Delivery",yes,3,[both builds]
+8 Motherboard fit-out,"Sockets, headers and 5.08 mm screw terminals for the board",1,9.00,9.00,maybe-board-order,"Reichelt, AZ-Delivery",yes,15,[both builds] Full list in pcb/kicad/parts-list.md. Robot 2 fits 3 of the 4 terminals (not 3.3V IN).
+8 Motherboard fit-out,"Capacitors 470 uF and 100 uF, 2 x 100 nF, 1N5819 diode, 4 resistors 1k/2k",1,3.00,3.00,maybe-board-order,Reichelt,either,5,[both builds]
+9 Tools and consumables,Heat-shrink tubing assortment,1,6.00,6.00,maybe-spare,any,either,3,[both builds]
+9 Tools and consumables,"Solder 1 mm, 100 g",1,7.00,7.00,maybe-spare,any,either,0,[both builds] Tool: you probably own an iron and a multimeter.
+9 Tools and consumables,Digital caliper,1,12.00,12.00,no,Amazon.de,yes,0,"[comfortable build only] To check servo, webcam and screen sizes before printing."
+9 Tools and consumables,Precision screwdriver and hex key set,1,10.00,10.00,maybe-spare,any,either,0,[comfortable build only]
+9 Tools and consumables,Wire stripper and flush cutter,1,10.00,10.00,maybe-spare,any,either,0,[comfortable build only]
+9 Tools and consumables,USB-C power meter (voltage and current),1,10.00,10.00,no,Amazon.de,yes,0,[comfortable build only] Handy for the power tests in stage 3.
+10 Travel and spares,Spare ESP32-S3 DevKitC-1,1,12.00,12.00,no,"Amazon.de, AZ-Delivery",yes,10,"[comfortable build only] (weight is carried luggage, not robot weight)"
+10 Travel and spares,LAN cable 2 m (Wi-Fi plan D),1,3.00,3.00,no,any,either,60,"[comfortable build only] (weight is carried luggage, not robot weight)"
+10 Travel and spares,Small USB keyboard (Wi-Fi plan E),1,10.00,10.00,maybe-spare,any,either,300,"[comfortable build only] (weight is carried luggage, not robot weight)"
+10 Travel and spares,Travel plug adapter,1,8.00,8.00,no,any,either,60,"[comfortable build only] Country not known yet. (weight is carried luggage, not robot weight)"
+10 Travel and spares,"Spare USB cables (USB-A to USB-C, data)",2,4.00,8.00,maybe-spare,any,either,20,"[comfortable build only] (weight is carried luggage, not robot weight)"
+10 Travel and spares,Laminating pouches for the family card,1,2.00,2.00,no,any,either,5,"[comfortable build only] (weight is carried luggage, not robot weight)"
+10 Travel and spares,Hard box or organiser for the trip (about 30 x 25 x 20 cm),1,15.00,15.00,no,any,either,400,"[comfortable build only] Printed parts stack into this size. (weight is carried luggage, not robot weight)"

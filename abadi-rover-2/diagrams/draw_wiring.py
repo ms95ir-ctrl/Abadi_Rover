@@ -35,7 +35,7 @@ def stub(x, y, t="to − splice"):
     txt(x + 1.3, y - 2.2, t, 7, ha="left")
 
 
-txt(100, 123.4, "ROBOT 2 (TELEPRESENCE ROBOT) - WIRING   |   motherboard v5 + single board computer + HDMI screen", 16, bold=True)
+txt(100, 123.4, "ABADI ROVER 2 (TELEPRESENCE ROBOT) - WIRING   |   motherboard v5 + Raspberry Pi 5 + 7 inch HDMI screen", 16, bold=True)
 txt(100, 120.0, "red = plus (+)    black = minus (−)    blue = data / video cable    orange = servo / motor leads    thick bar = lever-connector splice (+)", 10.5, "#333")
 
 # ---------- battery + splice ----------
@@ -71,52 +71,55 @@ box(105.5, 43.2, 121, 51.2, "", fc="#e0e0e0", ec="#999")
 txt(113.2, 47.2, "3.3V IN (not used)", 7.2, "#777")
 
 # ---------- peripherals on the motherboard ----------
-per = [(103.0, "LEFT MOTOR", "M1 (JST 2-pin)", "DRV A out 1+2"),
-       (94.4, "RIGHT MOTOR", "M2 (JST 2-pin)", "DRV A out 3+4"),
-       (85.8, "PAN SERVO (turn)", "PCA9685 CH0", "3-pin servo plug"),
-       (77.2, "TILT SERVO (nod)", "PCA9685 CH1", "3-pin servo plug"),
-       (68.6, "2 x SONAR HC-SR04", "SONAR 1 + 2 headers", "5 V, 4-pin"),
-       (60.0, "BATTERY MONITOR\nADS1115 + divider", "I2C SENSOR header", "3V3 GND SDA SCL"),
-       (51.4, "2 x CLIFF SENSOR", "SPARE IO header", "GND 3V3 GPIO 21, 3")]
+per = [(104.0, "LEFT MOTOR\n(Pololu 25D 12 V)", "M1 (JST 2-pin)", "DRV A out 1+2"),
+       (95.6, "RIGHT MOTOR\n(Pololu 25D 12 V)", "M2 (JST 2-pin)", "DRV A out 3+4"),
+       (87.2, "PAN SERVO (turn)", "PCA9685 CH0", "3-pin servo plug"),
+       (78.8, "TILT SERVO (nod)", "PCA9685 CH1", "3-pin servo plug"),
+       (70.4, "2 x SONAR HC-SR04", "SONAR 1 + 2 headers", "5 V, 4-pin"),
+       (62.0, "BATTERY MONITOR\nADS1115 + divider", "I2C SENSOR header", "3V3 GND SDA SCL"),
+       (53.6, "2 x CLIFF SENSOR\n(IR, 3.3 V)", "SPARE IO header", "GND 3V3 GPIO 21, 3"),
+       (45.2, "CAMERA LED (CH2)\n+ CALL BUTTON (GPIO45)", "PCA CH2 + SPARE IO", "LED + button")]
 for y, name, port, note in per:
-    box(166, y - 3.6, 199, y + 3.6, name, fc="#fdebd0" if "MOTOR" in name or "SERVO" in name else "#e6f4e6", fs=7.8, bold=True)
+    box(166, y - 3.5, 199, y + 3.5, name, fc="#fdebd0" if "MOTOR" in name or "SERVO" in name else "#e6f4e6", fs=7.4, bold=True)
     wire([(156, y), (166, y)], ORG if ("MOTOR" in name or "SERVO" in name) else GRN, 3.2)
     txt(154.4, y, port, 7.2, "#223", ha="right")
-    txt(161, y + 2.4, note, 5.8, "#555")
+    txt(161, y + 2.3, note, 5.4, "#555")
 
 # ---------- SBC branch (bottom) ----------
 y = 22
 wire([(37.6, y + 1.5), (46, y + 1.5)], RED)
 box(46, y - 3.6, 60, y + 4.4, "5 A fuse", fc="#fff3b0", fs=7.6, bold=True)
 wire([(60, y + 1.5), (68, y + 1.5)], RED)
-box(68, y - 6.2, 92, y + 6.2, "XL4016 module\nset to 5.1 V\n(SBC + screen)", fc="#e7f0fa", fs=8, bold=True)
+box(68, y - 6.2, 92, y + 6.2, "XL4016 module\nset to 5.1 V\n(Pi + screen)", fc="#e7f0fa", fs=8, bold=True)
 txt(69.4, y + 4.2, "IN+", 6.8, RED, ha="left", bold=True); txt(90.6, y + 4.2, "OUT+", 6.8, RED, ha="right", bold=True)
 txt(69.4, y - 4.2, "IN−", 6.8, BLK, ha="left", bold=True); txt(90.6, y - 4.2, "OUT−", 6.8, BLK, ha="right", bold=True)
 stub(71, y - 6.2)
 box(104, 6, 156, 35, "", fc="#efe6f5", ec="#538", lw=2.2)
 txt(130, 31.4, "SINGLE BOARD COMPUTER (SBC)", 10.5, "#325", bold=True)
-txt(130, 28.0, "model: see sbc-selection.md", 8, "#435")
+txt(130, 28.0, "Raspberry Pi 5 (2 GB) - why: sbc-selection.md", 8, "#435")
 wire([(92, y + 1.5), (104, y + 1.5)], RED); wire([(92, y - 1.5), (104, y - 1.5)], BLK)
 txt(94.6, y + 3.6, "5.1 V", 7, RED, bold=True)
-txt(130, 20.5, "power in (USB-C or 5 V pins)", 7.8, "#325")
+txt(130, 21.0, "power in: USB-C pigtail from the 5.1 V buck\n+ 1000 uF capacitor at the Pi (mind polarity)", 7.4, "#325")
+txt(130, 12.2, "4 USB ports: webcam, audio, ESP32 (data-only cable),\ntouch (data-only cable)", 7.0, "#325")
 # branch for the screen power
 ax.add_patch(plt.Circle((99.5, y + 1.5), 0.9, color=RED, zorder=7))
 wire([(99.5, y + 1.5), (99.5, 38.6), (138.6, 38.6), (139.3, 40.0), (140.7, 40.0), (141.4, 38.6), (164.4, 38.6), (164.4, 34.0), (166, 34.0)], RED, 2.8)
-txt(101.0, 36.7, "5 V for the screen", 7, RED, ha="left", bold=True)
+box(146, 36.9, 158, 40.3, "1 A fuse", fc="#fff3b0", fs=7, bold=True, z=5)
+txt(101.0, 36.7, "5.1 V for the screen", 7, RED, ha="left", bold=True)
 
 # USB link SBC -> ESP32
 wire([(140, 35), (140, 41)], BLU, 3.4)
-txt(138.0, 36.7, "USB: SBC → ESP32 (COM port)", 7.4, BLU, ha="right", bold=True)
+txt(138.0, 36.7, "USB (data-only cable): Pi → ESP32 COM port", 7.2, BLU, ha="right", bold=True)
 
 # SBC peripherals
-spe = [(31.5, "HDMI SCREEN 7 in", "micro/mini HDMI cable", BLU), (22.0, "USB WEBCAM + MICROPHONE", "USB cable", BLU), (13.0, "SPEAKER / USB AUDIO", "USB (hub if the SBC has < 3 ports)", BLU)]
+spe = [(30.5, "7 INCH HDMI SCREEN\n(+ touch, own 5.1 V lead)", "HDMI + touch", BLU), (21.0, "USB WEBCAM + MICROPHONE", "USB 3 port", BLU), (12.0, "SPEAKER: USB AUDIO ADAPTER\n+ amp + 40 mm speaker", "USB 2 port", BLU)]
 for yy, name, how, c in spe:
     box(166, yy - 3.8, 199, yy + 3.8, name, fc="#e7ecf7", fs=7.8, bold=True)
     wire([(156, yy), (166, yy)], c, 3.2)
-    txt(161, yy + 2.5, how.split(" (")[0].replace("micro/mini ", "").replace(" cable", ""), 6.2, "#555")
+    txt(161, yy + 2.5, how, 5.8, "#555")
 
 # legend / rules
-txt(76, 4.0, "Every black stub = a black wire back to the − lever connector (the screen's black wire too). All − pins on the motherboard are one ground.", 7.6, "#555", ha="center")
+txt(76, 4.0, "Every black stub = a black wire back to the − lever connector (the screen's black wire too). All − pins on the motherboard are one ground.\nBattery-monitor divider (47k / 27k) is taken from the SPLICE +. The USB link to the ESP32 must have NO 5 V wire (the ESP32 is fed from CLEAN 5V IN). 3.3 V buck and DRV B not fitted.", 7.2, "#555", ha="center")
 fig.savefig(OUT + "/wiring-robot2.png")
 fig.savefig(OUT + "/wiring-robot2.svg")
 print("saved")

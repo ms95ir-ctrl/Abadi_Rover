@@ -43,5 +43,5 @@ edit them). **Robot 2 is a telepresence robot**, built on the same motherboard.
   is an estimate. The owner will build the robot abroad (country not known yet): say what to buy in Germany before travelling and what is easy to buy anywhere.
   Li-ion cells and power banks go in carry-on luggage only (flag this).
 - Be honest about uncertainty. Mark each key fact as VERIFIED (you saw it in a source or file) or ASSUMED. Never invent a part number or a price you did not see: say "about" and where to check.
-- Write only into your own files under `telepresence/` (names given in your task). Do not run git. Scratch files go in the scratchpad folder you are told about, not in the repo.
+- Write only into your own files under `abadi-rover-2/` (names given in your task). Do not run git. Scratch files go in the scratchpad folder you are told about, not in the repo.
 - No application code is to be written now (the owner's rule: one stage at a time, no code for later stages). Plans, specs, tables, diagrams and CAD sketches only.
