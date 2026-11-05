@@ -23,7 +23,7 @@ Details: software in `software-plan.md`, the USB language in `esp32-serial-proto
 | 9 | **One big CALL button** | Pressing it rings your phone. | Must |
 | 10 | **Answer and hang up** | Big buttons; hanging up also switches driving off. | Must |
 | 11 | **Privacy** | Camera and microphone are on only during a call. A light shows when the camera is live. There is a camera-off mode, a do-not-disturb mode and no recording. | Must |
-| 12 | **Family STOP** | Pressing the screen or the button stops a moving robot at once. | Must |
+| 12 | **Family STOP** | Version 1: hanging up the call stops the robot (about 0.5 s) and so does the main switch. A physical STOP / call button on the body is a Must before the trip. A STOP button on the screen during the call is added only if the overlay test passes (`software-plan.md`, section 3.3). | Must |
 | 13 | **Starts by itself** | Switch on, wait about a minute, the idle screen shows. No keyboard needed. | Must |
 | 14 | **Connects to the home Wi-Fi** | First choice: the Wi-Fi is stored before the trip. Fallbacks: your phone's hotspot, then a network cable. | Must |
 
@@ -31,11 +31,11 @@ Details: software in `software-plan.md`, the USB language in `esp32-serial-proto
 
 | # | Function | How it works, short | Priority |
 |---|---|---|---|
-| 15 | **Stops when the connection drops** | Three independent timers; the wheels stop in about 0.4 to 0.6 s (ASSUMED, measured in Stage 5 and 7). | Must |
+| 15 | **Stops when the connection drops** | Four independent timers (250, 300, 500 and 1000 ms); the wheels stop in about 0.4 s, or about 0.6 s if the ESP32 program hangs (ASSUMED, measured in Stage 5 and 7). | Must |
 | 16 | **Driving needs an extra switch** | After every reconnect, driving is off until you switch it on again, and only one person controls the robot at a time. | Must |
 | 17 | **Stops before obstacles** | Two sonars in front. | Should |
-| 18 | **Stops at stair edges** | Two floor-facing IR sensors (cliff sensors). | Should |
-| 19 | **Stops if lifted or tipped** | The gyro board (GY-521) on the motherboard. | Should |
+| 18 | **Stops at stair edges** | Two floor-facing IR sensors (cliff sensors). Required before the trip, because remote driving stays off until they pass. They protect only driving forwards, and only at low speed. | Must (before the trip) |
+| 19 | **Stops if lifted or tipped** | The gyro board (GY-521) on the motherboard; stops at 10 degrees of tilt. Required before the trip. | Must (before the trip) |
 | 20 | **Safe shutdown** | At low battery the robot warns, then the Pi shuts down cleanly before the pack runs empty. | Should |
 
 ## D. Version 2 and extras
@@ -44,7 +44,7 @@ Details: software in `software-plan.md`, the USB language in `esp32-serial-proto
 |---|---|---|
 | 21 | One own web page with video and controls together (instead of the public Jitsi service) | Nice, after the trip works |
 | 22 | Gamepad driving in the browser | Nice |
-| 23 | Camera cover and a physical call button on the body (needs a place in the 3D design) | Nice |
+| 23 | Camera slide cover (the 3D design now has a slot for it; the physical call/STOP button is already a Must, see rows 9 and 12) | Nice |
 | 24 | Bumper switches | Optional |
 
 Out of scope unless you ask: AI agent on the robot, turret, mapping, self-docking.

@@ -1,7 +1,7 @@
 # Brief: robot 2, the telepresence robot (written from the owner's request)
 
-The owner (a hobbyist in Germany, not comfortable with terminal or git shorthand) ordered 5 copies of the same 100 x 100 mm robot
-motherboard (`pcb/kicad/`, version v5). Each board is meant for a different robot. Robot 1 is the "Abadi Rover" (see `plan.md`, `wiring.md`; do not
+The owner (a hobbyist in Germany, not comfortable with terminal or git shorthand) reports that he has ordered 5 copies of the same 100 x 100 mm robot
+motherboard (`pcb/kicad/`, version v5; he must confirm the ordered files are v5, see `pcb/kicad/pin-table.md`). Each board is meant for a different robot. Robot 1 is the "Abadi Rover" (see `plan.md`, `wiring.md`; do not
 edit them). **Robot 2 is a telepresence robot**, built on the same motherboard.
 
 ## What the owner asked for (nearly verbatim)
@@ -37,11 +37,11 @@ edit them). **Robot 2 is a telepresence robot**, built on the same motherboard.
 - Motors: the DRV8833 (HW-627) does 1.5 A continuous / 2 A peak per channel, 2.7-10.8 V. The ESP32 pins are 3.3 V only.
 - Out of scope unless the owner asks: AI agent on the robot, turret, anything about robot 1's stages. Do NOT edit `plan.md`, `wiring.md` or anything under `pcb/`.
 
-## Working rules
+## Working rules (these are the rules the files in this folder were written under; you can skip this section)
 
 - Write for a hobbyist: short sentences, plain words, every abbreviation explained once. Tables are good. Prices in EUR for Germany; give a source link or the shop name; say when a price
   is an estimate. The owner will build the robot abroad (country not known yet): say what to buy in Germany before travelling and what is easy to buy anywhere.
   Li-ion cells and power banks go in carry-on luggage only (flag this).
-- Be honest about uncertainty. Mark each key fact as VERIFIED (you saw it in a source or file) or ASSUMED. Never invent a part number or a price you did not see: say "about" and where to check.
-- Write only into your own files under `abadi-rover-2/` (names given in your task). Do not run git. Scratch files go in the scratchpad folder you are told about, not in the repo.
-- No application code is to be written now (the owner's rule: one stage at a time, no code for later stages). Plans, specs, tables, diagrams and CAD sketches only.
+- Be honest about uncertainty. Mark each key fact as VERIFIED (seen in a source or file) or ASSUMED. Never invent a part number or a price that was not seen: say "about" and where to check.
+- Robot 2 is written only inside `abadi-rover-2/`. Robot 1's files and the locked motherboard folder `pcb/kicad/` are not changed from here.
+- No application code is written now (the owner's rule: one stage at a time, no code for later stages). Plans, specs, tables, diagrams and CAD sketches only.
