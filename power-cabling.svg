@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1620" viewBox="0 0 2400 1620">
+  <style>
+    .bg { fill: #ffffff; }
+    .box { fill: #f7f8fa; stroke: #222; stroke-width: 3; }
+    .bms { fill: #fff8ee; stroke: #8a4b08; stroke-width: 4; }
+    .pcb { fill: #eef6ee; stroke: #1b7a3d; stroke-width: 4; }
+    .pi { fill: #e7f1fb; stroke: #0b5cad; stroke-width: 4; }
+    .fuse { fill: #ffffff; stroke: #c4161c; stroke-width: 3; }
+    .key { fill: #fff4f4; stroke: #c4161c; stroke-width: 3; }
+    .h { font: bold 32px sans-serif; fill: #111; }
+    .h2 { font: bold 22px sans-serif; fill: #111; }
+    .t { font: 18px sans-serif; fill: #222; }
+    .s { font: 16px sans-serif; fill: #333; }
+    .amp { font: bold 22px sans-serif; fill: #9b0018; }
+    .warn { font: bold 18px sans-serif; fill: #9b0018; }
+    .wire { fill: none; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+    .bus { fill: none; stroke-width: 14; stroke-linecap: round; }
+    .red { stroke: #d62728; }
+    .blue { stroke: #1a73e8; }
+    .purple { stroke: #8e44ad; }
+    .yellow { stroke: #c9a000; }
+    .orange { stroke: #ef6c00; }
+    .black { stroke: #111; }
+  </style>
+  <rect class="bg" width="2400" height="1620"/>
+
+  <text x="40" y="46" class="h">ABADI ROVER - POWER CABLING</text>
+  <text x="780" y="46" class="s">From the BMS, a fuse on every plus wire, then the buck or the board. Minus wires have no fuse.</text>
+
+  <!-- source -->
+  <rect class="box" x="40" y="78" width="320" height="128" rx="14"/>
+  <text x="58" y="110" class="h2">TWO CELLS</text>
+  <text x="58" y="138" class="s">Already done.</text>
+  <text x="58" y="162" class="s">A minus to B-.   B plus to B+.</text>
+  <text x="58" y="186" class="s">A plus joined to B minus, to BM.</text>
+
+  <rect class="bms" x="40" y="224" width="320" height="250" rx="14"/>
+  <text x="58" y="258" class="h2">BMS</text>
+  <text x="58" y="286" class="s">Battery side is done: B-  BM  B+</text>
+  <text x="58" y="318" class="s">New wires start at the pack side.</text>
+  <rect x="58" y="340" width="120" height="48" rx="8" fill="#fff" stroke="#d62728" stroke-width="3"/>
+  <text x="90" y="372" class="h2" fill="#d62728">P+</text>
+  <rect x="200" y="340" width="120" height="48" rx="8" fill="#fff" stroke="#111" stroke-width="3"/>
+  <text x="232" y="372" class="h2">P-</text>
+  <text x="58" y="420" class="s">Charger plus stays on P+.</text>
+  <text x="58" y="444" class="s">Charger minus stays on P-.</text>
+
+  <rect class="box" x="40" y="492" width="320" height="78" rx="14"/>
+  <text x="58" y="524" class="h2">USB-C CHARGER</text>
+  <text x="58" y="550" class="s">Already on P+ and P-. No fuse.</text>
+
+  <!-- main fuse and plus bus -->
+  <path class="bus red" d="M360 364 H430"/>
+  <rect class="fuse" x="430" y="328" width="156" height="72" rx="10"/>
+  <text x="448" y="356" class="s">MAIN FUSE</text>
+  <text x="470" y="386" class="amp">15 A</text>
+  <path class="bus red" d="M586 364 H660"/>
+  <path class="bus red" d="M660 150 V1260"/>
+  <text x="674" y="142" class="s" fill="#d62728">P+ bus</text>
+  <text x="674" y="168" class="s" fill="#d62728">16 AWG</text>
+
+  <!-- Pi: not on the board -->
+  <path class="wire red" d="M660 230 H760"/>
+  <rect class="fuse" x="760" y="198" width="124" height="64" rx="10"/>
+  <text x="790" y="224" class="s">FUSE</text>
+  <text x="786" y="250" class="amp">7.5 A</text>
+  <path class="wire red" d="M884 230 H980"/>
+  <rect class="box" x="980" y="186" width="270" height="100" rx="12"/>
+  <text x="998" y="216" class="h2">XL4016</text>
+  <text x="998" y="242" class="s">IN+ after the 7.5 A fuse</text>
+  <text x="998" y="264" class="s">IN- to P-.   Out 5.10 V</text>
+  <path class="wire blue" d="M1250 230 H1688"/>
+  <text x="1320" y="216" class="s" fill="#1a73e8">blue, 18 AWG, Pi only</text>
+  <rect class="pi" x="1688" y="160" width="670" height="140" rx="14"/>
+  <text x="1710" y="196" class="h2">RASPBERRY PI 5</text>
+  <text x="1710" y="226" class="t">USB-C power port. Not a board pad.</text>
+  <text x="1710" y="252" class="s">Plus to VBUS. Minus to GND. 5.1k from CC to GND.</text>
+  <text x="1710" y="276" class="warn">The 40-pin header 5 V pin stays empty.</text>
+
+  <!-- 3.3V matches the top pads on the board -->
+  <path class="wire red" d="M660 470 H760"/>
+  <rect class="fuse" x="760" y="438" width="124" height="64" rx="10"/>
+  <text x="790" y="464" class="s">FUSE</text>
+  <text x="794" y="490" class="amp">1 A</text>
+  <path class="wire red" d="M884 470 H980"/>
+  <rect class="box" x="980" y="426" width="270" height="100" rx="12"/>
+  <text x="998" y="456" class="h2">3.3 V MODULE</text>
+  <text x="998" y="482" class="s">IN+ after the 1 A fuse</text>
+  <text x="998" y="504" class="s">IN- to P-.   Out 3.30 V</text>
+  <path class="wire yellow" d="M1250 470 H1908"/>
+  <text x="1480" y="456" class="s" fill="#8a6a00">yellow, 22 AWG</text>
+
+  <!-- clean 5V -->
+  <path class="wire red" d="M660 690 H760"/>
+  <rect class="fuse" x="760" y="658" width="124" height="64" rx="10"/>
+  <text x="790" y="684" class="s">FUSE</text>
+  <text x="794" y="710" class="amp">2 A</text>
+  <path class="wire red" d="M884 690 H980"/>
+  <rect class="box" x="980" y="646" width="270" height="100" rx="12"/>
+  <text x="998" y="676" class="h2">CLEAN 5 V BUCK</text>
+  <text x="998" y="702" class="s">IN+ after the 2 A fuse</text>
+  <text x="998" y="724" class="s">IN- to P-.   Out 5.00 V</text>
+  <path class="wire purple" d="M1250 690 H1908"/>
+  <text x="1480" y="676" class="s" fill="#8e44ad">purple, 22 AWG</text>
+
+  <!-- key -->
+  <path class="wire red" d="M660 900 H760"/>
+  <rect class="key" x="760" y="852" width="210" height="110" rx="12"/>
+  <text x="778" y="886" class="h2">KEY SWITCH</text>
+  <text x="778" y="912" class="s">Plus wire only.</text>
+  <text x="778" y="934" class="s">Off: motors and servos die.</text>
+  <text x="778" y="956" class="s">Pi, clean 5 V, 3.3 V stay on.</text>
+  <path class="bus red" d="M970 900 H1060"/>
+  <path class="bus red" d="M1060 900 V1160"/>
+
+  <!-- battery to board -->
+  <path class="wire red" d="M1060 1020 H1160"/>
+  <rect class="fuse" x="1160" y="988" width="150" height="64" rx="10"/>
+  <text x="1178" y="1014" class="s">FUSE slow</text>
+  <text x="1190" y="1040" class="amp">5 A</text>
+  <path class="wire red" d="M1310 1020 H1908"/>
+  <text x="1500" y="1006" class="s" fill="#d62728">red, 18 AWG, pack voltage</text>
+
+  <!-- servos -->
+  <path class="wire red" d="M1060 1160 H1160"/>
+  <rect class="fuse" x="1160" y="1128" width="150" height="64" rx="10"/>
+  <text x="1178" y="1154" class="s">FUSE slow</text>
+  <text x="1190" y="1180" class="amp">3 A</text>
+  <path class="wire red" d="M1310 1160 H1420"/>
+  <rect class="box" x="1420" y="1116" width="280" height="100" rx="12"/>
+  <text x="1438" y="1146" class="h2">LM2596 HW-411</text>
+  <text x="1438" y="1172" class="s">IN+ after the 3 A fuse</text>
+  <text x="1438" y="1194" class="s">IN- to P-.   Out 5.00 V</text>
+  <path class="wire orange" d="M1700 1160 H1908"/>
+  <text x="1710" y="1146" class="s" fill="#ef6c00">orange, 20 AWG</text>
+
+  <!-- board pads, aligned with the wires -->
+  <rect class="pcb" x="1908" y="400" width="452" height="860" rx="16"/>
+  <text x="1930" y="436" class="h2">MOTHERBOARD v5</text>
+  <text x="1930" y="464" class="s">Left edge. Top of the board is up.</text>
+
+  <text x="1930" y="520" class="t">3.3V IN +</text>
+  <text x="2140" y="520" class="s" fill="#8a6a00">yellow lands here</text>
+  <text x="1930" y="546" class="s">minus pad is just above it</text>
+
+  <text x="1930" y="700" class="t">CLEAN 5V IN +</text>
+  <text x="2160" y="700" class="s" fill="#8e44ad">purple</text>
+  <text x="1930" y="726" class="s">minus pad is just above it</text>
+
+  <text x="1930" y="1030" class="t">BATT IN +</text>
+  <text x="2140" y="1030" class="s" fill="#d62728">red lands here</text>
+  <text x="1930" y="1056" class="s">feeds the motor chips</text>
+
+  <text x="1930" y="1170" class="t">SERVO 5V IN +</text>
+  <text x="2160" y="1170" class="s" fill="#ef6c00">orange</text>
+  <text x="1930" y="1196" class="s">PCA9685 V+ only</text>
+
+  <text x="1930" y="1252" class="warn">ESP32 5 V pad stays empty.</text>
+
+  <!-- ground bus in the margin, clear of the boxes -->
+  <path class="wire black" d="M200 388 H24"/>
+  <path class="bus black" d="M24 388 V1388 H2360"/>
+  <text x="48" y="1416" class="h2">P- ground bus. Black wire. No fuse on this bus.</text>
+  <text x="48" y="1444" class="s">Every IN- and every OUT- goes to P-. One black wire from P- to any minus pad is enough: the minus pads are joined inside the board. Match each OUT- to the minus pad beside its own plus.</text>
+
+  <rect class="box" x="40" y="1472" width="2320" height="120" rx="12"/>
+  <text x="58" y="1506" class="h2">Set the screws before the output wire is attached</text>
+  <text x="58" y="1536" class="t">XL4016 = 5.10 V.   Clean buck = 5.00 V.   3.3 V module = 3.30 V.   LM2596 = 5.00 V.   If a meter shows about 8 V, keep turning until it falls.</text>
+  <text x="58" y="1568" class="t">Buy blade fuses and an inline holder for each: 15 A, 7.5 A, 5 A slow, 3 A slow, 2 A, 1 A. Use 16 AWG only on the P+ feed through the 15 A fuse.</text>
+</svg>

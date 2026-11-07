@@ -1,4 +1,4 @@
-**Current Status:** Phase 1 / Stage 1 (Power) — in progress. 7 Nov 2026: the pack is charging and the cells stayed matched (3.87 V, 3.87 V, pack 7.74 V after a couple of minutes). Unplug the charger at 4.20 V on either cell or 8.40 V on the pack. Next, when you are back: set the four bucks with the meter, then wire them. The full path from here to a finished, seeing, talking robot is the stage list below. The pin table further down is still the old TB6612 table. Do not solder signal wires from that table onto the printed board.
+**Current Status:** Phase 1 / Stage 1 (Power) — in progress. 7 Nov 2026, owner: the pack is charged. Cells had stayed matched while charging (3.87 V, 3.87 V, pack 7.74 V). Next: wire P+ and P- to the bucks through the fuses in `power-cabling.png`. Buck outputs stay off the Pi and the board until the meter reads 5.10 V, 5.00 V, 5.00 V, and 3.30 V. The pin table further down is still the old TB6612 table. Do not solder signal wires from that table onto the printed board.
 
 # Abadi Rover — Build Plan
 
@@ -60,6 +60,19 @@ Owner decisions, 7 Nov 2026. Each buck has its own two wires onto the protection
 | **Servo 5V** | LM2596 HW-411, input from **P+** and **P−** | **5.00 V** | **SERVO 5V IN +** and its minus pad |
 | **3.3V** | 3.3 V module, input from **P+** and **P−** | **3.30 V** | **3.3V IN +** and its minus pad |
 | **ESP32** | Pi USB-A → ESP32 **COM** USB-C | — | ESP32 only. Leave the ESP32 5V pin on the motherboard empty |
+
+Fuses, added 7 Nov 2026 at the owner's request. Every fuse is on a plus wire. P- has no fuse. The picture is [power-cabling.png](power-cabling.png).
+
+| Fuse | Where it sits | Wire |
+|---|---|---|
+| **15 A** | P+ to the split that feeds every load | 16 AWG |
+| **7.5 A** | XL4016 input plus | 18 AWG |
+| **2 A** | Clean 5 V buck input plus | 22 AWG |
+| **1 A** | 3.3 V module input plus | 22 AWG |
+| **5 A slow** | After the key switch, then BATT IN + | 18 AWG |
+| **3 A slow** | After the key switch, then LM2596 input plus | 20 AWG |
+
+The charger stays on P+ and P- with no fuse of its own. The key switch is on the plus feed of the 5 A and 3 A fuses, so motors and servos go off together. The Pi, the clean 5 V buck, and the 3.3 V module stay on.
 
 What each board pad feeds:
 

@@ -20,12 +20,14 @@ Items marked **(wire later)** belong to a later stage. Leave them unconnected un
 | Black | GND |
 | Any other colour | Signals |
 
-- Power wires: 20–22 AWG. Signal wires: 24–26 AWG.
+- P+ through the 15 A fuse: 16 AWG. Pi and motor branches: 18 AWG. Servo branch: 20 AWG. Clean 5 V and 3.3 V: 22 AWG. Signal wires: 24–26 AWG.
 - Keep motor wires away from screen and sensor signal wires where possible.
 
 ## 1. Power diagram
 
-Each buck has its own input wires on P+ and P−. Outputs stay separate.
+Each buck has its own input wires on P+ and P-. A fuse sits on every plus wire. The drawing is the one to follow.
+
+![BMS to fuses to the motherboard](power-cabling.png)
 
 ```mermaid
 flowchart LR
@@ -147,22 +149,22 @@ Set every output with the meter before the output wire is attached. Glue the scr
 | [ ] | Cell B plus | BMS **B+** | — |
 | [ ] | Charger plus | BMS **P+** | — |
 | [ ] | Charger minus | BMS **P−** | — |
-| [ ] | XL4016 IN+ | BMS **P+** | — |
+| [ ] | BMS **P+** | 15 A main fuse, then the plus split | Red, 16 AWG |
+| [ ] | 7.5 A fuse | XL4016 IN+ | Red, 18 AWG |
+| [ ] | 2 A fuse | Clean buck IN+ | Red, 22 AWG |
+| [ ] | 1 A fuse | 3.3 V module IN+ | Red, 22 AWG |
+| [ ] | Key switch, then 5 A slow fuse | **BATT IN +** | Red, 18 AWG |
+| [ ] | Key switch, then 3 A slow fuse | LM2596 IN+ | Red, 20 AWG |
 | [ ] | XL4016 IN− | BMS **P−** | Black |
 | [ ] | XL4016 OUT+ at 5.10 V | Pi USB-C power port, with 5.1 kΩ from CC to ground | Blue |
 | [ ] | XL4016 OUT− | Pi USB-C ground | Black |
-| [ ] | Clean buck IN+ | BMS **P+** | — |
 | [ ] | Clean buck IN− | BMS **P−** | Black |
 | [ ] | Clean buck OUT+ at 5.00 V | **CLEAN 5V IN +** | Purple |
 | [ ] | Clean buck OUT− | **CLEAN 5V IN −** | Black |
-| [ ] | 3.3 V module IN+ | BMS **P+** | — |
 | [ ] | 3.3 V module IN− | BMS **P−** | Black |
 | [ ] | 3.3 V module OUT+ at 3.30 V | **3.3V IN +** | Yellow |
 | [ ] | 3.3 V module OUT− | **3.3V IN −** | Black |
-| [ ] | BMS **P+** | Key switch terminal 1 | Red |
-| [ ] | Key switch terminal 2 | **BATT IN +** | Red |
 | [ ] | BMS **P−** | **BATT IN −** | Black |
-| [ ] | Key switch terminal 2 | LM2596 IN+ | Red |
 | [ ] | LM2596 IN− | BMS **P−** | Black |
 | [ ] | LM2596 OUT+ at 5.00 V | **SERVO 5V IN +** | Orange |
 | [ ] | LM2596 OUT− | **SERVO 5V IN −** | Black |
