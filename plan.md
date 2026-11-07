@@ -1,4 +1,4 @@
-**Current Status:** Phase 1 / Stage 1 (Power) — RESTARTED on Raspberry Pi 5 8GB + ESP32-S3. Motor driver is now TB6612FNG. Old UNO Q / DRV8833 pin table is retired. New pin table locked below. Pending: Pi 5 boots on the hub from the power bank; star ground includes Pi GND and ESP32 GND.
+**Current Status:** Phase 1 / Stage 1 (Power) — RESTARTED on Raspberry Pi 5 8GB + ESP32-S3. 7 Nov 2026, owner confirmed: two cells 3.83 V and 3.84 V on the 2S BMS, pack about 7.7 V. Charger reads 8.5 V with nothing attached. Next check: charger on P+ and P−, then both cell voltages while charging. Pi 5 boot test still pending. Written pin table below is still the TB6612 table.
 
 # Abadi Rover — Build Plan
 
@@ -145,6 +145,8 @@ Old bank / hub / fan / 7V / 3.3V tests already passed on this power hardware. Ne
 
 | Test | Result |
 |---|---|
+| 2S cells on the BMS (3.83 V and 3.84 V, pack about 7.7 V) | **Confirmed** 7 Nov 2026 |
+| Charger open-circuit voltage | **8.5 V.** Connect to P+ and P−, then recheck both cells while charging |
 | 1. Pi 5 boots on hub from power bank USB-C 2; stays up 5 min; ESP32 enumerates on Pi USB | **Pending** |
 | 2–5. Bank USB-A, motors, fan keep-awake, HW-183B 7.0V | Passed earlier (same rails) |
 | 6. Servo rail under servo movement | **Pending** (Stage 4) |
