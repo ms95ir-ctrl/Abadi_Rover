@@ -20,7 +20,7 @@ Items marked **(wire later)** belong to a later stage. Leave them unconnected un
 | Black | GND |
 | Any other colour | Signals |
 
-- P+ through the 15 A fuse: 16 AWG. Pi and motor branches: 18 AWG. Servo branch: 20 AWG. Clean 5 V and 3.3 V: 22 AWG. Signal wires: 24–26 AWG.
+- Short jumper from P+ to the five fuses. Pi and motor branches: 18 AWG. Servo branch: 20 AWG. Clean 5 V and 3.3 V: 22 AWG. Signal wires: 24–26 AWG.
 - Keep motor wires away from screen and sensor signal wires where possible.
 
 ## 1. Power diagram
@@ -149,12 +149,12 @@ Set every output with the meter before the output wire is attached. Glue the scr
 | [ ] | Cell B plus | BMS **B+** | — |
 | [ ] | Charger plus | BMS **P+** | — |
 | [ ] | Charger minus | BMS **P−** | — |
-| [ ] | BMS **P+** | 15 A main fuse, then the plus split | Red, 16 AWG |
-| [ ] | 7.5 A fuse | XL4016 IN+ | Red, 18 AWG |
+| [ ] | BMS **P+**, short jumper | the five fuse holders | Red |
+| [ ] | 6.3 A fuse | XL4016 IN+ | Red, 18 AWG |
 | [ ] | 2 A fuse | Clean buck IN+ | Red, 22 AWG |
-| [ ] | 1 A fuse | 3.3 V module IN+ | Red, 22 AWG |
-| [ ] | Key switch, then 5 A slow fuse | **BATT IN +** | Red, 18 AWG |
-| [ ] | Key switch, then 3 A slow fuse | LM2596 IN+ | Red, 20 AWG |
+| [ ] | 2 A fuse | 3.3 V module IN+ | Red, 22 AWG |
+| [ ] | Key switch, then 5 A fuse | **BATT IN +** | Red, 18 AWG |
+| [ ] | Key switch, then the other 5 A fuse | LM2596 IN+ | Red, 20 AWG |
 | [ ] | XL4016 IN− | BMS **P−** | Black |
 | [ ] | XL4016 OUT+ at 5.10 V | Pi USB-C power port, with 5.1 kΩ from CC to ground | Blue |
 | [ ] | XL4016 OUT− | Pi USB-C ground | Black |

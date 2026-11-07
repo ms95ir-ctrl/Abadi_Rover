@@ -61,18 +61,17 @@ Owner decisions, 7 Nov 2026. Each buck has its own two wires onto the protection
 | **3.3V** | 3.3 V module, input from **P+** and **P−** | **3.30 V** | **3.3V IN +** and its minus pad |
 | **ESP32** | Pi USB-A → ESP32 **COM** USB-C | — | ESP32 only. Leave the ESP32 5V pin on the motherboard empty |
 
-Fuses, added 7 Nov 2026 at the owner's request. Every fuse is on a plus wire. P- has no fuse. The picture is [power-cabling.png](power-cabling.png).
+Fuses, set 7 Nov 2026 from the five fuses on hand. Every fuse is on a plus wire. P- has no fuse. There is no main fuse: the red jumper from P+ to the five fuses stays short. The picture is [power-cabling.png](power-cabling.png).
 
-| Fuse | Where it sits | Wire |
+| Fuse on hand | Where it sits | Wire |
 |---|---|---|
-| **15 A** | P+ to the split that feeds every load | 16 AWG |
-| **7.5 A** | XL4016 input plus | 18 AWG |
+| **6.3 A** | XL4016 input plus (the Pi) | 18 AWG |
+| **5 A** | After the key switch, then BATT IN + | 18 AWG |
+| **5 A** | After the key switch, then LM2596 input plus | 20 AWG |
 | **2 A** | Clean 5 V buck input plus | 22 AWG |
-| **1 A** | 3.3 V module input plus | 22 AWG |
-| **5 A slow** | After the key switch, then BATT IN + | 18 AWG |
-| **3 A slow** | After the key switch, then LM2596 input plus | 20 AWG |
+| **2 A** | 3.3 V module input plus | 22 AWG |
 
-The charger stays on P+ and P- with no fuse of its own. The key switch is on the plus feed of the 5 A and 3 A fuses, so motors and servos go off together. The Pi, the clean 5 V buck, and the 3.3 V module stay on.
+The charger stays on P+ and P- with no fuse of its own. The key switch is on the plus feed of both 5 A fuses, so motors and servos go off together. The Pi, the clean 5 V buck, and the 3.3 V module stay on. The 6.3 A is the Pi fuse because the Pi is the heavy always-on load. The motor wire gets a 5 A fuse because a stalled track is the big fault. The other 5 A is on the servo buck: it opens if that wire shorts. The LM2596 itself stops around 3 A, so the fuse is not what limits a stall.
 
 What each board pad feeds:
 

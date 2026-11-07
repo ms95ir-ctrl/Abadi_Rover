@@ -50,24 +50,20 @@
   <text x="58" y="550" class="s">Already on P+ and P-. No fuse.</text>
 
   <!-- main fuse and plus bus -->
-  <path class="bus red" d="M360 364 H430"/>
-  <rect class="fuse" x="430" y="328" width="156" height="72" rx="10"/>
-  <text x="448" y="356" class="s">MAIN FUSE</text>
-  <text x="470" y="386" class="amp">15 A</text>
-  <path class="bus red" d="M586 364 H660"/>
+  <path class="bus red" d="M360 364 H660"/>
   <path class="bus red" d="M660 150 V1260"/>
   <text x="674" y="142" class="s" fill="#d62728">P+ bus</text>
-  <text x="674" y="168" class="s" fill="#d62728">16 AWG</text>
+  <text x="674" y="168" class="s" fill="#d62728">keep short</text>
 
   <!-- Pi: not on the board -->
   <path class="wire red" d="M660 230 H760"/>
   <rect class="fuse" x="760" y="198" width="124" height="64" rx="10"/>
   <text x="790" y="224" class="s">FUSE</text>
-  <text x="786" y="250" class="amp">7.5 A</text>
+  <text x="786" y="250" class="amp">6.3 A</text>
   <path class="wire red" d="M884 230 H980"/>
   <rect class="box" x="980" y="186" width="270" height="100" rx="12"/>
   <text x="998" y="216" class="h2">XL4016</text>
-  <text x="998" y="242" class="s">IN+ after the 7.5 A fuse</text>
+  <text x="998" y="242" class="s">IN+ after the 6.3 A fuse</text>
   <text x="998" y="264" class="s">IN- to P-.   Out 5.10 V</text>
   <path class="wire blue" d="M1250 230 H1688"/>
   <text x="1320" y="216" class="s" fill="#1a73e8">blue, 18 AWG, Pi only</text>
@@ -81,11 +77,11 @@
   <path class="wire red" d="M660 470 H760"/>
   <rect class="fuse" x="760" y="438" width="124" height="64" rx="10"/>
   <text x="790" y="464" class="s">FUSE</text>
-  <text x="794" y="490" class="amp">1 A</text>
+  <text x="794" y="490" class="amp">2 A</text>
   <path class="wire red" d="M884 470 H980"/>
   <rect class="box" x="980" y="426" width="270" height="100" rx="12"/>
   <text x="998" y="456" class="h2">3.3 V MODULE</text>
-  <text x="998" y="482" class="s">IN+ after the 1 A fuse</text>
+  <text x="998" y="482" class="s">IN+ after the 2 A fuse</text>
   <text x="998" y="504" class="s">IN- to P-.   Out 3.30 V</text>
   <path class="wire yellow" d="M1250 470 H1908"/>
   <text x="1480" y="456" class="s" fill="#8a6a00">yellow, 22 AWG</text>
@@ -116,7 +112,7 @@
   <!-- battery to board -->
   <path class="wire red" d="M1060 1020 H1160"/>
   <rect class="fuse" x="1160" y="988" width="150" height="64" rx="10"/>
-  <text x="1178" y="1014" class="s">FUSE slow</text>
+  <text x="1194" y="1014" class="s">FUSE</text>
   <text x="1190" y="1040" class="amp">5 A</text>
   <path class="wire red" d="M1310 1020 H1908"/>
   <text x="1500" y="1006" class="s" fill="#d62728">red, 18 AWG, pack voltage</text>
@@ -124,12 +120,12 @@
   <!-- servos -->
   <path class="wire red" d="M1060 1160 H1160"/>
   <rect class="fuse" x="1160" y="1128" width="150" height="64" rx="10"/>
-  <text x="1178" y="1154" class="s">FUSE slow</text>
-  <text x="1190" y="1180" class="amp">3 A</text>
+  <text x="1194" y="1154" class="s">FUSE</text>
+  <text x="1190" y="1180" class="amp">5 A</text>
   <path class="wire red" d="M1310 1160 H1420"/>
   <rect class="box" x="1420" y="1116" width="280" height="100" rx="12"/>
   <text x="1438" y="1146" class="h2">LM2596 HW-411</text>
-  <text x="1438" y="1172" class="s">IN+ after the 3 A fuse</text>
+  <text x="1438" y="1172" class="s">IN+ after the 5 A fuse</text>
   <text x="1438" y="1194" class="s">IN- to P-.   Out 5.00 V</text>
   <path class="wire orange" d="M1700 1160 H1908"/>
   <text x="1710" y="1146" class="s" fill="#ef6c00">orange, 20 AWG</text>
@@ -166,5 +162,5 @@
   <rect class="box" x="40" y="1472" width="2320" height="120" rx="12"/>
   <text x="58" y="1506" class="h2">Set the screws before the output wire is attached</text>
   <text x="58" y="1536" class="t">XL4016 = 5.10 V.   Clean buck = 5.00 V.   3.3 V module = 3.30 V.   LM2596 = 5.00 V.   If a meter shows about 8 V, keep turning until it falls.</text>
-  <text x="58" y="1568" class="t">Buy blade fuses and an inline holder for each: 15 A, 7.5 A, 5 A slow, 3 A slow, 2 A, 1 A. Use 16 AWG only on the P+ feed through the 15 A fuse.</text>
+  <text x="58" y="1568" class="t">Fuses on hand: 6.3 A for the Pi, 5 A for the motors, 5 A for the servos, 2 A for clean 5 V, 2 A for 3.3 V. No main fuse. Keep the red jumper from P+ to these five fuses short.</text>
 </svg>
