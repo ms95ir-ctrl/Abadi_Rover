@@ -88,7 +88,7 @@ Rules that stay in force:
 - The Pi is powered only through its USB-C power port. Do not use the Pi header 5 V pins. The USB-C plug needs a **5.1 kΩ** resistor from the CC pin to ground, or the Pi can stay off.
 - Do not feed the ESP32 5V/VIN pin from a buck.
 - All minus wires join the board ground. Add one wire from a Pi header GND and one extra wire from an ESP32 GND pin. Do not rely on the USB cable alone for motor ground.
-- The key switch sits in the P+ wire before the five fuses. Off kills the whole robot. Shut the Pi down from its menu when you can. The key is the hard off, and it cuts the Pi too. The gamepad kill button is the one that stops the motors while the Pi stays on.
+- The key switch sits in the single **P+** wire, next to the BMS, before the five fuses. Off kills the whole robot. **B−**, **BM**, and **B+** stay soldered to the cells. Shut the Pi down from its menu when you can. The key is the hard off, and it cuts the Pi too. The gamepad kill button is the one that stops the motors while the Pi stays on.
 - Measure 3.30 V on the 3.3 V rail **before** any relay IN wire is connected. A wandering 3.3 V rail already killed the old controller.
 - Charge with the key switch off. Unplug the charger when a cell reaches 4.20 V or the pack reaches 8.40 V. Unplug if the cells drift more than about 0.1 V apart, or if a cell gets hot.
 
