@@ -4,16 +4,19 @@
 
 Soldering and assembly reference. Pin assignments come from the **Locked pin table** in [plan.md](plan.md); if this file and `plan.md` ever disagree, `plan.md` wins and the mismatch must be reported.
 
-Items marked **(wire later)** belong to Phase 2 or later. Their pins are reserved now; leave them unconnected until that stage.
+The power section below matches the 7 Nov 2026 power design in `plan.md`. The signal checklists further down still name the old TB6612. Do not solder those signal wires onto Motherboard v5. That board has two DRV8833 sockets. Signal wires wait until the pin table is updated.
+
+Items marked **(wire later)** belong to a later stage. Leave them unconnected until that stage.
 
 ## Wire colours and sizes
 
 | Colour | Use |
 |---|---|
-| Red | Noisy 5V (after key switch) |
-| Orange | Motor 7V (HW-183B output) → TB6612 VM only |
-| Purple | Quiet 5V (hub port) |
-| Yellow | Rail C 3.3V |
+| Red | Pack plus, BATT IN, after the key switch |
+| Blue | XL4016 5.10 V, Pi USB-C only |
+| Purple | Clean 5 V |
+| Orange | Servo 5 V (LM2596 HW-411) |
+| Yellow | 3.3 V |
 | Black | GND |
 | Any other colour | Signals |
 
@@ -22,59 +25,49 @@ Items marked **(wire later)** belong to Phase 2 or later. Their pins are reserve
 
 ## 1. Power diagram
 
+Each buck has its own input wires on P+ and P−. Outputs stay separate.
+
 ```mermaid
 flowchart LR
-    subgraph bank [Power bank 20000mAh 45W]
-        C2["USB-C port 2 PD"]
-        UA["USB-A port"]
-        C1["USB-C port 1 - charging only"]
-    end
+    Cells["Two cells"] --> BMS["BMS B- BM B+"]
+    Charger["USB-C charger"] --> P["P+ and P-"]
+    BMS --> P
 
-    C2 --> HubIn["Hub PD-IN"]
-    HubIn --> Hub["Benfei hub"]
-    Hub -->|"hub USB-C cable"| Pi["Raspberry Pi 5"]
-    Pi -->|"USB-A to COM port"| ESP["ESP32-S3"]
-    Hub -->|"USB port"| Cam["Camera - Phase 3"]
-    Hub -->|"USB port"| Audio["USB audio - Phase 3"]
-    Hub -->|"USB port + screw adapter"| Quiet["Quiet 5V - purple"]
+    P --> XL["XL4016 set to 5.10V"]
+    P --> Clean["Clean 5V buck set to 5.00V"]
+    P --> Mod33["3.3V module set to 3.30V"]
+    P --> Key["Key switch"]
 
-    Quiet --> Sonar["HC-SR04 VCC"]
-    Quiet --> Buck["HW-133A set to 3.3V"]
-    Buck --> RailC["Rail C 3.3V - yellow"]
-    RailC --> ScrL["Left screen VCC - wire later"]
-    RailC --> ScrR["Right screen VCC - wire later"]
-    RailC --> Relay["Relay board VCC + COM1 + COM2"]
-    RailC --> TBVcc["TB6612 VCC"]
+    XL --> Pi["Pi USB-C power port"]
+    Pi -->|"USB-A to COM"| ESP["ESP32-S3"]
 
-    UA -->|"screw adapter"| Key["Key switch"]
-    Key --> Noisy["Noisy 5V - red"]
-    Noisy --> Fan["Fan - keep-awake load"]
-    Noisy --> PCAVplus["PCA9685 V+ terminal"]
-    Noisy --> Boost["HW-183B screw input"]
-    Boost --> Motor7["Motor 7V - orange"]
-    Motor7 --> TBVM["TB6612 VM"]
+    Clean --> CleanIn["CLEAN 5V IN"]
+    Mod33 --> Rail["3.3V IN"]
+    Key --> Batt["BATT IN"]
+    Key --> ServoBuck["LM2596 HW-411 set to 5.00V"]
+    ServoBuck --> ServoIn["SERVO 5V IN"]
 
-    ESP -->|"3.3V pin"| PCAVcc["PCA9685 VCC logic"]
+    Batt --> Motors["DRV8833 power pins"]
+    CleanIn --> Sonar["Sonar VCC - wire later"]
+    Rail --> Screens["Screens and relay VCC"]
+    ServoIn --> PCAV["PCA9685 V+"]
+    ESP -->|"own 3.3V pin"| PCALogic["PCA9685 VCC logic"]
 ```
 
 ### Ground (star point)
 
 All of these go to **one** star point (a screw-terminal bus bar or lever connector):
 
+The minus pads on the motherboard are already joined. P−, every buck minus, and those pads are one ground.
+
 ```mermaid
 flowchart TB
-    Star["STAR GROUND POINT"]
-    UAneg["USB-A adapter minus"] --> Star
-    Quietneg["Quiet 5V adapter minus"] --> Star
-    BuckNeg["HW-133A IN- and OUT-"] --> Star
-    BoostNeg["HW-183B IN- and OUT-"] --> Star
-    FanNeg["Fan minus"] --> Star
-    TBg["TB6612 all GND"] --> Star
-    PCAg["PCA9685 GND terminal"] --> Star
-    SonarG["HC-SR04 GND"] --> Star
-    RelayG["Relay board GND"] --> Star
-    LightsG["Lights minus"] --> Star
-    ScreensG["Screens GND - wire later"] --> Star
+    Star["Board ground"]
+    Pminus["BMS P-"] --> Star
+    XlNeg["XL4016 IN- and OUT-"] --> Star
+    CleanNeg["Clean buck IN- and OUT-"] --> Star
+    ServoNeg["LM2596 IN- and OUT-"] --> Star
+    M33["3.3V module IN- and OUT-"] --> Star
     PiG["Pi 5 header GND - one wire"] --> Star
     EspG["ESP32 GND pin - extra wire"] --> Star
 ```
@@ -143,34 +136,43 @@ flowchart LR
 
 Tick each box once the wire is soldered/screwed and checked.
 
-### Power bank, hub, key switch, Pi, ESP32
+### Pack, bucks, key switch, Pi, ESP32
+
+Set every output with the meter before the output wire is attached. Glue the screw only after the loaded test in that stage.
 
 | Done | From | To | Colour |
 |---|---|---|---|
-| [ ] | Bank USB-C port 2 | Hub PD-IN (USB-C cable) | — |
-| [ ] | Hub USB-C cable | Raspberry Pi 5 USB-C **power** port | — |
+| [ ] | Cell A minus | BMS **B−** | — |
+| [ ] | Cell A plus joined to cell B minus | BMS **BM** | — |
+| [ ] | Cell B plus | BMS **B+** | — |
+| [ ] | Charger plus | BMS **P+** | — |
+| [ ] | Charger minus | BMS **P−** | — |
+| [ ] | XL4016 IN+ | BMS **P+** | — |
+| [ ] | XL4016 IN− | BMS **P−** | Black |
+| [ ] | XL4016 OUT+ at 5.10 V | Pi USB-C power port, with 5.1 kΩ from CC to ground | Blue |
+| [ ] | XL4016 OUT− | Pi USB-C ground | Black |
+| [ ] | Clean buck IN+ | BMS **P+** | — |
+| [ ] | Clean buck IN− | BMS **P−** | Black |
+| [ ] | Clean buck OUT+ at 5.00 V | **CLEAN 5V IN +** | Purple |
+| [ ] | Clean buck OUT− | **CLEAN 5V IN −** | Black |
+| [ ] | 3.3 V module IN+ | BMS **P+** | — |
+| [ ] | 3.3 V module IN− | BMS **P−** | Black |
+| [ ] | 3.3 V module OUT+ at 3.30 V | **3.3V IN +** | Yellow |
+| [ ] | 3.3 V module OUT− | **3.3V IN −** | Black |
+| [ ] | BMS **P+** | Key switch terminal 1 | Red |
+| [ ] | Key switch terminal 2 | **BATT IN +** | Red |
+| [ ] | BMS **P−** | **BATT IN −** | Black |
+| [ ] | Key switch terminal 2 | LM2596 IN+ | Red |
+| [ ] | LM2596 IN− | BMS **P−** | Black |
+| [ ] | LM2596 OUT+ at 5.00 V | **SERVO 5V IN +** | Orange |
+| [ ] | LM2596 OUT− | **SERVO 5V IN −** | Black |
 | [ ] | Pi USB-A | ESP32 **COM** USB-C | — |
-| [ ] | Hub spare USB port | USB screw adapter = Quiet 5V | — |
-| [ ] | Bank USB-A | USB-A screw adapter | — |
-| [ ] | USB-A adapter + | Key switch terminal 1 | Red |
-| [ ] | Key switch terminal 2 | Noisy 5V bus | Red |
-| [ ] | USB-A adapter − | Star ground | Black |
-| [ ] | Quiet 5V adapter − | Star ground | Black |
-| [ ] | Pi 5 header GND | Star ground | Black |
-| [ ] | ESP32 GND pin | Star ground | Black |
+| [ ] | Pi 5 header GND | Board ground | Black |
+| [ ] | ESP32 GND pin | Board ground | Black |
 
-### HW-183B boost (motor 7V)
+### TB6612FNG — do not use on Motherboard v5
 
-| Done | From | To | Colour |
-|---|---|---|---|
-| [ ] | Noisy 5V bus | HW-183B screw IN+ | Red |
-| [ ] | Star ground | HW-183B screw IN− | Black |
-| [ ] | HW-183B OUT+ | TB6612 **VM** | Orange |
-| [ ] | HW-183B OUT− | Star ground | Black |
-
-Use the **screw input**, not the HW-183B's USB-C socket, so the key switch can cut the motors. Re-check 7.0V under load after wiring, then glue the dial.
-
-### TB6612FNG
+The printed board has DRV8833 sockets. Leave this checklist until the pin table is replaced. Do not solder these wires.
 
 | Done | TB6612 pin | To | Colour |
 |---|---|---|---|
@@ -197,7 +199,7 @@ Leave the seven signal pins empty until Stage 3. STBY sits low by itself, so the
 | [ ] | GND (logic header) | ESP32 GND | Black |
 | [ ] | SDA | ESP32 GPIO 8 | Signal |
 | [ ] | SCL | ESP32 GPIO 9 | Signal |
-| [ ] | V+ (screw terminal) | Noisy 5V bus | Red |
+| [ ] | V+ (screw terminal) | SERVO 5V IN | Orange |
 | [ ] | GND (screw terminal) | Star ground | Black |
 | — | Bulk cap | Already on the PCA9685 board (1000µF), nothing to wire | — |
 | — | OE | Not connected | — |
@@ -211,40 +213,33 @@ Servo plugs: **brown/black = GND, red = V+, orange/yellow = signal (PWM)**. Matc
 
 | Done | From | To | Colour |
 |---|---|---|---|
-| [ ] | Fan + | Noisy 5V bus | Red |
+| [ ] | Fan + | CLEAN 5V rail, after that buck's current is known | Purple |
 | [ ] | Fan − | Star ground | Black |
 
 ### HC-SR04 (wire later)
 
 | Done | HC-SR04 pin | To | Colour |
 |---|---|---|---|
-| [ ] | VCC | Quiet 5V | Purple |
+| [ ] | VCC | CLEAN 5V IN | Purple |
 | [ ] | TRIG | ESP32 GPIO 41 | Signal |
 | [ ] | ECHO | Voltage divider → ESP32 GPIO 42 | Signal |
 | [ ] | GND | Star ground | Black |
 
 ECHO is 5V. The ESP32 is **not** 5V-tolerant. Do not connect ECHO straight to GPIO 42.
 
-### HW-133A buck (Rail C 3.3V)
+### 3.3 V module
 
-| Done | From | To | Colour |
-|---|---|---|---|
-| [ ] | Quiet 5V | HW-133A IN+ | Purple |
-| [ ] | Star ground | HW-133A IN− | Black |
-| [ ] | HW-133A OUT+ | Rail C 3.3V bus | Yellow |
-| [ ] | HW-133A OUT− | Star ground | Black |
-
-Set to **3.3V with nothing connected to the output** before wiring any load. Measure again after loads are connected. Confirm 3.3V **before** connecting relay IN1/IN2.
+The wires are in the pack checklist above. Confirm **3.30 V** on **3.3V IN** before connecting any relay IN pin. Measure again after the screens and relays are connected.
 
 ### Relay board and lights
 
 | Done | From | To | Colour |
 |---|---|---|---|
-| [ ] | Relay VCC | Rail C 3.3V | Yellow |
+| [ ] | Relay VCC | 3.3V IN | Yellow |
 | [ ] | Relay GND | Star ground | Black |
 | [ ] | Relay IN1 | ESP32 GPIO 1 | Signal |
 | [ ] | Relay IN2 | ESP32 GPIO 2 | Signal |
-| [ ] | Relay COM1, COM2 | Rail C 3.3V | Yellow |
+| [ ] | Relay COM1, COM2 | 3.3 V rail | Yellow |
 | [ ] | Relay NO1 | ~10Ω resistor → light 1 + | Yellow |
 | [ ] | Relay NO2 | ~10Ω resistor → light 2 + | Yellow |
 | [ ] | Light 1 −, light 2 − | Star ground | Black |
@@ -255,7 +250,7 @@ LED filaments have polarity: one end is usually marked (+, a dot, or a notch). T
 
 | Done | Screen pin | Left screen | Right screen | Colour |
 |---|---|---|---|---|
-| [ ] | VCC | Rail C 3.3V | Rail C 3.3V | Yellow |
+| [ ] | VCC | 3.3V IN | 3.3V IN | Yellow |
 | [ ] | GND | Star ground | Star ground | Black |
 | [ ] | SCL | ESP32 GPIO 12 | ESP32 GPIO 12 | Signal |
 | [ ] | SDA | ESP32 GPIO 11 | ESP32 GPIO 11 | Signal |
@@ -269,9 +264,9 @@ Use a 7-pin female connector housing on each screen. The shared lines (SCL, SDA,
 
 - **Bulk capacitor polarity:** the stripe on the can marks the **minus** leg. Reversed, it can burst.
 - **ESP32 pins are not 5V-tolerant.** Relay IN pins sit at the relay board's VCC — that must be a steady 3.3V *before* IN1/IN2 are connected. HC-SR04 ECHO needs a divider.
-- **Never feed power into the Pi 5 GPIO 5V pins, or the ESP32 5V/VIN pin.** Pi = USB-C from the hub only. ESP32 = USB from the Pi only.
-- **HW-183B:** set 7.0V under load on the power bank, then glue the dial. TB6612 VM max is 13.5V.
-- **Before first power-on:** with everything off, check continuity from each rail's minus to the star point, and check that no + rail beeps to ground.
-- **Charging:** robot off, unplug USB-C port 1's cable, then charge.
+- **Never feed power into the Pi 5 GPIO 5V pins, or the ESP32 5V/VIN pin.** The Pi is powered only through its USB-C port from the XL4016. The ESP32 is powered only through USB from the Pi.
+- **Bucks:** set 5.10 V, 5.00 V, 5.00 V, and 3.30 V with the outputs unconnected. Pack voltage on BATT IN must stay under 10.8 V. Two cells is the top.
+- **Before first power-on:** with everything off, check that each rail's minus reaches board ground, and that no plus rail beeps to ground.
+- **Charging:** key switch off. Unplug the charger at 4.20 V on a cell or 8.40 V on the pack.
 - Lift the tracks off the table for every first motor test.
-- If the Pi 5 shows a lightning bolt or reboots, the hub is not passing enough power.
+- If the Pi 5 shows a lightning bolt or reboots, the XL4016 is not holding 5.1 V under the Pi's load.
