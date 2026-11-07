@@ -1,4 +1,4 @@
-**Current Status:** Phase 1 / Stage 1 (Power) — RESTARTED on Raspberry Pi 5 8GB + ESP32-S3. 7 Nov 2026, owner confirmed: two cells 3.83 V and 3.84 V on the 2S BMS, pack about 7.7 V. Charger reads 8.5 V with nothing attached. Next check: charger on P+ and P−, then both cell voltages while charging. Pi 5 boot test still pending. Written pin table below is still the TB6612 table.
+**Current Status:** Phase 1 / Stage 1 (Power) — RESTARTED on Raspberry Pi 5 8GB + ESP32-S3. 7 Nov 2026, owner confirmed: charger on P+ and P− is charging. Started at 3.84 V per cell and 7.69 V on the pack. After a couple of minutes, 3.87 V per cell and 7.74 V on the pack. Cells stayed matched. Unplug at 4.20 V per cell or 8.40 V on the pack. Pi 5 boot test still pending. Written pin table below is still the TB6612 table.
 
 # Abadi Rover — Build Plan
 
@@ -146,7 +146,8 @@ Old bank / hub / fan / 7V / 3.3V tests already passed on this power hardware. Ne
 | Test | Result |
 |---|---|
 | 2S cells on the BMS (3.83 V and 3.84 V, pack about 7.7 V) | **Confirmed** 7 Nov 2026 |
-| Charger open-circuit voltage | **8.5 V.** Connect to P+ and P−, then recheck both cells while charging |
+| Charger open-circuit voltage | **8.5 V** |
+| Charger on P+ and P− | **Charging.** 3.84 V / 3.84 V / 7.69 V at the start. After a couple of minutes: 3.87 V / 3.87 V / 7.74 V. Cells matched. Unplug at 4.20 V per cell or 8.40 V on the pack |
 | 1. Pi 5 boots on hub from power bank USB-C 2; stays up 5 min; ESP32 enumerates on Pi USB | **Pending** |
 | 2–5. Bank USB-A, motors, fan keep-awake, HW-183B 7.0V | Passed earlier (same rails) |
 | 6. Servo rail under servo movement | **Pending** (Stage 4) |
