@@ -12,7 +12,7 @@ Items marked **(wire later)** belong to a later stage. Leave them unconnected un
 
 | Colour | Use |
 |---|---|
-| Red | Pack plus, BATT IN, after the key switch |
+| Red | Pack plus, after the key switch |
 | Blue | XL4016 5.10 V, Pi USB-C only |
 | Purple | Clean 5 V |
 | Orange | Servo 5 V (LM2596 HW-411) |
@@ -35,18 +35,18 @@ flowchart LR
     Charger["USB-C charger"] --> P["P+ and P-"]
     BMS --> P
 
-    P --> XL["XL4016 set to 5.10V"]
-    P --> Clean["Clean 5V buck set to 5.00V"]
-    P --> Mod33["3.3V module set to 3.30V"]
-    P --> Key["Key switch"]
+    P --> Key["Key switch, whole robot"]
+    Key --> XL["XL4016 set to 5.10V"]
+    Key --> Clean["Clean 5V buck set to 5.00V"]
+    Key --> Mod33["3.3V module set to 3.30V"]
+    Key --> Batt["BATT IN"]
+    Key --> ServoBuck["LM2596 HW-411 set to 5.00V"]
 
     XL --> Pi["Pi USB-C power port"]
     Pi -->|"USB-A to COM"| ESP["ESP32-S3"]
 
     Clean --> CleanIn["CLEAN 5V IN"]
     Mod33 --> Rail["3.3V IN"]
-    Key --> Batt["BATT IN"]
-    Key --> ServoBuck["LM2596 HW-411 set to 5.00V"]
     ServoBuck --> ServoIn["SERVO 5V IN"]
 
     Batt --> Motors["DRV8833 power pins"]
@@ -149,12 +149,13 @@ Set every output with the meter before the output wire is attached. Glue the scr
 | [ ] | Cell B plus | BMS **B+** | — |
 | [ ] | Charger plus | BMS **P+** | — |
 | [ ] | Charger minus | BMS **P−** | — |
-| [ ] | BMS **P+**, short jumper | the five fuse holders | Red |
+| [ ] | BMS **P+** | Key switch terminal 1 | Red |
+| [ ] | Key switch terminal 2 | the five fuse holders, short jumper | Red |
 | [ ] | 6.3 A fuse | XL4016 IN+ | Red, 18 AWG |
 | [ ] | 2 A fuse | Clean buck IN+ | Red, 22 AWG |
 | [ ] | 2 A fuse | 3.3 V module IN+ | Red, 22 AWG |
-| [ ] | Key switch, then 5 A fuse | **BATT IN +** | Red, 18 AWG |
-| [ ] | Key switch, then the other 5 A fuse | LM2596 IN+ | Red, 20 AWG |
+| [ ] | 5 A fuse | **BATT IN +** | Red, 18 AWG |
+| [ ] | the other 5 A fuse | LM2596 IN+ | Red, 20 AWG |
 | [ ] | XL4016 IN− | BMS **P−** | Black |
 | [ ] | XL4016 OUT+ at 5.10 V | Pi USB-C power port, with 5.1 kΩ from CC to ground | Blue |
 | [ ] | XL4016 OUT− | Pi USB-C ground | Black |

@@ -40,7 +40,7 @@ The rover is bolted together, powered from its own battery, and driven by the ga
 - 2× GMT020-02 2.0" SPI TFT (ST7789, 240×320)
 - Two Li-ion cells, a 2S protection board (B−, BM, B+, P−, P+), and a USB-C charger
 - XL4016 buck (Pi only), one buck for CLEAN 5V IN (label still to be read), LM2596 HW-411 (servos), one 3.3 V module
-- Key switch (cuts motors and servos; the Pi stays on)
+- Key switch on the P+ wire, before the five fuses. Off kills the whole robot. The charger stays on the battery side of the key.
 - 5V cooling fan
 - USB webcam SC-012-SN259
 - A speaker the Pi can drive (USB speaker, or the headphone jack into a powered speaker)
@@ -66,12 +66,12 @@ Fuses, set 7 Nov 2026 from the five fuses on hand. Every fuse is on a plus wire.
 | Fuse on hand | Where it sits | Wire |
 |---|---|---|
 | **6.3 A** | XL4016 input plus (the Pi) | 18 AWG |
-| **5 A** | After the key switch, then BATT IN + | 18 AWG |
-| **5 A** | After the key switch, then LM2596 input plus | 20 AWG |
+| **5 A** | BATT IN + | 18 AWG |
+| **5 A** | LM2596 input plus | 20 AWG |
 | **2 A** | Clean 5 V buck input plus | 22 AWG |
 | **2 A** | 3.3 V module input plus | 22 AWG |
 
-The charger stays on P+ and P- with no fuse of its own. The key switch is on the plus feed of both 5 A fuses, so motors and servos go off together. The Pi, the clean 5 V buck, and the 3.3 V module stay on. The 6.3 A is the Pi fuse because the Pi is the heavy always-on load. The motor wire gets a 5 A fuse because a stalled track is the big fault. The other 5 A is on the servo buck: it opens if that wire shorts. The LM2596 itself stops around 3 A, so the fuse is not what limits a stall.
+The charger stays on P+ and P- with no fuse of its own, on the battery side of the key. The key is the next thing on the P+ wire. Everything to the right of the key — Pi, clean 5 V, 3.3 V, motors, and servos — dies when the key is off. The 6.3 A fuse is on the Pi because that rail is the heavy one. One 5 A fuse is on the motor wire because a stalled track is the big fault. The other 5 A is on the servo buck: it opens if that wire shorts. The LM2596 itself stops around 3 A, so the fuse is not what limits a stall.
 
 What each board pad feeds:
 
@@ -88,7 +88,7 @@ Rules that stay in force:
 - The Pi is powered only through its USB-C power port. Do not use the Pi header 5 V pins. The USB-C plug needs a **5.1 kΩ** resistor from the CC pin to ground, or the Pi can stay off.
 - Do not feed the ESP32 5V/VIN pin from a buck.
 - All minus wires join the board ground. Add one wire from a Pi header GND and one extra wire from an ESP32 GND pin. Do not rely on the USB cable alone for motor ground.
-- The key switch sits in the plus wire of **BATT IN** and the LM2596 input. Motors and servos go off. The Pi, the clean 5 V buck, and the 3.3 V module stay on.
+- The key switch sits in the P+ wire before the five fuses. Off kills the whole robot. Shut the Pi down from its menu when you can. The key is the hard off, and it cuts the Pi too. The gamepad kill button is the one that stops the motors while the Pi stays on.
 - Measure 3.30 V on the 3.3 V rail **before** any relay IN wire is connected. A wandering 3.3 V rail already killed the old controller.
 - Charge with the key switch off. Unplug the charger when a cell reaches 4.20 V or the pack reaches 8.40 V. Unplug if the cells drift more than about 0.1 V apart, or if a cell gets hot.
 
@@ -189,7 +189,7 @@ The charger can still be running. Outputs of the bucks stay free until the meter
 2. Wire each buck input, plus to **P+** and minus to **P−**, with its own pair of wires. The charger stays on those posts.
 3. Meter each output and turn the screw until it reads: XL4016 **5.10 V**, clean buck **5.00 V**, LM2596 **5.00 V**, 3.3 V module **3.30 V**.
 4. Then connect the outputs: XL4016 to the Pi USB-C plug (with the 5.1 kΩ resistor), clean buck to **CLEAN 5V IN**, LM2596 to **SERVO 5V IN**, 3.3 V module to **3.3V IN**. Each minus goes to that pair's minus pad.
-5. Connect **BATT IN** to **P+** and **P−** through the key switch on the plus wire. The LM2596 input plus goes through that same switch.
+5. The key switch is the plus wire from **P+** to the five fuses. **BATT IN** minus and every buck minus go to **P−**.
 6. Turn the key on. Meter the four IN pads on the board. They must match the table. Nothing gets hot.
 
 **Pass:** on the board, BATT IN reads the pack voltage, CLEAN 5V IN and SERVO 5V IN read 5.00 V, and 3.3V IN reads 3.30 V. The Pi is connected only after the XL4016 meter reads 5.10 V. No wire is warm after a minute.
@@ -217,7 +217,7 @@ Power it from the bucks with the key on. Meter BATT IN, CLEAN 5V IN, SERVO 5V IN
 3. One ground wire from a Pi header GND to the board. One extra ground wire from an ESP32 GND pin to the board.
 4. Leave the Pi header 5 V pin empty.
 
-**Pass:** the Pi stays up for 5 minutes. The ESP32 shows up on the Pi. The Pi does not reboot when the key switch turns the motor rail on and off.
+**Pass:** the Pi stays up for 5 minutes and the ESP32 shows up. Key off, the Pi goes dark. Key on, it boots again.
 
 ### Stage 4 — Gamepad (no motors)
 
@@ -256,7 +256,7 @@ Both screens on the headers marked SCREEN L and SCREEN R, powered from the 3.3 V
 
 Bolt the board, the Pi, the pack, and the bucks onto the chassis. Keep the cell tabs covered. Keep wires off the tracks and off the pots, so the voltage screws can still be turned. Mount the camera so it looks forward. Mount the speaker. Tie the pack down so it cannot slide into the tracks.
 
-- **Pass:** drive around the room by gamepad, no PC, key switch kills motion, Pi stays up.
+- **Pass:** drive around the room by gamepad, no PC. The gamepad kill button stops the motors and the Pi stays up. The key switch then kills the whole robot.
 
 ### Stage 10 — Camera
 
@@ -298,7 +298,7 @@ A speaker on the Pi. A microphone, or the camera's microphone if it has one. Spe
 
 ### Stage 15 — One robot
 
-One program: gamepad drive and neck, eyes, lights, and the seeing and talking from the stages above. It can say what it sees and which room it is in, in Arabic or English. The kill button and the key switch still stop motion.
+One program: gamepad drive and neck, eyes, lights, and the seeing and talking from the stages above. It can say what it sees and which room it is in, in Arabic or English. The gamepad kill button stops motion while the Pi stays on. The key switch cuts power to the whole robot.
 
 - **Pass:** drive it through two rooms, no PC. It names the room, notices a person, and answers one spoken sentence. Kill switch works.
 

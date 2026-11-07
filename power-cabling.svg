@@ -25,7 +25,7 @@
   <rect class="bg" width="2400" height="1620"/>
 
   <text x="40" y="46" class="h">ABADI ROVER - POWER CABLING</text>
-  <text x="780" y="46" class="s">From the BMS, a fuse on every plus wire, then the buck or the board. Minus wires have no fuse.</text>
+  <text x="720" y="46" class="s">The key is on P+ before the five fuses. Off kills the whole robot. The charger stays on the battery side of the key.</text>
 
   <!-- source -->
   <rect class="box" x="40" y="78" width="320" height="128" rx="14"/>
@@ -49,14 +49,19 @@
   <text x="58" y="524" class="h2">USB-C CHARGER</text>
   <text x="58" y="550" class="s">Already on P+ and P-. No fuse.</text>
 
-  <!-- main fuse and plus bus -->
-  <path class="bus red" d="M360 364 H660"/>
-  <path class="bus red" d="M660 150 V1260"/>
-  <text x="674" y="142" class="s" fill="#d62728">P+ bus</text>
-  <text x="674" y="168" class="s" fill="#d62728">keep short</text>
+  <!-- key, then the plus bus to every fuse -->
+  <path class="bus red" d="M360 364 H410"/>
+  <rect class="key" x="410" y="318" width="200" height="92" rx="12"/>
+  <text x="428" y="352" class="h2">KEY SWITCH</text>
+  <text x="428" y="378" class="s">Off kills everything</text>
+  <text x="428" y="400" class="s">on the right.</text>
+  <path class="bus red" d="M610 364 H700"/>
+  <path class="bus red" d="M700 150 V1260"/>
+  <text x="714" y="142" class="s" fill="#d62728">after key</text>
+  <text x="714" y="168" class="s" fill="#d62728">keep short</text>
 
   <!-- Pi: not on the board -->
-  <path class="wire red" d="M660 230 H760"/>
+  <path class="wire red" d="M700 230 H760"/>
   <rect class="fuse" x="760" y="198" width="124" height="64" rx="10"/>
   <text x="790" y="224" class="s">FUSE</text>
   <text x="786" y="250" class="amp">6.3 A</text>
@@ -74,7 +79,7 @@
   <text x="1710" y="276" class="warn">The 40-pin header 5 V pin stays empty.</text>
 
   <!-- 3.3V matches the top pads on the board -->
-  <path class="wire red" d="M660 470 H760"/>
+  <path class="wire red" d="M700 470 H760"/>
   <rect class="fuse" x="760" y="438" width="124" height="64" rx="10"/>
   <text x="790" y="464" class="s">FUSE</text>
   <text x="794" y="490" class="amp">2 A</text>
@@ -87,7 +92,7 @@
   <text x="1480" y="456" class="s" fill="#8a6a00">yellow, 22 AWG</text>
 
   <!-- clean 5V -->
-  <path class="wire red" d="M660 690 H760"/>
+  <path class="wire red" d="M700 690 H760"/>
   <rect class="fuse" x="760" y="658" width="124" height="64" rx="10"/>
   <text x="790" y="684" class="s">FUSE</text>
   <text x="794" y="710" class="amp">2 A</text>
@@ -99,36 +104,26 @@
   <path class="wire purple" d="M1250 690 H1908"/>
   <text x="1480" y="676" class="s" fill="#8e44ad">purple, 22 AWG</text>
 
-  <!-- key -->
-  <path class="wire red" d="M660 900 H760"/>
-  <rect class="key" x="760" y="852" width="210" height="110" rx="12"/>
-  <text x="778" y="886" class="h2">KEY SWITCH</text>
-  <text x="778" y="912" class="s">Plus wire only.</text>
-  <text x="778" y="934" class="s">Off: motors and servos die.</text>
-  <text x="778" y="956" class="s">Pi, clean 5 V, 3.3 V stay on.</text>
-  <path class="bus red" d="M970 900 H1060"/>
-  <path class="bus red" d="M1060 900 V1160"/>
-
   <!-- battery to board -->
-  <path class="wire red" d="M1060 1020 H1160"/>
-  <rect class="fuse" x="1160" y="988" width="150" height="64" rx="10"/>
-  <text x="1194" y="1014" class="s">FUSE</text>
-  <text x="1190" y="1040" class="amp">5 A</text>
-  <path class="wire red" d="M1310 1020 H1908"/>
-  <text x="1500" y="1006" class="s" fill="#d62728">red, 18 AWG, pack voltage</text>
+  <path class="wire red" d="M700 980 H760"/>
+  <rect class="fuse" x="760" y="948" width="124" height="64" rx="10"/>
+  <text x="790" y="974" class="s">FUSE</text>
+  <text x="790" y="1000" class="amp">5 A</text>
+  <path class="wire red" d="M884 980 H1908"/>
+  <text x="1100" y="966" class="s" fill="#d62728">red, 18 AWG, pack voltage, no buck</text>
 
   <!-- servos -->
-  <path class="wire red" d="M1060 1160 H1160"/>
-  <rect class="fuse" x="1160" y="1128" width="150" height="64" rx="10"/>
-  <text x="1194" y="1154" class="s">FUSE</text>
-  <text x="1190" y="1180" class="amp">5 A</text>
-  <path class="wire red" d="M1310 1160 H1420"/>
-  <rect class="box" x="1420" y="1116" width="280" height="100" rx="12"/>
-  <text x="1438" y="1146" class="h2">LM2596 HW-411</text>
-  <text x="1438" y="1172" class="s">IN+ after the 5 A fuse</text>
-  <text x="1438" y="1194" class="s">IN- to P-.   Out 5.00 V</text>
-  <path class="wire orange" d="M1700 1160 H1908"/>
-  <text x="1710" y="1146" class="s" fill="#ef6c00">orange, 20 AWG</text>
+  <path class="wire red" d="M700 1160 H760"/>
+  <rect class="fuse" x="760" y="1128" width="124" height="64" rx="10"/>
+  <text x="790" y="1154" class="s">FUSE</text>
+  <text x="790" y="1180" class="amp">5 A</text>
+  <path class="wire red" d="M884 1160 H980"/>
+  <rect class="box" x="980" y="1116" width="270" height="100" rx="12"/>
+  <text x="998" y="1146" class="h2">LM2596 HW-411</text>
+  <text x="998" y="1172" class="s">IN+ after the 5 A fuse</text>
+  <text x="998" y="1194" class="s">IN- to P-.   Out 5.00 V</text>
+  <path class="wire orange" d="M1250 1160 H1908"/>
+  <text x="1480" y="1146" class="s" fill="#ef6c00">orange, 20 AWG</text>
 
   <!-- board pads, aligned with the wires -->
   <rect class="pcb" x="1908" y="400" width="452" height="860" rx="16"/>
@@ -162,5 +157,5 @@
   <rect class="box" x="40" y="1472" width="2320" height="120" rx="12"/>
   <text x="58" y="1506" class="h2">Set the screws before the output wire is attached</text>
   <text x="58" y="1536" class="t">XL4016 = 5.10 V.   Clean buck = 5.00 V.   3.3 V module = 3.30 V.   LM2596 = 5.00 V.   If a meter shows about 8 V, keep turning until it falls.</text>
-  <text x="58" y="1568" class="t">Fuses on hand: 6.3 A for the Pi, 5 A for the motors, 5 A for the servos, 2 A for clean 5 V, 2 A for 3.3 V. No main fuse. Keep the red jumper from P+ to these five fuses short.</text>
+  <text x="58" y="1568" class="t">Fuses on hand, all after the key: 6.3 A for the Pi, 5 A for the motors, 5 A for the servos, 2 A for clean 5 V, 2 A for 3.3 V. Keep the wire from the key to the five fuses short. The charger stays on P+ and does not go through the key.</text>
 </svg>
