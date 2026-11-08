@@ -1,4 +1,4 @@
-**Current Status:** Phase 1 / Stage 3 (Pi and ESP32) — in progress. 8 Nov 2026, owner: the Pi lists the ESP32 COM port as QinHeng USB Single Serial, id 1a86:55d3. The port name is not recorded yet. The key-off test is not done yet. The pin table further down is still the old TB6612 table. Do not solder signal wires from that table onto the printed board.
+**Current Status:** Phase 1 / Stage 3 (Pi and ESP32) — in progress. 8 Nov 2026, owner: the ESP32 COM port is `/dev/serial/by-id/usb-1a86_USB_Single_Serial_5C82127816-if00`. The key-off test is not done yet. The pin table further down is still the old TB6612 table. Do not solder signal wires from that table onto the printed board.
 
 # Abadi Rover — Build Plan
 
@@ -168,7 +168,7 @@ The pin marked VCC on each DRV8833 outline is already tied to BATT IN. No extra 
 | Track driver | Socket B only. Sleep jumper closed on that module. Socket A is unused for the tracks | 8 Nov 2026, owner |
 | DRV module IN row | Reversed from the silk. Hole IN1 lands on the module pin IN4, IN2 on IN3, IN3 on IN2, IN4 on IN1. VCC and GND are crossed with wires so power is right | 8 Nov 2026, owner. Same footprint on socket B |
 | Track motor screws | M3 and M4, the pairs tied to socket B | 8 Nov 2026. M1 and M2 belong to socket A |
-| ESP32 COM on the Pi | QinHeng USB Single Serial, id 1a86:55d3 | 8 Nov 2026, lsusb. Port name not recorded yet |
+| ESP32 COM on the Pi | `/dev/serial/by-id/usb-1a86_USB_Single_Serial_5C82127816-if00` | 8 Nov 2026. QinHeng 1a86:55d3 |
 | CH0 MG996R min / max pulse (µs) | TBD | Servo stage |
 | CH0 role | TBD | Servo stage |
 | CH1 MZ996 min / max pulse (µs) | TBD | Servo stage (confirm 90° vs 180°) |
