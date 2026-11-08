@@ -1,4 +1,4 @@
-**Current Status:** Phase 1 / Stage 2 (Motherboard) — meter mostly good, three checks still open. 8 Nov 2026, owner: the rails are fine. The ESP32 lights with no USB cable. The PCA9685 has 3.3 V on VCC and 5 V on V+ and its LED stays dark. The DRV8833 sleep jumper is still open. Next: meter the ESP32 5V pin and the 3V3 pin before the Pi is plugged in. The pin table further down is still the old TB6612 table. Do not solder signal wires from that table onto the printed board.
+**Current Status:** Phase 1 / Stage 2 (Motherboard) — rails good. 8 Nov 2026, owner: ESP32 5V pin reads 5 V and the 3V3 pin reads 3.3 V with no USB cable. The manufactured v5 gerber does this on purpose: the 1N5819 joins CLEAN5 to the ESP5V pin, and the ESP32 makes the 3.3 V. The older line that says the 5V pin stays empty does not match this board. Leave the diode. PCA9685 LED stays dark with 3.3 V on VCC and 5 V on V+. DRV8833 sleep jumper still open. The pin table further down is still the old TB6612 table. Do not solder signal wires from that table onto the printed board.
 
 # Abadi Rover — Build Plan
 
