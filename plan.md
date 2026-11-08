@@ -1,4 +1,4 @@
-**Current Status:** Phase 1 / Stage 1 (Power) — in progress. 7 Nov 2026, owner: the pack is charged. Cells had stayed matched while charging (3.87 V, 3.87 V, pack 7.74 V). Next: wire P+ and P- to the bucks through the fuses in `power-cabling.png`. Buck outputs stay off the Pi and the board until the meter reads 5.10 V, 5.00 V, 5.00 V, and 3.30 V. The pin table further down is still the old TB6612 table. Do not solder signal wires from that table onto the printed board.
+**Current Status:** Phase 1 / Stage 1 (Power) — passed 8 Nov 2026. Owner: every power rail meters correctly and the grounds are common. Next: Stage 2, solder the motherboard with the key off. The pin table further down is still the old TB6612 table. Do not solder signal wires from that table onto the printed board.
 
 # Abadi Rover — Build Plan
 
@@ -164,6 +164,7 @@ The pin marked VCC on each DRV8833 outline is already tied to BATT IN. No extra 
 | Clean 5 V buck output | 5.00 V | Module label still to be read |
 | LM2596 HW-411 output | 5.00 V | Set with the meter before it touches SERVO 5V IN |
 | 3.3 V module output | 3.30 V | Set with the meter before it touches 3.3V IN |
+| Rails on the board | Match the set points, common ground | 8 Nov 2026, owner confirmed. Stage 1 passed |
 | CH0 MG996R min / max pulse (µs) | TBD | Servo stage |
 | CH0 role | TBD | Servo stage |
 | CH1 MZ996 min / max pulse (µs) | TBD | Servo stage (confirm 90° vs 180°) |
