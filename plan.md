@@ -1,4 +1,4 @@
-**Current Status:** Phase 1 / Stage 2 (Motherboard) — passed 8 Nov 2026. Owner: rails are good, the ESP32 lights from the clean 5 V rail through the 1N5819, and the PCA9685 has 3.3 V on VCC and 5 V on V+ with the LED dark. Leave the diode. Close each DRV8833 sleep jumper (J2 / EEP) before any motor wire goes on. Next is Stage 3, the Pi. The pin table further down is still the old TB6612 table. Do not solder signal wires from that table onto the printed board.
+**Current Status:** Phase 1 / Stage 2 (Motherboard) — passed 8 Nov 2026. Owner: rails are good, the ESP32 lights from the clean 5 V rail through the 1N5819, the PCA9685 has 3.3 V on VCC and 5 V on V+, and both DRV8833 sleep jumpers are closed. Leave the diode. Next is Stage 3, the Pi. The pin table further down is still the old TB6612 table. Do not solder signal wires from that table onto the printed board.
 
 # Abadi Rover — Build Plan
 
