@@ -1,4 +1,4 @@
-**Current Status:** Phase 1 / Stage 2 (Motherboard) — passed 8 Nov 2026. Owner: rails are good, the ESP32 lights from the clean 5 V rail through the 1N5819, the PCA9685 has 3.3 V on VCC and 5 V on V+, and both DRV8833 sleep jumpers are closed. Leave the diode. Next is Stage 3, the Pi. The pin table further down is still the old TB6612 table. Do not solder signal wires from that table onto the printed board.
+**Current Status:** Phase 1 / Stage 2 (Motherboard) — passed 8 Nov 2026. Owner: rails are good. The ESP32 lights from the clean 5 V rail through the 1N5819. The live motor driver is the module in socket B, sleep jumper closed. Socket A is not the track driver. On these modules the IN/VCC/GND row is reversed from the silk, so VCC and GND are wired across and the IN holes are reversed end to end. Track motors use the M3 and M4 screws. Next is Stage 3, the Pi. The pin table further down is still the old TB6612 table. Do not solder signal wires from that table onto the printed board.
 
 # Abadi Rover — Build Plan
 
@@ -165,6 +165,9 @@ The pin marked VCC on each DRV8833 outline is already tied to BATT IN. No extra 
 | LM2596 HW-411 output | 5.00 V | Set with the meter before it touches SERVO 5V IN |
 | 3.3 V module output | 3.30 V | Set with the meter before it touches 3.3V IN |
 | Rails on the board | Match the set points, common ground | 8 Nov 2026, owner confirmed. Stage 1 passed |
+| Track driver | Socket B only. Sleep jumper closed on that module. Socket A is unused for the tracks | 8 Nov 2026, owner |
+| DRV module IN row | Reversed from the silk. Hole IN1 lands on the module pin IN4, IN2 on IN3, IN3 on IN2, IN4 on IN1. VCC and GND are crossed with wires so power is right | 8 Nov 2026, owner. Same footprint on socket B |
+| Track motor screws | M3 and M4, the pairs tied to socket B | 8 Nov 2026. M1 and M2 belong to socket A |
 | CH0 MG996R min / max pulse (µs) | TBD | Servo stage |
 | CH0 role | TBD | Servo stage |
 | CH1 MZ996 min / max pulse (µs) | TBD | Servo stage (confirm 90° vs 180°) |
